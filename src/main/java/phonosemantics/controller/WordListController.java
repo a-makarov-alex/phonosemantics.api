@@ -10,12 +10,16 @@ import phonosemantics.service.WordService;
 import java.util.ArrayList;
 
 @RestController
-public class WordController {
+public class WordListController {
 
-    @GetMapping("/words")
+    private static final WordListService wls = new WordListService("Input.xlsx");
+
+    /**
+     * GETTING WORDLIST BY MEANING
+     * **/
+    @GetMapping("/wordlist")
     public WordList getWordlist(@RequestParam(value = "meaning") String meaning) {
 
-        WordListService wls = new WordListService("Input.xlsx");
         ArrayList<WordList> allWordlists = wls.getAllWordLists();
 
         for (WordList wl : allWordlists) {
@@ -24,6 +28,22 @@ public class WordController {
             }
         }
         return null;
+    }
+
+
+    /**
+     * GETTING ALL MEANINGS THAT ARE PRESENT IN INPUT FILE ( == IN DATABASE)
+     * **/
+    @GetMapping("/meanings")
+    public ArrayList<String> getAllMeanings() {
+
+        ArrayList<String> meaningsList = new ArrayList<>();
+
+        for (WordList wl : wls.getAllWordLists()) {
+            meaningsList.add(wl.getMeaning());
+        }
+
+        return meaningsList;
     }
 
     @GetMapping("/tes")

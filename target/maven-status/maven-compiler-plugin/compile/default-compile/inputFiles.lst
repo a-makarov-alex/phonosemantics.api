@@ -7,14 +7,14 @@ D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\wordlist\Wordli
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\model\phonetics\Phoneme.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\test\ControllerEx.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\model\Meaning.java
-D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\wordlist\WordlistService.java
+D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\model\WordList.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\test\ResponseEx.java
-D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\controller\WordController.java
+D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\controller\WordListController.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\model\Language.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\controller\MeaningController.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\App.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\service\SoundsBank.java
+D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\service\WordListService.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\service\WordService.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\model\phonetics\Vowel.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\model\Word.java
-D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\wordlist\Wordlist.java

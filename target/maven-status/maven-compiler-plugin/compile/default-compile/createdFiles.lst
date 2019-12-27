@@ -1,4 +1,3 @@
-phonosemantics\wordlist\Wordlist.class
 phonosemantics\service\MeaningService.class
 phonosemantics\model\Word.class
 phonosemantics\service\LanguageService.class
@@ -16,16 +15,18 @@ phonosemantics\model\phonetics\Phoneme.class
 phonosemantics\service\SoundsBank$Roundness.class
 phonosemantics\App.class
 phonosemantics\model\phonetics\Consonant$1.class
+phonosemantics\model\WordList.class
 phonosemantics\model\Language.class
 phonosemantics\model\phonetics\Vowel.class
+phonosemantics\controller\WordListController.class
 phonosemantics\test\RequestEx.class
 phonosemantics\model\phonetics\Phoneme$SoundClass.class
-phonosemantics\wordlist\WordlistService.class
 phonosemantics\controller\LanguageController.class
 phonosemantics\service\SoundsBank$MannerPricise.class
 phonosemantics\model\Meaning.class
-phonosemantics\controller\WordController.class
+phonosemantics\model\WordList$PhTypeStats.class
 phonosemantics\service\SoundsBank$Nasalization.class
 phonosemantics\service\SoundsBank$PlaceApproximate.class
+phonosemantics\service\WordListService.class
 phonosemantics\service\SoundsBank$MannerApproximate.class
 phonosemantics\service\SoundsBank.class
