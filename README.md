@@ -1,5 +1,6 @@
 # phonosemantics.api
 phonosemantics v2 functionality in a REST API form
 
-- implement some API methods as a test
 - add swagger as a documentation
+- enable CORS using global config (now it's an individual method's config)
+

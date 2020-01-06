@@ -4,7 +4,9 @@ phonosemantics\service\LanguageService.class
 phonosemantics\service\SoundsBank$Height.class
 phonosemantics\service\SoundsBank$PlacePrecise.class
 phonosemantics\service\SoundsBank$Phonation.class
+phonosemantics\service\PhonemesService$CoverageSheet.class
 phonosemantics\wordlist\WordlistController.class
+phonosemantics\service\PhonemesService.class
 phonosemantics\service\SoundsBank$Backness.class
 phonosemantics\test\ResponseEx.class
 phonosemantics\controller\MeaningController.class
@@ -20,11 +22,13 @@ phonosemantics\model\Language.class
 phonosemantics\model\phonetics\Vowel.class
 phonosemantics\controller\WordListController.class
 phonosemantics\test\RequestEx.class
+phonosemantics\controller\PhonemesController.class
 phonosemantics\model\phonetics\Phoneme$SoundClass.class
 phonosemantics\controller\LanguageController.class
 phonosemantics\service\SoundsBank$MannerPricise.class
 phonosemantics\model\Meaning.class
 phonosemantics\model\WordList$PhTypeStats.class
+corsFilters\SimpleCorsFilters.class
 phonosemantics\service\SoundsBank$Nasalization.class
 phonosemantics\service\SoundsBank$PlaceApproximate.class
 phonosemantics\service\WordListService.class

@@ -1,12 +1,15 @@
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\controller\LanguageController.java
+D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\controller\PhonemesController.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\service\LanguageService.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\service\MeaningService.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\model\phonetics\Consonant.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\test\RequestEx.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\wordlist\WordlistController.java
+D:\JavaProjects3\API_phonosemantics\src\main\java\corsFilters\SimpleCorsFilters.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\model\phonetics\Phoneme.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\test\ControllerEx.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\model\Meaning.java
+D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\service\PhonemesService.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\model\WordList.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\test\ResponseEx.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\controller\WordListController.java

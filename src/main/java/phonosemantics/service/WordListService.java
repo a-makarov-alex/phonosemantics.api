@@ -179,7 +179,7 @@ public class WordListService {
 
 
 //TEST
-    /*public static ArrayList<Word> getAllwords() {
+    /*public templates ArrayList<Word> getAllwords() {
         allwords = new ArrayList<>();
         allwords.add(new Word("one", new Meaning("one")));
         allwords.add(new Word("two", new Meaning("two")));

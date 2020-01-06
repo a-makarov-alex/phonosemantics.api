@@ -9,9 +9,11 @@ import phonosemantics.service.WordService;
 
 import java.util.ArrayList;
 
+
 @RestController
 public class WordListController {
 
+    // TODO: запихнуть в контекст эти данные
     private static final WordListService wls = new WordListService("Input.xlsx");
 
     /**
@@ -46,12 +48,18 @@ public class WordListController {
         return meaningsList;
     }
 
-    @GetMapping("/tes")
-    public String getFp() {
-        WordListService wls = new WordListService("Input.xlsx");
-        ArrayList<WordList> allWordlists = wls.getAllWordLists();
-        String w = allWordlists.get(0).getMeaning();
-        return w;
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/language")
+    public String getTestLanguage() {
+        return "testlanguage";
     }
+
+
+
+    // чтобы работало, надо аннотацию @Controller ко всему классу вместо RestController
+    /*@RequestMapping("/tes")
+    public String getFp() {
+        return "StartPage";
+    }*/
 }
 
