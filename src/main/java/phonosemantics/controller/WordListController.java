@@ -36,6 +36,7 @@ public class WordListController {
     /**
      * GETTING ALL MEANINGS THAT ARE PRESENT IN INPUT FILE ( == IN DATABASE)
      * **/
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/meanings")
     public ArrayList<String> getAllMeanings() {
 
