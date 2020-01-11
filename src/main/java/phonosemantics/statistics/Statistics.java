@@ -1,7 +1,5 @@
 package phonosemantics.statistics;
 
-import phonosemantics.model.WordList;
-
 import java.util.*;
 
 public class Statistics {
