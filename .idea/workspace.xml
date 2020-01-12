@@ -3,76 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d5b60608-c8b9-413e-ae13-b72e2c2e7889" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/controller/LanguageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/language/LanguageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/controller/MeaningController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/meaning/MeaningController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/controller/PhonemesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/controller/WordListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/model/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/language/Language.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/model/Meaning.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/meaning/Meaning.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/model/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/word/Word.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/model/WordList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/output/Header.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/output/header/Header.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/output/HeaderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/output/header/HeaderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/output/HeaderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/output/header/HeaderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/output/OldHeader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/Consonant.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/Phoneme.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/Vowel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/service/LanguageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/language/LanguageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/service/MeaningService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/meaning/MeaningService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/service/PhonemesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/service/SoundsBank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/service/WordListService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/service/WordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/word/WordService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/statistics/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/statistics/Statistics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/test/ControllerEx.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/test/RequestEx.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/test/ResponseEx.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/wordlist/WordlistController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/API_phonosemantics-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/API_phonosemantics-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/API_phonosemantics-1.0-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/API_phonosemantics-1.0-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/controller/LanguageController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/controller/MeaningController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/controller/PhonemesController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/controller/WordListController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/model/Language.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/model/Meaning.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/model/Word.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/model/WordList$PhTypeStats.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/model/WordList.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/model/phonetics/Consonant$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/model/phonetics/Consonant.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/model/phonetics/Phoneme$SoundClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/model/phonetics/Phoneme.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/model/phonetics/Vowel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/output/Header.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/output/HeaderController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/output/HeaderService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/output/OldHeader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/LanguageService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/MeaningService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/PhonemesService$CoverageSheet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/PhonemesService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/SoundsBank$Backness.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/SoundsBank$Height.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/SoundsBank$MannerApproximate.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/SoundsBank$MannerPricise.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/SoundsBank$Nasalization.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/SoundsBank$Phonation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/SoundsBank$PlaceApproximate.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/SoundsBank$PlacePrecise.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/SoundsBank$Roundness.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/SoundsBank.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/WordListService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/service/WordService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/statistics/Statistics$KindOfStats.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/statistics/Statistics$KindOfStats.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/statistics/Statistics.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/statistics/Statistics.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/test/ControllerEx.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/test/RequestEx.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/test/ResponseEx.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/wordlist/WordlistController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListService.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -87,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="20" column="40" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
+            <state relative-caret-position="-114">
+              <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1356#1357#0" expanded="true" />
@@ -101,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="122" column="48" selection-start-line="122" selection-start-column="48" selection-end-line="122" selection-end-column="48" />
+            <state relative-caret-position="121">
+              <caret line="123" column="104" selection-start-line="123" selection-start-column="104" selection-end-line="123" selection-end-column="104" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -221,12 +153,12 @@
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/model/WordList.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/output/header/HeaderController.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListController.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordList.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/language/Language.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/WordService.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/Word.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListController.java" />
       </list>
     </option>
   </component>
@@ -677,18 +609,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="20" column="40" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1356#1357#0" expanded="true" />
-            <element signature="e#1393#1394#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/language/Language.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="918">
@@ -728,10 +648,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="122" column="48" selection-start-line="122" selection-start-column="48" selection-end-line="122" selection-end-column="48" />
+        <state relative-caret-position="121">
+          <caret line="123" column="104" selection-start-line="123" selection-start-column="104" selection-end-line="123" selection-end-column="104" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-114">
+          <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1356#1357#0" expanded="true" />
+            <element signature="e#1393#1394#0" expanded="true" />
           </folding>
         </state>
       </provider>

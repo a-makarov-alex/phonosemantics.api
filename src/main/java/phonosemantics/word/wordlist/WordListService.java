@@ -122,13 +122,6 @@ public class WordListService {
                                         cell.getStringCellValue(),
                                         Language.getLanguage(sheet.getRow(i).getCell(0).getStringCellValue()));
                                 word.setMeaning(new Meaning(nullRow.getCell(col).getStringCellValue()));
-
-                                // ****************   vv TEMPORARY    *******************//
-//                                Word word = new Word(
-//                                        cell.getStringCellValue(),
-//                                        new Meaning(nullRow.getCell(col).getStringCellValue()));
-                               // ****************   ^^ TEMPORARY    *******************//
-
                                 list.add(word);
                                 count++;
                             } else {

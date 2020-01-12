@@ -32,6 +32,17 @@ public class WordListController {
 
 
     /**
+     * GETTING ALL WORDLISTS
+     * **/
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/wordlists")
+    public ArrayList<WordList> getAllWordlists() {
+        ArrayList<WordList> allWordlists = wls.getAllWordLists();
+        return allWordlists;
+    }
+
+
+    /**
      * GETTING ALL MEANINGS THAT ARE PRESENT IN INPUT FILE ( == IN DATABASE)
      * **/
     @CrossOrigin(origins = "http://localhost:8080")
