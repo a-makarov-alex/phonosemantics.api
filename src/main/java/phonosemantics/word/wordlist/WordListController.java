@@ -1,18 +1,13 @@
 package phonosemantics.word.wordlist;
 
 import org.springframework.web.bind.annotation.*;
-import phonosemantics.word.wordlist.WordList;
-import phonosemantics.word.wordlist.WordListService;
+import phonosemantics.App;
 
 import java.util.ArrayList;
 
 
 @RestController
 public class WordListController {
-
-    // TODO: запихнуть в контекст эти данные
-    private static final WordListService wls = new WordListService("Input.xlsx");
-
     /**
      * GETTING WORDLIST BY MEANING
      * **/
@@ -20,7 +15,7 @@ public class WordListController {
     @GetMapping("/wordlist")
     public WordList getWordlistByMeaning(@RequestParam(value = "meaning") String meaning) {
 
-        ArrayList<WordList> allWordlists = wls.getAllWordLists();
+        ArrayList<WordList> allWordlists = App.getAllWordLists();
 
         for (WordList wl : allWordlists) {
             if (wl.getMeaning().equals(meaning)) {
@@ -37,7 +32,7 @@ public class WordListController {
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/wordlists")
     public ArrayList<WordList> getAllWordlists() {
-        ArrayList<WordList> allWordlists = wls.getAllWordLists();
+        ArrayList<WordList> allWordlists = App.getAllWordLists();
         return allWordlists;
     }
 
@@ -51,7 +46,7 @@ public class WordListController {
 
         ArrayList<String> meaningsList = new ArrayList<>();
 
-        for (WordList wl : wls.getAllWordLists()) {
+        for (WordList wl : App.getAllWordLists()) {
             meaningsList.add(wl.getMeaning());
         }
 

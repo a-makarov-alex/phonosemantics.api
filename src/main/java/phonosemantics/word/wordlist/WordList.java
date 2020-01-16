@@ -55,6 +55,9 @@ public class WordList {
 
         // рассчитываем 3 базовых параметра для оценки результатов
         calculateBasicStats();
+
+        //TODO: метод для АПИ, чтобы json не отображал лишние вложенные объекты
+
     }
 
 //    public String serialize() {

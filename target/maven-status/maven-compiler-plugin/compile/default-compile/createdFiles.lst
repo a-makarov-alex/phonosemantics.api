@@ -13,6 +13,7 @@ phonosemantics\phonetics\phoneme\PhonemesService.class
 phonosemantics\word\wordlist\WordList$PhTypeStats.class
 phonosemantics\language\LanguageController.class
 phonosemantics\phonetics\consonant\Consonant.class
+phonosemantics\word\wordlist\wordlistReduced\WordlistReducedController.class
 phonosemantics\word\Word$PartOfSpeech.class
 phonosemantics\word\WordService.class
 phonosemantics\data\SoundsBank$PlaceApproximate.class
@@ -32,6 +33,8 @@ phonosemantics\data\SoundsBank$Height.class
 phonosemantics\data\SoundsBank.class
 phonosemantics\phonetics\phoneme\PhonemesController.class
 phonosemantics\phonetics\vowel\Vowel.class
+phonosemantics\word\wordlist\wordlistReduced\WordlistReducedService.class
 phonosemantics\output\header\Header.class
 phonosemantics\phonetics\phoneme\PhonemesService$CoverageSheet.class
+phonosemantics\word\wordlist\wordlistReduced\WordListReduced.class
 phonosemantics\language\LanguageService.class

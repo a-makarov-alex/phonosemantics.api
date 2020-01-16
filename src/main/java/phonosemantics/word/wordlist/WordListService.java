@@ -1,6 +1,7 @@
 package phonosemantics.word.wordlist;
 
 import org.apache.poi.ss.usermodel.*;
+import phonosemantics.App;
 import phonosemantics.language.Language;
 import phonosemantics.meaning.Meaning;
 import phonosemantics.word.Word;
@@ -14,40 +15,27 @@ import java.util.ArrayList;
 
 //TODO: be careful, remove hardcode from this class
 public class WordListService {
-    // TODO: add some kind of context to project to store data
-    public static ArrayList<WordList> allWordlists;
-
-    private String filePath;
+    private static final String FILEPATH = "Input.xlsx";
     private static final String INPUT_DIRECTORY = "D:\\JavaProjects2019\\word\\src\\main\\java\\input\\";
     static final Logger userLogger = LogManager.getLogger(WordListService.class);
 
-    //TODO: add wordlists files to input directory
-    public WordListService(String filePath) {
-        this.filePath = filePath;
-        this.getAllWordLists();
-    }
-
     public String getFilePath() {
-        return filePath;
+        return FILEPATH;
     }
 
     /**
      * Reads all the words from inputFile and write them to one list of Word entities
      */
-    public ArrayList<WordList> getAllWordLists() {
-        // if wordlist already exists
-        if (allWordlists != null) {
-            return allWordlists;
-        }
+    public static ArrayList<WordList> readAllWordListsFromInputFile() {
 
-        userLogger.info("wordlist extracting from file starting...");
+//        userLogger.info("wordlist extracting from file starting...");
 
         // open file for reading
         InputStream inputStream = null;
         ArrayList<WordList> allWordlists = new ArrayList<>();
 
         try {
-            inputStream = new FileInputStream(INPUT_DIRECTORY + filePath);
+            inputStream = new FileInputStream(INPUT_DIRECTORY + FILEPATH);
             Workbook wb = WorkbookFactory.create(inputStream);
             Sheet sheet = wb.getSheetAt(0);
 
@@ -57,9 +45,11 @@ public class WordListService {
             // read all the headers with words' Meanings
             while (sheet.getRow(rowNum).getCell(colNum) != null) {
 //                if (Main.CONSOLE_SHOW_FOUND_MEANINGS_IN_INPUT_FILE) {
-                    userLogger.debug("meaning found: " + sheet.getRow(rowNum).getCell(colNum).getStringCellValue());
+//                    userLogger.debug("meaning found: " + sheet.getRow(rowNum).getCell(colNum).getStringCellValue());
 //                }
-                allWordlists.add(this.composeWordList(sheet.getRow(rowNum).getCell(colNum).getStringCellValue()));
+                WordList wl = composeWordList(sheet.getRow(rowNum).getCell(colNum).getStringCellValue());
+                allWordlists.add(wl);
+
                 colNum++;
             }
             inputStream.close();
@@ -75,14 +65,14 @@ public class WordListService {
     /**
      * Reads a list of words from inputFile by meaning
      */
-    public WordList composeWordList(String meaning) {
+    public static WordList composeWordList(String meaning) {
 
         // open file for reading
         InputStream inputStream = null;
         ArrayList<Word> list = new ArrayList<Word>();
 
         try {
-            inputStream = new FileInputStream(INPUT_DIRECTORY + filePath);
+            inputStream = new FileInputStream(INPUT_DIRECTORY + FILEPATH);
 //            userLogger.info("wordlist composing for " + meaning);
             Workbook wb = WorkbookFactory.create(inputStream);
             Sheet sheet;
