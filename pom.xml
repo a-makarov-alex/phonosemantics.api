@@ -44,6 +44,20 @@
             <version>2.2.2.RELEASE</version>
         </dependency>
 
+        <!-- springfox-swagger2 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+
+        <!-- springfox-swagger-ui -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+
         <!-- APACHE POI -->
         <dependency>
             <groupId>org.apache.poi</groupId>

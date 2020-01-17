@@ -1,15 +1,13 @@
 package phonosemantics.data;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import phonosemantics.phonetics.phoneme.Phoneme;
 
 import java.util.HashSet;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api")
 public class SoundsBankController {
     /**
      * GETTING ALL PHONEMES

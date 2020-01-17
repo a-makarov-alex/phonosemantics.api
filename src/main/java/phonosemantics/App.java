@@ -11,6 +11,7 @@ import phonosemantics.word.wordlist.WordList;
 import phonosemantics.word.wordlist.WordListService;
 import phonosemantics.word.wordlist.wordlistReduced.WordListReduced;
 import phonosemantics.word.wordlist.wordlistReduced.WordlistReducedService;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +19,7 @@ import java.util.Collections;
 @ComponentScan
 @EnableAutoConfiguration
 @SpringBootApplication
+@EnableSwagger2
 public class App {
     private static final Logger userLogger = LogManager.getLogger(App.class);
 
