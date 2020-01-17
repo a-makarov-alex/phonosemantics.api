@@ -12,11 +12,6 @@ public class WordListReduced {
     private HashMap<Object, WordList.PhTypeStats> phTypeStatsMap = new HashMap<>();
     //private ArrayList<WordList.PhTypeStats> phTypeStatsList = new ArrayList<>();
 
-    public WordListReduced(String meaning, ArrayList<String> list) {
-        this.meaning = meaning;
-        this.list = list;
-    }
-
     public WordListReduced(WordList wordlist) {
         this.meaning = wordlist.getMeaning();
         for (int i = 0; i < wordlist.getList().size(); i++) {

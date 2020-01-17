@@ -16,7 +16,7 @@ import java.util.HashMap;
  *
  * *********************/
 public class SoundsBank {
-    static final Logger userLogger = LogManager.getLogger(SoundsBank.class);
+    private static final Logger userLogger = LogManager.getLogger(SoundsBank.class);
 
     private HashMap<String, Phoneme> allPhonemesTable;
     public HashMap<String, Phoneme> getAllPhonemesTable() {

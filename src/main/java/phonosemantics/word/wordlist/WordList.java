@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import phonosemantics.data.SoundsBank;
 import phonosemantics.statistics.Statistics;
 import phonosemantics.word.Word;
+import phonosemantics.LoggerConfig;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,10 +23,9 @@ import java.util.Map;
  *          - AVERAGE PHTYPE INSTANCES NUM PER WORD
  **/
 public class WordList {
-    static final Logger userLogger = LogManager.getLogger(WordList.class);
+    private static final Logger userLogger = LogManager.getLogger(WordList.class);
 
     private String meaning;
-//    private Language language;
     private ArrayList<Word> list;
     private HashMap<Object, PhTypeStats> phTypeStatsMap = new HashMap<>();
 
@@ -39,7 +39,6 @@ public class WordList {
             }
         }
         this.list = list;
-//        this.language = list.get(0).getLanguage();
 
         // Заполняем статсМапу парами "фонотип : пустой объект статов"
         HashMap<Object, Integer> allPhTypes = SoundsBank.getAllPhonotypes();
@@ -55,16 +54,7 @@ public class WordList {
 
         // рассчитываем 3 базовых параметра для оценки результатов
         calculateBasicStats();
-
-        //TODO: метод для АПИ, чтобы json не отображал лишние вложенные объекты
-
     }
-
-//    public String serialize() {
-//        Gson gson = new Gson();
-//        String json = gson.toJson(this);
-//        return json;
-//    }
 
 //    public Word getWord(String language) {
 //        for (Word word : this.list) {
@@ -89,9 +79,9 @@ public class WordList {
             int counterW = 0;
             for (Word w : this.getList()) {
                 int incr = w.countPhonotype(phType);
-//                if (phType.equals(Main.CONSOLE_SHOW_WORDS_OF_CLASS)) {
-//                    userLogger.debug(phType + " : " + w.getWord() + " " + incr);
-//                }
+                if (phType.equals(LoggerConfig.CONSOLE_SHOW_WORDS_OF_CLASS)) {
+                    userLogger.debug(phType + " : " + w.getWord() + " " + incr);
+                }
                 counterPh += incr;
                 if (incr > 0) {
                     counterW++;
@@ -100,7 +90,7 @@ public class WordList {
             entry.getValue().phonemesWithPhTypeCounter = counterPh;
             entry.getValue().wordsWithPhTypeCounter = counterW;
         }
-        userLogger.info("phonotypes for wordlist " + this.meaning + " are counted");
+        userLogger.info("--- phonotypes for wordlist " + this.meaning + " are counted");
     }
 
 
@@ -159,32 +149,12 @@ public class WordList {
         return list;
     }
 
-    public void setList(ArrayList<Word> list) {
-        this.list = list;
-    }
-
     public String getMeaning() {
         return meaning;
     }
 
-    public void setMeaning(String meaning) {
-        this.meaning = meaning;
-    }
-
-//    public Language getLanguage() {
-//        return language;
-//    }
-//
-//    public void setLanguage(Language language) {
-//        this.language = language;
-//    }
-
     public HashMap<Object, PhTypeStats> getPhTypeStatsMap() {
         return phTypeStatsMap;
-    }
-
-    public void setPhTypeStatsMap(HashMap<Object, PhTypeStats> phTypeStatsMap) {
-        this.phTypeStatsMap = phTypeStatsMap;
     }
 
     public class PhTypeStats {
@@ -208,12 +178,6 @@ public class WordList {
         public PhTypeStats(Object phType) {
             this.phType = phType;
         }
-
-//        public String serialize() {
-//            Gson gson = new Gson();
-//            String json = gson.toJson(this);
-//            return json;
-//        }
 
         public Object getPhType() {
             return phType;

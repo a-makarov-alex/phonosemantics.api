@@ -29,25 +29,13 @@ public class Vowel extends Phoneme {
     public SoundsBank.Height getHeight() {
         return height;
     }
-    public void setHeight(SoundsBank.Height height) {
-        this.height = height;
-    }
     public SoundsBank.Backness getBackness() {
         return backness;
-    }
-    public void setBackness(SoundsBank.Backness backness) {
-        this.backness = backness;
     }
     public SoundsBank.Roundness isRoundedness() {
         return roundedness;
     }
-    public void setRoundedness(SoundsBank.Roundness roundedness) {
-        this.roundedness = roundedness;
-    }
     public SoundsBank.Nasalization isNasalization() {
         return nasalization;
-    }
-    public void setNasalization(SoundsBank.Nasalization nasalization) {
-        this.nasalization = nasalization;
     }
 }

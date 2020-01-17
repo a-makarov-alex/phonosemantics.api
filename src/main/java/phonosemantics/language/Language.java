@@ -4,6 +4,7 @@ package phonosemantics.language;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
+import phonosemantics.LoggerConfig;
 import phonosemantics.data.SoundsBank;
 import phonosemantics.phonetics.consonant.Consonant;
 import phonosemantics.phonetics.phoneme.Phoneme;
@@ -17,9 +18,9 @@ import java.util.function.Predicate;
 
 // TODO: idea is for future. Should be implemented later
 public class Language {
-    static final Logger userLogger = LogManager.getLogger(Language.class);
+    private static final Logger userLogger = LogManager.getLogger(Language.class);
 
-    public static final String INPUT_LANGUAGES_PATH =
+    private static final String INPUT_LANGUAGES_PATH =
             "D:\\JavaProjects2019\\word\\src\\main\\java\\knowledgeBase\\AllLanguages.xlsx";
     // количество столбцов с фонемами в файле, описывающем языки
     private static int NUM_OF_PHONOLOGY_COLUMNS = 7;
@@ -67,9 +68,9 @@ public class Language {
                 String s = cell.getStringCellValue();
 
                 if (this.title.toLowerCase().equals(s.toLowerCase())) {
-//                    if (Main.CONSOLE_LANG_PHONOLOGY) {
-//                        System.out.print("PHONOLOGY for LANG " + this.getTitle() + ": ");
-//                    }
+                    if (LoggerConfig.CONSOLE_LANG_PHONOLOGY) {
+                        System.out.print("PHONOLOGY for LANG " + this.getTitle() + ": ");
+                    }
 
                     // CREATING A PHONEMES BANK FOR THE LANGUAGE
                     for (Map.Entry<String, Phoneme> entry : cBank.getAllPhonemesTable().entrySet()) {
@@ -87,14 +88,14 @@ public class Language {
 
                         for (String ph: allPhArr) {
                             if (ph.equals(entry.getKey())) {
-//                                if (Main.CONSOLE_LANG_PHONOLOGY) {
-//                                    System.out.print(entry.getKey() + " "); //check all phonemes in console
-//                                }
+                                if (LoggerConfig.CONSOLE_LANG_PHONOLOGY) {
+                                    System.out.print(entry.getKey() + " "); //check all phonemes in console
+                                }
                                 allPhonemes.add(entry.getValue());
                             }
                         }
                     }
-//                    if (Main.CONSOLE_LANG_PHONOLOGY) {System.out.println();}
+                    if (LoggerConfig.CONSOLE_LANG_PHONOLOGY) {System.out.println();}
                     break;
                 }
 
@@ -126,21 +127,18 @@ public class Language {
         //userLogger.debug("PhType coverage calculating is started");
         HashMap<Object, Integer> mapPhType = SoundsBank.getAllPhonotypes();
 
-//        if (Main.CONSOLE_LANG_PHONOTYPES) {
-//            userLogger.debug(this.title);
-//        }
+        if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
+            userLogger.debug(this.title);
+        }
 
         for (Map.Entry<Object, Integer> entry : mapPhType.entrySet()) {
-
-//            if (Main.CONSOLE_LANG_PHONOTYPES) {
-//                userLogger.debug(entry.getKey() + " : ");
-//            }
-
+            if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
+                userLogger.debug(entry.getKey() + " : ");
+            }
             entry.setValue(entry.getValue() + findPhType(entry.getKey()));
-
-//            if (Main.CONSOLE_LANG_PHONOTYPES) {
-//                userLogger.debug("TOTAL : " + entry.getValue());
-//            }
+            if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
+                userLogger.debug("TOTAL : " + entry.getValue());
+            }
         }
         return mapPhType;
     }
@@ -196,15 +194,13 @@ public class Language {
                     Vowel vow = (Vowel) ph;
                     if (p.test(vow)) {
                         count++;
-
-//                        if (Main.CONSOLE_LANG_PHONOTYPES) {
-//                            System.out.println(vow.getSymbol());
-//                        }
+                        if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
+                            System.out.println(vow.getSymbol());
+                        }
                     }
                 }
             }
         }
-
         return count;
     }
 
@@ -218,10 +214,9 @@ public class Language {
                     Consonant cons = (Consonant) ph;
                     if (p.test(cons)) {
                         count++;
-
-//                        if (Main.CONSOLE_LANG_PHONOTYPES) {
-//                            System.out.println(cons.getSymbol());
-//                        }
+                        if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
+                            System.out.println(cons.getSymbol());
+                        }
                     }
                 }
             }
@@ -235,32 +230,16 @@ public class Language {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getFamily() {
         return family;
-    }
-
-    public void setFamily(String family) {
-        this.family = family;
     }
 
     public String getGroup() {
         return group;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
-    }
-
     public Set<Phoneme> getPhonology() {
         return phonology;
-    }
-
-    public void setPhonology(HashSet<Phoneme> phonology) {
-        this.phonology = phonology;
     }
 
     public static HashMap<String, Language> getAllLanguages() {
@@ -271,28 +250,12 @@ public class Language {
         return phCoverage;
     }
 
-    public void setPhCoverage(Set<Phoneme> phCoverage) {
-        this.phCoverage = phCoverage;
-    }
-
     public HashMap<Object, Integer> getPhTypeCoverage() {
         return phTypeCoverage;
     }
 
-    public void setPhTypeCoverage(HashMap<Object, Integer> phTypeCoverage) {
-        this.phTypeCoverage = phTypeCoverage;
-    }
-
     public Set<Phoneme> getPhNotDescribed() {
         return phNotDescribed;
-    }
-
-    public void setPhNotDescribed(Set<Phoneme> phNotDescribed) {
-        this.phNotDescribed = phNotDescribed;
-    }
-
-    public static void setAllLanguages(HashMap<String, Language> allLanguages) {
-        Language.allLanguages = allLanguages;
     }
 
     public static Language getLanguage(String title) {

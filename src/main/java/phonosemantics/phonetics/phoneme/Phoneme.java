@@ -8,7 +8,6 @@ public class Phoneme {
         VOWEL, CONSONANT
     }
 
-
     public Phoneme(String symbol, SoundClass soundClass) {
         this.symbol = symbol;
         this.soundClass = soundClass;
@@ -24,8 +23,4 @@ public class Phoneme {
     public String getSymbol() {
         return symbol;
     }
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
 }

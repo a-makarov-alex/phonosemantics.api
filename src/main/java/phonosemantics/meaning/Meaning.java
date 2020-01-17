@@ -20,12 +20,4 @@ public class Meaning {
     public boolean isTag_small() {
         return tag_small;
     }
-
-    public void setTag_big(boolean tag_big) {
-        this.tag_big = tag_big;
-    }
-
-    public void setTag_small(boolean tag_small) {
-        this.tag_small = tag_small;
-    }
 }

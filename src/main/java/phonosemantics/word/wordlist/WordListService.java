@@ -1,7 +1,7 @@
 package phonosemantics.word.wordlist;
 
 import org.apache.poi.ss.usermodel.*;
-import phonosemantics.App;
+import phonosemantics.LoggerConfig;
 import phonosemantics.language.Language;
 import phonosemantics.meaning.Meaning;
 import phonosemantics.word.Word;
@@ -19,16 +19,12 @@ public class WordListService {
     private static final String INPUT_DIRECTORY = "D:\\JavaProjects2019\\word\\src\\main\\java\\input\\";
     static final Logger userLogger = LogManager.getLogger(WordListService.class);
 
-    public String getFilePath() {
-        return FILEPATH;
-    }
-
     /**
      * Reads all the words from inputFile and write them to one list of Word entities
      */
     public static ArrayList<WordList> readAllWordListsFromInputFile() {
 
-//        userLogger.info("wordlist extracting from file starting...");
+        userLogger.info("wordlist extracting from file starting...");
 
         // open file for reading
         InputStream inputStream = null;
@@ -44,20 +40,20 @@ public class WordListService {
 
             // read all the headers with words' Meanings
             while (sheet.getRow(rowNum).getCell(colNum) != null) {
-//                if (Main.CONSOLE_SHOW_FOUND_MEANINGS_IN_INPUT_FILE) {
-//                    userLogger.debug("meaning found: " + sheet.getRow(rowNum).getCell(colNum).getStringCellValue());
-//                }
+                if (LoggerConfig.CONSOLE_SHOW_FOUND_MEANINGS_IN_INPUT_FILE) {
+                    userLogger.debug("--- meaning found: " + sheet.getRow(rowNum).getCell(colNum).getStringCellValue());
+                }
                 WordList wl = composeWordList(sheet.getRow(rowNum).getCell(colNum).getStringCellValue());
                 allWordlists.add(wl);
 
                 colNum++;
             }
             inputStream.close();
-//            userLogger.info(colNum + " wordlists are composed from input file");
+            userLogger.info(colNum + " wordlists are composed from input file");
             return allWordlists;
 
         } catch (IOException e) {
-//            userLogger.error(e.toString());
+            userLogger.error(e.toString());
             return null;
         }
     }
@@ -73,7 +69,7 @@ public class WordListService {
 
         try {
             inputStream = new FileInputStream(INPUT_DIRECTORY + FILEPATH);
-//            userLogger.info("wordlist composing for " + meaning);
+            userLogger.info("--- wordlist composing for " + meaning);
             Workbook wb = WorkbookFactory.create(inputStream);
             Sheet sheet;
             sheet = wb.getSheetAt(0);
@@ -86,24 +82,24 @@ public class WordListService {
                 cell = nullRow.getCell(col);
                 // stop on the first empty column
                 if (cell == null) {
-//                    if (Main.CONSOLE_SHOW_NOT_FOUND_MEANINGS_IN_INPUT_FILE) {
-//                        userLogger.debug("PROBLEM: There is no words for " + meaning + " in the input file");
-//                    }
+                    if (LoggerConfig.CONSOLE_SHOW_NOT_FOUND_MEANINGS_IN_INPUT_FILE) {
+                        userLogger.debug("PROBLEM: There is no words for " + meaning + " in the input file");
+                    }
                     break;
                 } else {
                     // Meaning is found successfully
                     if (cell.getStringCellValue().toLowerCase().equals(meaning.toLowerCase())) {
-//                        if (Main.CONSOLE_SHOW_FOUND_MEANINGS_IN_INPUT_FILE) {
-//                            userLogger.debug("SUCCESS: Words for " + meaning +
-//                                    " found in the " + col + " column of the input file");
-//                        }
+                        if (LoggerConfig.CONSOLE_SHOW_FOUND_MEANINGS_IN_INPUT_FILE) {
+                            userLogger.debug("SUCCESS: Words for " + meaning +
+                                    " found in the " + col + " column of the input file");
+                        }
                         int lastRow = sheet.getLastRowNum();
                         for (int i = 1; i <=  lastRow + 1; i++) {
                             // Stop on the first empty row
                             if (sheet.getRow(i) == null) {
-//                                if (Main.CONSOLE_SHOW_FOUND_MEANINGS_IN_INPUT_FILE) {
-//                                    userLogger.debug("Number of words for " + meaning + " : " + (count));
-//                                }
+                                if (LoggerConfig.CONSOLE_SHOW_FOUND_MEANINGS_IN_INPUT_FILE) {
+                                    userLogger.debug("Number of words for " + meaning + " : " + (count));
+                                }
                                 break;
                             }
                             cell = sheet.getRow(i).getCell(col);
@@ -115,8 +111,8 @@ public class WordListService {
                                 list.add(word);
                                 count++;
                             } else {
-//                                userLogger.debug("No value for word \"" + nullRow.getCell(col).getStringCellValue() +
-//                                        "\" of language " + sheet.getRow(i).getCell(0).getStringCellValue());
+                                userLogger.debug("No value for word \"" + nullRow.getCell(col).getStringCellValue() +
+                                        "\" of language " + sheet.getRow(i).getCell(0).getStringCellValue());
                             }
                         }
                         // Break after wordlist is created
@@ -125,14 +121,14 @@ public class WordListService {
                 }
             }
 
-//            if (Main.CONSOLE_SHOW_FOUND_MEANINGS_IN_INPUT_FILE) {
-//                System.out.println();
-//            }
+            if (LoggerConfig.CONSOLE_SHOW_FOUND_MEANINGS_IN_INPUT_FILE) {
+                System.out.println();
+            }
             inputStream.close();
             return new WordList(list);
 
         } catch (IOException e) {
-//            userLogger.error(e.toString());
+            userLogger.error(e.toString());
             return null;
         }
     }

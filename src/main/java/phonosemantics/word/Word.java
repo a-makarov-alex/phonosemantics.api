@@ -1,5 +1,8 @@
 package phonosemantics.word;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import phonosemantics.LoggerConfig;
 import phonosemantics.data.SoundsBank;
 import phonosemantics.language.Language;
 import phonosemantics.meaning.Meaning;
@@ -13,6 +16,8 @@ import java.util.HashMap;
 import java.util.function.Predicate;
 
 public class Word {
+    private static final Logger userLogger = LogManager.getLogger(Word.class);
+
     private String word;
     private ArrayList<Phoneme> transcription;
     private Meaning meaning;
@@ -44,7 +49,6 @@ public class Word {
         setTranscriptionFromWord(); // length is added here also
     }
 
-
     /**
      * GETTERS AND SETTERS
      **/
@@ -68,10 +72,6 @@ public class Word {
         return transcription;
     }
 
-    public void setTranscription(ArrayList<Phoneme> transcription) {
-        this.transcription = transcription;
-    }
-
     public int getLength() {
         return length;
     }
@@ -80,33 +80,25 @@ public class Word {
         return language;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
     public PartOfSpeech getPartOfSpeech() {
         return partOfSpeech;
     }
 
-    public void setPartOfSpeech(PartOfSpeech partOfSpeech) {
-        this.partOfSpeech = partOfSpeech;
-    }
-
-
     public void printTranscription() {
         // Print transcription to console
-        System.out.println("Word: " + this.word);
-        System.out.print("Transcription: ");
+        userLogger.debug("Word: " + this.word);
+        userLogger.debug("Transcription: ");
+        String result = "";
         for (Phoneme p : this.transcription) {
             if (p != null) {
-                System.out.print(p.getSymbol() + " ");
+                result += p.getSymbol() + " ";
             } else {
-                System.out.print("_ ");
+                result += "_ ";
             }
         }
-        System.out.println("Length: " + this.length);
-        System.out.println("");
-        System.out.println("");
+        userLogger.debug(result);
+        userLogger.debug("Length: " + this.length);
+        userLogger.debug("");
     }
 
     public int getNumOfPhonemes(String phoneme) {
@@ -176,14 +168,14 @@ public class Word {
                         }
                     }
                 } else {
-//                    if (Main.CONSOLE_EXTRA_SYMBOLS) {
-//                        System.out.println("Extra: " + phonemes[i]);
-//                    }
+                    if (LoggerConfig.CONSOLE_EXTRA_SYMBOLS) {
+                        userLogger.debug("Extra: " + phonemes[i]);
+                    }
                 }
             }
-//            if (Main.CONSOLE_SHOW_TRASCRIPTION) {
-//                printTranscription();
-//            }
+            if (LoggerConfig.CONSOLE_SHOW_TRASCRIPTION) {
+                printTranscription();
+            }
         }
     }
 
@@ -203,9 +195,9 @@ public class Word {
         if (objClass.equals(SoundsBank.MannerApproximate.class)) {
             return countConsPhonotypeBy(cons -> cons.getMannerApproximate().equals((SoundsBank.MannerApproximate) object));
         } else if (objClass.equals(SoundsBank.MannerPricise.class)) {
-//            if (object.equals(Main.CONSOLE_SHOW_WORDS_OF_CLASS)) {
-//                System.out.print("Manner Precise :   ");
-//            }
+            if (object.equals(LoggerConfig.CONSOLE_SHOW_WORDS_OF_CLASS)) {
+                System.out.print("Manner Precise :   ");
+            }
             return countConsPhonotypeBy(cons -> cons.getMannerPricise().equals((SoundsBank.MannerPricise) object));
         } else if (objClass.equals(SoundsBank.Phonation.class)) {
             return countConsPhonotypeBy(cons -> cons.isVoiced().equals((SoundsBank.Phonation) object));
@@ -213,21 +205,21 @@ public class Word {
 
         //* ************************** VOWELS **********************************//
         else if (objClass.equals(SoundsBank.Height.class)) {
-//            if (object.equals(Main.CONSOLE_SHOW_WORDS_OF_CLASS)) {
-//                System.out.print("Height :   ");
-//            }
+            if (object.equals(LoggerConfig.CONSOLE_SHOW_WORDS_OF_CLASS)) {
+                System.out.print("Height :   ");
+            }
             return countVowPhonotypeBy(vow -> vow.getHeight().equals((SoundsBank.Height) object));
         } else if (objClass.equals(SoundsBank.Backness.class)) {
             return countVowPhonotypeBy(vow -> vow.getBackness().equals((SoundsBank.Backness) object));
         } else if (objClass.equals(SoundsBank.Roundness.class)) {
-//            if (object.equals(Main.CONSOLE_SHOW_WORDS_OF_CLASS)) {
-//                System.out.print("Roundness :   ");
-//            }
+            if (object.equals(LoggerConfig.CONSOLE_SHOW_WORDS_OF_CLASS)) {
+                System.out.print("Roundness :   ");
+            }
             return countVowPhonotypeBy(vow -> vow.isRoundedness().equals((SoundsBank.Roundness) object));
         } else if (objClass.equals(SoundsBank.Nasalization.class)) {
-//            if (object.equals(Main.CONSOLE_SHOW_WORDS_OF_CLASS)) {
-//                System.out.print("Nasalization :   ");
-//            }
+            if (object.equals(LoggerConfig.CONSOLE_SHOW_WORDS_OF_CLASS)) {
+                System.out.print("Nasalization :   ");
+            }
             return countVowPhonotypeBy(vow -> vow.isNasalization().equals((SoundsBank.Nasalization) object));
         } else {
             return 0;

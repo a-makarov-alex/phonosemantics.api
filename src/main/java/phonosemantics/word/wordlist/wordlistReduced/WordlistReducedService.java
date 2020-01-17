@@ -2,7 +2,6 @@ package phonosemantics.word.wordlist.wordlistReduced;
 
 import phonosemantics.App;
 import phonosemantics.word.wordlist.WordList;
-import phonosemantics.word.wordlist.WordListService;
 
 import java.util.ArrayList;
 

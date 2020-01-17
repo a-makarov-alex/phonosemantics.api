@@ -120,7 +120,5 @@ public class PhonemesService {
     public void colorOnlyPhonemesFoundInWordlists() {
         userLogger.info("start coloring phonemes found in wordlists...");
 
-
     }
-
 }

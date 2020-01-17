@@ -10,12 +10,12 @@ phonosemantics\word\wordlist\WordListController.class
 phonosemantics\statistics\Statistics$KindOfStats.class
 phonosemantics\meaning\Meaning.class
 phonosemantics\phonetics\phoneme\PhonemesService.class
+phonosemantics\LoggerConfig.class
 phonosemantics\word\wordlist\WordList$PhTypeStats.class
 phonosemantics\language\LanguageController.class
 phonosemantics\phonetics\consonant\Consonant.class
 phonosemantics\word\wordlist\wordlistReduced\WordlistReducedController.class
 phonosemantics\word\Word$PartOfSpeech.class
-phonosemantics\word\WordService.class
 phonosemantics\data\SoundsBank$PlaceApproximate.class
 phonosemantics\phonetics\consonant\Consonant$1.class
 phonosemantics\data\SoundsBank$PlacePrecise.class
