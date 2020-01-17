@@ -2,8 +2,8 @@ D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\language\Langua
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\output\header\HeaderService.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\statistics\Statistics.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\phonetics\consonant\Consonant.java
-D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\language\LanguageController.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\meaning\MeaningController.java
+D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\language\languageReduced\LanguageReducedController.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\meaning\Meaning.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\output\header\Header.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\meaning\MeaningService.java
@@ -13,13 +13,16 @@ D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\word\Word.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\phonetics\phoneme\PhonemesService.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\word\wordlist\wordlistReduced\WordlistReducedController.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\word\wordlist\WordListService.java
+D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\language\languageReduced\LanguageReduced.java
+D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\language\languageReduced\LanguageReducedService.java
+D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\data\SoundsBankController.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\output\header\HeaderController.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\App.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\data\SoundsBank.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\LoggerConfig.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\phonetics\vowel\Vowel.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\word\wordlist\wordlistReduced\WordlistReducedService.java
-D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\language\LanguageService.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\word\wordlist\wordlistReduced\WordListReduced.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\word\wordlist\WordList.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\word\wordlist\WordListController.java
+D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\word\WordReduced.java

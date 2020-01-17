@@ -1,5 +1,7 @@
 package phonosemantics.word.wordlist.wordlistReduced;
 
+import phonosemantics.word.Word;
+import phonosemantics.word.WordReduced;
 import phonosemantics.word.wordlist.WordList;
 
 import java.util.ArrayList;
@@ -8,31 +10,38 @@ import java.util.Map;
 
 public class WordListReduced {
     private String meaning;
-    private ArrayList<String> list = new ArrayList<>();
-    private HashMap<Object, WordList.PhTypeStats> phTypeStatsMap = new HashMap<>();
-    //private ArrayList<WordList.PhTypeStats> phTypeStatsList = new ArrayList<>();
+    private ArrayList<WordReduced> list = new ArrayList<>();
+    //private HashMap<Object, WordList.PhTypeStats> phTypeStatsMap = new HashMap<>(); //remove later
+    private ArrayList<WordList.PhTypeStats> phTypeStatsList = new ArrayList<>();
 
     public WordListReduced(WordList wordlist) {
+        ArrayList<Word> wl = wordlist.getList();
+
         this.meaning = wordlist.getMeaning();
-        for (int i = 0; i < wordlist.getList().size(); i++) {
-            this.list.add(wordlist.getList().get(i).getWord());
+        for (int i = 0; i < wl.size(); i++) {
+            this.list.add(new WordReduced(wl.get(i)));
         }
-        this.phTypeStatsMap = wordlist.getPhTypeStatsMap();
-        //TODO: Почему не работает с листом??!
-        /*for (Map.Entry<Object, WordList.PhTypeStats> phTypeStats : wordlist.getPhTypeStatsMap().entrySet()) {
+        //this.phTypeStatsMap = wordlist.getPhTypeStatsMap(); //remove later
+        for (Map.Entry<Object, WordList.PhTypeStats> phTypeStats : wordlist.getPhTypeStatsMap().entrySet()) {
             this.phTypeStatsList.add(phTypeStats.getValue());
-        }*/
+        }
     }
 
     public String getMeaning() {
         return meaning;
     }
 
-    public ArrayList<String> getList() {
+    public ArrayList<WordReduced> getList() {
         return list;
     }
 
-    public HashMap<Object, WordList.PhTypeStats> getPhTypeStatsMap() {
-        return phTypeStatsMap;
+    //remove later
+//    public HashMap<Object, WordList.PhTypeStats> getPhTypeStatsMap() {
+//        return phTypeStatsMap;
+//    }
+
+
+    public ArrayList<WordList.PhTypeStats> getPhTypeStatsList() {
+        return phTypeStatsList;
     }
 }

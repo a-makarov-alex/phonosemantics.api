@@ -1,9 +1,12 @@
 package phonosemantics;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+
 import phonosemantics.word.wordlist.WordList;
 import phonosemantics.word.wordlist.WordListService;
 import phonosemantics.word.wordlist.wordlistReduced.WordListReduced;
@@ -16,6 +19,8 @@ import java.util.Collections;
 @EnableAutoConfiguration
 @SpringBootApplication
 public class App {
+    private static final Logger userLogger = LogManager.getLogger(App.class);
+
     // TODO: запихнуть в контекст эти данные, если мы не оставим путь как константу
     // TODO: add some kind of context to project to store data
     private static ArrayList<WordList> allWordLists;
@@ -23,8 +28,10 @@ public class App {
 
     public static ArrayList<WordList> getAllWordLists() {
         if (allWordLists != null) {
+            userLogger.info("allWordlists is NOT null");
             return allWordLists;
         } else {
+            userLogger.info("allWordlists is null");
             allWordLists = WordListService.readAllWordListsFromInputFile();
             return allWordLists;
         }

@@ -2,39 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d5b60608-c8b9-413e-ae13-b72e2c2e7889" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/LoggerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBankController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/language/languageReduced/LanguageReduced.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/language/languageReduced/LanguageReducedController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/language/languageReduced/LanguageReducedService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/word/WordReduced.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/language/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/language/Language.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/language/LanguageController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/language/LanguageService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/meaning/Meaning.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/meaning/Meaning.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/Phoneme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/Phoneme.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/vowel/Vowel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/vowel/Vowel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/word/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/word/Word.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/word/WordService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/wordlistReduced/WordListReduced.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/wordlistReduced/WordListReduced.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/wordlistReduced/WordlistReducedController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/wordlistReduced/WordlistReducedController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/wordlistReduced/WordlistReducedService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/wordlistReduced/WordlistReducedService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/API_phonosemantics-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/API_phonosemantics-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/API_phonosemantics-1.0-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/API_phonosemantics-1.0-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/data/SoundsBank.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/data/SoundsBank.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/LoggerConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/LoggerConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/language/Language.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/language/Language.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/language/LanguageController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/language/LanguageService.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/meaning/Meaning.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/meaning/Meaning.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/Phoneme.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/Phoneme.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/PhonemesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/PhonemesService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/vowel/Vowel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/vowel/Vowel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/Word$PartOfSpeech.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/word/Word$PartOfSpeech.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/Word.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/word/Word.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/WordService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/WordList$PhTypeStats.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/WordList$PhTypeStats.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/WordList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/WordList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/WordListService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/WordListService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/wordlistReduced/WordListReduced.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/wordlistReduced/WordListReduced.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/wordlistReduced/WordlistReducedController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/wordlistReduced/WordlistReducedController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/wordlistReduced/WordlistReducedService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/wordlistReduced/WordlistReducedService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
@@ -52,41 +44,126 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/meaning/Meaning.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/meaning/MeaningController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/statistics/Statistics.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            <state relative-caret-position="153">
+              <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
               <folding>
-                <element signature="method#getNumOfUnknownPhonemes#0;class#Statistics#0" />
-                <element signature="method#addUnknownSymbol#0;class#Statistics#0" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1501#1502#0" expanded="true" />
+                <element signature="e#1538#1539#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/language/languageReduced/LanguageReducedController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="226">
+              <caret line="32" column="5" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="32" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#702#703#0" expanded="true" />
+                <element signature="e#723#724#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/language/languageReduced/LanguageReducedService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="325">
+              <caret line="36" column="70" selection-start-line="36" selection-start-column="70" selection-end-line="36" selection-end-column="70" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/LoggerConfig.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBankController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="64" selection-start-line="4" selection-start-column="64" selection-end-line="4" selection-end-column="64" />
+            <state relative-caret-position="291">
+              <caret line="39" column="51" lean-forward="true" selection-start-line="39" selection-start-column="51" selection-end-line="39" selection-end-column="51" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBank.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/language/Language.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="82" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/language/languageReduced/LanguageReduced.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="41" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
+              <folding>
+                <element signature="e#220#221#0" expanded="true" />
+                <element signature="e#254#255#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/App.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="30" column="49" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/WordReduced.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="20" column="38" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -112,15 +189,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/WordController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/test/ControllerEx.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/model/Phoneme.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/model/phonetics/Vowel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/model/phonetics/Consonant.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/service/SoundsBank.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/model/Word.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/model/Wordlist.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/service/WordService.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/service/WordlistService.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/controller/WordController.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/service/WordListService.java" />
@@ -145,8 +213,6 @@
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListForApi.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListReduced.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/App.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/wordlistReduced/WordListReduced.java" />
         <option value="$PROJECT_DIR$/src/main/java/loggerPrefs.java" />
         <option value="$PROJECT_DIR$/src/main/java/loggerConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/LoggerConfig.java" />
@@ -154,15 +220,26 @@
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/wordlistReduced/WordlistReducedController.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordList.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBank.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/language/Language.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/Word.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/meaning/Meaning.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/vowel/Vowel.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/Phoneme.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/log4j2.xml" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/LoggerConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/meaning/Meaning.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/language/Language.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/App.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/Word.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/wordlistReduced/WordListReduced.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/WordReduced.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/language/LanguageController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/language/languageReduced/LanguageReduced.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/language/LanguageService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/language/LanguageReducedService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/language/LanguageReducedController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/language/languageReduced/LanguageReducedController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/language/languageReduced/LanguageReducedService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBankController.java" />
       </list>
     </option>
   </component>
@@ -249,6 +326,34 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
+              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="language" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
+              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="language" type="462c0819:PsiDirectoryNode" />
+              <item name="languageReduced" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
+              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
               <item name="output" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -277,7 +382,38 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="phonetics" type="462c0819:PsiDirectoryNode" />
+              <item name="phoneme" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
+              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
               <item name="word" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
+              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="word" type="462c0819:PsiDirectoryNode" />
+              <item name="wordlist" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
+              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="word" type="462c0819:PsiDirectoryNode" />
+              <item name="wordlist" type="462c0819:PsiDirectoryNode" />
+              <item name="wordlistReduced" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
@@ -468,76 +604,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/language/LanguageController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/language/LanguageService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/wordlistReduced/WordListReduced.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="12" column="82" selection-start-line="12" selection-start-column="82" selection-end-line="12" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1053#1054#0" expanded="true" />
-            <element signature="e#1122#1123#0" expanded="true" />
-            <element signature="e#1281#1282#0" expanded="true" />
-            <element signature="e#1318#1319#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4760">
-          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/language/Language.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="258" column="5" selection-start-line="258" selection-start-column="5" selection-end-line="258" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="123" column="28" selection-start-line="123" selection-start-column="28" selection-end-line="123" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="36" column="5" lean-forward="true" selection-start-line="28" selection-start-column="4" selection-end-line="36" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1356#1357#0" expanded="true" />
-            <element signature="e#1393#1394#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -545,23 +611,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/wordlistReduced/WordlistReducedService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="45" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -574,13 +623,6 @@
             <element signature="e#1141#1142#0" expanded="true" />
             <element signature="e#1192#1193#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/meaning/Meaning.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -609,17 +651,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1615">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/Phoneme.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-          <folding>
-            <element signature="class#SoundClass#0;class#Phoneme#0" />
-            <element signature="method#Phoneme#0;class#Phoneme#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -664,16 +695,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/Word.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1300">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/WordService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2023">
@@ -702,10 +723,169 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/Phoneme.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="class#SoundClass#0;class#Phoneme#0" />
+            <element signature="method#Phoneme#0;class#Phoneme#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/meaning/Meaning.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="21" column="7" lean-forward="true" selection-start-line="15" selection-start-column="6" selection-end-line="21" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/wordlistReduced/WordlistReducedService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/LoggerConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="64" selection-start-line="4" selection-start-column="64" selection-end-line="4" selection-end-column="64" />
+        <state relative-caret-position="170">
+          <caret line="10" column="62" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/Word.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-204">
+          <caret line="57" selection-start-line="57" selection-end-line="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/wordlistReduced/WordListReduced.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="37" column="18" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1023#1024#0" expanded="true" />
+            <element signature="e#1053#1054#0" expanded="true" />
+            <element signature="e#1095#1096#0" expanded="true" />
+            <element signature="e#1122#1123#0" expanded="true" />
+            <element signature="e#1411#1412#0" expanded="true" />
+            <element signature="e#1449#1450#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/WordReduced.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="20" column="38" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="30" column="49" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/language/Language.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="82" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1501#1502#0" expanded="true" />
+            <element signature="e#1538#1539#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/language/languageReduced/LanguageReduced.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="41" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
+          <folding>
+            <element signature="e#220#221#0" expanded="true" />
+            <element signature="e#254#255#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/language/languageReduced/LanguageReducedService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="36" column="70" selection-start-line="36" selection-start-column="70" selection-end-line="36" selection-end-column="70" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/language/languageReduced/LanguageReducedController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="32" column="5" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="32" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#702#703#0" expanded="true" />
+            <element signature="e#723#724#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBankController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="39" column="51" lean-forward="true" selection-start-line="39" selection-start-column="51" selection-end-line="39" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

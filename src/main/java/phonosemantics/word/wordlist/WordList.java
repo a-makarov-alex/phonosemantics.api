@@ -56,11 +56,11 @@ public class WordList {
         calculateBasicStats();
     }
 
-//    public Word getWord(String language) {
+//    public Word getGraphicForm(String language) {
 //        for (Word word : this.list) {
 //            if (word.getLanguage().getTitle().toLowerCase().equals(language.toLowerCase())) {
 //                System.out.println("SUCCESS: Word of language " + language +
-//                        " with meaning " + this.meaning + " is: " + word.getWord());
+//                        " with meaning " + this.meaning + " is: " + word.getGraphicForm());
 //                return word;
 //            }
 //        }
@@ -80,7 +80,7 @@ public class WordList {
             for (Word w : this.getList()) {
                 int incr = w.countPhonotype(phType);
                 if (phType.equals(LoggerConfig.CONSOLE_SHOW_WORDS_OF_CLASS)) {
-                    userLogger.debug(phType + " : " + w.getWord() + " " + incr);
+                    userLogger.debug(phType + " : " + w.getGraphicForm() + " " + incr);
                 }
                 counterPh += incr;
                 if (incr > 0) {

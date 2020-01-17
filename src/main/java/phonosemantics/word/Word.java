@@ -18,7 +18,7 @@ import java.util.function.Predicate;
 public class Word {
     private static final Logger userLogger = LogManager.getLogger(Word.class);
 
-    private String word;
+    private String graphicForm;
     private ArrayList<Phoneme> transcription;
     private Meaning meaning;
     private Language language;
@@ -30,7 +30,7 @@ public class Word {
     }
 
     public Word(String word, String definition, String language, PartOfSpeech partOfSpeech) {
-        this.word = word;
+        this.graphicForm = word;
         this.meaning = new Meaning(definition);
         setTranscriptionFromWord(); // length is added here also
         this.language = Language.getLanguage(language);
@@ -38,34 +38,30 @@ public class Word {
     }
 
     public Word(String word, Language language) {
-        this.word = word;
+        this.graphicForm = word;
         this.language = language;
         setTranscriptionFromWord(); // length is added here also
     }
 
     // for jUnit tests
     public Word(String word) {
-        this.word = word;
+        this.graphicForm = word;
         setTranscriptionFromWord(); // length is added here also
     }
 
     /**
      * GETTERS AND SETTERS
      **/
+    public String getGraphicForm() {
+        return graphicForm;
+    }
+
     public Meaning getMeaning() {
         return meaning;
     }
 
     public void setMeaning(Meaning meaning) {
         this.meaning = meaning;
-    }
-
-    public String getWord() {
-        return word;
-    }
-
-    public void setWord(String word) {
-        this.word = word;
     }
 
     public ArrayList<Phoneme> getTranscription() {
@@ -86,7 +82,7 @@ public class Word {
 
     public void printTranscription() {
         // Print transcription to console
-        userLogger.debug("Word: " + this.word);
+        userLogger.debug("Word: " + this.graphicForm);
         userLogger.debug("Transcription: ");
         String result = "";
         for (Phoneme p : this.transcription) {
@@ -113,7 +109,7 @@ public class Word {
 
     public void setTranscriptionFromWord() {
         this.transcription = new ArrayList<>();
-        String word = this.getWord();
+        String word = this.getGraphicForm();
 
         if (word != null) {
             String[] phonemes = word.split("");
@@ -227,7 +223,7 @@ public class Word {
     }
 
     /**
-     * The main methods for counting phonotype instances in the word
+     * The main methods for counting phonotype instances in the graphicForm
      **/
     private int countConsPhonotypeBy(Predicate<Consonant> p) {
         int count = 0;
@@ -255,7 +251,7 @@ public class Word {
                     }
                 }
             } else {
-                //System.out.println(this.getWord());
+                //System.out.println(this.getGraphicForm());
             }
         }
         return count;

@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.util.*;
 import java.util.function.Predicate;
 
-// TODO: idea is for future. Should be implemented later
+// TODO: maybe id should be implemented cause 2 languages may have similar name
 public class Language {
     private static final Logger userLogger = LogManager.getLogger(Language.class);
 
