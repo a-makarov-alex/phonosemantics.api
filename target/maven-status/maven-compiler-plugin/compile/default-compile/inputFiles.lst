@@ -19,6 +19,8 @@ D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\data\SoundsBank
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\output\header\HeaderController.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\App.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\data\SoundsBank.java
+D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\phonetics\phoneme\PhonemesCoverageNew.java
+D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\phonetics\phoneme\PhonemeInTable.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\LoggerConfig.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\phonetics\vowel\Vowel.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\word\wordlist\wordlistReduced\WordlistReducedService.java

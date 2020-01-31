@@ -8,4 +8,5 @@ OR get API json: http://localhost:8083/v2/api-docs
 
 TODO:
 - enable CORS using global config (now it's an individual method's config)
-
+- how to do with classes duplication like Word vs WordReduced
+Reduced classes are needed for UI implementation. 
