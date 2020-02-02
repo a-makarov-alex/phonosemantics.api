@@ -4,6 +4,7 @@ public class PhonemeInTable {
     private String value;
     private int row;
     private int column;
+    private boolean isRecognized = false;
 
     public PhonemeInTable(String value, int r, int c) {
         this.value = value;
@@ -21,5 +22,13 @@ public class PhonemeInTable {
 
     public int getColumn() {
         return column;
+    }
+
+    public boolean isRecognized() {
+        return isRecognized;
+    }
+
+    public void setRecognized(boolean recognized) {
+        isRecognized = recognized;
     }
 }

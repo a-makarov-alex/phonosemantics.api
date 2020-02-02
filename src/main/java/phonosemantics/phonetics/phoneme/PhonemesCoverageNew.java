@@ -8,6 +8,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import phonosemantics.data.SoundsBank;
 import phonosemantics.output.header.Header;
 
 public class PhonemesCoverageNew {
@@ -109,7 +111,12 @@ public class PhonemesCoverageNew {
                     //userLogger.warn("coord null" + i + " " + j);
                 }
                 else {
-                    allPhonemesInTable.add(new PhonemeInTable(c.getStringCellValue(), i, j));
+                    PhonemeInTable ph = new PhonemeInTable(c.getStringCellValue(), i, j);
+                    // define if phoneme is recognized by program
+                    if (SoundsBank.getInstance().find(c.getStringCellValue()) != null) {
+                        ph.setRecognized(true);
+                    }
+                    allPhonemesInTable.add(ph);
                 }
             }
         }
