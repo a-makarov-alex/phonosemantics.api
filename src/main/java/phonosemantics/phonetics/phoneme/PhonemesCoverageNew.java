@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Map;
 
 import phonosemantics.data.SoundsBank;
 import phonosemantics.output.header.Header;
@@ -83,6 +84,14 @@ public class PhonemesCoverageNew {
             mannerHeaders.add(new Header(i, 0, c.getStringCellValue()));
         }
         return mannerHeaders;
+    }
+
+    public static ArrayList<Object> getConsonantsParameters() {
+        ArrayList<Object> phTypes = new ArrayList<>();
+        for (Map.Entry<Object, Integer> entry : SoundsBank.getAllPhonotypes().entrySet()) {
+            phTypes.add(entry.getKey());
+        }
+        return phTypes;
     }
 
     public static ArrayList<PhonemeInTable> getAllPhonemesList() {

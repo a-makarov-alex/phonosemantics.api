@@ -26,4 +26,10 @@ public class PhonemesController {
     public ArrayList<Header> getMannerHeaders() {
         return PhonemesCoverageNew.getMannerHeaders();
     }
+
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/phonemes/parameters/consonants")
+    public ArrayList<Object> getConsonantsParameters() {
+        return PhonemesCoverageNew.getConsonantsParameters();
+    }
 }
