@@ -1,10 +1,13 @@
 package phonosemantics.phonetics.phoneme;
 
+import phonosemantics.phonetics.DistinctiveFeatures;
+
 public class PhonemeInTable {
     private String value;
     private int row;
     private int column;
     private boolean isRecognized = false;
+    private DistinctiveFeatures distinctiveFeatures;
 
     public PhonemeInTable(String value, int r, int c) {
         this.value = value;
@@ -30,5 +33,13 @@ public class PhonemeInTable {
 
     public void setRecognized(boolean recognized) {
         isRecognized = recognized;
+    }
+
+    public DistinctiveFeatures getDistinctiveFeatures() {
+        return distinctiveFeatures;
+    }
+
+    public void setDistinctiveFeatures(DistinctiveFeatures distinctiveFeatures) {
+        this.distinctiveFeatures = distinctiveFeatures;
     }
 }

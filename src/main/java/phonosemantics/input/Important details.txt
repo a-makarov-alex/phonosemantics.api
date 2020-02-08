@@ -1,0 +1,51 @@
+Out of 706 language inventories surveyed by Ruhlen (1976), labialization occurred most often with velar (42%) and uvular (15%) segments and least often with dental and alveolar segments. With non-dorsal consonants, labialization may include velarization as well. Labialization is not restricted to lip-rounding.
+
+https://en.wikipedia.org/wiki/Labialization
+
+Почитать про place и возможно переписать на булевские поля
+https://en.wikipedia.org/wiki/Distinctive_feature
+
+НЕОБЪОДИМО разработать вопрос соотношения артикуляторной и акустической фонетики. Акустические: частота и т.д.
+Кое-какие ссылки по этому вопросу:
+http://www.phon.ox.ac.uk/jcoleman/consonant_acoustics.htm
+http://my.ilstu.edu/~jsawyer/consonantsvowels/consonantsvowels_print.html
+https://pdfs.semanticscholar.org/75c8/b50c01fc44566dd9cf5e47bc53733d685a0f.pdf
+
+!!! https://studopedia.su/2_24428_Aspects-of-speech-sounds.html
+
+Sound production actually takes place in the larynx, the pharynx and the oral and nasal cavities. The air-stream coming from the lungs undergoes important modifications in them.
+
+4 аспекта фонетических описаний: артикуляционный, акустический, перцептивный, функциональный
+https://myfilology.ru/russkiiyazyk/fonetika-i-fonologiia/chetyre-aspekta-foneticheskikh-opisanii-artikuliatsionnyi-akusticheskii-pertseptivnyi-funktsionalnyi/
+Аэродинамическая и акустическая фазы речи рассматриваются обычно в акустической фонетике.
+В акустическом аспектк рассматриваются следующие явления:
+
+звук, звук вообще, звучание
+типы звуков: тоны, обертоны, шумы
+признаки звуков: сила, высота, длительность, тембр
+явление резонанса
+
+
+
+Сибилянты громче своих неассибилированных пар, бо́льшая часть их силы приходится на более высокие частоты, чем у остальных фрикативов. Наиболее сильный звук — [s], его основная акустическая сила приходится на частоту 8 000 Гц, но может достигать и 10 000 Гц. У звука [ʃ] основная частота — 4 000 Гц, до 8 000 Гц.
+
+
+https://ru.wikipedia.org/wiki/%D0%A5%D0%B0%D0%BB%D0%BB%D0%B5,_%D0%9C%D0%BE%D1%80%D1%80%D0%B8%D1%81
+Почитать про универсальную акустическую классификацию различительных признаков
+
+В этой работе выделяются 12 универсальных дифференциальных признаков фонем:
+кое-что есть тут
+https://myfilology.ru/yazykoznanie/sopostavitelno-tipologicheskoe-yazykoznanie/akusticheskaya-klassifikacziya-fonem/
+
+1)    гласный – негласный;
+2)    согласный – несогласный;
+3)    звонкий – незвонкий;
+4)    резкий – нерезкий;
+5)    прерванный – непрерванный;
+6)    глоттализованный – неглоттализованный;
+7)    компактный – некомпактный;
+8)    высокий – невысокий;
+9)    бемольный – небемольный;
+10)           диезный – недиезный;
+11)           носовой – неносовой;
+12)           напряженный – ненапряженный.
