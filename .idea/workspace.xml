@@ -2,8 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d5b60608-c8b9-413e-ae13-b72e2c2e7889" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/DistinctiveFeatures.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/MannerPrecise.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/Stricture.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Lateral.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/PlaceApproximate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/PlacePrecise.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Rhotics.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Semivowel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Sibilant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Strident.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/vowels/Backness.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/vowels/Height.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/vowels/Roundness.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/DistinctiveFeatures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/DistinctiveFeatures.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/DistinctiveFeatures.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/PhonemesBank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/PhonemesBank.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemeInTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemeInTable.java" afterDir="false" />
     </list>
@@ -21,34 +34,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="78" column="90" selection-start-line="78" selection-start-column="4" selection-end-line="78" selection-end-column="90" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesCoverageNew.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1923">
-              <caret line="125" column="39" selection-start-line="125" selection-start-column="39" selection-end-line="125" selection-end-column="39" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemeInTable.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="208">
-              <caret line="37" column="55" selection-start-line="37" selection-start-column="55" selection-end-line="37" selection-end-column="55" />
+              <caret line="35" column="55" selection-start-line="35" selection-start-column="55" selection-end-line="35" selection-end-column="55" />
               <folding>
                 <element signature="method#setDistinctiveFeatures#0;class#PhonemeInTable#0" />
               </folding>
@@ -76,45 +65,43 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/DistinctiveFeatures.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/DistinctiveFeatures.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="93" column="142" selection-start-line="93" selection-start-column="142" selection-end-line="93" selection-end-column="142" />
+            <state relative-caret-position="342">
+              <caret line="59" column="73" lean-forward="true" selection-start-line="59" selection-start-column="73" selection-end-line="59" selection-end-column="73" />
               <folding>
-                <element signature="class#MajorClass#0;class#DistinctiveFeatures#0" />
-                <element signature="e#736#737#0" expanded="true" />
-                <element signature="e#790#791#0" expanded="true" />
-                <element signature="e#1319#1320#0" expanded="true" />
-                <element signature="e#1356#1357#0" expanded="true" />
-                <element signature="e#1157#1158#0" expanded="true" />
-                <element signature="e#1199#1200#0" expanded="true" />
-                <element signature="class#PlaceApproximate#0;class#DistinctiveFeatures#0" />
-                <element signature="class#PlacePrecise#0;class#DistinctiveFeatures#0" />
-                <element signature="class#Height#0;class#DistinctiveFeatures#0" />
-                <element signature="class#Backness#0;class#DistinctiveFeatures#0" />
-                <element signature="class#Stricture#0;class#DistinctiveFeatures#0" />
-                <element signature="class#Strident#0;class#DistinctiveFeatures#0" />
-                <element signature="class#Sibilant#0;class#DistinctiveFeatures#0" />
-                <element signature="class#Lateral#0;class#DistinctiveFeatures#0" />
-                <element signature="class#Rhotics#0;class#DistinctiveFeatures#0" />
-                <element signature="class#Semivowel#0;class#DistinctiveFeatures#0" />
-                <element signature="class#MannerPrecise#0;class#DistinctiveFeatures#0" />
-                <element signature="method#DistinctiveFeatures#1;class#DistinctiveFeatures#0" />
-                <element signature="e#5020#5021#0" expanded="true" />
-                <element signature="e#5053#5054#0" expanded="true" />
-                <element signature="e#5157#5158#0" expanded="true" />
-                <element signature="e#5186#5187#0" expanded="true" />
-                <element signature="e#5239#5240#0" expanded="true" />
-                <element signature="e#5278#5279#0" expanded="true" />
-                <element signature="e#5323#5324#0" expanded="true" />
-                <element signature="e#5358#5359#0" expanded="true" />
-                <element signature="e#5391#5392#0" expanded="true" />
-                <element signature="e#5420#5421#0" expanded="true" />
-                <element signature="e#5457#5458#0" expanded="true" />
-                <element signature="e#5488#5489#0" expanded="true" />
-                <element signature="e#5524#5525#0" expanded="true" />
-                <element signature="e#5556#5557#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1194#1195#0" expanded="true" />
+                <element signature="e#1238#1239#0" expanded="true" />
+                <element signature="e#1429#1430#0" expanded="true" />
+                <element signature="e#1466#1467#0" expanded="true" />
+                <element signature="e#1508#1509#0" expanded="true" />
+                <element signature="e#1550#1551#0" expanded="true" />
+                <element signature="e#1283#1331#0" />
+                <element signature="method#countMannerParameters#0;class#Manner#0;class#DistinctiveFeatures#0" />
+                <element signature="e#10062#10063#0" expanded="true" />
+                <element signature="e#10159#10160#0" expanded="true" />
+                <element signature="e#10237#10238#0" expanded="true" />
+                <element signature="e#10319#10320#0" expanded="true" />
+                <element signature="e#10402#10403#0" expanded="true" />
+                <element signature="e#10474#10475#0" expanded="true" />
+                <element signature="e#10548#10549#0" expanded="true" />
+                <element signature="e#10628#10629#0" expanded="true" />
+                <element signature="e#10708#10709#0" expanded="true" />
+                <element signature="e#10785#10786#0" expanded="true" />
+                <element signature="e#10862#10863#0" expanded="true" />
+                <element signature="e#10957#10958#0" expanded="true" />
+                <element signature="e#11040#11041#0" expanded="true" />
+                <element signature="method#Place#0;class#Place#0;class#DistinctiveFeatures#0" />
+                <element signature="method#Place#1;class#Place#0;class#DistinctiveFeatures#0" />
+                <element signature="e#7182#7183#0" expanded="true" />
+                <element signature="e#7224#7225#0" expanded="true" />
+                <element signature="e#7268#7269#0" expanded="true" />
+                <element signature="e#7306#7307#0" expanded="true" />
+                <element signature="method#placeApproximateFromPrecise#0;class#Place#0;class#DistinctiveFeatures#0" />
+                <element signature="method#VowelSpace#0;class#VowelSpace#0;class#DistinctiveFeatures#0" />
+                <element signature="method#VowelSpace#1;class#VowelSpace#0;class#DistinctiveFeatures#0" />
               </folding>
             </state>
           </provider>
@@ -123,7 +110,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBank.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
+            <state relative-caret-position="612">
               <caret line="233" column="62" selection-start-line="233" selection-start-column="55" selection-end-line="233" selection-end-column="62" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -132,35 +119,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/PhonemesBank.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="77">
-              <caret line="43" column="57" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
+            <state relative-caret-position="582">
+              <caret line="88" column="6" selection-start-line="88" selection-start-column="6" selection-end-line="88" selection-end-column="6" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -175,6 +138,7 @@
       <list>
         <option value="HTML File" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -182,6 +146,7 @@
     <findStrings>
       <find>vowSh.put(SoundsBank</find>
       <find>table</find>
+      <find>NOT_APPLIABLE</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -190,22 +155,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/templates/Main.js" />
-        <option value="$PROJECT_DIR$/src/main/java/corsFilters/SimpleCorsFilters.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/controller/WordListController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/output/OldHeader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/statistics/Statistics.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/output/HedgerService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/output/HeaderController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/output/Header.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/output/HeaderService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/model/WordList.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/output/header/HeaderController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/WordService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListForApi.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListReduced.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/loggerPrefs.java" />
         <option value="$PROJECT_DIR$/src/main/java/loggerConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/LoggerConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/wordlistReduced/WordlistReducedService.java" />
@@ -239,8 +188,24 @@
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesController.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemeInTable.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/Phonemes.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/PhonemesBank.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/DistinctiveFeatures.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/DistinctiveFeatures.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/PlacePrecise.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/PlaceApproximate.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/MannerPrecise.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/Height.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/vowels/Roundness.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/vowels/Height.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/vowels/Backness.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/PlacePrecise.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/Stricture.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Strident.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Sibilant.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Lateral.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Rhotics.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Semivowel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/DistinctiveFeatures.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/PhonemesBank.java" />
       </list>
     </option>
   </component>
@@ -262,12 +227,6 @@
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
           <item name="API_phonosemantics" type="9519ce18:MavenProjectsStructure$ProjectNode" />
           <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="API_phonosemantics" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
-          <item name="org.springframework:spring-context:5.2.2.RELEASE" type="c0821a7e:MavenProjectsStructure$DependencyNode" />
         </path>
       </expand>
       <select />
@@ -369,6 +328,29 @@
               <item name="phonetics" type="462c0819:PsiDirectoryNode" />
               <item name="phoneme" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
+              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="phonetics" type="462c0819:PsiDirectoryNode" />
+              <item name="phoneme" type="462c0819:PsiDirectoryNode" />
+              <item name="distinctiveFeatures" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
+              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="phonetics" type="462c0819:PsiDirectoryNode" />
+              <item name="phoneme" type="462c0819:PsiDirectoryNode" />
+              <item name="distinctiveFeatures" type="462c0819:PsiDirectoryNode" />
+              <item name="consonants" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -447,7 +429,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14977308" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14977308" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -461,7 +443,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.30278233" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.30278233" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50075644" side_tool="true" weight="0.3289689" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3289689" />
       <window_info anchor="bottom" id="Messages" order="10" />
@@ -480,15 +462,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.js" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/entities/Phoneme.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/test/Main.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/entities/Word.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/test/RequestEx.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/test/ResponseEx.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/test/ControllerEx.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/home.jsp" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/StartPage.html" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/Main.js" />
     <entry file="file://$PROJECT_DIR$/src/main/java/corsFilters/SimpleCorsFilters.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/wordlist/WordlistController.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/output/OldHeader.java" />
@@ -755,6 +728,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesCoverageNew.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1923">
+          <caret line="125" column="39" selection-start-line="125" selection-start-column="39" selection-end-line="125" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemeInTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="35" column="55" selection-start-line="35" selection-start-column="55" selection-end-line="35" selection-end-column="55" />
+          <folding>
+            <element signature="method#setDistinctiveFeatures#0;class#PhonemeInTable#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/consonant/Consonant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="61" column="76" lean-forward="true" selection-start-line="61" selection-start-column="76" selection-end-line="61" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -773,36 +773,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesCoverageNew.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1923">
-          <caret line="125" column="39" selection-start-line="125" selection-start-column="39" selection-end-line="125" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemeInTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="37" column="55" selection-start-line="37" selection-start-column="55" selection-end-line="37" selection-end-column="55" />
-          <folding>
-            <element signature="method#setDistinctiveFeatures#0;class#PhonemeInTable#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/consonant/Consonant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="61" column="76" lean-forward="true" selection-start-line="61" selection-start-column="76" selection-end-line="61" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBank.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
+        <state relative-caret-position="612">
           <caret line="233" column="62" selection-start-line="233" selection-start-column="55" selection-end-line="233" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -810,54 +783,136 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/PhonemesBank.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/MannerPrecise.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="102">
+          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/vowels/Roundness.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/vowels/Backness.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/vowels/Height.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="76" selection-start-line="3" selection-start-column="76" selection-end-line="3" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/PlaceApproximate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/PlacePrecise.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Sibilant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Lateral.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Rhotics.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Semivowel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Strident.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/Stricture.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/DistinctiveFeatures.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="59" column="73" lean-forward="true" selection-start-line="59" selection-start-column="73" selection-end-line="59" selection-end-column="73" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1194#1195#0" expanded="true" />
+            <element signature="e#1238#1239#0" expanded="true" />
+            <element signature="e#1429#1430#0" expanded="true" />
+            <element signature="e#1466#1467#0" expanded="true" />
+            <element signature="e#1508#1509#0" expanded="true" />
+            <element signature="e#1550#1551#0" expanded="true" />
+            <element signature="e#1283#1331#0" />
+            <element signature="method#countMannerParameters#0;class#Manner#0;class#DistinctiveFeatures#0" />
+            <element signature="e#10062#10063#0" expanded="true" />
+            <element signature="e#10159#10160#0" expanded="true" />
+            <element signature="e#10237#10238#0" expanded="true" />
+            <element signature="e#10319#10320#0" expanded="true" />
+            <element signature="e#10402#10403#0" expanded="true" />
+            <element signature="e#10474#10475#0" expanded="true" />
+            <element signature="e#10548#10549#0" expanded="true" />
+            <element signature="e#10628#10629#0" expanded="true" />
+            <element signature="e#10708#10709#0" expanded="true" />
+            <element signature="e#10785#10786#0" expanded="true" />
+            <element signature="e#10862#10863#0" expanded="true" />
+            <element signature="e#10957#10958#0" expanded="true" />
+            <element signature="e#11040#11041#0" expanded="true" />
+            <element signature="method#Place#0;class#Place#0;class#DistinctiveFeatures#0" />
+            <element signature="method#Place#1;class#Place#0;class#DistinctiveFeatures#0" />
+            <element signature="e#7182#7183#0" expanded="true" />
+            <element signature="e#7224#7225#0" expanded="true" />
+            <element signature="e#7268#7269#0" expanded="true" />
+            <element signature="e#7306#7307#0" expanded="true" />
+            <element signature="method#placeApproximateFromPrecise#0;class#Place#0;class#DistinctiveFeatures#0" />
+            <element signature="method#VowelSpace#0;class#VowelSpace#0;class#DistinctiveFeatures#0" />
+            <element signature="method#VowelSpace#1;class#VowelSpace#0;class#DistinctiveFeatures#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/DistinctiveFeatures.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/PhonemesBank.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="93" column="142" selection-start-line="93" selection-start-column="142" selection-end-line="93" selection-end-column="142" />
+        <state relative-caret-position="582">
+          <caret line="88" column="6" selection-start-line="88" selection-start-column="6" selection-end-line="88" selection-end-column="6" />
           <folding>
-            <element signature="class#MajorClass#0;class#DistinctiveFeatures#0" />
-            <element signature="e#736#737#0" expanded="true" />
-            <element signature="e#790#791#0" expanded="true" />
-            <element signature="e#1319#1320#0" expanded="true" />
-            <element signature="e#1356#1357#0" expanded="true" />
-            <element signature="e#1157#1158#0" expanded="true" />
-            <element signature="e#1199#1200#0" expanded="true" />
-            <element signature="class#PlaceApproximate#0;class#DistinctiveFeatures#0" />
-            <element signature="class#PlacePrecise#0;class#DistinctiveFeatures#0" />
-            <element signature="class#Height#0;class#DistinctiveFeatures#0" />
-            <element signature="class#Backness#0;class#DistinctiveFeatures#0" />
-            <element signature="class#Stricture#0;class#DistinctiveFeatures#0" />
-            <element signature="class#Strident#0;class#DistinctiveFeatures#0" />
-            <element signature="class#Sibilant#0;class#DistinctiveFeatures#0" />
-            <element signature="class#Lateral#0;class#DistinctiveFeatures#0" />
-            <element signature="class#Rhotics#0;class#DistinctiveFeatures#0" />
-            <element signature="class#Semivowel#0;class#DistinctiveFeatures#0" />
-            <element signature="class#MannerPrecise#0;class#DistinctiveFeatures#0" />
-            <element signature="method#DistinctiveFeatures#1;class#DistinctiveFeatures#0" />
-            <element signature="e#5020#5021#0" expanded="true" />
-            <element signature="e#5053#5054#0" expanded="true" />
-            <element signature="e#5157#5158#0" expanded="true" />
-            <element signature="e#5186#5187#0" expanded="true" />
-            <element signature="e#5239#5240#0" expanded="true" />
-            <element signature="e#5278#5279#0" expanded="true" />
-            <element signature="e#5323#5324#0" expanded="true" />
-            <element signature="e#5358#5359#0" expanded="true" />
-            <element signature="e#5391#5392#0" expanded="true" />
-            <element signature="e#5420#5421#0" expanded="true" />
-            <element signature="e#5457#5458#0" expanded="true" />
-            <element signature="e#5488#5489#0" expanded="true" />
-            <element signature="e#5524#5525#0" expanded="true" />
-            <element signature="e#5556#5557#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

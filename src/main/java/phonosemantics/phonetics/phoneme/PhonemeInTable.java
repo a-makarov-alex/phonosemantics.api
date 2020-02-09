@@ -1,7 +1,5 @@
 package phonosemantics.phonetics.phoneme;
 
-import phonosemantics.phonetics.DistinctiveFeatures;
-
 public class PhonemeInTable {
     private String value;
     private int row;
