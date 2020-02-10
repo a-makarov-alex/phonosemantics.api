@@ -7,12 +7,17 @@ import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Backness;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Height;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Roundness;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class DistinctiveFeatures {
     private MajorClass majorClass;
     private Manner manner;
     private Place place; //consonants only
     private VowelSpace vowelSpace; //vowels only
     //    private Laryngeal laryngeal;
+
+    private static HashMap<Object, Integer> allFeaturesMap = null;
 
 
     /** CONSTRUCTOR FOR CONSONANTS **/
@@ -379,5 +384,92 @@ public class DistinctiveFeatures {
         public Roundness getRoundness() {
             return roundness;
         }
+    }
+
+    // Создает MAP со всеми фонотипами в качестве ключей. Значения нулевые.
+//    public static HashMap<Object, Integer> getAllFeatures() {
+//        if (allFeaturesMap != null) {
+//            return allFeaturesMap;
+//
+//        } else {
+//            HashMap<Object, Integer> map = new HashMap<>();
+//
+//            /* **********************  VOWELS ***************************/
+//            // Height
+//            Object[] hArr = Height.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            // Backness
+//            hArr = Backness.values();
+//            for (int i = 0; i < hArr.length; i++) {
+//                map.put(hArr[i], 0);
+//            }
+//
+//            // Roundness
+//            hArr = Roundness.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            // Nasalization
+//            hArr = Nasalization.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            /* **********************  CONSONANTS ***************************/
+//            // Cons.MannerApprox
+//            hArr = MannerApproximate.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            // Cons.MannerPrecise
+//            hArr = MannerPricise.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            // Cons.PlaceApprox
+//            hArr = PlaceApproximate.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            // Cons.PlacePrecise
+//            hArr = PlacePrecise.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            // Phonation
+//            hArr = Phonation.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            userLogger.debug("map of phonotypes is created");
+//            allPhTypesMap = map;
+//            return map;
+//        }
+//    }
+
+    public static HashMap<String, Object[]> getAllFeaturesForAPI() {
+        HashMap<String, Object[]> map = new HashMap<>();
+
+        map.put("Manner", MannerPrecise.values());
+
+        /* **********************  VOWELS ***************************/
+        map.put("Height", Height.values());
+        map.put("Backness", Backness.values());
+        map.put("Roundness", Roundness.values());
+
+        /* **********************  CONSONANTS ***************************/
+        map.put("PlaceApproximate", PlaceApproximate.values());
+        map.put("PlacePrecise", PlacePrecise.values());
+
+        return map;
     }
 }

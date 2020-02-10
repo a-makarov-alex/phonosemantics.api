@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import phonosemantics.output.header.Header;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 public class PhonemesController {
@@ -31,5 +32,11 @@ public class PhonemesController {
     @GetMapping("/phonemes/parameters/consonants")
     public ArrayList<Object> getConsonantsParameters() {
         return PhonemesCoverageNew.getConsonantsParameters();
+    }
+
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/phonemes/parameters/all")
+    public HashMap<String, Object[]> getAllFeatures() {
+        return DistinctiveFeatures.getAllFeaturesForAPI();
     }
 }

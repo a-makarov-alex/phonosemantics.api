@@ -2,15 +2,14 @@ package phonosemantics.phonetics;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import phonosemantics.data.SoundsBank;
-import phonosemantics.phonetics.consonant.Consonant;
+
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.MannerPrecise;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.consonants.*;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Backness;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Height;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Roundness;
-import phonosemantics.phonetics.vowel.Vowel;
+
 
 import java.util.HashMap;
 
@@ -18,7 +17,27 @@ import java.util.HashMap;
 public class PhonemesBank {
     private static final Logger userLogger = LogManager.getLogger(PhonemesBank.class);
 
-    private HashMap<String, DistinctiveFeatures> allPhonemes = new HashMap<>();
+    private HashMap<String, DistinctiveFeatures> allPhonemes;
+
+    /***************************  SINGLETON ************************/
+    private static PhonemesBank instance;
+
+    public static PhonemesBank getInstance() {
+        if (instance == null) {
+            instance = new PhonemesBank();
+            userLogger.debug("sounds bank instance initialized");
+        }
+        return instance;
+    }
+
+    /*************************** CONSTRUCTOR ************************/
+    public PhonemesBank() {
+        this.allPhonemes = new HashMap<>();
+        addConsonants();
+        addVowels();
+        // TODO all the affricates
+        // TODO all the diacritics
+    }
 
     private void addConsonants() {
         // consonants
@@ -124,50 +143,48 @@ public class PhonemesBank {
         allPhonemes.put("y", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE, Backness.FRONT, Roundness.ROUNDED));
         allPhonemes.put("e", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE_MID, Backness.FRONT, Roundness.UNROUNDED));
         allPhonemes.put("ẽ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE_MID, Backness.FRONT, Roundness.UNROUNDED, true));
-
-        allPhonemes.put("ø", new Vowel("ø", SoundsBank.Height.CLOSE_MID, SoundsBank.Backness.FRONT, SoundsBank.Roundness.ROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("ɛ", new Vowel("ɛ", SoundsBank.Height.OPEN_MID, SoundsBank.Backness.FRONT, SoundsBank.Roundness.UNROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("œ", new Vowel("œ", SoundsBank.Height.OPEN_MID, SoundsBank.Backness.FRONT, SoundsBank.Roundness.ROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("æ", new Vowel("æ", SoundsBank.Height.NEAR_OPEN, SoundsBank.Backness.FRONT, SoundsBank.Roundness.UNROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("a", new Vowel("a", SoundsBank.Height.OPEN, SoundsBank.Backness.FRONT, SoundsBank.Roundness.UNROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("ã", new Vowel("ã", SoundsBank.Height.OPEN, SoundsBank.Backness.FRONT, SoundsBank.Roundness.UNROUNDED, SoundsBank.Nasalization.NASAL));
-        allPhonemes.put("ɶ", new Vowel("ɶ", SoundsBank.Height.OPEN, SoundsBank.Backness.FRONT, SoundsBank.Roundness.ROUNDED, SoundsBank.Nasalization.NON_NASAL));
+        allPhonemes.put("ø", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE_MID, Backness.FRONT, Roundness.ROUNDED));
+        allPhonemes.put("ɛ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN_MID, Backness.FRONT, Roundness.UNROUNDED));
+        allPhonemes.put("œ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN_MID, Backness.FRONT, Roundness.ROUNDED));
+        allPhonemes.put("æ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.NEAR_OPEN, Backness.FRONT, Roundness.UNROUNDED));
+        allPhonemes.put("a", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN, Backness.FRONT, Roundness.UNROUNDED));
+        allPhonemes.put("ã", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN, Backness.FRONT, Roundness.UNROUNDED, true));
+        allPhonemes.put("ɶ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN, Backness.FRONT, Roundness.ROUNDED));
 
         // central
-        allPhonemes.put("ɨ", new Vowel("ɨ", SoundsBank.Height.CLOSE, SoundsBank.Backness.CENTRAL, SoundsBank.Roundness.UNROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("ʉ", new Vowel("ʉ", SoundsBank.Height.CLOSE, SoundsBank.Backness.CENTRAL, SoundsBank.Roundness.ROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("ɘ", new Vowel("ɘ", SoundsBank.Height.CLOSE_MID, SoundsBank.Backness.CENTRAL, SoundsBank.Roundness.UNROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("ɵ", new Vowel("ɵ", SoundsBank.Height.CLOSE_MID, SoundsBank.Backness.CENTRAL, SoundsBank.Roundness.ROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("ə", new Vowel("ə", SoundsBank.Height.MID, SoundsBank.Backness.CENTRAL, SoundsBank.Roundness.UNROUNDED, SoundsBank.Nasalization.NON_NASAL)); // \u0259
-        allPhonemes.put("ǝ", new Vowel("ǝ", SoundsBank.Height.MID, SoundsBank.Backness.CENTRAL, SoundsBank.Roundness.UNROUNDED, SoundsBank.Nasalization.NON_NASAL)); // \u01DD
-
-        allPhonemes.put("ɜ", new Vowel("ɜ", SoundsBank.Height.OPEN_MID, SoundsBank.Backness.CENTRAL, SoundsBank.Roundness.UNROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("ɞ", new Vowel("ɞ", SoundsBank.Height.OPEN_MID, SoundsBank.Backness.CENTRAL, SoundsBank.Roundness.ROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("ä", new Vowel("ä", SoundsBank.Height.OPEN, SoundsBank.Backness.CENTRAL, SoundsBank.Roundness.UNROUNDED, SoundsBank.Nasalization.NON_NASAL));
+        allPhonemes.put("ɨ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE, Backness.CENTRAL, Roundness.UNROUNDED));
+        allPhonemes.put("ʉ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE, Backness.CENTRAL, Roundness.ROUNDED));
+        allPhonemes.put("ɘ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE_MID, Backness.CENTRAL, Roundness.UNROUNDED));
+        allPhonemes.put("ɵ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE_MID, Backness.CENTRAL, Roundness.ROUNDED));
+        allPhonemes.put("ə", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.MID, Backness.CENTRAL, Roundness.UNROUNDED)); // \u0259
+        allPhonemes.put("ǝ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.MID, Backness.CENTRAL, Roundness.UNROUNDED)); // \u01DD
+        allPhonemes.put("ɜ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN_MID, Backness.CENTRAL, Roundness.UNROUNDED));
+        allPhonemes.put("ɞ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN_MID, Backness.CENTRAL, Roundness.ROUNDED));
+        allPhonemes.put("ä", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN, Backness.CENTRAL, Roundness.UNROUNDED));
 
         // back
-        allPhonemes.put("ɯ", new Vowel("ɯ", SoundsBank.Height.CLOSE, SoundsBank.Backness.BACK, SoundsBank.Roundness.UNROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("u", new Vowel("u", SoundsBank.Height.CLOSE, SoundsBank.Backness.BACK, SoundsBank.Roundness.ROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("ʊ", new Vowel("ʊ", SoundsBank.Height.NEAR_CLOSE, SoundsBank.Backness.BACK, SoundsBank.Roundness.ROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("ɤ", new Vowel("ɤ", SoundsBank.Height.CLOSE_MID, SoundsBank.Backness.BACK, SoundsBank.Roundness.UNROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("o", new Vowel("o", SoundsBank.Height.CLOSE_MID, SoundsBank.Backness.BACK, SoundsBank.Roundness.ROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("õ", new Vowel("õ", SoundsBank.Height.CLOSE_MID, SoundsBank.Backness.BACK, SoundsBank.Roundness.ROUNDED, SoundsBank.Nasalization.NASAL));
-        allPhonemes.put("ʌ", new Vowel("ʌ", SoundsBank.Height.OPEN_MID, SoundsBank.Backness.BACK, SoundsBank.Roundness.UNROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("ɔ", new Vowel("ɔ", SoundsBank.Height.OPEN_MID, SoundsBank.Backness.BACK, SoundsBank.Roundness.ROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("ɑ", new Vowel("ɑ", SoundsBank.Height.OPEN, SoundsBank.Backness.BACK, SoundsBank.Roundness.UNROUNDED, SoundsBank.Nasalization.NON_NASAL));
-        allPhonemes.put("ɒ", new Vowel("ɒ", SoundsBank.Height.OPEN, SoundsBank.Backness.BACK, SoundsBank.Roundness.ROUNDED, SoundsBank.Nasalization.NON_NASAL));
+        allPhonemes.put("ɯ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE, Backness.BACK, Roundness.UNROUNDED));
+        allPhonemes.put("u", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE, Backness.BACK, Roundness.ROUNDED));
+        allPhonemes.put("ʊ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.NEAR_CLOSE, Backness.BACK, Roundness.ROUNDED));
+        allPhonemes.put("ɤ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE_MID, Backness.BACK, Roundness.UNROUNDED));
+        allPhonemes.put("o", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE_MID, Backness.BACK, Roundness.ROUNDED));
+        allPhonemes.put("õ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE_MID, Backness.BACK, Roundness.ROUNDED, true));
+        allPhonemes.put("ʌ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN_MID, Backness.BACK, Roundness.UNROUNDED));
+        allPhonemes.put("ɔ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN_MID, Backness.BACK, Roundness.ROUNDED));
+        allPhonemes.put("ɑ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN, Backness.BACK, Roundness.UNROUNDED));
+        allPhonemes.put("ɒ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN, Backness.BACK, Roundness.ROUNDED));
 
         userLogger.info("vowels map is filled up");
     }
 
     private void addAffricates() {
 
-        allPhonemes.put("ts", new Consonant("ts", SoundsBank.PlacePrecise.ALVEOLAR, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, false));
-        allPhonemes.put("dz", new Consonant("dz", SoundsBank.PlacePrecise.ALVEOLAR, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, true));
-        allPhonemes.put("ʈʂ", new Consonant("ʈʂ", SoundsBank.PlacePrecise.RETROFLEX, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, false));
-        allPhonemes.put("ɖʐ", new Consonant("ɖʐ", SoundsBank.PlacePrecise.RETROFLEX, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, true));
-        allPhonemes.put("tɕ", new Consonant("tɕ", SoundsBank.PlacePrecise.PALATAL, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, false));
-        allPhonemes.put("dʑ", new Consonant("dʑ", SoundsBank.PlacePrecise.PALATAL, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, true));
+//        allPhonemes.put("ts", new Consonant("ts", SoundsBank.PlacePrecise.ALVEOLAR, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, false));
+//        allPhonemes.put("dz", new Consonant("dz", SoundsBank.PlacePrecise.ALVEOLAR, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, true));
+//        allPhonemes.put("ʈʂ", new Consonant("ʈʂ", SoundsBank.PlacePrecise.RETROFLEX, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, false));
+//        allPhonemes.put("ɖʐ", new Consonant("ɖʐ", SoundsBank.PlacePrecise.RETROFLEX, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, true));
+//        allPhonemes.put("tɕ", new Consonant("tɕ", SoundsBank.PlacePrecise.PALATAL, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, false));
+//        allPhonemes.put("dʑ", new Consonant("dʑ", SoundsBank.PlacePrecise.PALATAL, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, true));
 
         userLogger.info("affricates map is filled up");
     }
