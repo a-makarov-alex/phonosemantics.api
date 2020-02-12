@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/PhonemesBank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/PhonemesBank.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/DistinctiveFeatures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/DistinctiveFeatures.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesCoverageNew.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesCoverageNew.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -22,8 +23,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemeInTable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="35" column="55" selection-start-line="35" selection-start-column="55" selection-end-line="35" selection-end-column="55" />
+            <state relative-caret-position="-114">
+              <caret line="7" column="43" lean-forward="true" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
               <folding>
                 <element signature="method#setDistinctiveFeatures#0;class#PhonemeInTable#0" />
               </folding>
@@ -31,11 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="38" column="55" lean-forward="true" selection-start-line="38" selection-start-column="55" selection-end-line="38" selection-end-column="55" />
+            <state relative-caret-position="104">
+              <caret line="15" column="45" lean-forward="true" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#454#455#0" expanded="true" />
@@ -44,19 +45,24 @@
                 <element signature="e#736#737#0" expanded="true" />
                 <element signature="e#915#916#0" expanded="true" />
                 <element signature="e#975#976#0" expanded="true" />
-                <element signature="e#1135#1136#0" expanded="true" />
-                <element signature="e#1203#1204#0" expanded="true" />
+                <element signature="e#1368#1369#0" expanded="true" />
                 <element signature="e#1436#1437#0" expanded="true" />
+                <element signature="e#1604#1605#0" expanded="true" />
+                <element signature="e#1669#1670#0" expanded="true" />
+                <element signature="e#1920#1921#0" expanded="true" />
+                <element signature="e#1985#1986#0" expanded="true" />
+                <element signature="e#2142#2143#0" expanded="true" />
+                <element signature="e#2207#2208#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/DistinctiveFeatures.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="89">
-              <caret line="458" column="64" selection-start-line="458" selection-start-column="44" selection-end-line="458" selection-end-column="64" />
+            <state relative-caret-position="-237">
+              <caret line="89" column="10" selection-start-line="89" selection-start-column="10" selection-end-line="89" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1194#1195#0" expanded="true" />
@@ -89,6 +95,26 @@
                 <element signature="method#placeApproximateFromPrecise#0;class#Place#0;class#DistinctiveFeatures#0" />
                 <element signature="method#VowelSpace#0;class#VowelSpace#0;class#DistinctiveFeatures#0" />
                 <element signature="method#VowelSpace#1;class#VowelSpace#0;class#DistinctiveFeatures#0" />
+                <element signature="e#18937#18938#0" expanded="true" />
+                <element signature="e#18970#18971#0" expanded="true" />
+                <element signature="e#19003#19004#0" expanded="true" />
+                <element signature="e#19032#19033#0" expanded="true" />
+                <element signature="e#19063#19064#0" expanded="true" />
+                <element signature="e#19091#19092#0" expanded="true" />
+                <element signature="e#19132#19133#0" expanded="true" />
+                <element signature="e#19165#19166#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesCoverageNew.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="131" column="52" selection-start-line="131" selection-start-column="52" selection-end-line="131" selection-end-column="52" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,8 +123,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBank.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="24" column="4" lean-forward="true" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="65" />
+            <state relative-caret-position="243">
+              <caret line="317" column="5" lean-forward="true" selection-start-line="315" selection-start-column="4" selection-end-line="317" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -109,8 +135,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/PhonemesBank.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-47">
-              <caret line="19" column="60" selection-start-line="19" selection-start-column="60" selection-end-line="19" selection-end-column="60" />
+            <state relative-caret-position="127">
+              <caret line="186" column="74" selection-start-line="186" selection-start-column="74" selection-end-line="186" selection-end-column="74" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -171,7 +197,6 @@
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBankController.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/output/header/Header.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesCoverageNew.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemeInTable.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/Phonemes.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/DistinctiveFeatures.java" />
@@ -190,9 +215,10 @@
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Lateral.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Rhotics.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Semivowel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/PhonemesBank.java" />
-        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/DistinctiveFeatures.java" />
         <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/PhonemesBank.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesCoverageNew.java" />
+        <option value="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/DistinctiveFeatures.java" />
       </list>
     </option>
   </component>
@@ -715,26 +741,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesCoverageNew.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1923">
-          <caret line="125" column="39" selection-start-line="125" selection-start-column="39" selection-end-line="125" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemeInTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="35" column="55" selection-start-line="35" selection-start-column="55" selection-end-line="35" selection-end-column="55" />
-          <folding>
-            <element signature="method#setDistinctiveFeatures#0;class#PhonemeInTable#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/consonant/Consonant.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -819,26 +825,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/PhonemesBank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-47">
-          <caret line="19" column="60" selection-start-line="19" selection-start-column="60" selection-end-line="19" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="24" column="4" lean-forward="true" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="65" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/distinctiveFeatures/MannerPrecise.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -846,10 +832,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="317" column="5" lean-forward="true" selection-start-line="315" selection-start-column="4" selection-end-line="317" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/PhonemesBank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="186" column="74" selection-start-line="186" selection-start-column="74" selection-end-line="186" selection-end-column="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesCoverageNew.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="131" column="52" selection-start-line="131" selection-start-column="52" selection-end-line="131" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="15" column="45" lean-forward="true" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+            <element signature="e#517#518#0" expanded="true" />
+            <element signature="e#673#674#0" expanded="true" />
+            <element signature="e#736#737#0" expanded="true" />
+            <element signature="e#915#916#0" expanded="true" />
+            <element signature="e#975#976#0" expanded="true" />
+            <element signature="e#1368#1369#0" expanded="true" />
+            <element signature="e#1436#1437#0" expanded="true" />
+            <element signature="e#1604#1605#0" expanded="true" />
+            <element signature="e#1669#1670#0" expanded="true" />
+            <element signature="e#1920#1921#0" expanded="true" />
+            <element signature="e#1985#1986#0" expanded="true" />
+            <element signature="e#2142#2143#0" expanded="true" />
+            <element signature="e#2207#2208#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemeInTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-114">
+          <caret line="7" column="43" lean-forward="true" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+          <folding>
+            <element signature="method#setDistinctiveFeatures#0;class#PhonemeInTable#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/DistinctiveFeatures.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="458" column="64" selection-start-line="458" selection-start-column="44" selection-end-line="458" selection-end-column="64" />
+        <state relative-caret-position="-237">
+          <caret line="89" column="10" selection-start-line="89" selection-start-column="10" selection-end-line="89" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1194#1195#0" expanded="true" />
@@ -882,25 +932,14 @@
             <element signature="method#placeApproximateFromPrecise#0;class#Place#0;class#DistinctiveFeatures#0" />
             <element signature="method#VowelSpace#0;class#VowelSpace#0;class#DistinctiveFeatures#0" />
             <element signature="method#VowelSpace#1;class#VowelSpace#0;class#DistinctiveFeatures#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="38" column="55" lean-forward="true" selection-start-line="38" selection-start-column="55" selection-end-line="38" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#454#455#0" expanded="true" />
-            <element signature="e#517#518#0" expanded="true" />
-            <element signature="e#673#674#0" expanded="true" />
-            <element signature="e#736#737#0" expanded="true" />
-            <element signature="e#915#916#0" expanded="true" />
-            <element signature="e#975#976#0" expanded="true" />
-            <element signature="e#1135#1136#0" expanded="true" />
-            <element signature="e#1203#1204#0" expanded="true" />
-            <element signature="e#1436#1437#0" expanded="true" />
+            <element signature="e#18937#18938#0" expanded="true" />
+            <element signature="e#18970#18971#0" expanded="true" />
+            <element signature="e#19003#19004#0" expanded="true" />
+            <element signature="e#19032#19033#0" expanded="true" />
+            <element signature="e#19063#19064#0" expanded="true" />
+            <element signature="e#19091#19092#0" expanded="true" />
+            <element signature="e#19132#19133#0" expanded="true" />
+            <element signature="e#19165#19166#0" expanded="true" />
           </folding>
         </state>
       </provider>

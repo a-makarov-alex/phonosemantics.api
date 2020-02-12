@@ -12,6 +12,7 @@ import java.util.Map;
 
 import phonosemantics.data.SoundsBank;
 import phonosemantics.output.header.Header;
+import phonosemantics.phonetics.PhonemesBank;
 
 public class PhonemesCoverageNew {
     static final Logger userLogger = LogManager.getLogger(PhonemesService.class);
@@ -122,8 +123,13 @@ public class PhonemesCoverageNew {
                 else {
                     PhonemeInTable ph = new PhonemeInTable(c.getStringCellValue(), i, j);
                     // define if phoneme is recognized by program
-                    if (SoundsBank.getInstance().find(c.getStringCellValue()) != null) {
+                    /*if (SoundsBank.getInstance().find(c.getStringCellValue()) != null) {
                         ph.setRecognized(true);
+                    }*/
+                    DistinctiveFeatures df = PhonemesBank.getInstance().find(c.getStringCellValue());
+                    if (df != null) {
+                        ph.setRecognized(true);
+                        ph.setDistinctiveFeatures(df);
                     }
                     allPhonemesInTable.add(ph);
                 }

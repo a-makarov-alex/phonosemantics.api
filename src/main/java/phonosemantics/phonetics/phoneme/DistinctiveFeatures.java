@@ -457,9 +457,18 @@ public class DistinctiveFeatures {
 //    }
 
     public static HashMap<String, Object[]> getAllFeaturesForAPI() {
+
+        //TODO: переписать через вызов такого же метода для general/vowel/consonant
         HashMap<String, Object[]> map = new HashMap<>();
 
         map.put("Manner", MannerPrecise.values());
+        map.put("Stricture", Stricture.values());
+        map.put("Vocoid", new String[] {"true", "false"});
+        map.put("Approximate", new String[] {"true", "false"});
+        map.put("Sonorant", new String[] {"true", "false"});
+        map.put("Continuant", new String[] {"true", "false"});
+        map.put("Nasal", new String[] {"true", "false"});
+
 
         /* **********************  VOWELS ***************************/
         map.put("Height", Height.values());
@@ -469,7 +478,70 @@ public class DistinctiveFeatures {
         /* **********************  CONSONANTS ***************************/
         map.put("PlaceApproximate", PlaceApproximate.values());
         map.put("PlacePrecise", PlacePrecise.values());
+        map.put("Strident", Strident.values());
+        map.put("Sibilant", Sibilant.values());
+        map.put("Semivowel", Semivowel.values());
+        map.put("Lateral", Lateral.values());
+        map.put("Rhotics", Rhotics.values());
+        map.put("Voiced", new String[] {"true", "false"});
 
         return map;
+    }
+
+    public static HashMap<String, Object[]> getGeneralFeaturesForAPI() {
+        HashMap<String, Object[]> map = new HashMap<>();
+
+        map.put("Manner", MannerPrecise.values());
+        map.put("Stricture", Stricture.values());
+        map.put("Vocoid", new String[] {"true", "false"});
+        map.put("Approximate", new String[] {"true", "false"});
+        map.put("Sonorant", new String[] {"true", "false"});
+        map.put("Continuant", new String[] {"true", "false"});
+        map.put("Nasal", new String[] {"true", "false"});
+
+        return map;
+    }
+
+    public static HashMap<String, Object[]> getVowelFeaturesForAPI() {
+        HashMap<String, Object[]> map = new HashMap<>();
+
+        /* **********************  VOWELS ***************************/
+        map.put("Height", Height.values());
+        map.put("Backness", Backness.values());
+        map.put("Roundness", Roundness.values());
+
+        return map;
+    }
+
+    public static HashMap<String, Object[]> getConsonantFeaturesForAPI() {
+        HashMap<String, Object[]> map = new HashMap<>();
+
+        /* **********************  CONSONANTS ***************************/
+        map.put("PlaceApproximate", PlaceApproximate.values());
+        map.put("PlacePrecise", PlacePrecise.values());
+        map.put("Strident", Strident.values());
+        map.put("Sibilant", Sibilant.values());
+        map.put("Semivowel", Semivowel.values());
+        map.put("Lateral", Lateral.values());
+        map.put("Rhotics", Rhotics.values());
+        map.put("Voiced", new String[] {"true", "false"});
+
+        return map;
+    }
+
+    public MajorClass getMajorClass() {
+        return majorClass;
+    }
+
+    public Manner getManner() {
+        return manner;
+    }
+
+    public Place getPlace() {
+        return place;
+    }
+
+    public VowelSpace getVowelSpace() {
+        return vowelSpace;
     }
 }

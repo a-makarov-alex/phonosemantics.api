@@ -188,4 +188,8 @@ public class PhonemesBank {
 
         userLogger.info("affricates map is filled up");
     }
+
+    public DistinctiveFeatures find(String requestedSymbol) {
+        return allPhonemes.get(requestedSymbol);
+    }
 }
