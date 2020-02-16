@@ -33,6 +33,7 @@ phonosemantics\phonetics\phoneme\distinctiveFeatures\consonants\Semivowel.class
 phonosemantics\phonetics\phoneme\PhonemesService$CoverageSheet.class
 phonosemantics\phonetics\phoneme\distinctiveFeatures\consonants\Sibilant.class
 phonosemantics\phonetics\phoneme\distinctiveFeatures\vowels\Backness.class
+phonosemantics\phonetics\phoneme\PhonemeInTable$PhonemeStats.class
 phonosemantics\output\header\HeaderService.class
 phonosemantics\output\header\HeaderController.class
 phonosemantics\phonetics\phoneme\distinctiveFeatures\MannerPrecise.class

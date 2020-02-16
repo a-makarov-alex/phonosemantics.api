@@ -3,6 +3,10 @@ package phonosemantics.word.wordlist;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import phonosemantics.data.SoundsBank;
+import phonosemantics.phonetics.PhonemesBank;
+import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
+import phonosemantics.phonetics.phoneme.Phoneme;
+import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.statistics.Statistics;
 import phonosemantics.word.Word;
 import phonosemantics.LoggerConfig;
@@ -28,6 +32,7 @@ public class WordList {
     private String meaning;
     private ArrayList<Word> list;
     private HashMap<Object, PhTypeStats> phTypeStatsMap = new HashMap<>();
+    private HashMap<String, PhonemeInTable.PhonemeStats> phonemeStats;
 
     public WordList(ArrayList<Word> list) {
         this.meaning = list.get(0).getMeaning().getDefinition();
@@ -46,6 +51,35 @@ public class WordList {
             PhTypeStats stats = new PhTypeStats(phT.getKey());
             phTypeStatsMap.put(phT.getKey(), stats);
         }
+
+        // Заполняем фонемМапу
+        phonemeStats = new HashMap<>();
+        for (Map.Entry<String, DistinctiveFeatures> entry : PhonemesBank.getInstance().getAllPhonemes().entrySet()) {
+            String currentPh = entry.getKey();
+            int counterPh = 0;
+            int counterW = 0;
+            int numOfAllPhonemes = 0;
+            int numOfAllWords = list.size();
+            for (Word w : list) {
+                boolean wordIsCounted = false;
+                for (Phoneme ph : w.getTranscription()) {
+                    numOfAllPhonemes++;
+                    if (ph.getSymbol().equals(currentPh)) {
+                        counterPh++;
+                        counterW++;
+                        wordIsCounted = true;
+                    }
+                }
+                wordIsCounted = false;
+            }
+
+            phonemeStats.put(entry.getKey(), new PhonemeInTable.PhonemeStats(
+                    counterPh,
+                    counterW,
+                    numOfAllPhonemes,
+                    numOfAllWords));
+        }
+
         // рассчитываем, в скольки языках из представленных присутствует каждый фонотип
         calculatePotentialWordsWithPhType();
 
@@ -155,6 +189,10 @@ public class WordList {
 
     public HashMap<Object, PhTypeStats> getPhTypeStatsMap() {
         return phTypeStatsMap;
+    }
+
+    public HashMap<String, PhonemeInTable.PhonemeStats> getPhonemeStats() {
+        return phonemeStats;
     }
 
     public class PhTypeStats {

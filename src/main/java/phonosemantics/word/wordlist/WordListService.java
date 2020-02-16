@@ -1,6 +1,7 @@
 package phonosemantics.word.wordlist;
 
 import org.apache.poi.ss.usermodel.*;
+import phonosemantics.App;
 import phonosemantics.LoggerConfig;
 import phonosemantics.language.Language;
 import phonosemantics.meaning.Meaning;
@@ -131,6 +132,16 @@ public class WordListService {
             userLogger.error(e.toString());
             return null;
         }
+    }
+
+    public static WordList getWordlist(String meaning) {
+        ArrayList<WordList> allWordlists = App.getAllWordLists();
+        for (WordList wl : allWordlists) {
+            if (wl.getMeaning().equals(meaning)) {
+                return wl;
+            }
+        }
+        return null;
     }
 
 //    public void prepareLanguagesMap() {

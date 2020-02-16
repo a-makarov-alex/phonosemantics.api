@@ -192,4 +192,8 @@ public class PhonemesBank {
     public DistinctiveFeatures find(String requestedSymbol) {
         return allPhonemes.get(requestedSymbol);
     }
+
+    public HashMap<String, DistinctiveFeatures> getAllPhonemes() {
+        return allPhonemes;
+    }
 }

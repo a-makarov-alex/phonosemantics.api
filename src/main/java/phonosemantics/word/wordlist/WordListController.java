@@ -14,15 +14,7 @@ public class WordListController {
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/wordlist")
     public WordList getWordlistByMeaning(@RequestParam(value = "meaning") String meaning) {
-
-        ArrayList<WordList> allWordlists = App.getAllWordLists();
-
-        for (WordList wl : allWordlists) {
-            if (wl.getMeaning().equals(meaning)) {
-                return wl;
-            }
-        }
-        return null;
+        return WordListService.getWordlist(meaning);
     }
 
 

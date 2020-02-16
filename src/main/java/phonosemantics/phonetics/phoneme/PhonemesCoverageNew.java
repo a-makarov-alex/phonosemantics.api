@@ -13,6 +13,7 @@ import java.util.Map;
 import phonosemantics.data.SoundsBank;
 import phonosemantics.output.header.Header;
 import phonosemantics.phonetics.PhonemesBank;
+import phonosemantics.word.wordlist.WordList;
 
 public class PhonemesCoverageNew {
     static final Logger userLogger = LogManager.getLogger(PhonemesService.class);
@@ -95,6 +96,9 @@ public class PhonemesCoverageNew {
         return phTypes;
     }
 
+    /**
+     *  ПО СУТИ, ЭТИ ДАННЫЕ - КОНСТАНТА. ДЛЯ ДОБАВЛЕНИЯ ДИНАМИЧЕСКИХ ДАННЫХ ИЗ WORDLIST ЕСТЬ МЕТОД НИЖЕ
+     * **/
     public static ArrayList<PhonemeInTable> getAllPhonemesList() {
         Workbook wb = null;
         try {
@@ -136,6 +140,15 @@ public class PhonemesCoverageNew {
             }
         }
         return allPhonemesInTable;
+    }
+
+
+    public static ArrayList<PhonemeInTable> getAllPhonemesList(WordList wl) {
+        ArrayList<PhonemeInTable> phList = getAllPhonemesList();
+        for (PhonemeInTable phit : phList) {
+            phit.setPhonemeStats(wl.getPhonemeStats().get(phit.getValue()));
+        }
+        return phList;
     }
 }
 
