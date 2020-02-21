@@ -314,26 +314,26 @@ public class DistinctiveFeatures {
     }
 
     class Place {
-        private PlaceApproximate approximate;
-        private PlacePrecise precise;
+        private PlaceApproximate placeApproximate;
+        private PlacePrecise placePrecise;
 
-        public Place(PlacePrecise precise) {
-            this.precise = precise;
-            this.approximate = placeApproximateFromPrecise(precise);
+        public Place(PlacePrecise placePrecise) {
+            this.placePrecise = placePrecise;
+            this.placeApproximate = placeApproximateFromPrecise(placePrecise);
         }
 
         // Constructor for vowels
         public Place() {
-            this.approximate = PlaceApproximate.NOT_APPLICABLE;
-            this.precise = PlacePrecise.NOT_APPLICABLE;
+            this.placeApproximate = PlaceApproximate.NOT_APPLICABLE;
+            this.placePrecise = PlacePrecise.NOT_APPLICABLE;
         }
 
-        public PlaceApproximate getApproximate() {
-            return approximate;
+        public PlaceApproximate getPlaceApproximate() {
+            return placeApproximate;
         }
 
-        public PlacePrecise getPrecise() {
-            return precise;
+        public PlacePrecise getPlacePrecise() {
+            return placePrecise;
         }
 
         /** Needed for constructor**/
@@ -461,29 +461,29 @@ public class DistinctiveFeatures {
         //TODO: переписать через вызов такого же метода для general/vowel/consonant
         HashMap<String, Object[]> map = new HashMap<>();
 
-        map.put("Manner", MannerPrecise.values());
-        map.put("Stricture", Stricture.values());
-        map.put("Vocoid", new String[] {"true", "false"});
-        map.put("Approximate", new String[] {"true", "false"});
-        map.put("Sonorant", new String[] {"true", "false"});
-        map.put("Continuant", new String[] {"true", "false"});
-        map.put("Nasal", new String[] {"true", "false"});
+        map.put("mannerPrecise", MannerPrecise.values());
+        map.put("stricture", Stricture.values());
+        map.put("vocoid", new String[] {"true", "false"});
+        map.put("approximant", new String[] {"true", "false"});
+        map.put("sonorant", new String[] {"true", "false"});
+        map.put("continuant", new String[] {"true", "false"});
+        map.put("nasal", new String[] {"true", "false"});
 
 
         /* **********************  VOWELS ***************************/
-        map.put("Height", Height.values());
-        map.put("Backness", Backness.values());
-        map.put("Roundness", Roundness.values());
+        map.put("height", Height.values());
+        map.put("backness", Backness.values());
+        map.put("roundness", Roundness.values());
 
         /* **********************  CONSONANTS ***************************/
-        map.put("PlaceApproximate", PlaceApproximate.values());
-        map.put("PlacePrecise", PlacePrecise.values());
-        map.put("Strident", Strident.values());
-        map.put("Sibilant", Sibilant.values());
-        map.put("Semivowel", Semivowel.values());
-        map.put("Lateral", Lateral.values());
-        map.put("Rhotics", Rhotics.values());
-        map.put("Voiced", new String[] {"true", "false"});
+        map.put("placeApproximate", PlaceApproximate.values());
+        map.put("placePrecise", PlacePrecise.values());
+        map.put("strident", Strident.values());
+        map.put("sibilant", Sibilant.values());
+        map.put("semivowel", Semivowel.values());
+        map.put("lateral", Lateral.values());
+        map.put("rhotics", Rhotics.values());
+        map.put("voiced", new String[] {"true", "false"});
 
         return map;
     }
@@ -491,13 +491,13 @@ public class DistinctiveFeatures {
     public static HashMap<String, Object[]> getGeneralFeaturesForAPI() {
         HashMap<String, Object[]> map = new HashMap<>();
 
-        map.put("Manner", MannerPrecise.values());
-        map.put("Stricture", Stricture.values());
-        map.put("Vocoid", new String[] {"true", "false"});
-        map.put("Approximate", new String[] {"true", "false"});
-        map.put("Sonorant", new String[] {"true", "false"});
-        map.put("Continuant", new String[] {"true", "false"});
-        map.put("Nasal", new String[] {"true", "false"});
+        map.put("mannerPrecise", MannerPrecise.values());
+        map.put("stricture", Stricture.values());
+        map.put("vocoid", new String[] {"true", "false"});
+        map.put("approximant", new String[] {"true", "false"});
+        map.put("sonorant", new String[] {"true", "false"});
+        map.put("continuant", new String[] {"true", "false"});
+        map.put("nasal", new String[] {"true", "false"});
 
         return map;
     }
@@ -506,9 +506,9 @@ public class DistinctiveFeatures {
         HashMap<String, Object[]> map = new HashMap<>();
 
         /* **********************  VOWELS ***************************/
-        map.put("Height", Height.values());
-        map.put("Backness", Backness.values());
-        map.put("Roundness", Roundness.values());
+        map.put("height", Height.values());
+        map.put("backness", Backness.values());
+        map.put("roundness", Roundness.values());
 
         return map;
     }
@@ -517,14 +517,14 @@ public class DistinctiveFeatures {
         HashMap<String, Object[]> map = new HashMap<>();
 
         /* **********************  CONSONANTS ***************************/
-        map.put("PlaceApproximate", PlaceApproximate.values());
-        map.put("PlacePrecise", PlacePrecise.values());
-        map.put("Strident", Strident.values());
-        map.put("Sibilant", Sibilant.values());
-        map.put("Semivowel", Semivowel.values());
-        map.put("Lateral", Lateral.values());
-        map.put("Rhotics", Rhotics.values());
-        map.put("Voiced", new String[] {"true", "false"});
+        map.put("placeApproximate", PlaceApproximate.values());
+        map.put("placePrecise", PlacePrecise.values());
+        map.put("strident", Strident.values());
+        map.put("sibilant", Sibilant.values());
+        map.put("semivowel", Semivowel.values());
+        map.put("lateral", Lateral.values());
+        map.put("rhotics", Rhotics.values());
+        map.put("voiced", new String[] {"true", "false"});
 
         return map;
     }
