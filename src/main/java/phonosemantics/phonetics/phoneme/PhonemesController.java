@@ -21,6 +21,12 @@ public class PhonemesController {
     }
 
     @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/phonemes/coverage/vowels")
+    public ArrayList<PhonemeInTable> getVowelsCoverage() {
+        return PhonemesCoverageNew.getAllVowelsList();
+    }
+
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/phonemes/coverage/{meaning}")
     public ArrayList<PhonemeInTable> getPhonemesCoverageForWordlist(@PathVariable(value="meaning") String meaning) {
         WordList wrdl = WordListService.getWordlist(meaning);
@@ -38,6 +44,18 @@ public class PhonemesController {
     @GetMapping("/phonemes/headers/manner")
     public ArrayList<Header> getMannerHeaders() {
         return PhonemesCoverageNew.getMannerHeaders();
+    }
+
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/phonemes/headers/backness")
+    public ArrayList<Header> getBacknessHeaders() {
+        return PhonemesCoverageNew.getBacknessHeaders();
+    }
+
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/phonemes/headers/height")
+    public ArrayList<Header> getHeightHeaders() {
+        return PhonemesCoverageNew.getHeightHeaders();
     }
 
     // NOT APPROPRIATE

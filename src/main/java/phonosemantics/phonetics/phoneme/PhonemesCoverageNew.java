@@ -88,6 +88,72 @@ public class PhonemesCoverageNew {
         return mannerHeaders;
     }
 
+    public static ArrayList<Header> getBacknessHeaders() {
+        ArrayList<Header> backnessHeaders = new ArrayList<>();
+        Workbook wb = null;
+        try {
+            InputStream inputStream = new FileInputStream(INPUT_FILE_PATH);
+            wb = WorkbookFactory.create(inputStream);
+            userLogger.info("example file is opened");
+            inputStream.close();
+        } catch (
+                IOException e) {
+            userLogger.error(e.toString());
+        }
+
+        Sheet sheet = wb.getSheetAt(0);
+        Header previousHeader = null;
+        int width = 1;
+
+        for (int i = 0; i < 2; i++) {
+            Row r = sheet.getRow(i);
+            for (int j=1; j <= 6; j++) {
+                Cell c = r.getCell(j);
+                if (c == null) {
+                    width++;
+                } else {
+                    if (c.getCellType().equals(CellType.BLANK)) {
+                        width++;
+                    } else {
+                        if (previousHeader != null) {
+
+                            previousHeader.setWidth(width);
+                            width = 1;
+                            backnessHeaders.add(previousHeader);
+                        }
+                        previousHeader = new Header(i, j, c.getStringCellValue());
+                    }
+                }
+            }
+        }
+        previousHeader.setWidth(width);
+        backnessHeaders.add(previousHeader);
+        return backnessHeaders;
+    }
+
+    public static ArrayList<Header> getHeightHeaders() {
+        ArrayList<Header> heightHeaders = new ArrayList<>();
+        Workbook wb = null;
+        try {
+            InputStream inputStream = new FileInputStream(INPUT_FILE_PATH);
+            wb = WorkbookFactory.create(inputStream);
+            userLogger.info("example file is opened");
+            inputStream.close();
+        } catch (
+                IOException e) {
+            userLogger.error(e.toString());
+        }
+
+        Sheet sheet = wb.getSheetAt(0);
+
+        for (int i = 2; i <= 8; i++) {
+            Row r = sheet.getRow(i);
+            Cell c = r.getCell(0);
+            heightHeaders.add(new Header(i, 0, c.getStringCellValue()));
+        }
+        return heightHeaders;
+    }
+
     public static ArrayList<Object> getConsonantsParameters() {
         ArrayList<Object> phTypes = new ArrayList<>();
         for (Map.Entry<Object, Integer> entry : SoundsBank.getAllPhonotypes().entrySet()) {
@@ -145,6 +211,56 @@ public class PhonemesCoverageNew {
 
     public static ArrayList<PhonemeInTable> getAllPhonemesList(WordList wl) {
         ArrayList<PhonemeInTable> phList = getAllPhonemesList();
+        for (PhonemeInTable phit : phList) {
+            phit.setPhonemeStats(wl.getPhonemeStats().get(phit.getValue()));
+        }
+        return phList;
+    }
+
+    public static ArrayList<PhonemeInTable> getAllVowelsList() {
+        Workbook wb = null;
+        try {
+            InputStream inputStream = new FileInputStream(INPUT_FILE_PATH);
+            wb = WorkbookFactory.create(inputStream);
+            userLogger.info("example file is opened");
+            inputStream.close();
+        } catch (
+                IOException e) {
+            userLogger.error(e.toString());
+        }
+
+        CoverageSheet vowelsSheet = new CoverageSheet(wb.getSheetAt(0), 2, 8, 1, 6);
+
+        ArrayList<PhonemeInTable> allVowelsInTable = new ArrayList<>();
+
+        for (int i = vowelsSheet.firstRow; i <= vowelsSheet.lastRow; i++) {
+            Row r = vowelsSheet.sheet.getRow(i);
+            for (int j = vowelsSheet.firstCol; j <= vowelsSheet.lastCol; j++) {
+                Cell c = r.getCell(j);
+                if (c == null) {
+                    allVowelsInTable.add(new PhonemeInTable("", i, j));
+                    //userLogger.warn("coord null" + i + " " + j);
+                }
+                else {
+                    PhonemeInTable ph = new PhonemeInTable(c.getStringCellValue(), i, j);
+                    // define if phoneme is recognized by program
+                    /*if (SoundsBank.getInstance().find(c.getStringCellValue()) != null) {
+                        ph.setRecognized(true);
+                    }*/
+                    DistinctiveFeatures df = PhonemesBank.getInstance().find(c.getStringCellValue());
+                    if (df != null) {
+                        ph.setRecognized(true);
+                        ph.setDistinctiveFeatures(df);
+                    }
+                    allVowelsInTable.add(ph);
+                }
+            }
+        }
+        return allVowelsInTable;
+    }
+
+    public static ArrayList<PhonemeInTable> getAllVowelsList(WordList wl) {
+        ArrayList<PhonemeInTable> phList = getAllVowelsList();
         for (PhonemeInTable phit : phList) {
             phit.setPhonemeStats(wl.getPhonemeStats().get(phit.getValue()));
         }
