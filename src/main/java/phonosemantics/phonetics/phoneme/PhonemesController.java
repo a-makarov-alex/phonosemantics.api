@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import phonosemantics.App;
 import phonosemantics.output.header.Header;
 import phonosemantics.word.wordlist.WordList;
 import phonosemantics.word.wordlist.WordListService;
@@ -35,35 +34,10 @@ public class PhonemesController {
     }
 
     @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/phonemes/headers/place")
-    public ArrayList<Header> getPlaceHeaders() {
-        return PhonemesCoverageNew.getPlaceHeaders();
+    @GetMapping("/phonemes/headers/{distinctiveFeature}")
+    public ArrayList<Header> getHeaders(@PathVariable(value="distinctiveFeature") String distinctiveFeature) {
+        return PhonemesCoverageNew.getHeaders(distinctiveFeature);
     }
-
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/phonemes/headers/manner")
-    public ArrayList<Header> getMannerHeaders() {
-        return PhonemesCoverageNew.getMannerHeaders();
-    }
-
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/phonemes/headers/backness")
-    public ArrayList<Header> getBacknessHeaders() {
-        return PhonemesCoverageNew.getBacknessHeaders();
-    }
-
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/phonemes/headers/height")
-    public ArrayList<Header> getHeightHeaders() {
-        return PhonemesCoverageNew.getHeightHeaders();
-    }
-
-    // NOT APPROPRIATE
-    /*@CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/phonemes/parameters/consonants")
-    public ArrayList<Object> getConsonantsParameters() {
-        return PhonemesCoverageNew.getConsonantsParameters();
-    }*/
 
     /***************** METHODS FOR GETTING SOUNDS DISTINCTIVE FEATURES ************/
 

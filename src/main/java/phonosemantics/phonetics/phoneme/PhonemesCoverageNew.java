@@ -22,8 +22,8 @@ public class PhonemesCoverageNew {
     private static final String INPUT_FILE_PATH = "D:\\JavaProjects2019\\word\\src\\main\\java\\output\\PhonemesCoverageExample.xlsx";
 
 
-    public static ArrayList<Header> getPlaceHeaders() {
-        ArrayList<Header> placeHeaders = new ArrayList<>();
+    public static ArrayList<Header> getHeaders(String distFeature) {
+        ArrayList<Header> headers = new ArrayList<>();
         Workbook wb = null;
         try {
             InputStream inputStream = new FileInputStream(INPUT_FILE_PATH);
@@ -35,123 +35,69 @@ public class PhonemesCoverageNew {
             userLogger.error(e.toString());
         }
 
-        Sheet sheet = wb.getSheetAt(1);
+        distFeature = distFeature.toLowerCase();
+        Sheet sheet;
         Header previousHeader = null;
         int width = 1;
+        int iStart = 0;
+        int iFinish = 0;
 
-        for (int i = 0; i < 2; i++) {
-            Row r = sheet.getRow(i);
-            for (int j=1; j <= 24; j++) {
-                Cell c = r.getCell(j);
-                if (c == null) {
-                    width++;
-                } else {
-                    if (c.getCellType().equals(CellType.BLANK)) {
+        if (distFeature.equals("height") || distFeature.equals("manner")) {
+            if (distFeature.equals("height")) {
+                iStart = 2;
+                iFinish = 8;
+                sheet = wb.getSheetAt(0);
+            } else {
+                iStart = 2;
+                iFinish = 14;
+                sheet = wb.getSheetAt(1);
+            }
+
+            // Go through file
+            for (int i = iStart; i <= iFinish; i++) {
+                Row r = sheet.getRow(i);
+                Cell c = r.getCell(0);
+                headers.add(new Header(i, 0, c.getStringCellValue()));
+            }
+        }
+
+        if (distFeature.equals("backness") || distFeature.equals("place")) {
+            if (distFeature.equals("backness")) {
+                iStart = 1;
+                iFinish = 6;
+                sheet = wb.getSheetAt(0);
+            } else {
+                iStart = 1;
+                iFinish = 24;
+                sheet = wb.getSheetAt(1);
+            }
+
+            // Go through file
+            for (int i = 0; i < 2; i++) {
+                Row r = sheet.getRow(i);
+                for (int j = iStart; j <= iFinish; j++) {
+                    Cell c = r.getCell(j);
+                    if (c == null) {
                         width++;
                     } else {
-                        if (previousHeader != null) {
+                        if (c.getCellType().equals(CellType.BLANK)) {
+                            width++;
+                        } else {
+                            if (previousHeader != null) {
 
-                            previousHeader.setWidth(width);
-                            width = 1;
-                            placeHeaders.add(previousHeader);
+                                previousHeader.setWidth(width);
+                                width = 1;
+                                headers.add(previousHeader);
+                            }
+                            previousHeader = new Header(i, j, c.getStringCellValue());
                         }
-                        previousHeader = new Header(i, j, c.getStringCellValue());
                     }
                 }
             }
+            previousHeader.setWidth(width);
+            headers.add(previousHeader);
         }
-        previousHeader.setWidth(width);
-        placeHeaders.add(previousHeader);
-        return placeHeaders;
-    }
-
-    public static ArrayList<Header> getMannerHeaders() {
-        ArrayList<Header> mannerHeaders = new ArrayList<>();
-        Workbook wb = null;
-        try {
-            InputStream inputStream = new FileInputStream(INPUT_FILE_PATH);
-            wb = WorkbookFactory.create(inputStream);
-            userLogger.info("example file is opened");
-            inputStream.close();
-        } catch (
-                IOException e) {
-            userLogger.error(e.toString());
-        }
-
-        Sheet sheet = wb.getSheetAt(1);
-
-        for (int i = 2; i <= 14; i++) {
-            Row r = sheet.getRow(i);
-            Cell c = r.getCell(0);
-            mannerHeaders.add(new Header(i, 0, c.getStringCellValue()));
-        }
-        return mannerHeaders;
-    }
-
-    public static ArrayList<Header> getBacknessHeaders() {
-        ArrayList<Header> backnessHeaders = new ArrayList<>();
-        Workbook wb = null;
-        try {
-            InputStream inputStream = new FileInputStream(INPUT_FILE_PATH);
-            wb = WorkbookFactory.create(inputStream);
-            userLogger.info("example file is opened");
-            inputStream.close();
-        } catch (
-                IOException e) {
-            userLogger.error(e.toString());
-        }
-
-        Sheet sheet = wb.getSheetAt(0);
-        Header previousHeader = null;
-        int width = 1;
-
-        for (int i = 0; i < 2; i++) {
-            Row r = sheet.getRow(i);
-            for (int j=1; j <= 6; j++) {
-                Cell c = r.getCell(j);
-                if (c == null) {
-                    width++;
-                } else {
-                    if (c.getCellType().equals(CellType.BLANK)) {
-                        width++;
-                    } else {
-                        if (previousHeader != null) {
-
-                            previousHeader.setWidth(width);
-                            width = 1;
-                            backnessHeaders.add(previousHeader);
-                        }
-                        previousHeader = new Header(i, j, c.getStringCellValue());
-                    }
-                }
-            }
-        }
-        previousHeader.setWidth(width);
-        backnessHeaders.add(previousHeader);
-        return backnessHeaders;
-    }
-
-    public static ArrayList<Header> getHeightHeaders() {
-        ArrayList<Header> heightHeaders = new ArrayList<>();
-        Workbook wb = null;
-        try {
-            InputStream inputStream = new FileInputStream(INPUT_FILE_PATH);
-            wb = WorkbookFactory.create(inputStream);
-            userLogger.info("example file is opened");
-            inputStream.close();
-        } catch (
-                IOException e) {
-            userLogger.error(e.toString());
-        }
-
-        Sheet sheet = wb.getSheetAt(0);
-
-        for (int i = 2; i <= 8; i++) {
-            Row r = sheet.getRow(i);
-            Cell c = r.getCell(0);
-            heightHeaders.add(new Header(i, 0, c.getStringCellValue()));
-        }
-        return heightHeaders;
+        return headers;
     }
 
     public static ArrayList<Object> getConsonantsParameters() {
