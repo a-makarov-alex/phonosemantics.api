@@ -42,26 +42,8 @@ public class PhonemesController {
     /***************** METHODS FOR GETTING SOUNDS DISTINCTIVE FEATURES ************/
 
     @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/phonemes/parameters/all")
-    public HashMap<String, Object[]> getAllFeatures() {
-        return DistinctiveFeatures.getAllFeaturesForAPI();
-    }
-
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/phonemes/parameters/general")
-    public HashMap<String, Object[]> getGeneralFeatures() {
-        return DistinctiveFeatures.getGeneralFeaturesForAPI();
-    }
-
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/phonemes/parameters/vowel")
-    public HashMap<String, Object[]> getVowelFeatures() {
-        return DistinctiveFeatures.getVowelFeaturesForAPI();
-    }
-
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/phonemes/parameters/consonant")
-    public HashMap<String, Object[]> getConsonantFeatures() {
-        return DistinctiveFeatures.getConsonantFeaturesForAPI();
+    @GetMapping("/phonemes/parameters/{distinctiveFeature}")
+    public HashMap<String, Object[]> getFeatures(@PathVariable(value="distinctiveFeature") String distinctiveFeature) {
+        return DistinctiveFeatures.getFeaturesForAPI(distinctiveFeature);
     }
 }
