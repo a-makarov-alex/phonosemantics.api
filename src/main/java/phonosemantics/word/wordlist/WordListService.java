@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 //TODO: be careful, remove hardcode from this class
 public class WordListService {
-    private static final String FILEPATH = "Input.xlsx";
-    private static final String INPUT_DIRECTORY = "D:\\JavaProjects2019\\word\\src\\main\\java\\input\\";
+    private static final String FILENAME = "Input.xlsx";
+    private static final String INPUT_DIRECTORY = "./src/main/java/phonosemantics/input/";
     static final Logger userLogger = LogManager.getLogger(WordListService.class);
 
     /**
@@ -32,7 +32,7 @@ public class WordListService {
         ArrayList<WordList> allWordlists = new ArrayList<>();
 
         try {
-            inputStream = new FileInputStream(INPUT_DIRECTORY + FILEPATH);
+            inputStream = new FileInputStream(INPUT_DIRECTORY + FILENAME);
             Workbook wb = WorkbookFactory.create(inputStream);
             Sheet sheet = wb.getSheetAt(0);
 
@@ -69,7 +69,7 @@ public class WordListService {
         ArrayList<Word> list = new ArrayList<Word>();
 
         try {
-            inputStream = new FileInputStream(INPUT_DIRECTORY + FILEPATH);
+            inputStream = new FileInputStream(INPUT_DIRECTORY + FILENAME);
             userLogger.info("--- wordlist composing for " + meaning);
             Workbook wb = WorkbookFactory.create(inputStream);
             Sheet sheet;

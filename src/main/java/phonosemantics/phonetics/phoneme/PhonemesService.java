@@ -22,8 +22,8 @@ public class PhonemesService {
 
     // Шаблон с таблицами всех фонем перезаписывается в отредактированном варианте
     // Сам шаблон остается в оригинальном виде
-    private final String OUTPUT_DIRECTORY = "D:\\JavaProjects2019\\word\\src\\main\\java\\output\\";
-    private final String INPUT_FILE_PATH = OUTPUT_DIRECTORY + "PhonemesCoverageExample.xlsx";
+    private final String OUTPUT_DIRECTORY = "./src/main/java/phonosemantics/output/";
+    private final String INPUT_FILE_PATH = "./src/main/java/phonosemantics/input/PhonemesCoverageExample.xlsx";
 
 
     private class CoverageSheet {

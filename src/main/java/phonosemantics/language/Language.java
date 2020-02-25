@@ -20,8 +20,8 @@ import java.util.function.Predicate;
 public class Language {
     private static final Logger userLogger = LogManager.getLogger(Language.class);
 
-    private static final String INPUT_LANGUAGES_PATH =
-            "D:\\JavaProjects2019\\word\\src\\main\\java\\knowledgeBase\\AllLanguages.xlsx";
+    private static final String INPUT_LANGUAGES_PATH = "./src/main/java/phonosemantics/input/AllLanguages.xlsx";
+
     // количество столбцов с фонемами в файле, описывающем языки
     private static int NUM_OF_PHONOLOGY_COLUMNS = 7;
     private static HashMap<String, Language> allLanguages = new HashMap<>();
