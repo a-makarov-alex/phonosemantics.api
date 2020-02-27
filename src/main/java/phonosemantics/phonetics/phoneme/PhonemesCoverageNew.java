@@ -16,10 +16,9 @@ import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.word.wordlist.WordList;
 
 public class PhonemesCoverageNew {
-    static final Logger userLogger = LogManager.getLogger(PhonemesService.class);
+    static final Logger userLogger = LogManager.getLogger(PhonemesCoverageNew.class);
 
     //путь к шаблону всех согласных фонем
-    //private static final String INPUT_FILE_PATH = "D:\\JavaProjects2019\\word\\src\\main\\java\\output\\PhonemesCoverageExample.xlsx";
     private static final String INPUT_FILE_PATH = "./src/main/java/phonosemantics/input/PhonemesCoverageExample.xlsx";
 
 

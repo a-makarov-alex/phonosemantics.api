@@ -22,7 +22,6 @@ D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\phonetics\phone
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\phonetics\phoneme\PhonemesController.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\word\Word.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\phonetics\phoneme\distinctiveFeatures\Stricture.java
-D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\phonetics\phoneme\PhonemesService.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\word\wordlist\wordlistReduced\WordlistReducedController.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\word\wordlist\WordListService.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\language\languageReduced\LanguageReduced.java
@@ -36,6 +35,7 @@ D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\phonetics\phone
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\phonetics\phoneme\PhonemeInTable.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\LoggerConfig.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\phonetics\vowel\Vowel.java
+D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\phonetics\phoneme\DistinctiveFeaturesController.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\phonetics\phoneme\distinctiveFeatures\vowels\Height.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\word\wordlist\wordlistReduced\WordlistReducedService.java
 D:\JavaProjects3\API_phonosemantics\src\main\java\phonosemantics\word\wordlist\wordlistReduced\WordListReduced.java

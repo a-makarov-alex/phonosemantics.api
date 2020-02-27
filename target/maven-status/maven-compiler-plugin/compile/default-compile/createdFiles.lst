@@ -30,7 +30,6 @@ phonosemantics\phonetics\phoneme\PhonemesController.class
 phonosemantics\language\languageReduced\LanguageReduced.class
 phonosemantics\data\SoundsBankController.class
 phonosemantics\phonetics\phoneme\distinctiveFeatures\consonants\Semivowel.class
-phonosemantics\phonetics\phoneme\PhonemesService$CoverageSheet.class
 phonosemantics\phonetics\phoneme\distinctiveFeatures\consonants\Sibilant.class
 phonosemantics\phonetics\phoneme\distinctiveFeatures\vowels\Backness.class
 phonosemantics\phonetics\phoneme\PhonemeInTable$PhonemeStats.class
@@ -40,9 +39,9 @@ phonosemantics\phonetics\phoneme\distinctiveFeatures\MannerPrecise.class
 phonosemantics\phonetics\phoneme\distinctiveFeatures\consonants\Strident.class
 phonosemantics\phonetics\phoneme\DistinctiveFeatures.class
 phonosemantics\statistics\Statistics$KindOfStats.class
-phonosemantics\phonetics\phoneme\PhonemesService.class
 phonosemantics\phonetics\phoneme\PhonemeInTable.class
 phonosemantics\phonetics\consonant\Consonant.class
+phonosemantics\phonetics\phoneme\DistinctiveFeaturesController.class
 phonosemantics\word\wordlist\wordlistReduced\WordlistReducedController.class
 phonosemantics\phonetics\phoneme\distinctiveFeatures\consonants\Rhotics.class
 phonosemantics\data\SoundsBank$PlaceApproximate.class

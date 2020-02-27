@@ -39,11 +39,4 @@ public class PhonemesController {
         return PhonemesCoverageNew.getHeaders(distinctiveFeature);
     }
 
-    /***************** METHODS FOR GETTING SOUNDS DISTINCTIVE FEATURES ************/
-
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/phonemes/parameters/{distinctiveFeature}")
-    public HashMap<String, Object[]> getFeatures(@PathVariable(value="distinctiveFeature") String distinctiveFeature) {
-        return DistinctiveFeatures.getFeaturesForAPI(distinctiveFeature);
-    }
 }

@@ -9,6 +9,7 @@ import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Roundness;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class DistinctiveFeatures {
     private MajorClass majorClass;
@@ -422,6 +423,28 @@ public class DistinctiveFeatures {
             map.put("voiced", new String[] {"true", "false"});
         }
         return map;
+    }
+
+    /**
+     * ПОЛУЧЕНИЕ СПИСКА ПРИЗНАКОВ С ДОПУСТИМЫМИ ЗНАЧЕНИЯМИ И КОЛИЧЕСТВОМ ЭКЗЕМПЛЯРОВ КАЖДОГО ЗНАЧЕНИЯ.
+     * ПРИМЕР:
+     * { VOCOID: [{true : 1}, {false: 0}]}
+     */
+    public static HashMap<String, HashMap<Object, Integer>> getFeaturesStats() {
+        HashMap<String, HashMap<Object, Integer>> mainMap = new HashMap<>();
+
+        for (Map.Entry<String, Object[]> elem : getFeaturesForAPI("all").entrySet()) {
+            HashMap<Object, Integer> innerMap = new HashMap<>();
+
+            // Заполняем парами "значение признака : количество экземпляров". [{true : 1}, {false: 0}]
+            for (int i=0; i < elem.getValue().length; i++) {
+                innerMap.put(elem.getValue()[i], 0);
+            }
+
+            // Добавляем в мапу верхнего уровня: { VOCOID: [{true : 1}, {false: 0}]}
+            mainMap.put(elem.getKey(), innerMap);
+        }
+        return mainMap;
     }
 
     public MajorClass getMajorClass() {
