@@ -44,22 +44,5 @@ public class WordListController {
 
         return meaningsList;
     }
-
-
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/language")
-    public String getTestLanguage() {
-        return "testlanguage";
-    }
-
-
-
-
-
-    // чтобы работало, надо аннотацию @Controller ко всему классу вместо RestController
-    /*@RequestMapping("/tes")
-    public String getFp() {
-        return "StartPage";
-    }*/
 }
 

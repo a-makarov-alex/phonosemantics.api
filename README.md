@@ -7,6 +7,13 @@ OR get API json: http://localhost:8083/v2/api-docs
 
 
 TODO:
+
+!!!
+- Phonemes list may be get from PhonemesCoverageNew or PhonemesBank class.
+Need to block second opportunity. It's ambiguous.
+1. Централизовано хранить фонемы
+2. Это должна быть коллекция (сет?) phonemeInTable, HashMap<String, DistFeatures> НЕ подойдет
+
 - count Features instances (just like Phonotypes earlier)
 - how to do with classes duplication like Word vs WordReduced
 Reduced classes are needed for UI implementation. 

@@ -8,6 +8,7 @@ import phonosemantics.language.Language;
 import phonosemantics.meaning.Meaning;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.consonant.Consonant;
+import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.Phoneme;
 import phonosemantics.phonetics.vowel.Vowel;
 import phonosemantics.statistics.Statistics;
@@ -20,9 +21,9 @@ public class Word {
     private static final Logger userLogger = LogManager.getLogger(Word.class);
 
     private String graphicForm;
-    private ArrayList<Phoneme> transcription;
+    private ArrayList<String> transcription;    //phoneme may be find by PhonemesBank -> find(String phoneme)
     private Meaning meaning;
-    private Language language;
+    private String language;    // need to find language using Language --> find(String language)
     private int length = 0;
     private PartOfSpeech partOfSpeech;  // TODO think about shifting field to meaning
 
@@ -34,13 +35,13 @@ public class Word {
         this.graphicForm = word;
         this.meaning = new Meaning(definition);
         setTranscriptionFromWord(); // length is added here also
-        this.language = Language.getLanguage(language);
+        this.language = language;
         this.partOfSpeech = partOfSpeech;
     }
 
     public Word(String word, Language language) {
         this.graphicForm = word;
-        this.language = language;
+        this.language = language.getTitle();
         setTranscriptionFromWord(); // length is added here also
     }
 
@@ -65,7 +66,7 @@ public class Word {
         this.meaning = meaning;
     }
 
-    public ArrayList<Phoneme> getTranscription() {
+    public ArrayList<String> getTranscription() {
         return transcription;
     }
 
@@ -73,7 +74,7 @@ public class Word {
         return length;
     }
 
-    public Language getLanguage() {
+    public String getLanguage() {
         return language;
     }
 
@@ -81,27 +82,10 @@ public class Word {
         return partOfSpeech;
     }
 
-    public void printTranscription() {
-        // Print transcription to console
-        userLogger.debug("Word: " + this.graphicForm);
-        userLogger.debug("Transcription: ");
-        String result = "";
-        for (Phoneme p : this.transcription) {
-            if (p != null) {
-                result += p.getSymbol() + " ";
-            } else {
-                result += "_ ";
-            }
-        }
-        userLogger.debug(result);
-        userLogger.debug("Length: " + this.length);
-        userLogger.debug("");
-    }
-
     public int getNumOfPhonemes(String phoneme) {
         int count = 0;
         for (int i = 0; i < this.getTranscription().size(); i++) {
-            if (this.getTranscription().get(i).getSymbol().equals(phoneme)) {
+            if (this.getTranscription().get(i).equals(phoneme)) {
                 count++;
             }
         }
@@ -113,35 +97,35 @@ public class Word {
         String word = this.getGraphicForm();
 
         if (word != null) {
-            String[] phonemes = word.split("");
+            String[] letters = word.split("");
             HashMap<String, Phoneme> allPhonemes = SoundsBank.getInstance().getAllPhonemesTable();
-            Language language = this.getLanguage();
+            Language language = Language.getLanguage(this.getLanguage());
 
             // Phoneme might be a set of 2 symbols.
             // So we need to check the symbol after the current on every step.
             for (int i = 0; i < word.length(); i++) {
 
                 // For extra symbols, accents, tones etc.
-                if (!PhonemesBank.isExtraSign(phonemes[i])) {
+                if (!PhonemesBank.isExtraSign(letters[i])) {
 
                     // For last symbol
                     if (i == word.length() - 1) {
-                        Phoneme ph = allPhonemes.get(phonemes[i]);
+                        Phoneme ph = allPhonemes.get(letters[i]);
                         if (ph != null) {
-                            this.transcription.add(ph);
+                            this.transcription.add(ph.getSymbol());
                             if (language != null) {
                                 language.categorizePh(ph);
                             }
                         } else {
-                            Statistics.addUnknownSymbol(phonemes[i]);
+                            Statistics.addUnknownSymbol(letters[i]);
                         }
                         incrementLength();
                     } else {
 
                         // For 2-graph phoneme
-                        Phoneme ph = allPhonemes.get(phonemes[i] + phonemes[i + 1]);
+                        Phoneme ph = allPhonemes.get(letters[i] + letters[i + 1]);
                         if (ph != null) {
-                            this.transcription.add(ph);
+                            this.transcription.add(ph.getSymbol());
                             incrementLength();
                             if (language != null) {
                                 language.categorizePh(ph);
@@ -150,28 +134,25 @@ public class Word {
                         } else {
 
                             // For 1-graph phoneme
-                            ph = allPhonemes.get(phonemes[i]);
+                            ph = allPhonemes.get(letters[i]);
                             if (ph != null) {
-                                this.transcription.add(ph);
+                                this.transcription.add(ph.getSymbol());
                                 incrementLength();
                                 if (language != null) {
                                     language.categorizePh(ph);
                                 }
                             } else {
                                 // Empty phoneme
-                                Statistics.addUnknownSymbol(phonemes[i]);
+                                Statistics.addUnknownSymbol(letters[i]);
                                 incrementLength();
                             }
                         }
                     }
                 } else {
                     if (LoggerConfig.CONSOLE_EXTRA_SYMBOLS) {
-                        userLogger.debug("Extra: " + phonemes[i]);
+                        userLogger.debug("Extra: " + letters[i]);
                     }
                 }
-            }
-            if (LoggerConfig.CONSOLE_SHOW_TRASCRIPTION) {
-                printTranscription();
             }
         }
     }
@@ -228,7 +209,8 @@ public class Word {
      **/
     private int countConsPhonotypeBy(Predicate<Consonant> p) {
         int count = 0;
-        for (Phoneme ph : this.transcription) {
+        for (String symb : this.transcription) {
+            Phoneme ph = SoundsBank.getInstance().find(symb);
             if (ph != null) {
                 if (ph.getClass().equals(Consonant.class)) {
                     Consonant cons = (Consonant) ph;
@@ -243,7 +225,8 @@ public class Word {
 
     private int countVowPhonotypeBy(Predicate<Vowel> p) {
         int count = 0;
-        for (Phoneme ph : this.transcription) {
+        for (String symb : this.transcription) {
+            Phoneme ph = SoundsBank.getInstance().find(symb);
             if (ph != null) {
                 if (ph.getClass().equals(Vowel.class)) {
                     Vowel vow = (Vowel) ph;

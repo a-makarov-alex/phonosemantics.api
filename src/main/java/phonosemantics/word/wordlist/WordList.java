@@ -3,6 +3,7 @@ package phonosemantics.word.wordlist;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import phonosemantics.data.SoundsBank;
+import phonosemantics.language.Language;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.Phoneme;
@@ -62,9 +63,9 @@ public class WordList {
             int numOfAllWords = list.size();
             for (Word w : list) {
                 boolean wordIsCounted = false;
-                for (Phoneme ph : w.getTranscription()) {
+                for (String ph : w.getTranscription()) {
                     numOfAllPhonemes++;
-                    if (ph.getSymbol().equals(currentPh)) {
+                    if (ph.equals(currentPh)) {
                         counterPh++;
                         counterW++;
                         wordIsCounted = true;
@@ -164,7 +165,8 @@ public class WordList {
             int count = 0;
 
             for (Word w : this.getList()) {
-                HashMap<Object, Integer> phTypeCov = w.getLanguage().getPhTypeCoverage();
+                Language language = new Language(w.getLanguage());
+                HashMap<Object, Integer> phTypeCov = language.getPhTypeCoverage();
 
                 if (phTypeCov.get(entry.getKey()) > 0) {
                     count++;

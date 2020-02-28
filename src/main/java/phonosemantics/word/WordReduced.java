@@ -2,6 +2,7 @@ package phonosemantics.word;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import phonosemantics.language.Language;
 import phonosemantics.language.languageReduced.LanguageReduced;
 
 import java.util.ArrayList;
@@ -18,11 +19,11 @@ public class WordReduced {
     public WordReduced(Word word) {
         this.graphicForm = word.getGraphicForm();
         this.definition = word.getMeaning().getDefinition();
-        this.language = new LanguageReduced(word.getLanguage());
+        this.language = new LanguageReduced(Language.getLanguage(word.getLanguage()));
         this.length = word.getLength();
 
         for (int i=0; i < word.getTranscription().size(); i++) {
-            this.transcription.add(word.getTranscription().get(i).getSymbol());
+            this.transcription.add(word.getTranscription().get(i));
         }
     }
 
