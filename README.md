@@ -21,3 +21,8 @@ private Object[] values; //(values from Enums in distinctiveFeatures directory)
 
 - enable CORS using global config (now it's an individual method's config)
 
+
+____
+
+###/phonemes/parameters/{cluster} 
+instead of /phonotypes (SoundsBank class)

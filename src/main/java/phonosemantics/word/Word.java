@@ -6,6 +6,7 @@ import phonosemantics.LoggerConfig;
 import phonosemantics.data.SoundsBank;
 import phonosemantics.language.Language;
 import phonosemantics.meaning.Meaning;
+import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.consonant.Consonant;
 import phonosemantics.phonetics.phoneme.Phoneme;
 import phonosemantics.phonetics.vowel.Vowel;
@@ -121,7 +122,7 @@ public class Word {
             for (int i = 0; i < word.length(); i++) {
 
                 // For extra symbols, accents, tones etc.
-                if (!SoundsBank.isExtraSign(phonemes[i])) {
+                if (!PhonemesBank.isExtraSign(phonemes[i])) {
 
                     // For last symbol
                     if (i == word.length() - 1) {

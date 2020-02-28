@@ -388,8 +388,6 @@ public class DistinctiveFeatures {
     }
 
     public static HashMap<String, Object[]> getFeaturesForAPI(String requestedFeatures) {
-
-        //TODO: переписать через вызов такого же метода для general/vowel/consonant
         HashMap<String, Object[]> map = new HashMap<>();
         requestedFeatures = requestedFeatures.toLowerCase();
 

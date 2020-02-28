@@ -317,18 +317,5 @@ public class SoundsBank {
         return allPhonemesTable.get(requestedSymbol);
     }
 
-    public static boolean isExtraSign(String symbol) {
-        String[] symbols = {
-                ".", ",", "-", "=", "˗"
-        };
-        boolean result = false;
 
-        for (String s :symbols) {
-            if (s.equals(symbol)) {
-                result = true;
-                break;
-            }
-        }
-        return result;
-    }
 }
