@@ -2,13 +2,69 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d5b60608-c8b9-413e-ae13-b72e2c2e7889" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/DistinctiveFeaturesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/DistinctiveFeatures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/DistinctiveFeatures.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesCoverageNew.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesCoverageNew.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesService.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API_phonosemantics.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/log4j2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/App.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/LoggerConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/data/SoundsBank$Backness.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/data/SoundsBank$Height.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/data/SoundsBank$MannerApproximate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/data/SoundsBank$MannerPricise.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/data/SoundsBank$Nasalization.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/data/SoundsBank$Phonation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/data/SoundsBank$PlaceApproximate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/data/SoundsBank$PlacePrecise.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/data/SoundsBank$Roundness.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/data/SoundsBank.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/data/SoundsBankController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/language/Language.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/language/languageReduced/LanguageReduced.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/language/languageReduced/LanguageReducedController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/language/languageReduced/LanguageReducedService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/meaning/Meaning.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/meaning/MeaningController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/meaning/MeaningService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/output/header/Header.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/output/header/HeaderController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/output/header/HeaderService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/PhonemesBank.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/consonant/Consonant$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/consonant/Consonant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/Phoneme$SoundClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/Phoneme.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/PhonemeInTable$PhonemeStats.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/PhonemeInTable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/distinctiveFeatures/MannerPrecise.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/distinctiveFeatures/Stricture.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Lateral.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/PlaceApproximate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/PlacePrecise.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Rhotics.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Semivowel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Sibilant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/distinctiveFeatures/consonants/Strident.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/distinctiveFeatures/vowels/Backness.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/distinctiveFeatures/vowels/Height.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/phoneme/distinctiveFeatures/vowels/Roundness.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/phonetics/vowel/Vowel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/statistics/Statistics$KindOfStats.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/statistics/Statistics.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/Word$PartOfSpeech.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/Word.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/WordReduced.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/WordList$PhTypeStats.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/WordList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/WordListController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/WordListService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/wordlistReduced/WordListReduced.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/wordlistReduced/WordlistReducedController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/phonosemantics/word/wordlist/wordlistReduced/WordlistReducedService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -24,94 +80,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBankController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesCoverageNew.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
+            <state relative-caret-position="153">
+              <caret line="21" column="67" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="197" column="17" selection-start-line="197" selection-start-column="17" selection-end-line="197" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#7745#7746#0" expanded="true" />
-                <element signature="e#7780#7781#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/DistinctiveFeatures.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="432" column="18" selection-start-line="432" selection-start-column="18" selection-end-line="432" selection-end-column="18" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#countMannerParameters#0;class#Manner#0;class#DistinctiveFeatures#0" />
-                <element signature="e#10600#10601#0" expanded="true" />
-                <element signature="e#10646#10647#0" expanded="true" />
-                <element signature="e#10697#10698#0" expanded="true" />
-                <element signature="e#10743#10744#0" expanded="true" />
-                <element signature="e#10782#10783#0" expanded="true" />
-                <element signature="e#10821#10822#0" expanded="true" />
-                <element signature="e#10862#10863#0" expanded="true" />
-                <element signature="e#10903#10904#0" expanded="true" />
-                <element signature="e#10946#10947#0" expanded="true" />
-                <element signature="e#10986#10987#0" expanded="true" />
-                <element signature="e#11022#11023#0" expanded="true" />
-                <element signature="e#11058#11059#0" expanded="true" />
-                <element signature="e#11095#11096#0" expanded="true" />
-                <element signature="e#11132#11133#0" expanded="true" />
-                <element signature="e#11173#11174#0" expanded="true" />
-                <element signature="e#11212#11213#0" expanded="true" />
-                <element signature="e#11253#11254#0" expanded="true" />
-                <element signature="e#11292#11293#0" expanded="true" />
-                <element signature="e#11331#11332#0" expanded="true" />
-                <element signature="e#11369#11370#0" expanded="true" />
-                <element signature="e#11408#11409#0" expanded="true" />
-                <element signature="e#11446#11447#0" expanded="true" />
-                <element signature="e#11497#11498#0" expanded="true" />
-                <element signature="e#11541#11542#0" expanded="true" />
-                <element signature="e#11584#11585#0" expanded="true" />
-                <element signature="e#11624#11625#0" expanded="true" />
-                <element signature="method#placeApproximateFromPrecise#0;class#Place#0;class#DistinctiveFeatures#0" />
-                <element signature="method#VowelSpace#0;class#VowelSpace#0;class#DistinctiveFeatures#0" />
-                <element signature="method#VowelSpace#1;class#VowelSpace#0;class#DistinctiveFeatures#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/data/SoundsBank.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#15803#15804#0" expanded="true" />
-                <element signature="e#15863#15864#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,8 +94,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/language/Language.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="128" lean-forward="true" selection-start-line="128" selection-end-line="128" />
+            <state relative-caret-position="391">
+              <caret line="36" column="36" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -129,23 +103,58 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="306">
-                <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-              </first_editor>
-              <second_editor />
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="76" selection-start-line="76" selection-end-line="76" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesController.java">
+        <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="548">
-              <caret line="40" selection-start-line="40" selection-end-line="40" />
+            <state relative-caret-position="187">
+              <caret line="11" column="48" selection-start-line="11" selection-start-column="48" selection-end-line="11" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="19" column="88" selection-start-line="19" selection-start-column="88" selection-end-line="19" selection-end-column="88" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/Word.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2720">
+              <caret line="187" column="15" selection-start-line="187" selection-start-column="15" selection-end-line="187" selection-end-column="15" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/WordReduced.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="20" column="38" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -249,7 +258,12 @@
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
           <item name="API_phonosemantics" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="API_phonosemantics" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
         </path>
       </expand>
       <select />
@@ -269,158 +283,45 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="phonosemantics.api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="phonosemantics.api" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="phonosemantics.api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="phonosemantics.api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="phonosemantics.api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="phonosemantics.api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="phonosemantics.api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="phonosemantics.api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
+              <item name="phonosemantics.api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="phonosemantics.api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="input" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="language" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
-              <item name="header" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="phonetics" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="phonetics" type="462c0819:PsiDirectoryNode" />
-              <item name="consonant" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="phonetics" type="462c0819:PsiDirectoryNode" />
-              <item name="phoneme" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="phonetics" type="462c0819:PsiDirectoryNode" />
-              <item name="vowel" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="statistics" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="word" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="API_phonosemantics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="API_phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="phonosemantics" type="462c0819:PsiDirectoryNode" />
-              <item name="word" type="462c0819:PsiDirectoryNode" />
-              <item name="wordlist" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -492,10 +393,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="1912" y="-8" width="1936" height="1176" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14977308" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12260128" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -528,7 +429,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.js" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/output/OldHeader.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/WordService.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/log4j2.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -565,8 +465,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
+        <state relative-caret-position="391">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
         </state>
       </provider>
     </entry>
@@ -666,16 +566,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="136">
-            <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/README.md" />
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/language/languageReduced/LanguageReduced.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -793,7 +684,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/Word.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2737">
+        <state relative-caret-position="2720">
           <caret line="187" column="15" selection-start-line="187" selection-start-column="15" selection-end-line="187" selection-end-column="15" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -820,7 +711,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/WordReduced.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
+        <state relative-caret-position="272">
           <caret line="20" column="38" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -830,7 +721,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordListService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
+        <state relative-caret-position="119">
           <caret line="19" column="88" selection-start-line="19" selection-start-column="88" selection-end-line="19" selection-end-column="88" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -888,16 +779,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="57" column="6" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesService.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/word/wordlist/WordList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -922,8 +804,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/phonetics/phoneme/PhonemesCoverageNew.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
+        <state relative-caret-position="153">
+          <caret line="21" column="67" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -944,8 +826,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/phonosemantics/language/Language.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="128" lean-forward="true" selection-start-line="128" selection-end-line="128" />
+        <state relative-caret-position="391">
+          <caret line="36" column="36" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -987,14 +869,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="306">
-            <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-          </first_editor>
-          <second_editor />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="48" selection-start-line="11" selection-start-column="48" selection-end-line="11" selection-end-column="48" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
