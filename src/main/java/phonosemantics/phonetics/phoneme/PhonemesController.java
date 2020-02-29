@@ -17,6 +17,7 @@ import java.util.HashMap;
 public class PhonemesController {
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/phonemes/{type}")
+    // returns only phonemes that are recognized by phonemes bank
     // type available values: all / vowel / consonant
     public ArrayList<PhonemeInTable> getPhonemesCoverage(@PathVariable(value="type") String type){
         return PhonemesBank.getInstance().getAllPhonemesList(type);
@@ -24,6 +25,7 @@ public class PhonemesController {
 
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/phonemes/table/{type}")
+    // returns all phonemes and blank cells that are needed to draw a table on UI
     // type available values: vowel / consonant
     public ArrayList<PhonemeInTable> getPhonemesCoverageForTable(@PathVariable(value="type") String type){
         return PhonemesBank.getInstance().getVowelPhonemesForTable(type);
@@ -42,17 +44,4 @@ public class PhonemesController {
     public ArrayList<Header> getHeaders(@PathVariable(value="distinctiveFeature") String distinctiveFeature) {
         return HeadersForUI.getHeaders(distinctiveFeature);
     }
-
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/phonemes/test")
-    public HashMap<String, DistinctiveFeatures> getHeaders() {
-        return PhonemesBank.getInstance().getAllPhonemes();
-    }
-
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/phonemes/test2")
-    public ArrayList<PhonemeInTable> getHead() {
-        return PhonemesBank.getInstance().getAllPhonemesNew();
-    }
-
 }
