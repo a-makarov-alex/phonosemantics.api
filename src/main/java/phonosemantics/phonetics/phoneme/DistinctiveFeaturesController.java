@@ -14,9 +14,10 @@ public class DistinctiveFeaturesController {
      * RETURNS THE MAP WITH 4 BIG CLASSES OF DISTINCTIVE FEATURES
      **/
     @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/phonemes/parameters/{cluster}")
-    public HashMap<String, Object[]> getFeatures(@PathVariable(value="cluster") String distinctiveFeature) {
-        return DistinctiveFeatures.getFeaturesForAPI(distinctiveFeature);
+    @GetMapping("/phonemes/parameters/{type}")
+    // type available values: all / general / vowel / consonant
+    public HashMap<String, Object[]> getFeatures(@PathVariable(value="type") String type) {
+        return DistinctiveFeatures.getFeaturesForAPI(type);
     }
 
     @CrossOrigin(origins = "http://localhost:8080")

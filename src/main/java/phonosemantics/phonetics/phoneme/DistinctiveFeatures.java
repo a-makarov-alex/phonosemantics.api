@@ -126,7 +126,7 @@ public class DistinctiveFeatures {
 //        private boolean constrictedGlottis = false;
 //    }
 
-    class Manner {
+    public class Manner {
         private MannerPrecise mannerPrecise;
         // all fields:
         // * sonorant

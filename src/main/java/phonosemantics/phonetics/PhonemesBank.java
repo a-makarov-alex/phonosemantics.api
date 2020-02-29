@@ -28,6 +28,8 @@ public class PhonemesBank {
 
     private HashMap<String, DistinctiveFeatures> allPhonemes;
     private ArrayList<PhonemeInTable> allPhonemesNew;
+    private ArrayList<PhonemeInTable> vowelsForTable;   //вынужденная мера
+    private ArrayList<PhonemeInTable> consonantsForTable; //вынужденная мера
 
     /***************************  SINGLETON ************************/
     private static PhonemesBank instance;
@@ -220,107 +222,168 @@ public class PhonemesBank {
 
     /**
      *  ПО СУТИ, ЭТИ ДАННЫЕ - КОНСТАНТА. ДЛЯ ДОБАВЛЕНИЯ ДИНАМИЧЕСКИХ ДАННЫХ ИЗ WORDLIST ЕСТЬ МЕТОД НИЖЕ
+     *  Condition:  vowel / consonant
+     *  1 все фонемы в лист
+     *  2 извлечь те, которые запрошены: все/согласные/гласные
      * **/
-    public static ArrayList<PhonemeInTable> getAllPhonemesList() {
+    public ArrayList<PhonemeInTable> getAllPhonemesList() {
+        return getAllPhonemesList("all");
+    }
+
+    public ArrayList<PhonemeInTable> getVowelPhonemesForTable(String type) {
+        // TODO лишний раз лазаем в файл, поскольку извлекать данные из общей таблицы сложнее
         Workbook wb = null;
         try {
             InputStream inputStream = new FileInputStream(INPUT_FILE_PATH);
             wb = WorkbookFactory.create(inputStream);
-            userLogger.info("example file is opened");
             inputStream.close();
-        } catch (
-                IOException e) {
-            userLogger.error(e.toString());
-        }
 
-        CoverageSheet vowelsSheet = new CoverageSheet(wb.getSheetAt(0), 2, 8, 1, 6);
-        CoverageSheet consonantsSheet = new CoverageSheet(wb.getSheetAt(1), 2, 14, 1, 24);
+            CoverageSheet sheet = null;
 
-        ArrayList<PhonemeInTable> allPhonemesInTable = new ArrayList<>();
-
-        for (int i = consonantsSheet.firstRow; i <= consonantsSheet.lastRow; i++) {
-            Row r = consonantsSheet.sheet.getRow(i);
-            for (int j = consonantsSheet.firstCol; j <= consonantsSheet.lastCol; j++) {
-                Cell c = r.getCell(j);
-                if (c == null) {
-                    allPhonemesInTable.add(new PhonemeInTable("", i, j));
-                    //userLogger.warn("coord null" + i + " " + j);
+            switch (type.toLowerCase()) {
+                case "vowel" : {
+                    sheet = new CoverageSheet(wb.getSheetAt(0), 2, 8, 1, 6);
+                    userLogger.info("extracting vowels for table");
+                    break;
                 }
-                else {
-                    PhonemeInTable ph = new PhonemeInTable(c.getStringCellValue(), i, j);
-                    // define if phoneme is recognized by program
-                    /*if (SoundsBank.getInstance().find(c.getStringCellValue()) != null) {
-                        ph.setRecognized(true);
-                    }*/
-                    DistinctiveFeatures df = PhonemesBank.getInstance().find(c.getStringCellValue());
-                    if (df != null) {
-                        ph.setRecognized(true);
-                        ph.setDistinctiveFeatures(df);
-                    }
-                    allPhonemesInTable.add(ph);
+                case "consonant" : {
+                    sheet = new CoverageSheet(wb.getSheetAt(1), 2, 14, 1, 24);
+                    userLogger.info("extracting consonants for table");
+                    break;
+                }
+                default : {
+                    userLogger.info("request parameter has an invalid value");
+                    return null;
                 }
             }
+
+            ArrayList<PhonemeInTable> list = new ArrayList<>();
+            for (int i = sheet.firstRow; i <= sheet.lastRow; i++) {
+                Row r = sheet.sheet.getRow(i);
+                for (int j = sheet.firstCol; j <= sheet.lastCol; j++) {
+                    Cell c = r.getCell(j);
+                    if (c == null) {
+                        list.add(new PhonemeInTable("", i, j));
+                    }
+                    else {
+                        PhonemeInTable ph = new PhonemeInTable(c.getStringCellValue(), i, j);
+                        // define if phoneme is recognized by program
+                        DistinctiveFeatures df = this.find(c.getStringCellValue());
+                        if (df != null) {
+                            ph.setRecognized(true);
+                            ph.setDistinctiveFeatures(df);
+                        }
+                        list.add(ph);
+                    }
+                }
+            }
+            return list;
+
+        } catch (IOException e) {
+            userLogger.error(e.toString());
+            return null;
         }
-        return allPhonemesInTable;
     }
 
+    public ArrayList<PhonemeInTable> getAllPhonemesList(String condition) {
+        if (allPhonemesNew == null) {
+            userLogger.info("extracting phonemes list from input file");
+            allPhonemesNew = new ArrayList<>();
+            Workbook wb = null;
+            try {
+                InputStream inputStream = new FileInputStream(INPUT_FILE_PATH);
+                wb = WorkbookFactory.create(inputStream);
+                inputStream.close();
 
-    public static ArrayList<PhonemeInTable> getAllPhonemesList(WordList wl) {
-        ArrayList<PhonemeInTable> phList = getAllPhonemesList();
-        for (PhonemeInTable phit : phList) {
-            phit.setPhonemeStats(wl.getPhonemeStats().get(phit.getValue()));
+                userLogger.info("extracting vowels");
+                CoverageSheet vowelSheet = new CoverageSheet(wb.getSheetAt(0), 2, 8, 1, 6);
+                extractAllPhonemesFromFile(vowelSheet);
+
+                userLogger.info("extracting consonants");
+                CoverageSheet consonantSheet = new CoverageSheet(wb.getSheetAt(1), 2, 14, 1, 24);
+                extractAllPhonemesFromFile(consonantSheet);
+            } catch (IOException e) {
+                userLogger.error(e.toString());
+            }
         }
+
+        userLogger.info("phonemes list exists");
+        if (condition.equals("all")) {
+            userLogger.info("returning all phonemes");
+            return allPhonemesNew;
+        }
+
+        ArrayList<PhonemeInTable> list = new ArrayList<>();
+
+        //TODO сейчас тут в мапе находятся нулевые фонемы без дистфич (пустые ячейки таблицы). их надо выпилить
+        switch (condition.toLowerCase()) {
+            case "vowel" : {
+                for (PhonemeInTable ph : allPhonemesNew) {
+                    if (ph.getDistinctiveFeatures() != null) {
+                        if (ph.getDistinctiveFeatures().getManner().getMannerPrecise() == MannerPrecise.VOWEL) {
+                            list.add(ph);
+                        }
+                    }
+                }
+                userLogger.info("returning vowel phonemes");
+                return list;
+            }
+            case "consonant" : {
+                for (PhonemeInTable ph : allPhonemesNew) {
+                    if (ph.getDistinctiveFeatures() != null) {
+                        if (ph.getDistinctiveFeatures().getManner().getMannerPrecise() != MannerPrecise.VOWEL) {
+                            list.add(ph);
+                        }
+                    }
+                }
+                userLogger.info("returning consonant phonemes");
+                return list;
+            }
+            default : {
+                userLogger.info("request parameter has an invalid value");
+                return null;
+            }
+        }
+    }
+
+    private void extractAllPhonemesFromFile(CoverageSheet sheet) {
+            for (int i = sheet.firstRow; i <= sheet.lastRow; i++) {
+                Row r = sheet.sheet.getRow(i);
+                for (int j = sheet.firstCol; j <= sheet.lastCol; j++) {
+                    Cell c = r.getCell(j);
+                    if (c == null) {
+                        allPhonemesNew.add(new PhonemeInTable("", i, j));
+                    }
+                    else {
+                        PhonemeInTable ph = new PhonemeInTable(c.getStringCellValue(), i, j);
+                        // define if phoneme is recognized by program
+                        DistinctiveFeatures df = this.find(c.getStringCellValue());
+                        if (df != null) {
+                            ph.setRecognized(true);
+                            ph.setDistinctiveFeatures(df);
+                        }
+                        allPhonemesNew.add(ph);
+                    }
+                }
+            }
+        userLogger.info("extracting is finished successfully");
+    }
+
+    public ArrayList<PhonemeInTable> getAllPhonemesList(WordList wl) {
+        ArrayList<PhonemeInTable> phList = this.getAllPhonemesList();
+        for (PhonemeInTable ph : phList) {
+            ph.setPhonemeStats(wl.getPhonemeStats().get(ph.getValue()));
+        }
+        userLogger.info("phonemes list for <<" + wl + ">> wordlist is composed successfully");
         return phList;
     }
 
-    public static ArrayList<PhonemeInTable> getAllVowelsList() {
-        Workbook wb = null;
-        try {
-            InputStream inputStream = new FileInputStream(INPUT_FILE_PATH);
-            wb = WorkbookFactory.create(inputStream);
-            userLogger.info("example file is opened");
-            inputStream.close();
-        } catch (
-                IOException e) {
-            userLogger.error(e.toString());
-        }
-
-        CoverageSheet vowelsSheet = new CoverageSheet(wb.getSheetAt(0), 2, 8, 1, 6);
-
-        ArrayList<PhonemeInTable> allVowelsInTable = new ArrayList<>();
-
-        for (int i = vowelsSheet.firstRow; i <= vowelsSheet.lastRow; i++) {
-            Row r = vowelsSheet.sheet.getRow(i);
-            for (int j = vowelsSheet.firstCol; j <= vowelsSheet.lastCol; j++) {
-                Cell c = r.getCell(j);
-                if (c == null) {
-                    allVowelsInTable.add(new PhonemeInTable("", i, j));
-                    //userLogger.warn("coord null" + i + " " + j);
-                }
-                else {
-                    PhonemeInTable ph = new PhonemeInTable(c.getStringCellValue(), i, j);
-                    // define if phoneme is recognized by program
-                    /*if (SoundsBank.getInstance().find(c.getStringCellValue()) != null) {
-                        ph.setRecognized(true);
-                    }*/
-                    DistinctiveFeatures df = PhonemesBank.getInstance().find(c.getStringCellValue());
-                    if (df != null) {
-                        ph.setRecognized(true);
-                        ph.setDistinctiveFeatures(df);
-                    }
-                    allVowelsInTable.add(ph);
-                }
-            }
-        }
-        return allVowelsInTable;
+    public HashMap<String, DistinctiveFeatures> getAllPhonemes() {
+        return allPhonemes;
     }
 
-    public static ArrayList<PhonemeInTable> getAllVowelsList(WordList wl) {
-        ArrayList<PhonemeInTable> phList = getAllVowelsList();
-        for (PhonemeInTable phit : phList) {
-            phit.setPhonemeStats(wl.getPhonemeStats().get(phit.getValue()));
-        }
-        return phList;
+    public ArrayList<PhonemeInTable> getAllPhonemesNew() {
+        return allPhonemesNew;
     }
 }
 

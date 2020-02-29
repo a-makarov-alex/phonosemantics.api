@@ -14,7 +14,7 @@ public class PhonemesBankController {
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/phonemes")
     public ArrayList<PhonemeInTable> getAllPhonemes() {
-        ArrayList<PhonemeInTable> list = PhonemesBank.getAllPhonemesList();
+        ArrayList<PhonemeInTable> list = PhonemesBank.getInstance().getAllPhonemesList();
         return list;
     }
 
@@ -24,7 +24,7 @@ public class PhonemesBankController {
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/phonemes/{phoneme}")
     public PhonemeInTable getPhonemeByName(@PathVariable(value="phoneme") String phoneme) {
-        ArrayList<PhonemeInTable> list = PhonemesBank.getAllPhonemesList();
+        ArrayList<PhonemeInTable> list = PhonemesBank.getInstance().getAllPhonemesList();
         for (PhonemeInTable ph : list) {
             if (ph.getValue().equals(phoneme.toLowerCase())) {
                 return ph;

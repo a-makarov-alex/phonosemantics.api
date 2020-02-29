@@ -56,7 +56,7 @@ public class WordList {
         // Заполняем фонемМапу
         phonemeStats = new HashMap<>();
         //for (Map.Entry<String, DistinctiveFeatures> entry : PhonemesBank.getInstance().getAllPhonemes().entrySet()) {
-        for (PhonemeInTable phoneme : PhonemesBank.getAllPhonemesList()) {
+        for (PhonemeInTable phoneme : PhonemesBank.getInstance().getAllPhonemesList()) {
             String currentPh = phoneme.getValue();
             int counterPh = 0;
             int counterW = 0;
