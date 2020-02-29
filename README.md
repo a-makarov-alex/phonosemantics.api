@@ -9,6 +9,10 @@ OR get API json: http://localhost:8083/v2/api-docs
 TODO:
 
 !!!
+Methods with creating wordlists do not work.
+Need to find a problem
+
+!!!
 - Phonemes list may be get from PhonemesCoverageNew or PhonemesBank class.
 Need to block second opportunity. It's ambiguous.
 1. Централизовано хранить фонемы

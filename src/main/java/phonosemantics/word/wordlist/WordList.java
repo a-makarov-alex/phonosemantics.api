@@ -55,8 +55,9 @@ public class WordList {
 
         // Заполняем фонемМапу
         phonemeStats = new HashMap<>();
-        for (Map.Entry<String, DistinctiveFeatures> entry : PhonemesBank.getInstance().getAllPhonemes().entrySet()) {
-            String currentPh = entry.getKey();
+        //for (Map.Entry<String, DistinctiveFeatures> entry : PhonemesBank.getInstance().getAllPhonemes().entrySet()) {
+        for (PhonemeInTable phoneme : PhonemesBank.getAllPhonemesList()) {
+            String currentPh = phoneme.getValue();
             int counterPh = 0;
             int counterW = 0;
             int numOfAllPhonemes = 0;
@@ -74,7 +75,7 @@ public class WordList {
                 wordIsCounted = false;
             }
 
-            phonemeStats.put(entry.getKey(), new PhonemeInTable.PhonemeStats(
+            phonemeStats.put(phoneme.getValue(), new PhonemeInTable.PhonemeStats(
                     counterPh,
                     counterW,
                     numOfAllPhonemes,

@@ -3,21 +3,31 @@ package phonosemantics.phonetics;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import org.apache.poi.ss.usermodel.*;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
+import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.MannerPrecise;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.consonants.*;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Backness;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Height;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Roundness;
+import phonosemantics.word.wordlist.WordList;
 
-
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class PhonemesBank {
     private static final Logger userLogger = LogManager.getLogger(PhonemesBank.class);
 
+    //путь к шаблону всех согласных фонем
+    public static final String INPUT_FILE_PATH = "./src/main/java/phonosemantics/input/PhonemesCoverageExample.xlsx";
+
     private HashMap<String, DistinctiveFeatures> allPhonemes;
+    private ArrayList<PhonemeInTable> allPhonemesNew;
 
     /***************************  SINGLETON ************************/
     private static PhonemesBank instance;
@@ -208,7 +218,125 @@ public class PhonemesBank {
         return result;
     }
 
-    public HashMap<String, DistinctiveFeatures> getAllPhonemes() {
-        return allPhonemes;
+    /**
+     *  ПО СУТИ, ЭТИ ДАННЫЕ - КОНСТАНТА. ДЛЯ ДОБАВЛЕНИЯ ДИНАМИЧЕСКИХ ДАННЫХ ИЗ WORDLIST ЕСТЬ МЕТОД НИЖЕ
+     * **/
+    public static ArrayList<PhonemeInTable> getAllPhonemesList() {
+        Workbook wb = null;
+        try {
+            InputStream inputStream = new FileInputStream(INPUT_FILE_PATH);
+            wb = WorkbookFactory.create(inputStream);
+            userLogger.info("example file is opened");
+            inputStream.close();
+        } catch (
+                IOException e) {
+            userLogger.error(e.toString());
+        }
+
+        CoverageSheet vowelsSheet = new CoverageSheet(wb.getSheetAt(0), 2, 8, 1, 6);
+        CoverageSheet consonantsSheet = new CoverageSheet(wb.getSheetAt(1), 2, 14, 1, 24);
+
+        ArrayList<PhonemeInTable> allPhonemesInTable = new ArrayList<>();
+
+        for (int i = consonantsSheet.firstRow; i <= consonantsSheet.lastRow; i++) {
+            Row r = consonantsSheet.sheet.getRow(i);
+            for (int j = consonantsSheet.firstCol; j <= consonantsSheet.lastCol; j++) {
+                Cell c = r.getCell(j);
+                if (c == null) {
+                    allPhonemesInTable.add(new PhonemeInTable("", i, j));
+                    //userLogger.warn("coord null" + i + " " + j);
+                }
+                else {
+                    PhonemeInTable ph = new PhonemeInTable(c.getStringCellValue(), i, j);
+                    // define if phoneme is recognized by program
+                    /*if (SoundsBank.getInstance().find(c.getStringCellValue()) != null) {
+                        ph.setRecognized(true);
+                    }*/
+                    DistinctiveFeatures df = PhonemesBank.getInstance().find(c.getStringCellValue());
+                    if (df != null) {
+                        ph.setRecognized(true);
+                        ph.setDistinctiveFeatures(df);
+                    }
+                    allPhonemesInTable.add(ph);
+                }
+            }
+        }
+        return allPhonemesInTable;
+    }
+
+
+    public static ArrayList<PhonemeInTable> getAllPhonemesList(WordList wl) {
+        ArrayList<PhonemeInTable> phList = getAllPhonemesList();
+        for (PhonemeInTable phit : phList) {
+            phit.setPhonemeStats(wl.getPhonemeStats().get(phit.getValue()));
+        }
+        return phList;
+    }
+
+    public static ArrayList<PhonemeInTable> getAllVowelsList() {
+        Workbook wb = null;
+        try {
+            InputStream inputStream = new FileInputStream(INPUT_FILE_PATH);
+            wb = WorkbookFactory.create(inputStream);
+            userLogger.info("example file is opened");
+            inputStream.close();
+        } catch (
+                IOException e) {
+            userLogger.error(e.toString());
+        }
+
+        CoverageSheet vowelsSheet = new CoverageSheet(wb.getSheetAt(0), 2, 8, 1, 6);
+
+        ArrayList<PhonemeInTable> allVowelsInTable = new ArrayList<>();
+
+        for (int i = vowelsSheet.firstRow; i <= vowelsSheet.lastRow; i++) {
+            Row r = vowelsSheet.sheet.getRow(i);
+            for (int j = vowelsSheet.firstCol; j <= vowelsSheet.lastCol; j++) {
+                Cell c = r.getCell(j);
+                if (c == null) {
+                    allVowelsInTable.add(new PhonemeInTable("", i, j));
+                    //userLogger.warn("coord null" + i + " " + j);
+                }
+                else {
+                    PhonemeInTable ph = new PhonemeInTable(c.getStringCellValue(), i, j);
+                    // define if phoneme is recognized by program
+                    /*if (SoundsBank.getInstance().find(c.getStringCellValue()) != null) {
+                        ph.setRecognized(true);
+                    }*/
+                    DistinctiveFeatures df = PhonemesBank.getInstance().find(c.getStringCellValue());
+                    if (df != null) {
+                        ph.setRecognized(true);
+                        ph.setDistinctiveFeatures(df);
+                    }
+                    allVowelsInTable.add(ph);
+                }
+            }
+        }
+        return allVowelsInTable;
+    }
+
+    public static ArrayList<PhonemeInTable> getAllVowelsList(WordList wl) {
+        ArrayList<PhonemeInTable> phList = getAllVowelsList();
+        for (PhonemeInTable phit : phList) {
+            phit.setPhonemeStats(wl.getPhonemeStats().get(phit.getValue()));
+        }
+        return phList;
+    }
+}
+
+class CoverageSheet {
+    Sheet sheet;
+    // Границы таблицы звуков для осмотра
+    int firstRow;
+    int lastRow;
+    int firstCol;
+    int lastCol;
+
+    public CoverageSheet(Sheet sheet, int firstRow, int lastRow, int firstCol, int lastCol) {
+        this.sheet = sheet;
+        this.firstRow = firstRow;
+        this.lastRow = lastRow;
+        this.firstCol = firstCol;
+        this.lastCol = lastCol;
     }
 }
