@@ -5,10 +5,8 @@ import org.apache.logging.log4j.Logger;
 import phonosemantics.LoggerConfig;
 import phonosemantics.data.SoundsBank;
 import phonosemantics.language.Language;
-import phonosemantics.meaning.Meaning;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.consonant.Consonant;
-import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.Phoneme;
 import phonosemantics.phonetics.vowel.Vowel;
 import phonosemantics.statistics.Statistics;
@@ -22,7 +20,7 @@ public class Word {
 
     private String graphicForm;
     private ArrayList<String> transcription;    //phoneme may be find by PhonemesBank -> find(String phoneme)
-    private Meaning meaning;
+    private String meaning;                     // the same. Meaning --> find(String meaning)
     private String language;    // need to find language using Language --> find(String language)
     private int length = 0;
     private PartOfSpeech partOfSpeech;  // TODO think about shifting field to meaning
@@ -31,17 +29,17 @@ public class Word {
         NOUN, VERB, ADJECTIVE
     }
 
-    public Word(String word, String definition, String language, PartOfSpeech partOfSpeech) {
+    public Word(String word, String meaning, String language, PartOfSpeech partOfSpeech) {
         this.graphicForm = word;
-        this.meaning = new Meaning(definition);
+        this.meaning = meaning;
         setTranscriptionFromWord(); // length is added here also
         this.language = language;
         this.partOfSpeech = partOfSpeech;
     }
 
-    public Word(String word, Language language) {
+    public Word(String word, String language) {
         this.graphicForm = word;
-        this.language = language.getTitle();
+        this.language = language;
         setTranscriptionFromWord(); // length is added here also
     }
 
@@ -58,11 +56,11 @@ public class Word {
         return graphicForm;
     }
 
-    public Meaning getMeaning() {
+    public String getMeaning() {
         return meaning;
     }
 
-    public void setMeaning(Meaning meaning) {
+    public void setMeaning(String meaning) {
         this.meaning = meaning;
     }
 

@@ -36,11 +36,11 @@ public class WordList {
     private HashMap<String, PhonemeInTable.PhonemeStats> phonemeStats;
 
     public WordList(ArrayList<Word> list) {
-        this.meaning = list.get(0).getMeaning().getDefinition();
+        this.meaning = list.get(0).getMeaning();
         //check that all the words in input list have the same meaning
         for (Word w : list) {
-            if (w.getMeaning().getDefinition() != this.meaning) {
-                userLogger.error("words in wordlist have different meanings: " + this.meaning + " != " + w.getMeaning().getDefinition());
+            if (w.getMeaning() != this.meaning) {
+                userLogger.error("words in wordlist have different meanings: " + this.meaning + " != " + w.getMeaning());
                 break;
             }
         }

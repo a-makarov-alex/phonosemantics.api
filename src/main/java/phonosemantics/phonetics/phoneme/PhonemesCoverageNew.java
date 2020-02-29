@@ -100,14 +100,6 @@ public class PhonemesCoverageNew {
         return headers;
     }
 
-    public static ArrayList<Object> getConsonantsParameters() {
-        ArrayList<Object> phTypes = new ArrayList<>();
-        for (Map.Entry<Object, Integer> entry : SoundsBank.getAllPhonotypes().entrySet()) {
-            phTypes.add(entry.getKey());
-        }
-        return phTypes;
-    }
-
     /**
      *  ПО СУТИ, ЭТИ ДАННЫЕ - КОНСТАНТА. ДЛЯ ДОБАВЛЕНИЯ ДИНАМИЧЕСКИХ ДАННЫХ ИЗ WORDLIST ЕСТЬ МЕТОД НИЖЕ
      * **/

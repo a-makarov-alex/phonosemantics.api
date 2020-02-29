@@ -107,8 +107,8 @@ public class WordListService {
                             if (cell != null && cell.getCellType() != CellType.BLANK) {
                                 Word word = new Word(
                                         cell.getStringCellValue(),
-                                        Language.getLanguage(sheet.getRow(i).getCell(0).getStringCellValue()));
-                                word.setMeaning(new Meaning(nullRow.getCell(col).getStringCellValue()));
+                                        sheet.getRow(i).getCell(0).getStringCellValue());
+                                word.setMeaning(nullRow.getCell(col).getStringCellValue());
                                 list.add(word);
                                 count++;
                             } else {

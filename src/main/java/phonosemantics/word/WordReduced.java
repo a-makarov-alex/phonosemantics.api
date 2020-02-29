@@ -18,7 +18,7 @@ public class WordReduced {
 
     public WordReduced(Word word) {
         this.graphicForm = word.getGraphicForm();
-        this.definition = word.getMeaning().getDefinition();
+        this.definition = word.getMeaning();
         this.language = new LanguageReduced(Language.getLanguage(word.getLanguage()));
         this.length = word.getLength();
 
