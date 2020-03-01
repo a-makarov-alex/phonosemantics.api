@@ -221,16 +221,18 @@ public class PhonemesBank {
     }
 
     /**
-     *  ПО СУТИ, ЭТИ ДАННЫЕ - КОНСТАНТА. ДЛЯ ДОБАВЛЕНИЯ ДИНАМИЧЕСКИХ ДАННЫХ ИЗ WORDLIST ЕСТЬ МЕТОД НИЖЕ
-     *  Condition:  vowel / consonant
-     *  1 все фонемы в лист
-     *  2 извлечь те, которые запрошены: все/согласные/гласные
+     * ПОЛУЧЕНИЕ СПИСКА ФОНЕМ ДЛЯ ФОРМИРОВАНИЯ ТАБЛИЦЫ НА UI
+     * ВКЛЮЧАЕТ В СЕБЯ РАСПОЗНАННЫЕ ФОНЕМЫ, НЕРАСПОЗНАННЫЕ ФОНЕМЫ, КООРДИНАТЫ ПУСТЫХ ЯЧЕЕК
      * **/
-    public ArrayList<PhonemeInTable> getAllPhonemesList() {
-        return getAllPhonemesList("all");
-    }
+    public ArrayList<PhonemeInTable> getPhonemesForTable(String type) {
+        if (vowelsForTable != null && type.toLowerCase().equals("vowel")) {
+            return vowelsForTable;
+        } else {
+            if (consonantsForTable != null && type.toLowerCase().equals("consonant")) {
+                return consonantsForTable;
+            }
+        }
 
-    public ArrayList<PhonemeInTable> getVowelPhonemesForTable(String type) {
         // TODO лишний раз лазаем в файл, поскольку извлекать данные из общей таблицы сложнее
         Workbook wb = null;
         try {
@@ -283,6 +285,14 @@ public class PhonemesBank {
             userLogger.error(e.toString());
             return null;
         }
+    }
+
+    /**
+     *  ПО СУТИ, ЭТИ ДАННЫЕ - КОНСТАНТА. ДЛЯ ДОБАВЛЕНИЯ ДИНАМИЧЕСКИХ ДАННЫХ ИЗ WORDLIST ЕСТЬ МЕТОД НИЖЕ
+     *  Condition:  vowel / consonant
+     * **/
+    public ArrayList<PhonemeInTable> getAllPhonemesList() {
+        return getAllPhonemesList("all");
     }
 
     public ArrayList<PhonemeInTable> getAllPhonemesList(String condition) {

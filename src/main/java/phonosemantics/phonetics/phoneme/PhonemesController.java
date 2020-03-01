@@ -11,7 +11,6 @@ import phonosemantics.word.wordlist.WordList;
 import phonosemantics.word.wordlist.WordListService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 @RestController
 public class PhonemesController {
@@ -28,7 +27,7 @@ public class PhonemesController {
     // returns all phonemes and blank cells that are needed to draw a table on UI
     // type available values: vowel / consonant
     public ArrayList<PhonemeInTable> getPhonemesCoverageForTable(@PathVariable(value="type") String type){
-        return PhonemesBank.getInstance().getVowelPhonemesForTable(type);
+        return PhonemesBank.getInstance().getPhonemesForTable(type);
     }
 
     @CrossOrigin(origins = "http://localhost:8080")
