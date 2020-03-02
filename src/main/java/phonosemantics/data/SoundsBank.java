@@ -87,75 +87,75 @@ public class SoundsBank {
         // TODO all the diacritics
     }
 
-    // Создает MAP со всеми фонотипами в качестве ключей. Значения нулевые.
-    public static HashMap<Object, Integer> getAllPhonotypes() {
-        if (allPhTypesMap != null) {
-            return allPhTypesMap;
-
-        } else {
-            HashMap<Object, Integer> map = new HashMap<>();
-
-            /* **********************  VOWELS ***************************/
-            // Height
-            Object[] hArr = Height.values();
-            for (Object ob : hArr) {
-                map.put(ob, 0);
-            }
-
-            // Backness
-            hArr = Backness.values();
-            for (int i = 0; i < hArr.length; i++) {
-                map.put(hArr[i], 0);
-            }
-
-            // Roundness
-            hArr = Roundness.values();
-            for (Object ob : hArr) {
-                map.put(ob, 0);
-            }
-
-            // Nasalization
-            hArr = Nasalization.values();
-            for (Object ob : hArr) {
-                map.put(ob, 0);
-            }
-
-            /* **********************  CONSONANTS ***************************/
-            // Cons.MannerApprox
-            hArr = MannerApproximate.values();
-            for (Object ob : hArr) {
-                map.put(ob, 0);
-            }
-
-            // Cons.MannerPrecise
-            hArr = MannerPricise.values();
-            for (Object ob : hArr) {
-                map.put(ob, 0);
-            }
-
-            // Cons.PlaceApprox
-            hArr = PlaceApproximate.values();
-            for (Object ob : hArr) {
-                map.put(ob, 0);
-            }
-
-            // Cons.PlacePrecise
-            hArr = PlacePrecise.values();
-            for (Object ob : hArr) {
-                map.put(ob, 0);
-            }
-
-            // Phonation
-            hArr = Phonation.values();
-            for (Object ob : hArr) {
-                map.put(ob, 0);
-            }
-
-            userLogger.debug("map of phonotypes is created");
-            allPhTypesMap = map;
-            return map;
-        }
-    }
+//    // Создает MAP со всеми фонотипами в качестве ключей. Значения нулевые.
+//    public static HashMap<Object, Integer> getAllPhonotypes() {
+//        if (allPhTypesMap != null) {
+//            return allPhTypesMap;
+//
+//        } else {
+//            HashMap<Object, Integer> map = new HashMap<>();
+//
+//            /* **********************  VOWELS ***************************/
+//            // Height
+//            Object[] hArr = Height.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            // Backness
+//            hArr = Backness.values();
+//            for (int i = 0; i < hArr.length; i++) {
+//                map.put(hArr[i], 0);
+//            }
+//
+//            // Roundness
+//            hArr = Roundness.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            // Nasalization
+//            hArr = Nasalization.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            /* **********************  CONSONANTS ***************************/
+//            // Cons.MannerApprox
+//            hArr = MannerApproximate.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            // Cons.MannerPrecise
+//            hArr = MannerPricise.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            // Cons.PlaceApprox
+//            hArr = PlaceApproximate.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            // Cons.PlacePrecise
+//            hArr = PlacePrecise.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            // Phonation
+//            hArr = Phonation.values();
+//            for (Object ob : hArr) {
+//                map.put(ob, 0);
+//            }
+//
+//            userLogger.debug("map of phonotypes is created");
+//            allPhTypesMap = map;
+//            return map;
+//        }
+//    }
 
     private void addConsonants() {
         HashMap<String, Phoneme> table = this.allPhonemesTable;

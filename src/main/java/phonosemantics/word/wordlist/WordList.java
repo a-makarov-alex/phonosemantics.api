@@ -47,15 +47,16 @@ public class WordList {
         this.list = list;
 
         // Заполняем статсМапу парами "фонотип : пустой объект статов"
-        HashMap<Object, Integer> allPhTypes = SoundsBank.getAllPhonotypes();
-        for (Map.Entry<Object, Integer> phT : allPhTypes.entrySet()) {
-            PhTypeStats stats = new PhTypeStats(phT.getKey());
-            phTypeStatsMap.put(phT.getKey(), stats);
+        HashMap<String, HashMap<Object, Integer>> allPhTypes = DistinctiveFeatures.getFeaturesStats("all");
+        for (Map.Entry<String, HashMap<Object, Integer>> outerMap : allPhTypes.entrySet()) {
+            for (Map.Entry<Object, Integer> phT : outerMap.getValue().entrySet()) {
+                PhTypeStats stats = new PhTypeStats(phT.getKey());
+                phTypeStatsMap.put(phT.getKey(), stats);
+            }
         }
 
         // Заполняем фонемМапу
         phonemeStats = new HashMap<>();
-        //for (Map.Entry<String, DistinctiveFeatures> entry : PhonemesBank.getInstance().getAllPhonemes().entrySet()) {
         for (PhonemeInTable phoneme : PhonemesBank.getInstance().getAllPhonemesList()) {
             String currentPh = phoneme.getValue();
             int counterPh = 0;
@@ -160,22 +161,24 @@ public class WordList {
      * Применить ко всем листам сразу нельзя, т.к. некоторые значения в отдельных языках могут быть не зафиксированы
      */
     public void calculatePotentialWordsWithPhType() {
-        HashMap<Object, Integer> mapOfDividers = SoundsBank.getAllPhonotypes();
+        HashMap<String, HashMap<Object, Integer>> fullMap = DistinctiveFeatures.getFeaturesStats("all");
 
-        for (Map.Entry<Object, Integer> entry : mapOfDividers.entrySet()) {
-            int count = 0;
+        for (Map.Entry<String, HashMap<Object, Integer>> outerMap : fullMap.entrySet()) {
+            for (Map.Entry<Object, Integer> entry : outerMap.getValue().entrySet()) {
+                int count = 0;
 
-            for (Word w : this.getList()) {
-                Language language = new Language(w.getLanguage());
-                HashMap<Object, Integer> phTypeCov = language.getPhTypeCoverage();
+                for (Word w : this.getList()) {
+                    Language language = Language.getLanguage(w.getLanguage());
+                    HashMap<String, HashMap<Object, Integer>> phTypeCov = language.getPhTypeCoverage();
 
-                if (phTypeCov.get(entry.getKey()) > 0) {
-                    count++;
+                    if (phTypeCov.get(outerMap.getKey()).get(entry.getKey()) > 0) {
+                        count++;
+                    }
                 }
+                // записываем полученное значение в параметры WL
+                this.getPhTypeStatsMap().get(entry.getKey()).potentialWordsWithPhType = count;
+                //TODO: userLogger.debug(entry.getKey() + " " + count);
             }
-            // записываем полученное значение в параметры WL
-            this.getPhTypeStatsMap().get(entry.getKey()).potentialWordsWithPhType = count;
-            //TODO: userLogger.debug(entry.getKey() + " " + count);
         }
         userLogger.debug("calculating potential words with PhType for wordlist " + this.meaning + " is finished");
     }

@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.*;
 import phonosemantics.LoggerConfig;
 import phonosemantics.data.SoundsBank;
 import phonosemantics.phonetics.consonant.Consonant;
+import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.Phoneme;
 import phonosemantics.phonetics.vowel.Vowel;
 
@@ -34,7 +35,7 @@ public class Language {
 
     // maps save the verdict "if the phoneme/phType were found in the Language words on practice"
     private Set<Phoneme> phCoverage;
-    private HashMap<Object, Integer> phTypeCoverage;
+    private HashMap<String, HashMap<Object, Integer>> phTypeCoverage;
     private Set<Phoneme> phNotDescribed;
 
     public Language(String title) {
@@ -123,24 +124,27 @@ public class Language {
     }
 
     // Count all the phonotypes present in a specific language
-    public HashMap<Object, Integer> calculatePhTypeCoverage() {
+    public HashMap<String, HashMap<Object, Integer>> calculatePhTypeCoverage() {
         //userLogger.debug("PhType coverage calculating is started");
-        HashMap<Object, Integer> mapPhType = SoundsBank.getAllPhonotypes();
+        //HashMap<Object, Integer> mapPhType = SoundsBank.getAllPhonotypes();
+        HashMap<String, HashMap<Object, Integer>> fullMap = DistinctiveFeatures.getFeaturesStats("all");
 
         if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
             userLogger.debug(this.title);
         }
 
-        for (Map.Entry<Object, Integer> entry : mapPhType.entrySet()) {
-            if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
-                userLogger.debug(entry.getKey() + " : ");
-            }
-            entry.setValue(entry.getValue() + findPhType(entry.getKey()));
-            if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
-                userLogger.debug("TOTAL : " + entry.getValue());
+        for (Map.Entry<String, HashMap<Object, Integer>> outerMap : fullMap.entrySet()) {
+            for (Map.Entry<Object, Integer> entry : outerMap.getValue().entrySet()) {
+                if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
+                    userLogger.debug(entry.getKey() + " : ");
+                }
+                entry.setValue(entry.getValue() + findPhType(entry.getKey()));
+                if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
+                    userLogger.debug("TOTAL : " + entry.getValue());
+                }
             }
         }
-        return mapPhType;
+        return fullMap;
     }
 
 
@@ -250,7 +254,7 @@ public class Language {
         return phCoverage;
     }
 
-    public HashMap<Object, Integer> getPhTypeCoverage() {
+    public HashMap<String, HashMap<Object, Integer>> getPhTypeCoverage() {
         return phTypeCoverage;
     }
 

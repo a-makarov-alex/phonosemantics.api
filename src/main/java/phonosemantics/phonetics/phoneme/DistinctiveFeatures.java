@@ -428,10 +428,10 @@ public class DistinctiveFeatures {
      * ПРИМЕР:
      * { VOCOID: [{true : 1}, {false: 0}]}
      */
-    public static HashMap<String, HashMap<Object, Integer>> getFeaturesStats() {
+    public static HashMap<String, HashMap<Object, Integer>> getFeaturesStats(String type) {
         HashMap<String, HashMap<Object, Integer>> mainMap = new HashMap<>();
 
-        for (Map.Entry<String, Object[]> elem : getFeaturesForAPI("all").entrySet()) {
+        for (Map.Entry<String, Object[]> elem : getFeaturesForAPI(type).entrySet()) {
             HashMap<Object, Integer> innerMap = new HashMap<>();
 
             // Заполняем парами "значение признака : количество экземпляров". [{true : 1}, {false: 0}]
