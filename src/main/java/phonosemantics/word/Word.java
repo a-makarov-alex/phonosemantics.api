@@ -8,6 +8,7 @@ import phonosemantics.language.Language;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.consonant.Consonant;
 import phonosemantics.phonetics.phoneme.Phoneme;
+import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.phonetics.vowel.Vowel;
 import phonosemantics.statistics.Statistics;
 
@@ -96,7 +97,8 @@ public class Word {
 
         if (word != null) {
             String[] letters = word.split("");
-            HashMap<String, Phoneme> allPhonemes = SoundsBank.getInstance().getAllPhonemesTable();
+            // TODO remove HashMap<String, Phoneme> allPhonemes = SoundsBank.getInstance().getAllPhonemesTable();
+            ArrayList<PhonemeInTable> allPhonemesNew = PhonemesBank.getInstance().getAllPhonemesList();
             Language language = Language.getLanguage(this.getLanguage());
 
             // Phoneme might be a set of 2 symbols.
@@ -108,9 +110,10 @@ public class Word {
 
                     // For last symbol
                     if (i == word.length() - 1) {
-                        Phoneme ph = allPhonemes.get(letters[i]);
+                        //Phoneme ph = allPhonemes.get(letters[i]);
+                        PhonemeInTable ph = PhonemesBank.getInstance().find(letters[i]);
                         if (ph != null) {
-                            this.transcription.add(ph.getSymbol());
+                            this.transcription.add(ph.getValue());
                             if (language != null) {
                                 language.categorizePh(ph);
                             }

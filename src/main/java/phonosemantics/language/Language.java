@@ -6,9 +6,11 @@ import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
 import phonosemantics.LoggerConfig;
 import phonosemantics.data.SoundsBank;
+import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.consonant.Consonant;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.Phoneme;
+import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.phonetics.vowel.Vowel;
 
 import java.io.FileInputStream;
@@ -31,12 +33,12 @@ public class Language {
     private String family;
     private String group;  // typology etc.
 
-    private Set<Phoneme> phonology;
+    private Set<PhonemeInTable> phonology;
 
     // maps save the verdict "if the phoneme/phType were found in the Language words on practice"
-    private Set<Phoneme> phCoverage;
+    private Set<PhonemeInTable> phCoverage;
     private HashMap<String, HashMap<Object, Integer>> phTypeCoverage;
-    private Set<Phoneme> phNotDescribed;
+    private Set<PhonemeInTable> phNotDescribed;
 
     public Language(String title) {
         this.title = title;
@@ -49,10 +51,10 @@ public class Language {
     }
 
 
-    public HashSet<Phoneme> getLangPhonology() {
+    public HashSet<PhonemeInTable> getLangPhonology() {
         // open file for reading
         InputStream inputStream = null;
-        HashSet<Phoneme> allPhonemes = new HashSet<>();
+        HashSet<PhonemeInTable> allPhonemes = new HashSet<>();
 
         try {
             inputStream = new FileInputStream(INPUT_LANGUAGES_PATH);
@@ -61,7 +63,7 @@ public class Language {
             int rowNum = 1;
             Row row = sheet.getRow(rowNum);
             Cell cell = row.getCell(0);
-            SoundsBank cBank = SoundsBank.getInstance();
+            //SoundsBank cBank = SoundsBank.getInstance();
             String[] allPhArr = null;
 
             // LOOKING FOR LANGUAGE
@@ -69,12 +71,12 @@ public class Language {
                 String s = cell.getStringCellValue();
 
                 if (this.title.toLowerCase().equals(s.toLowerCase())) {
-                    if (LoggerConfig.CONSOLE_LANG_PHONOLOGY) {
-                        System.out.print("PHONOLOGY for LANG " + this.getTitle() + ": ");
-                    }
+
+                    userLogger.debug("PHONOLOGY for LANG " + this.getTitle() + ": ");
+
 
                     // CREATING A PHONEMES BANK FOR THE LANGUAGE
-                    for (Map.Entry<String, Phoneme> entry : cBank.getAllPhonemesTable().entrySet()) {
+                    for (PhonemeInTable ph : PhonemesBank.getInstance().getAllPhonemesList()) {
                         if (allPhArr == null) {
                             String allPh = " ";
                             Row r = sheet.getRow(rowNum);
@@ -87,19 +89,17 @@ public class Language {
                             allPhArr = allPh.split(" ");
                         }
 
-                        for (String ph: allPhArr) {
-                            if (ph.equals(entry.getKey())) {
-                                if (LoggerConfig.CONSOLE_LANG_PHONOLOGY) {
-                                    System.out.print(entry.getKey() + " "); //check all phonemes in console
-                                }
-                                allPhonemes.add(entry.getValue());
+                        for (String symbol: allPhArr) {
+                            if (symbol.equals(ph.getValue())) {
+                                userLogger.debug(ph.getValue() + " "); //check all phonemes in console
+                                allPhonemes.add(ph);
                             }
                         }
                     }
+
                     if (LoggerConfig.CONSOLE_LANG_PHONOLOGY) {System.out.println();}
                     break;
                 }
-
                 rowNum++;
                 cell = sheet.getRow(rowNum).getCell(0);
             }
@@ -113,7 +113,7 @@ public class Language {
         }
     }
 
-    public void categorizePh(Phoneme ph) {
+    public void categorizePh(PhonemeInTable ph) {
         if (phonology.contains(ph)) {
             if (!phCoverage.contains(ph)) {
                 phCoverage.add(ph);
@@ -192,7 +192,7 @@ public class Language {
     private Integer findVowByPredicate(Predicate<Vowel> p) {
         int count = 0;
 
-        for (Phoneme ph : phonology) {
+        for (PhonemeInTable ph : phonology) {
             if (ph != null) {
                 if (ph.getClass().equals(Vowel.class)) {
                     Vowel vow = (Vowel) ph;

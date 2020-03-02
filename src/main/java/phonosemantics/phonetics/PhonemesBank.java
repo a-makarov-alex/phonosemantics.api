@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import org.apache.poi.ss.usermodel.*;
+import org.graalvm.compiler.hotspot.nodes.PluginFactory_JumpToExceptionHandlerNode;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.MannerPrecise;
@@ -201,8 +202,18 @@ public class PhonemesBank {
         userLogger.info("affricates map is filled up");
     }
 
-    public DistinctiveFeatures find(String requestedSymbol) {
+    /*public DistinctiveFeatures find(String requestedSymbol) {
         return allPhonemes.get(requestedSymbol);
+    }*/
+
+    public PhonemeInTable find(String requestedSymbol) {
+        requestedSymbol = requestedSymbol.toLowerCase();
+        for (PhonemeInTable ph : allPhonemesNew) {
+            if (ph.getValue().equals(requestedSymbol.toLowerCase())) {
+                return ph;
+            }
+        }
+        return null;
     }
 
     public static boolean isExtraSign(String symbol) {
@@ -270,7 +281,7 @@ public class PhonemesBank {
                     else {
                         PhonemeInTable ph = new PhonemeInTable(c.getStringCellValue(), i, j);
                         // define if phoneme is recognized by program
-                        DistinctiveFeatures df = this.find(c.getStringCellValue());
+                        DistinctiveFeatures df = this.find(c.getStringCellValue()).getDistinctiveFeatures();
                         if (df != null) {
                             ph.setRecognized(true);
                             ph.setDistinctiveFeatures(df);
@@ -367,7 +378,7 @@ public class PhonemesBank {
                     else {
                         PhonemeInTable ph = new PhonemeInTable(c.getStringCellValue(), i, j);
                         // define if phoneme is recognized by program
-                        DistinctiveFeatures df = this.find(c.getStringCellValue());
+                        DistinctiveFeatures df = this.find(c.getStringCellValue()).getDistinctiveFeatures();
                         if (df != null) {
                             ph.setRecognized(true);
                             ph.setDistinctiveFeatures(df);
