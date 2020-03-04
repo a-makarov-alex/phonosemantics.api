@@ -2,11 +2,9 @@ package phonosemantics.word.wordlist;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import phonosemantics.data.SoundsBank;
 import phonosemantics.language.Language;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
-import phonosemantics.phonetics.phoneme.Phoneme;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.statistics.Statistics;
 import phonosemantics.word.Word;

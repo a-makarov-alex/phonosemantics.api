@@ -9,8 +9,7 @@ OR get API json: http://localhost:8083/v2/api-docs
 TODO:
 
 !!!
-Methods with creating wordlists do not work.
-Need to find a problem
+/wordlists/{meaning}/phonemes не работает. Зацикливается.
 
 !!!
 - Phonemes list may be get from PhonemesCoverageNew or PhonemesBank class.

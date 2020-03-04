@@ -3,20 +3,14 @@ package phonosemantics.word;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import phonosemantics.LoggerConfig;
-import phonosemantics.data.SoundsBank;
-import phonosemantics.language.Language;
 import phonosemantics.phonetics.PhonemesBank;
-import phonosemantics.phonetics.consonant.Consonant;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
-import phonosemantics.phonetics.phoneme.Phoneme;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
-import phonosemantics.phonetics.vowel.Vowel;
 import phonosemantics.statistics.Statistics;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Predicate;
 
 public class Word {
     private static final Logger userLogger = LogManager.getLogger(Word.class);
