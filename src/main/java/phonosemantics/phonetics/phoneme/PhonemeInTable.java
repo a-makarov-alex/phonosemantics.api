@@ -2,6 +2,8 @@ package phonosemantics.phonetics.phoneme;
 
 import phonosemantics.word.wordlist.WordList;
 
+import java.util.HashMap;
+
 //TODO: можно сделать синглтон и менять PhonemeStats в контроллере
 public class PhonemeInTable {
     private String value;
@@ -15,6 +17,21 @@ public class PhonemeInTable {
         this.value = value;
         this.row = r;
         this.column = c;
+    }
+
+    public HashMap<String, HashMap<Object, Integer>> phonemeDistinctiveFeatureStats() {
+        HashMap<String, HashMap<Object, Integer>> distFeatureStats = DistinctiveFeatures.getFeaturesStats("all");
+
+        Integer i = 0;
+        String key = "";
+
+        i = this.distinctiveFeatures.getMajorClass().isVocoid() ? 1 : 0;
+        key = i == 0 ? "true" : "false";
+        distFeatureStats.get("vocoid").put(key, i);
+
+        //TODO other fileds
+
+        return distFeatureStats;
     }
 
     public String getValue() {

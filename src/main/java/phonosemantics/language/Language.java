@@ -4,20 +4,18 @@ package phonosemantics.language;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
+import phonosemantics.App;
 import phonosemantics.LoggerConfig;
-import phonosemantics.data.SoundsBank;
 import phonosemantics.phonetics.PhonemesBank;
-import phonosemantics.phonetics.consonant.Consonant;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
-import phonosemantics.phonetics.phoneme.Phoneme;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
-import phonosemantics.phonetics.vowel.Vowel;
+import phonosemantics.word.Word;
+import phonosemantics.word.wordlist.WordList;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
-import java.util.function.Predicate;
 
 // TODO: maybe id should be implemented cause 2 languages may have similar name
 public class Language {
@@ -129,104 +127,132 @@ public class Language {
         //HashMap<Object, Integer> mapPhType = SoundsBank.getAllPhonotypes();
         HashMap<String, HashMap<Object, Integer>> fullMap = DistinctiveFeatures.getFeaturesStats("all");
 
-        if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
-            userLogger.debug(this.title);
+        // Делаем рабочую мапу без иерархии
+        // HashMap<String, HashMap<Object, Integer>> ----> HashMap<Object, Integer>
+        HashMap<Object, Integer> bufferMap = new HashMap<>();
+        for (Map.Entry<String, HashMap<Object, Integer>> phTypeHigherLevel : fullMap.entrySet()) {
+            for (Map.Entry<Object, Integer> phTypeEntity : phTypeHigherLevel.getValue().entrySet()) {
+                // Entity example: {true: 0} or {HIGH_MID: 0}
+                bufferMap.put(phTypeEntity.getKey(), phTypeEntity.getValue());
+
+            }
         }
 
-        for (Map.Entry<String, HashMap<Object, Integer>> outerMap : fullMap.entrySet()) {
-            for (Map.Entry<Object, Integer> entry : outerMap.getValue().entrySet()) {
-                if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
-                    userLogger.debug(entry.getKey() + " : ");
-                }
-                entry.setValue(entry.getValue() + findPhType(entry.getKey()));
-                if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
-                    userLogger.debug("TOTAL : " + entry.getValue());
+        ArrayList<WordList> allWordlists = App.getAllWordLists();
+        for (WordList wl : allWordlists) {
+            for (Word word : wl.getWordsByLanguage(this)) {
+
+                // Put all the distFeatures counters of every word into a full distFeature map
+                for (Map.Entry<String, HashMap<Object, Integer>> phTypeHigherLevel : fullMap.entrySet()) {
+
+                    for (Map.Entry<Object, Integer> phTypeEntity : phTypeHigherLevel.getValue().entrySet()) {
+                        // Entity example: {true: 0} or {HIGH_MID: 0}
+
+                        Integer i = word.wordDistinctiveFeatures().get(phTypeHigherLevel.getKey()).get(phTypeEntity.getKey());
+                        phTypeEntity.setValue(phTypeEntity.getValue() + i);
+                    }
                 }
             }
         }
+
+//        //if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
+//            userLogger.debug(this.title);
+//        //}
+//
+//        for (Map.Entry<String, HashMap<Object, Integer>> outerMap : fullMap.entrySet()) {
+//            for (Map.Entry<Object, Integer> entry : outerMap.getValue().entrySet()) {
+//                //if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
+//                    userLogger.debug(entry.getKey() + " : ");
+//                //}
+//                entry.setValue(entry.getValue() + findPhType(entry.getKey()));
+//                //if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
+//                    userLogger.debug("TOTAL : " + entry.getValue());
+//                //}
+//            }
+//        }
         return fullMap;
     }
 
 
     // Буферный метод, который маппит классы для лямбды
-    public Integer findPhType(Object phType) {
-        int i = 0;
-        Class phTypeClass = phType.getClass();
-
-        // *************************** VOWELS
-        if (phTypeClass.equals(SoundsBank.Height.class)) {
-            return findVowByPredicate(vow -> vow.getHeight().equals((SoundsBank.Height)phType));
-        }
-
-        else if (phTypeClass.equals(SoundsBank.Backness.class)) {
-            return findVowByPredicate(vow -> vow.getBackness().equals((SoundsBank.Backness)phType));
-        }
-
-        else if (phTypeClass.equals(SoundsBank.Roundness.class)) {
-            return findVowByPredicate(vow -> vow.isRoundedness().equals((SoundsBank.Roundness)phType));
-        }
-
-        else if (phTypeClass.equals(SoundsBank.Nasalization.class)) {
-            return findVowByPredicate(vow -> vow.isNasalization().equals((SoundsBank.Nasalization)phType));
-        }
-
-        // **************************CONSONANTS
-        if (phTypeClass.equals(SoundsBank.Phonation.class)) {
-            return findConsByPredicate(cons -> cons.isVoiced().equals((SoundsBank.Phonation)phType));
-        }
-
-        if (phTypeClass.equals(SoundsBank.MannerPricise.class)) {
-            return findConsByPredicate(cons -> cons.getMannerPricise().equals((SoundsBank.MannerPricise)phType));
-        }
-
-        if (phTypeClass.equals(SoundsBank.MannerApproximate.class)) {
-            return findConsByPredicate(cons -> cons.getMannerApproximate().equals((SoundsBank.MannerApproximate)phType));
-        }
-
-        else {
-            return i;
-        }
-    }
+//    public Integer findPhType(Object phType) {
+//        int i = 0;
+//        Class phTypeClass = phType.getClass();
+//
+//        // *************************** VOWELS
+//        if (phTypeClass.equals(SoundsBank.Height.class)) {
+//            return findVowByPredicate(vow -> vow.getHeight().equals((SoundsBank.Height)phType));
+//        }
+//
+//        else if (phTypeClass.equals(SoundsBank.Backness.class)) {
+//            return findVowByPredicate(vow -> vow.getBackness().equals((SoundsBank.Backness)phType));
+//        }
+//
+//        else if (phTypeClass.equals(SoundsBank.Roundness.class)) {
+//            return findVowByPredicate(vow -> vow.isRoundedness().equals((SoundsBank.Roundness)phType));
+//        }
+//
+//        else if (phTypeClass.equals(SoundsBank.Nasalization.class)) {
+//            return findVowByPredicate(vow -> vow.isNasalization().equals((SoundsBank.Nasalization)phType));
+//        }
+//
+//        // **************************CONSONANTS
+//        if (phTypeClass.equals(SoundsBank.Phonation.class)) {
+//            return findConsByPredicate(cons -> cons.isVoiced().equals((SoundsBank.Phonation)phType));
+//        }
+//
+//        if (phTypeClass.equals(SoundsBank.MannerPricise.class)) {
+//            return findConsByPredicate(cons -> cons.getMannerPricise().equals((SoundsBank.MannerPricise)phType));
+//        }
+//
+//        if (phTypeClass.equals(SoundsBank.MannerApproximate.class)) {
+//            return findConsByPredicate(cons -> cons.getMannerApproximate().equals((SoundsBank.MannerApproximate)phType));
+//        }
+//
+//        else {
+//            return i;
+//        }
+//    }
 
     // Проверяем каждую фонему языка на соответствие заданному фонотипу и возвращаем число таких фонем в языке.
-    private Integer findVowByPredicate(Predicate<Vowel> p) {
-        int count = 0;
+//    private Integer findVowByPredicate(Predicate<Vowel> p) {
+//        int count = 0;
+//
+//        for (PhonemeInTable ph : phonology) {
+//            if (ph != null) {
+//                if (ph.getClass().equals(Vowel.class)) {
+//                    Vowel vow = (Vowel) ph;
+//                    if (p.test(vow)) {
+//                        count++;
+//                        if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
+//                            System.out.println(vow.getSymbol());
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return count;
+//    }
 
-        for (PhonemeInTable ph : phonology) {
-            if (ph != null) {
-                if (ph.getClass().equals(Vowel.class)) {
-                    Vowel vow = (Vowel) ph;
-                    if (p.test(vow)) {
-                        count++;
-                        if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
-                            System.out.println(vow.getSymbol());
-                        }
-                    }
-                }
-            }
-        }
-        return count;
-    }
 
-
-    private int findConsByPredicate(Predicate<Consonant> p) {
-        int count = 0;
-
-        for (Phoneme ph : phonology) {
-            if (ph != null) {
-                if (ph.getClass().equals(Consonant.class)) {
-                    Consonant cons = (Consonant) ph;
-                    if (p.test(cons)) {
-                        count++;
-                        if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
-                            System.out.println(cons.getSymbol());
-                        }
-                    }
-                }
-            }
-        }
-        return count;
-    }
+//    private int findConsByPredicate(Predicate<Consonant> p) {
+//        int count = 0;
+//
+//        for (PhonemeInTable ph : phonology) {
+//            if (ph != null) {
+//                if (ph.getClass().equals(Consonant.class)) {
+//                    Consonant cons = (Consonant) ph;
+//                    if (p.test(cons)) {
+//                        count++;
+//                        if (LoggerConfig.CONSOLE_LANG_PHONOTYPES) {
+//                            System.out.println(cons.getSymbol());
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return count;
+//    }
 
 
     /** GETTERS AND SETTERS **/
@@ -242,7 +268,7 @@ public class Language {
         return group;
     }
 
-    public Set<Phoneme> getPhonology() {
+    public Set<PhonemeInTable> getPhonology() {
         return phonology;
     }
 
@@ -250,7 +276,7 @@ public class Language {
         return allLanguages;
     }
 
-    public Set<Phoneme> getPhCoverage() {
+    public Set<PhonemeInTable> getPhCoverage() {
         return phCoverage;
     }
 
@@ -258,7 +284,7 @@ public class Language {
         return phTypeCoverage;
     }
 
-    public Set<Phoneme> getPhNotDescribed() {
+    public Set<PhonemeInTable> getPhNotDescribed() {
         return phNotDescribed;
     }
 

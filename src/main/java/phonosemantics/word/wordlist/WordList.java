@@ -115,7 +115,8 @@ public class WordList {
             int counterPh = 0;
             int counterW = 0;
             for (Word w : this.getList()) {
-                int incr = w.countPhonotype(phType);
+                // TODO раскомментить и переделать int incr = w.countPhonotype(phType);
+                int incr = 1;
                 if (phType.equals(LoggerConfig.CONSOLE_SHOW_WORDS_OF_CLASS)) {
                     userLogger.debug(phType + " : " + w.getGraphicForm() + " " + incr);
                 }
@@ -181,6 +182,21 @@ public class WordList {
             }
         }
         userLogger.debug("calculating potential words with PhType for wordlist " + this.meaning + " is finished");
+    }
+
+    /**
+     * RETURNS ALL THE WORDS OF CERTAIN LANGUAGE
+     * @param language
+     * @return
+     */
+    public ArrayList<Word> getWordsByLanguage(Language language) {
+        ArrayList<Word> list = new ArrayList<>();
+        for (Word word : this.list) {
+            if (word.getLanguage().toLowerCase().equals(language.getTitle().toLowerCase())) {
+                list.add(word);
+            }
+        }
+        return list;
     }
 
 
