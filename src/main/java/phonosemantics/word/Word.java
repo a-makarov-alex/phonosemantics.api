@@ -256,7 +256,12 @@ public class Word {
                     PhonemeInTable ph = PhonemesBank.getInstance().find(symbol);
 
                     // add 1 if phoneme has feature, add 0 if not
-                    sumForWord += ph.phonemeDistinctiveFeatureStats().get(phTypeHigherLevel.getKey()).get(phTypeEntity.getKey());
+                    HashMap<String, HashMap<Object, Integer>> stats = ph.phonemeDistinctiveFeatureStats();
+                    if (stats != null) {
+                        sumForWord += stats.get(phTypeHigherLevel.getKey()).get(phTypeEntity.getKey());
+                    } else {
+
+                    }
                 }
 
                 phTypeEntity.setValue(sumForWord);

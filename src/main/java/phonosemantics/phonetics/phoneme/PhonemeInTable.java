@@ -1,11 +1,16 @@
 package phonosemantics.phonetics.phoneme;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import phonosemantics.language.Language;
 import phonosemantics.word.wordlist.WordList;
 
 import java.util.HashMap;
 
 //TODO: можно сделать синглтон и менять PhonemeStats в контроллере
 public class PhonemeInTable {
+    private static final Logger userLogger = LogManager.getLogger(PhonemeInTable.class);
+
     private String value;
     private int row;
     private int column;
@@ -25,9 +30,14 @@ public class PhonemeInTable {
         Integer i = 0;
         String key = "";
 
-        i = this.distinctiveFeatures.getMajorClass().isVocoid() ? 1 : 0;
-        key = i == 0 ? "true" : "false";
-        distFeatureStats.get("vocoid").put(key, i);
+        if (this.distinctiveFeatures != null) {
+            i = this.distinctiveFeatures.getMajorClass().isVocoid() ? 1 : 0;
+            key = i == 0 ? "true" : "false";
+            distFeatureStats.get("vocoid").put(key, i);
+        } else {
+            //userLogger.info("distinctive feature is null: " + this.getValue());
+            return null;
+        }
 
         //TODO other fileds
 

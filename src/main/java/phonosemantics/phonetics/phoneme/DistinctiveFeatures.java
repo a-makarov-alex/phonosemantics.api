@@ -1,11 +1,13 @@
 package phonosemantics.phonetics.phoneme;
 
+import phonosemantics.App;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.MannerPrecise;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.Stricture;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.consonants.*;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Backness;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Height;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Roundness;
+import phonosemantics.word.wordlist.WordList;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -40,8 +40,14 @@ public class App {
     }
 
     public static ArrayList<WordListReduced> getAllReducedWordLists() {
-        allReducedWordLists = WordlistReducedService.readAllReducedWordlistsFromInputFile();
-        return allReducedWordLists;
+        if (allReducedWordLists != null) {
+            userLogger.info("allReducedWordlists is NOT null");
+            return allReducedWordLists;
+        } else {
+            allReducedWordLists = WordlistReducedService.readAllReducedWordlistsFromInputFile();
+            userLogger.info("allReducedWordlists is null");
+            return allReducedWordLists;
+        }
     }
 
     public static void main(String args[]) {

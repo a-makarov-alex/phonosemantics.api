@@ -125,22 +125,25 @@ public class Language {
     public HashMap<String, HashMap<Object, Integer>> calculatePhTypeCoverage() {
         //userLogger.debug("PhType coverage calculating is started");
         //HashMap<Object, Integer> mapPhType = SoundsBank.getAllPhonotypes();
+        userLogger.info("calculating PhType coverage");
         HashMap<String, HashMap<Object, Integer>> fullMap = DistinctiveFeatures.getFeaturesStats("all");
 
         // Делаем рабочую мапу без иерархии
         // HashMap<String, HashMap<Object, Integer>> ----> HashMap<Object, Integer>
-        HashMap<Object, Integer> bufferMap = new HashMap<>();
+        /*HashMap<Object, Integer> bufferMap = new HashMap<>();
         for (Map.Entry<String, HashMap<Object, Integer>> phTypeHigherLevel : fullMap.entrySet()) {
             for (Map.Entry<Object, Integer> phTypeEntity : phTypeHigherLevel.getValue().entrySet()) {
                 // Entity example: {true: 0} or {HIGH_MID: 0}
                 bufferMap.put(phTypeEntity.getKey(), phTypeEntity.getValue());
 
             }
-        }
+        }*/
 
         ArrayList<WordList> allWordlists = App.getAllWordLists();
         for (WordList wl : allWordlists) {
+            userLogger.info("Calculating coverage for <" + wl.getMeaning() + "> wordlist");
             for (Word word : wl.getWordsByLanguage(this)) {
+                userLogger.info("Word: " + word.getGraphicForm());
 
                 // Put all the distFeatures counters of every word into a full distFeature map
                 for (Map.Entry<String, HashMap<Object, Integer>> phTypeHigherLevel : fullMap.entrySet()) {
@@ -149,6 +152,7 @@ public class Language {
                         // Entity example: {true: 0} or {HIGH_MID: 0}
 
                         Integer i = word.wordDistinctiveFeatures().get(phTypeHigherLevel.getKey()).get(phTypeEntity.getKey());
+                        //userLogger.info("PH: " + phTypeHigherLevel.getKey() + " --- " + phTypeEntity.getKey() + " " + i);
                         phTypeEntity.setValue(phTypeEntity.getValue() + i);
                     }
                 }
