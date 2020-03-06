@@ -44,15 +44,6 @@ public class WordList {
         }
         this.list = list;
 
-        // Заполняем статсМапу парами "фонотип : пустой объект статов"
-        HashMap<String, HashMap<Object, Integer>> allPhTypes = DistinctiveFeatures.getFeaturesStats("all");
-        for (Map.Entry<String, HashMap<Object, Integer>> outerMap : allPhTypes.entrySet()) {
-            for (Map.Entry<Object, Integer> phT : outerMap.getValue().entrySet()) {
-                PhTypeStats stats = new PhTypeStats(phT.getKey());
-                phTypeStatsMap.put(phT.getKey(), stats);
-            }
-        }
-
         // Заполняем фонемМапу
         phonemeStats = new HashMap<>();
         for (PhonemeInTable phoneme : PhonemesBank.getInstance().getAllPhonemesList()) {
@@ -73,22 +64,12 @@ public class WordList {
                 }
                 wordIsCounted = false;
             }
-
             phonemeStats.put(phoneme.getValue(), new PhonemeInTable.PhonemeStats(
                     counterPh,
                     counterW,
                     numOfAllPhonemes,
                     numOfAllWords));
         }
-
-        // рассчитываем, в скольки языках из представленных присутствует каждый фонотип
-        calculatePotentialWordsWithPhType();
-
-        // рассчитываем, сколько в WL: 1. экземпляров каждого фонотипа, 2. слов с наличием экземпляра фонотипа
-        countAllPhonotypesInstances();
-
-        // рассчитываем 3 базовых параметра для оценки результатов
-        calculateBasicStats();
     }
 
 //    public Word getGraphicForm(String language) {
@@ -103,6 +84,32 @@ public class WordList {
 //                " with meaning " + this.meaning + " is not found");
 //        return null;
 //    }
+
+    public HashMap<Object, PhTypeStats> getPhonotypeStats() {
+        if (this.phTypeStatsMap != null) {
+            return this.phTypeStatsMap;
+        } else {
+            // Заполняем статсМапу парами "фонотип : пустой объект статов"
+            HashMap<String, HashMap<Object, Integer>> allPhTypes = DistinctiveFeatures.getFeaturesStats("all");
+            for (Map.Entry<String, HashMap<Object, Integer>> outerMap : allPhTypes.entrySet()) {
+                for (Map.Entry<Object, Integer> phT : outerMap.getValue().entrySet()) {
+                    PhTypeStats stats = new PhTypeStats(phT.getKey());
+                    phTypeStatsMap.put(phT.getKey(), stats);
+                }
+            }
+
+            // рассчитываем, в скольки языках из представленных присутствует каждый фонотип
+            calculatePotentialWordsWithPhType();
+
+            // рассчитываем, сколько в WL: 1. экземпляров каждого фонотипа, 2. слов с наличием экземпляра фонотипа
+            countAllPhonotypesInstances();
+
+            // рассчитываем 3 базовых параметра для оценки результатов
+            calculateBasicStats();
+
+            return this.phTypeStatsMap;
+        }
+    }
 
 
     // Counts all ph-types for further statistics and write result to the Statistics object

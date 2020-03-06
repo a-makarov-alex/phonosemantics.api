@@ -94,7 +94,6 @@ public class Word {
         if (word != null) {
             String[] letters = word.split("");
             // TODO remove HashMap<String, Phoneme> allPhonemes = SoundsBank.getInstance().getAllPhonemesTable();
-            ArrayList<PhonemeInTable> allPhonemesNew = PhonemesBank.getInstance().getAllPhonemesList();
 //Language language = Language.getLanguage(this.getLanguage());
 
             // Phoneme might be a set of 2 symbols.
@@ -106,7 +105,6 @@ public class Word {
 
                     // For last symbol
                     if (i == word.length() - 1) {
-                        //Phoneme ph = allPhonemes.get(letters[i]);
                         PhonemeInTable ph = PhonemesBank.getInstance().find(letters[i]);
                         if (ph != null) {
                             this.transcription.add(ph.getValue());

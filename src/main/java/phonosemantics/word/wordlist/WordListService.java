@@ -3,8 +3,6 @@ package phonosemantics.word.wordlist;
 import org.apache.poi.ss.usermodel.*;
 import phonosemantics.App;
 import phonosemantics.LoggerConfig;
-import phonosemantics.language.Language;
-import phonosemantics.meaning.Meaning;
 import phonosemantics.word.Word;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -83,9 +81,7 @@ public class WordListService {
                 cell = nullRow.getCell(col);
                 // stop on the first empty column
                 if (cell == null) {
-                    if (LoggerConfig.CONSOLE_SHOW_NOT_FOUND_MEANINGS_IN_INPUT_FILE) {
-                        userLogger.debug("PROBLEM: There is no words for " + meaning + " in the input file");
-                    }
+                    userLogger.info("PROBLEM: There is no words for " + meaning + " in the input file");
                     break;
                 } else {
                     // Meaning is found successfully
@@ -112,7 +108,7 @@ public class WordListService {
                                 list.add(word);
                                 count++;
                             } else {
-                                userLogger.debug("No value for word \"" + nullRow.getCell(col).getStringCellValue() +
+                                userLogger.info("No value for word \"" + nullRow.getCell(col).getStringCellValue() +
                                         "\" of language " + sheet.getRow(i).getCell(0).getStringCellValue());
                             }
                         }
@@ -121,7 +117,6 @@ public class WordListService {
                     }
                 }
             }
-
             if (LoggerConfig.CONSOLE_SHOW_FOUND_MEANINGS_IN_INPUT_FILE) {
                 System.out.println();
             }

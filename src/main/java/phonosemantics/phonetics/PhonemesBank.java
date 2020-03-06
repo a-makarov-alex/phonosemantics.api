@@ -216,7 +216,6 @@ public class PhonemesBank {
     public PhonemeInTable find(String requestedSymbol) {
         requestedSymbol = requestedSymbol.toLowerCase();
         for (PhonemeInTable ph : getAllPhonemesList()) {
-            userLogger.info(ph.getValue());
             if (ph.getValue().equals(requestedSymbol.toLowerCase())) {
                 return ph;
             }
@@ -294,13 +293,10 @@ public class PhonemesBank {
 
     public ArrayList<PhonemeInTable> getAllPhonemesList(String condition) {
         if (allPhonemesNew == null) {
-            userLogger.info("creating");
             createAllPhonemesList();
         }
 
-        userLogger.info("phonemes list exists");
         if (condition.equals("all")) {
-            userLogger.info("returning all phonemes: " + allPhonemesNew.size());
             return allPhonemesNew;
         }
 
@@ -324,11 +320,16 @@ public class PhonemesBank {
                 return list;
             }
             case "consonant" : {
-                for (PhonemeInTable ph : getAllPhonemesList()) {
+                /*for (PhonemeInTable ph : getAllPhonemesList()) {
                     if (ph.getDistinctiveFeatures() != null) {
                         if (ph.getDistinctiveFeatures().getManner().getMannerPrecise() != MannerPrecise.VOWEL) {
                             list.add(ph);
                         }
+                    }
+                }*/
+                for (PhonemeInTable ph : getPhonemesForTable("consonant")) {
+                    if (!ph.getValue().equals("")) {
+                        list.add(ph);
                     }
                 }
                 userLogger.info("returning consonant phonemes");
@@ -400,7 +401,7 @@ public class PhonemesBank {
         for (PhonemeInTable ph : phList) {
             ph.setPhonemeStats(wl.getPhonemeStats().get(ph.getValue()));
         }
-        userLogger.info("phonemes list for <<" + wl + ">> wordlist is composed successfully");
+        userLogger.info("phonemes list for <<" + wl.getMeaning() + ">> wordlist is composed successfully");
         return phList;
     }
 }
