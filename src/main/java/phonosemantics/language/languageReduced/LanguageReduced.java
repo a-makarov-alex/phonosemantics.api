@@ -7,9 +7,9 @@ public class LanguageReduced {
     private String family;
     private String group;  // typology etc.
 
-    public LanguageReduced(Language language) {
+    /*public LanguageReduced(Language language) {
         this.title = language.getTitle();
-    }
+    }*/
 
     public String getTitle() {
         return title;

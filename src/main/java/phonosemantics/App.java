@@ -9,8 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 import phonosemantics.word.wordlist.WordList;
 import phonosemantics.word.wordlist.WordListService;
-import phonosemantics.word.wordlist.wordlistReduced.WordListReduced;
-import phonosemantics.word.wordlist.wordlistReduced.WordlistReducedService;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
@@ -26,7 +24,6 @@ public class App {
     // TODO: запихнуть в контекст эти данные, если мы не оставим путь как константу
     // TODO: add some kind of context to project to store data
     private static ArrayList<WordList> allWordLists;
-    public static ArrayList<WordListReduced> allReducedWordLists;
 
     public static ArrayList<WordList> getAllWordLists() {
         if (allWordLists != null) {
@@ -36,17 +33,6 @@ public class App {
             userLogger.info("allWordlists is null");
             allWordLists = WordListService.readAllWordListsFromInputFile();
             return allWordLists;
-        }
-    }
-
-    public static ArrayList<WordListReduced> getAllReducedWordLists() {
-        if (allReducedWordLists != null) {
-            userLogger.info("allReducedWordlists is NOT null");
-            return allReducedWordLists;
-        } else {
-            allReducedWordLists = WordlistReducedService.readAllReducedWordlistsFromInputFile();
-            userLogger.info("allReducedWordlists is null");
-            return allReducedWordLists;
         }
     }
 

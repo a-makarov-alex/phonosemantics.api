@@ -72,19 +72,6 @@ public class WordList {
         }
     }
 
-//    public Word getGraphicForm(String language) {
-//        for (Word word : this.list) {
-//            if (word.getLanguage().getTitle().toLowerCase().equals(language.toLowerCase())) {
-//                System.out.println("SUCCESS: Word of language " + language +
-//                        " with meaning " + this.meaning + " is: " + word.getGraphicForm());
-//                return word;
-//            }
-//        }
-//        System.out.println("FAILURE: Word of language " + language +
-//                " with meaning " + this.meaning + " is not found");
-//        return null;
-//    }
-
     public HashMap<Object, PhTypeStats> getPhonotypeStats() {
         if (this.phTypeStatsMap != null) {
             return this.phTypeStatsMap;
