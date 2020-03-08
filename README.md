@@ -10,7 +10,7 @@ TODO:
 
 1. PhonemesBank ---> getAllPhonemesList комменты удалить
 2. getFeaturesStats не дергает создание вордлистов
-3. getLanguages не дергает создание вордлистов и соответственно создание языков
+3. повторный getLanguage заново пересчитывает calculatePhType
 
 !!!
 количество фонем и слов с фонемой всегда совпадает

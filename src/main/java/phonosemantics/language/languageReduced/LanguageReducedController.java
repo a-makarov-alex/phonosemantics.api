@@ -17,7 +17,7 @@ public class LanguageReducedController {
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/languages")
     public ArrayList<String> getAllLanguages() {
-        return LanguageReducedService.getAllLanguageNames();
+        return LanguageService.getAllLanguageNames();
     }
 
     /**
@@ -26,6 +26,6 @@ public class LanguageReducedController {
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/languages/{language}")
     public Language getLanguageByName(@PathVariable(value="language") String title) {
-        return Language.getLanguage(title);
+        return LanguageService.getLanguage(title);
     }
 }

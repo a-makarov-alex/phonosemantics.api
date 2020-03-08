@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
 import phonosemantics.App;
 import phonosemantics.LoggerConfig;
+import phonosemantics.language.languageReduced.LanguageService;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
@@ -21,16 +22,9 @@ import java.util.*;
 public class Language {
     private static final Logger userLogger = LogManager.getLogger(Language.class);
 
-    private static final String INPUT_LANGUAGES_PATH = "./src/main/java/phonosemantics/input/AllLanguages.xlsx";
-
-    // количество столбцов с фонемами в файле, описывающем языки
-    private static int NUM_OF_PHONOLOGY_COLUMNS = 7;
-    private static HashMap<String, Language> allLanguages = new HashMap<>();
-
     private String title;
     private String family;
     private String group;  // typology etc.
-
     private Set<PhonemeInTable> phonology;
 
     // maps save the verdict "if the phoneme/phType were found in the Language words on practice"
@@ -40,31 +34,34 @@ public class Language {
 
     public Language(String title) {
         this.title = title;
-        this.phonology = getLangPhonology();
+        phCoverage = new HashSet<>();
+        phNotDescribed = new HashSet<>();
+    }
+
+    public Language(String title, Set<PhonemeInTable> phonology) {
+        this.title = title;
+        this.phonology = phonology;
         this.phTypeCoverage = calculatePhTypeCoverage();
         phCoverage = new HashSet<>();
         phNotDescribed = new HashSet<>();
-
-        allLanguages.put(this.title, this);
     }
 
 
-    public HashSet<PhonemeInTable> getLangPhonology() {
-        // open file for reading
-        InputStream inputStream = null;
+    public void readLangPhonologyFromFile() {
         HashSet<PhonemeInTable> allPhonemes = new HashSet<>();
 
         try {
-            inputStream = new FileInputStream(INPUT_LANGUAGES_PATH);
+            InputStream inputStream = new FileInputStream(LanguageService.INPUT_LANGUAGES_PATH);
             Workbook wb = WorkbookFactory.create(inputStream);
+            inputStream.close();
             Sheet sheet = wb.getSheetAt(0);
+
             int rowNum = 1;
             Row row = sheet.getRow(rowNum);
             Cell cell = row.getCell(0);
-            //SoundsBank cBank = SoundsBank.getInstance();
             String[] allPhArr = null;
 
-            // LOOKING FOR LANGUAGE
+            // LOOKING FOR THE LANGUAGE
             while (cell.getCellType() != CellType.BLANK) {
                 String s = cell.getStringCellValue();
 
@@ -77,7 +74,7 @@ public class Language {
                             String allPh = " ";
                             Row r = sheet.getRow(rowNum);
 
-                            for (int i = 1; i <= NUM_OF_PHONOLOGY_COLUMNS; i++) {
+                            for (int i = 1; i <= LanguageService.NUM_OF_PHONOLOGY_COLUMNS; i++) {
                                 if (r.getCell(i) != null) {
                                     allPh += r.getCell(i).getStringCellValue() + " ";
                                 }
@@ -92,19 +89,17 @@ public class Language {
                             }
                         }
                     }
-                    if (LoggerConfig.CONSOLE_LANG_PHONOLOGY) {System.out.println();}
                     break;
                 }
                 rowNum++;
                 cell = sheet.getRow(rowNum).getCell(0);
             }
-
-            inputStream.close();
-            return allPhonemes;
+            this.phonology = allPhonemes;
+            userLogger.info("phonology is set for " + this.getTitle() + " language");
+            this.phTypeCoverage = calculatePhTypeCoverage();
 
         } catch (IOException e) {
             userLogger.error(e.toString());
-            return null;
         }
     }
 
@@ -164,10 +159,6 @@ public class Language {
         return phonology;
     }
 
-    public static HashMap<String, Language> getAllLanguages() {
-        return allLanguages;
-    }
-
     public Set<PhonemeInTable> getPhCoverage() {
         return phCoverage;
     }
@@ -178,15 +169,5 @@ public class Language {
 
     public Set<PhonemeInTable> getPhNotDescribed() {
         return phNotDescribed;
-    }
-
-    public static Language getLanguage(String title) {
-        if (allLanguages.containsKey(title)) {
-            return allLanguages.get(title);
-        } else {
-            userLogger.debug("language " + title + " is not found and will be added now");
-            Language l = new Language(title);
-            return l;
-        }
     }
 }
