@@ -59,11 +59,12 @@ public class WordList {
                     numOfAllPhonemes++;
                     if (ph.equals(currentPh)) {
                         counterPh++;
-                        counterW++;
                         wordIsCounted = true;
                     }
                 }
-                wordIsCounted = false;
+                if (wordIsCounted) {
+                    counterW++;
+                }
             }
             phonemeStats.put(phoneme.getValue(), new PhonemeInTable.PhonemeStats(
                     counterPh,
