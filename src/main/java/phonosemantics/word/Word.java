@@ -3,10 +3,14 @@ package phonosemantics.word;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import phonosemantics.LoggerConfig;
+import phonosemantics.language.Language;
+import phonosemantics.language.languageReduced.LanguageService;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.statistics.Statistics;
+import phonosemantics.word.wordlist.WordList;
+import phonosemantics.word.wordlist.WordListService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -272,5 +276,35 @@ public class Word {
 
 
         return distFeaturesMap;
+    }
+
+    /**
+     * RETURNS WORD BY LANGUAGE AND MEANING
+     */
+    public static Word getWordByLanguageAndMeaning(String languageName, String meaning) {
+        WordList wl = WordListService.getWordlist(meaning);
+        if (wl == null) {
+            userLogger.debug("requested wordlist for [" + meaning + "] meaning does not exist");
+            return null;
+        }
+
+        Language language = LanguageService.getLanguage(languageName);
+        if (language == null) {
+            userLogger.debug("requested [" + languageName + "] language does not exist");
+            return null;
+        }
+
+        ArrayList<Word> list = wl.getWordsByLanguage(language);
+        if (list == null) {
+            userLogger.debug("no words found for [" + meaning + "] meaning in [" + languageName + "] language");
+            return null;
+        }
+
+        if (list.size() > 1) {
+            userLogger.debug("there are some words for [" + meaning + "] meaning in [" + languageName + "] language");
+            return list.get(0);
+        }
+
+        return list.get(0);
     }
 }

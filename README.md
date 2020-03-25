@@ -9,11 +9,10 @@ OR get API json: http://localhost:8083/v2/api-docs
 TODO:
 
 1. PhonemesBank ---> getAllPhonemesList комменты удалить
-2. getFeaturesStats не дергает создание вордлистов
+2. getFeaturesStats создавать вордлисты, считать статы по каждому слову
 3. повторный getLanguage заново пересчитывает calculatePhType
 
-!!!
-количество фонем и слов с фонемой всегда совпадает
+
 
 
 - count Features instances (just like Phonotypes earlier)

@@ -130,6 +130,7 @@ public class WordListService {
     }
 
     public static WordList getWordlist(String meaning) {
+        meaning = meaning.toLowerCase();
         ArrayList<WordList> allWordlists = App.getAllWordLists();
         for (WordList wl : allWordlists) {
             if (wl.getMeaning().equals(meaning)) {

@@ -433,6 +433,8 @@ public class DistinctiveFeatures {
     public static HashMap<String, HashMap<Object, Integer>> getFeaturesStats(String type) {
         HashMap<String, HashMap<Object, Integer>> mainMap = new HashMap<>();
 
+        //TODO: составить все вордлисты, собрать данные по каждому слову и вычислить статы по слову. а потом уже делать этот метод
+
         for (Map.Entry<String, Object[]> elem : getFeaturesForAPI(type).entrySet()) {
             HashMap<Object, Integer> innerMap = new HashMap<>();
 
