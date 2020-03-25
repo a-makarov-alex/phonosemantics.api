@@ -32,8 +32,8 @@ public class PhonemeInTable {
 
         if (this.distinctiveFeatures != null) {
             i = this.distinctiveFeatures.getMajorClass().isVocoid() ? 1 : 0;
-            key = i == 0 ? "true" : "false";
-            distFeatureStats.get("vocoid").put(key, i);
+            key = i == 1 ? "true" : "false";
+            distFeatureStats.get("vocoid").put(key, 1);
         } else {
             //userLogger.info("distinctive feature is null: " + this.getValue());
             return null;

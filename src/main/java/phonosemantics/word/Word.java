@@ -243,7 +243,7 @@ public class Word {
     /**
      * RETURNS SUM OF EVERY DISTINCTIVE FEATURE FOR A CERTAIN WORD
      */
-    public HashMap<String, HashMap<Object, Integer>> wordDistinctiveFeatures() {
+    public HashMap<String, HashMap<Object, Integer>> getWordDistinctiveFeatures() {
         HashMap<String, HashMap<Object, Integer>> distFeaturesMap = DistinctiveFeatures.getFeaturesStats("all");
 
         // Делаем рабочую мапу без иерархии

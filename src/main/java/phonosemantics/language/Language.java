@@ -5,7 +5,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
 import phonosemantics.App;
-import phonosemantics.LoggerConfig;
 import phonosemantics.language.languageReduced.LanguageService;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
@@ -131,7 +130,7 @@ public class Language {
                     for (Map.Entry<Object, Integer> phTypeEntity : phTypeHigherLevel.getValue().entrySet()) {
                         // Entity example: {true: 0} or {HIGH_MID: 0}
 
-                        Integer i = word.wordDistinctiveFeatures().get(phTypeHigherLevel.getKey()).get(phTypeEntity.getKey());
+                        Integer i = word.getWordDistinctiveFeatures().get(phTypeHigherLevel.getKey()).get(phTypeEntity.getKey());
                         //userLogger.info("PH: " + phTypeHigherLevel.getKey() + " --- " + phTypeEntity.getKey() + " " + i);
                         phTypeEntity.setValue(phTypeEntity.getValue() + i);
                     }

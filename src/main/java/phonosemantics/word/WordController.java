@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import phonosemantics.word.wordlist.WordList;
 import phonosemantics.word.wordlist.WordListService;
 
+import java.util.HashMap;
+
 @RestController
 public class WordController {
     /**
@@ -19,6 +21,19 @@ public class WordController {
             @RequestParam(value = "meaning") String meaning
     ) {
         return Word.getWordByLanguageAndMeaning(language, meaning);
+    }
+
+    /**
+     * GETTING WORD's DISTINCTIVE FEATURES
+     * **/
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/languages/{language}/meanings/{meaning}/features")
+    public HashMap<String, HashMap<Object, Integer>> getWordDistinctiveFeatures(
+            @RequestParam(value = "language") String language,
+            @RequestParam(value = "meaning") String meaning
+    ) {
+        Word w = Word.getWordByLanguageAndMeaning(language, meaning);
+        return w.getWordDistinctiveFeatures();
     }
 
 }
