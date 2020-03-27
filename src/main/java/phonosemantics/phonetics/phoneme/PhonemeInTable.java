@@ -3,7 +3,8 @@ package phonosemantics.phonetics.phoneme;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import phonosemantics.language.Language;
-import phonosemantics.phonetics.phoneme.distinctiveFeatures.consonants.Rhotics;
+import phonosemantics.phonetics.phoneme.distinctiveFeatures.Stricture;
+import phonosemantics.phonetics.phoneme.distinctiveFeatures.consonants.*;
 import phonosemantics.word.wordlist.WordList;
 
 import java.util.HashMap;
@@ -27,9 +28,6 @@ public class PhonemeInTable {
 
     public HashMap<String, HashMap<Object, Integer>> phonemeDistinctiveFeatureStats() {
         HashMap<String, HashMap<Object, Integer>> distFeatureStats = DistinctiveFeatures.getFeaturesStats("all");
-
-        Integer i = 0;
-        String key = "";
         DistinctiveFeatures df = this.distinctiveFeatures;
 
         // TODO это можно как-то автоматизировать через перебор полей класса, но пока нет смысла
@@ -38,33 +36,42 @@ public class PhonemeInTable {
             return null;
         }
 
-        i = df.getMajorClass().isVocoid() ? 1 : 0;
-        key = i == 1 ? "true" : "false";
+        // MAJOR CLASS
+        String key = df.getMajorClass().isVocoid() ? "true" : "false";
         distFeatureStats.get("vocoid").put(key, 1);
 
-        i = df.getMajorClass().isApproximant() ? 1 : 0;
-        key = i == 1 ? "true" : "false";
+        key = df.getMajorClass().isApproximant() ? "true" : "false";
         distFeatureStats.get("approximant").put(key, 1);
 
-        i = df.getManner().isSonorant() ? 1 : 0;
-        key = i == 1 ? "true" : "false";
+        // MANNER
+        key = df.getManner().isSonorant() ? "true" : "false";
         distFeatureStats.get("sonorant").put(key, 1);
 
-        i = df.getManner().isContinuant() ? 1 : 0;
-        key = i == 1 ? "true" : "false";
+        key = df.getManner().isContinuant() ? "true" : "false";
         distFeatureStats.get("continuant").put(key, 1);
 
-        i = df.getManner().isNasal() ? 1 : 0;
-        key = i == 1 ? "true" : "false";
+        key = df.getManner().isNasal() ? "true" : "false";
         distFeatureStats.get("nasal").put(key, 1);
 
-        i = df.getManner().isVoiced() ? 1 : 0;
-        key = i == 1 ? "true" : "false";
+        key = df.getManner().isVoiced() ? "true" : "false";
         distFeatureStats.get("voiced").put(key, 1);
 
-        Rhotics key_rh = df.getManner().getRhotics();
-        distFeatureStats.get("rhotics").put(key_rh, 1);
+        distFeatureStats.get("stricture").put(df.getManner().getStricture(), 1);
+        distFeatureStats.get("rhotics").put(df.getManner().getRhotics(), 1);
+        distFeatureStats.get("lateral").put(df.getManner().getLateral(), 1);
+        distFeatureStats.get("sibilant").put(df.getManner().getSibilant(), 1);
+        distFeatureStats.get("semivowel").put(df.getManner().getSemivowel(), 1);
+        distFeatureStats.get("strident").put(df.getManner().getStrident(), 1);
+        distFeatureStats.get("mannerPrecise").put(df.getManner().getMannerPrecise(), 1);
 
+        // PLACE
+        distFeatureStats.get("placeApproximate").put(df.getPlace().getPlaceApproximate(), 1);
+        distFeatureStats.get("placePrecise").put(df.getPlace().getPlacePrecise(), 1);
+
+        // VOWEL SPACE
+        distFeatureStats.get("height").put(df.getVowelSpace().getHeight(), 1);
+        distFeatureStats.get("backness").put(df.getVowelSpace().getBackness(), 1);
+        distFeatureStats.get("roundness").put(df.getVowelSpace().getRoundness(), 1);
 
         //TODO other fileds
 
