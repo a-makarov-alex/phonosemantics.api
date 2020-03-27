@@ -3,6 +3,7 @@ package phonosemantics.phonetics.phoneme;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import phonosemantics.language.Language;
+import phonosemantics.phonetics.phoneme.distinctiveFeatures.consonants.Rhotics;
 import phonosemantics.word.wordlist.WordList;
 
 import java.util.HashMap;
@@ -29,15 +30,41 @@ public class PhonemeInTable {
 
         Integer i = 0;
         String key = "";
+        DistinctiveFeatures df = this.distinctiveFeatures;
 
-        if (this.distinctiveFeatures != null) {
-            i = this.distinctiveFeatures.getMajorClass().isVocoid() ? 1 : 0;
-            key = i == 1 ? "true" : "false";
-            distFeatureStats.get("vocoid").put(key, 1);
-        } else {
+        // TODO это можно как-то автоматизировать через перебор полей класса, но пока нет смысла
+        if (df == null) {
             //userLogger.info("distinctive feature is null: " + this.getValue());
             return null;
         }
+
+        i = df.getMajorClass().isVocoid() ? 1 : 0;
+        key = i == 1 ? "true" : "false";
+        distFeatureStats.get("vocoid").put(key, 1);
+
+        i = df.getMajorClass().isApproximant() ? 1 : 0;
+        key = i == 1 ? "true" : "false";
+        distFeatureStats.get("approximant").put(key, 1);
+
+        i = df.getManner().isSonorant() ? 1 : 0;
+        key = i == 1 ? "true" : "false";
+        distFeatureStats.get("sonorant").put(key, 1);
+
+        i = df.getManner().isContinuant() ? 1 : 0;
+        key = i == 1 ? "true" : "false";
+        distFeatureStats.get("continuant").put(key, 1);
+
+        i = df.getManner().isNasal() ? 1 : 0;
+        key = i == 1 ? "true" : "false";
+        distFeatureStats.get("nasal").put(key, 1);
+
+        i = df.getManner().isVoiced() ? 1 : 0;
+        key = i == 1 ? "true" : "false";
+        distFeatureStats.get("voiced").put(key, 1);
+
+        Rhotics key_rh = df.getManner().getRhotics();
+        distFeatureStats.get("rhotics").put(key_rh, 1);
+
 
         //TODO other fileds
 
