@@ -10,6 +10,7 @@ import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.word.Word;
 import phonosemantics.word.wordlist.WordList;
+import phonosemantics.word.wordlist.WordListService;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -117,7 +118,7 @@ public class Language {
         HashMap<String, HashMap<Object, Integer>> fullMap = DistinctiveFeatures.getFeaturesStats("all");
 
 
-        ArrayList<WordList> allWordlists = App.getAllWordLists();
+        ArrayList<WordList> allWordlists = WordListService.getAllWordLists();
         for (WordList wl : allWordlists) {
             userLogger.info("Calculating coverage for <" + wl.getMeaning() + "> wordlist");
             for (Word word : wl.getWords(this)) {

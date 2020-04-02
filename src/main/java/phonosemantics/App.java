@@ -19,23 +19,6 @@ import java.util.Collections;
 @SpringBootApplication
 @EnableSwagger2
 public class App {
-    private static final Logger userLogger = LogManager.getLogger(App.class);
-
-    // TODO: запихнуть в контекст эти данные, если мы не оставим путь как константу
-    // TODO: add some kind of context to project to store data
-    private static ArrayList<WordList> allWordLists;
-
-    public static ArrayList<WordList> getAllWordLists() {
-        if (allWordLists != null) {
-            userLogger.info("allWordlists is NOT null");
-            return allWordLists;
-        } else {
-            userLogger.info("allWordlists is null");
-            allWordLists = WordListService.readAllWordListsFromInputFile();
-            return allWordLists;
-        }
-    }
-
     public static void main(String args[]) {
         //SpringApplication.run(App.class, args);
         SpringApplication app = new SpringApplication(App.class);

@@ -24,7 +24,7 @@ public class WordListController {
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/wordlists")
     public ArrayList<WordList> getAllWordlists() {
-        ArrayList<WordList> allWordlists = App.getAllWordLists();
+        ArrayList<WordList> allWordlists = WordListService.getAllWordLists();
         return allWordlists;
     }
 
@@ -38,7 +38,7 @@ public class WordListController {
 
         ArrayList<String> meaningsList = new ArrayList<>();
 
-        for (WordList wl : App.getAllWordLists()) {
+        for (WordList wl : WordListService.getAllWordLists()) {
             meaningsList.add(wl.getMeaning());
         }
 

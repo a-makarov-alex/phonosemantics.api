@@ -18,6 +18,23 @@ public class WordListService {
     private static final String INPUT_DIRECTORY = "./src/main/java/phonosemantics/input/";
     static final Logger userLogger = LogManager.getLogger(WordListService.class);
 
+
+    // TODO: запихнуть в контекст эти данные, если мы не оставим путь как константу
+    // TODO: add some kind of context to project to store data
+    private static ArrayList<WordList> allWordLists;
+
+    public static ArrayList<WordList> getAllWordLists() {
+        if (allWordLists != null) {
+            userLogger.info("allWordlists is NOT null");
+            return allWordLists;
+        } else {
+            userLogger.info("allWordlists is null");
+            allWordLists = WordListService.readAllWordListsFromInputFile();
+            return allWordLists;
+        }
+    }
+
+
     /**
      * Reads all the words from inputFile and write them to one list of Word entities
      */
@@ -131,7 +148,7 @@ public class WordListService {
 
     public static WordList getWordlist(String meaning) {
         meaning = meaning.toLowerCase();
-        ArrayList<WordList> allWordlists = App.getAllWordLists();
+        ArrayList<WordList> allWordlists = getAllWordLists();
         for (WordList wl : allWordlists) {
             if (wl.getMeaning().equals(meaning)) {
                 return wl;
