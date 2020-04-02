@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import phonosemantics.LoggerConfig;
 import phonosemantics.language.Language;
-import phonosemantics.language.languageReduced.LanguageService;
+import phonosemantics.language.LanguageService;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
@@ -248,6 +248,7 @@ public class Word {
 
         // Делаем рабочую мапу без иерархии
         // HashMap<String, HashMap<Object, Integer>> ----> HashMap<Object, Integer>
+        // TODO рефакторинг. Буфер вроде уже не нужен
         HashMap<Object, Integer> bufferMap = new HashMap<>();
         for (Map.Entry<String, HashMap<Object, Integer>> phTypeHigherLevel : distFeaturesMap.entrySet()) {
             for (Map.Entry<Object, Integer> phTypeEntity : phTypeHigherLevel.getValue().entrySet()) {
@@ -281,7 +282,7 @@ public class Word {
     /**
      * RETURNS WORD BY LANGUAGE AND MEANING
      */
-    public static Word getWordByLanguageAndMeaning(String languageName, String meaning) {
+    public static Word getWord(String languageName, String meaning) {
         WordList wl = WordListService.getWordlist(meaning);
         if (wl == null) {
             userLogger.debug("requested wordlist for [" + meaning + "] meaning does not exist");
@@ -294,7 +295,7 @@ public class Word {
             return null;
         }
 
-        ArrayList<Word> list = wl.getWordsByLanguage(language);
+        ArrayList<Word> list = wl.getWords(language);
         if (list == null) {
             userLogger.debug("no words found for [" + meaning + "] meaning in [" + languageName + "] language");
             return null;

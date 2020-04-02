@@ -320,13 +320,6 @@ public class PhonemesBank {
                 return list;
             }
             case "consonant" : {
-                /*for (PhonemeInTable ph : getAllPhonemesList()) {
-                    if (ph.getDistinctiveFeatures() != null) {
-                        if (ph.getDistinctiveFeatures().getManner().getMannerPrecise() != MannerPrecise.VOWEL) {
-                            list.add(ph);
-                        }
-                    }
-                }*/
                 for (PhonemeInTable ph : getPhonemesForTable("consonant")) {
                     if (!ph.getValue().equals("")) {
                         list.add(ph);
@@ -386,7 +379,10 @@ public class PhonemesBank {
                             ph.setRecognized(true);
                             ph.setDistinctiveFeatures(df);
                         }
-                        allPhonemesNew.add(ph);
+                        // Method is called from different other methods, so there might be duplicates
+                        if (!allPhonemesNew.contains(ph)) {
+                            allPhonemesNew.add(ph);
+                        }
                         resultList.add(ph);
                     }
                 }

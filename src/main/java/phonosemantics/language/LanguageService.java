@@ -1,4 +1,4 @@
-package phonosemantics.language.languageReduced;
+package phonosemantics.language;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

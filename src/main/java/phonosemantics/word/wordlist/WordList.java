@@ -3,7 +3,7 @@ package phonosemantics.word.wordlist;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import phonosemantics.language.Language;
-import phonosemantics.language.languageReduced.LanguageService;
+import phonosemantics.language.LanguageService;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
@@ -183,7 +183,7 @@ public class WordList {
      * @param language
      * @return
      */
-    public ArrayList<Word> getWordsByLanguage(Language language) {
+    public ArrayList<Word> getWords(Language language) {
         ArrayList<Word> list = new ArrayList<>();
         for (Word word : this.list) {
             if (word.getLanguage().toLowerCase().equals(language.getTitle().toLowerCase())) {

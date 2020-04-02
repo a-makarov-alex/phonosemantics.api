@@ -5,7 +5,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
 import phonosemantics.App;
-import phonosemantics.language.languageReduced.LanguageService;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
@@ -121,7 +120,7 @@ public class Language {
         ArrayList<WordList> allWordlists = App.getAllWordLists();
         for (WordList wl : allWordlists) {
             userLogger.info("Calculating coverage for <" + wl.getMeaning() + "> wordlist");
-            for (Word word : wl.getWordsByLanguage(this)) {
+            for (Word word : wl.getWords(this)) {
                 userLogger.info("Word: " + word.getGraphicForm());
 
                 // Put all the distFeatures counters of every word into a full distFeature map

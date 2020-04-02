@@ -1,15 +1,14 @@
-package phonosemantics.language.languageReduced;
+package phonosemantics.language;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import phonosemantics.language.Language;
 
 import java.util.ArrayList;
 
 @RestController
-public class LanguageReducedController {
+public class LanguageController {
 
     /**
      * GETTING ALL LANGUAGES

@@ -4,8 +4,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import phonosemantics.word.wordlist.WordList;
-import phonosemantics.word.wordlist.WordListService;
 
 import java.util.HashMap;
 
@@ -20,7 +18,7 @@ public class WordController {
             @RequestParam(value = "language") String language,
             @RequestParam(value = "meaning") String meaning
     ) {
-        return Word.getWordByLanguageAndMeaning(language, meaning);
+        return Word.getWord(language, meaning);
     }
 
     /**
@@ -32,7 +30,7 @@ public class WordController {
             @RequestParam(value = "language") String language,
             @RequestParam(value = "meaning") String meaning
     ) {
-        Word w = Word.getWordByLanguageAndMeaning(language, meaning);
+        Word w = Word.getWord(language, meaning);
         return w.getWordDistinctiveFeatures();
     }
 
