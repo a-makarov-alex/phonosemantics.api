@@ -31,7 +31,7 @@ public class WordController {
             @RequestParam(value = "meaning") String meaning
     ) {
         Word w = Word.getWord(language, meaning);
-        return w.countWordDistinctiveFeaturesStats();
+        return w.countWordDistinctiveFeaturesStats("all");
     }
 
 }

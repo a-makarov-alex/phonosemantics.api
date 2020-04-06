@@ -1,6 +1,8 @@
 package phonosemantics.phonetics.phoneme;
 
 import org.springframework.web.bind.annotation.*;
+import phonosemantics.word.wordlist.WordList;
+import phonosemantics.word.wordlist.WordListService;
 
 import java.util.HashMap;
 
@@ -29,7 +31,8 @@ public class DistinctiveFeaturesController {
     // type available values: all / general / vowel / consonant
     public HashMap<String, HashMap<Object, Integer>> getFeaturesStats(
             @PathVariable(value="type") String type,
-            @RequestParam(value = "meaning") String meaning) {
-        return DistinctiveFeatures.getFeaturesStructureDraft(type);
+            @RequestParam(value = "wordlistWeaning") String wordlistWeaning) {
+        WordList wl = WordListService.getWordlist(wordlistWeaning);
+        return wl.calculateFeaturesStats(type);
     }
 }

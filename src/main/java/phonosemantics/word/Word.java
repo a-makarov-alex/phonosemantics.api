@@ -243,8 +243,8 @@ public class Word {
     /**
      * RETURNS SUM OF EVERY DISTINCTIVE FEATURE FOR A CERTAIN WORD
      */
-    public HashMap<String, HashMap<Object, Integer>> countWordDistinctiveFeaturesStats() {
-        HashMap<String, HashMap<Object, Integer>> distFeaturesMap = DistinctiveFeatures.getFeaturesStructureDraft("all");
+    public HashMap<String, HashMap<Object, Integer>> countWordDistinctiveFeaturesStats(String type) {
+        HashMap<String, HashMap<Object, Integer>> distFeaturesMap = DistinctiveFeatures.getFeaturesStructureDraft(type);
 
         // Делаем рабочую мапу без иерархии
         // HashMap<String, HashMap<Object, Integer>> ----> HashMap<Object, Integer>

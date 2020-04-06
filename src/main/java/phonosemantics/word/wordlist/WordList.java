@@ -74,6 +74,28 @@ public class WordList {
         }
     }
 
+    public HashMap<String, HashMap<Object, Integer>> calculateFeaturesStats(String type) {
+        userLogger.info("starting calculating Wordlist " + this.getMeaning() + "features stats");
+        HashMap<String, HashMap<Object, Integer>> resultMap = DistinctiveFeatures.getFeaturesStructureDraft(type);
+        HashMap<String, HashMap<Object, Integer>> bufferForWordStats;
+
+        for (Word w : this.getList()) {
+            bufferForWordStats = w.countWordDistinctiveFeaturesStats(type);
+
+            for (Map.Entry<String, HashMap<Object, Integer>> entryHighLevel : bufferForWordStats.entrySet()) {
+                for (Map.Entry<Object, Integer> entryLowLevel : entryHighLevel.getValue().entrySet()) {
+                    // Sum for "current value in the result map + value for current word"
+                    Integer i = entryLowLevel.getValue() + resultMap.get(entryHighLevel.getKey()).get(entryLowLevel.getKey());
+                    // Put the new sum to result map
+                    resultMap.get(entryHighLevel.getKey()).put(entryLowLevel.getKey(), i);
+                }
+            }
+        }
+        userLogger.info("finishing calculating Wordlist " + this.getMeaning() + "features stats");
+        return resultMap;
+    }
+
+    @Deprecated
     public HashMap<Object, PhTypeStats> getPhonotypeStats() {
         if (this.phTypeStatsMap != null) {
             return this.phTypeStatsMap;
@@ -102,6 +124,7 @@ public class WordList {
 
 
     // Counts all ph-types for further statistics and write result to the Statistics object
+    @Deprecated
     public void countAllPhonotypesInstances() {
         // Все фонотипы каждой фонемы из каждого слова в вордлисте суммируем в хашмапе
         for (Map.Entry<Object, PhTypeStats> entry : phTypeStatsMap.entrySet()) {
@@ -127,6 +150,7 @@ public class WordList {
 
 
     // TODO метод явно не из этого класса
+    @Deprecated
     public void calculateBasicStats() {
         HashMap<Object, PhTypeStats> inputMap = phTypeStatsMap;
 
