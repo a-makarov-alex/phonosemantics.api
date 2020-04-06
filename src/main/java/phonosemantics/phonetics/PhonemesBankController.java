@@ -2,6 +2,8 @@ package phonosemantics.phonetics;
 
 import org.springframework.web.bind.annotation.*;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
+import phonosemantics.word.wordlist.WordList;
+import phonosemantics.word.wordlist.WordListService;
 
 import java.util.ArrayList;
 
@@ -18,6 +20,7 @@ public class PhonemesBankController {
         return list;
     }
 
+
     /**
      * GETTING PHONEME BY ITS TITLE
      * **/
@@ -31,5 +34,19 @@ public class PhonemesBankController {
             }
         }
         return null;
+    }
+
+
+    /**
+     * GETTING PHONEME STATS
+     * **/
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/phonemes/{phoneme}/stats")
+    public PhonemeInTable.PhonemeStats getPhonemeStats(
+            @RequestParam(value = "wordlistMeaning") String wordlistMeaning,
+            @PathVariable(value="phoneme") String phoneme
+    ) {
+        WordList wl = WordListService.getWordlist(wordlistMeaning);
+        return wl.getPhonemeStats().get(phoneme);
     }
 }

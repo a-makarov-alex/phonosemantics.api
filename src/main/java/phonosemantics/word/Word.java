@@ -243,8 +243,8 @@ public class Word {
     /**
      * RETURNS SUM OF EVERY DISTINCTIVE FEATURE FOR A CERTAIN WORD
      */
-    public HashMap<String, HashMap<Object, Integer>> getWordDistinctiveFeatures() {
-        HashMap<String, HashMap<Object, Integer>> distFeaturesMap = DistinctiveFeatures.getFeaturesStats("all");
+    public HashMap<String, HashMap<Object, Integer>> countWordDistinctiveFeaturesStats() {
+        HashMap<String, HashMap<Object, Integer>> distFeaturesMap = DistinctiveFeatures.getFeaturesStructureDraft("all");
 
         // Делаем рабочую мапу без иерархии
         // HashMap<String, HashMap<Object, Integer>> ----> HashMap<Object, Integer>
@@ -261,7 +261,7 @@ public class Word {
                     PhonemeInTable ph = PhonemesBank.getInstance().find(symbol);
 
                     // add 1 if phoneme has feature, add 0 if not
-                    HashMap<String, HashMap<Object, Integer>> stats = ph.phonemeDistinctiveFeatureStats();
+                    HashMap<String, HashMap<Object, Integer>> stats = ph.countPhonemeDistinctiveFeatureStats();
                     if (stats != null) {
                         sumForWord += stats.get(phTypeHigherLevel.getKey()).get(phTypeEntity.getKey());
                     } else {

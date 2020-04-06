@@ -79,7 +79,7 @@ public class WordList {
             return this.phTypeStatsMap;
         } else {
             // Заполняем статсМапу парами "фонотип : пустой объект статов"
-            HashMap<String, HashMap<Object, Integer>> allPhTypes = DistinctiveFeatures.getFeaturesStats("all");
+            HashMap<String, HashMap<Object, Integer>> allPhTypes = DistinctiveFeatures.getFeaturesStructureDraft("all");
             for (Map.Entry<String, HashMap<Object, Integer>> outerMap : allPhTypes.entrySet()) {
                 for (Map.Entry<Object, Integer> phT : outerMap.getValue().entrySet()) {
                     PhTypeStats stats = new PhTypeStats(phT.getKey());
@@ -126,6 +126,7 @@ public class WordList {
     }
 
 
+    // TODO метод явно не из этого класса
     public void calculateBasicStats() {
         HashMap<Object, PhTypeStats> inputMap = phTypeStatsMap;
 
@@ -156,7 +157,7 @@ public class WordList {
      * Применить ко всем листам сразу нельзя, т.к. некоторые значения в отдельных языках могут быть не зафиксированы
      */
     public void calculatePotentialWordsWithPhType() {
-        HashMap<String, HashMap<Object, Integer>> fullMap = DistinctiveFeatures.getFeaturesStats("all");
+        HashMap<String, HashMap<Object, Integer>> fullMap = DistinctiveFeatures.getFeaturesStructureDraft("all");
 
         for (Map.Entry<String, HashMap<Object, Integer>> outerMap : fullMap.entrySet()) {
             for (Map.Entry<Object, Integer> entry : outerMap.getValue().entrySet()) {

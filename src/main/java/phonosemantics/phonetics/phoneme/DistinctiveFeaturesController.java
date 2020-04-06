@@ -1,9 +1,6 @@
 package phonosemantics.phonetics.phoneme;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
@@ -14,16 +11,25 @@ public class DistinctiveFeaturesController {
      * RETURNS THE MAP WITH 4 BIG CLASSES OF DISTINCTIVE FEATURES
      **/
     @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/features/{type}")
+    @GetMapping("/features/{type}/structure")
     // type available values: all / general / vowel / consonant
     public HashMap<String, Object[]> getFeatures(@PathVariable(value="type") String type) {
         return DistinctiveFeatures.getFeaturesForAPI(type);
     }
 
     @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/features/{type}/structure-stats-draft")
+    // type available values: all / general / vowel / consonant
+    public HashMap<String, HashMap<Object, Integer>> getFeaturesStatsDraft(@PathVariable(value="type") String type) {
+        return DistinctiveFeatures.getFeaturesStructureDraft(type);
+    }
+
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/features/{type}/stats")
     // type available values: all / general / vowel / consonant
-    public HashMap<String, HashMap<Object, Integer>> getFeaturesStats(@PathVariable(value="type") String type) {
-        return DistinctiveFeatures.getFeaturesStats(type);
+    public HashMap<String, HashMap<Object, Integer>> getFeaturesStats(
+            @PathVariable(value="type") String type,
+            @RequestParam(value = "meaning") String meaning) {
+        return DistinctiveFeatures.getFeaturesStructureDraft(type);
     }
 }

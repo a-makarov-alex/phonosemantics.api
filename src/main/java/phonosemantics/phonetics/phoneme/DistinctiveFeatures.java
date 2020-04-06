@@ -430,7 +430,7 @@ public class DistinctiveFeatures {
      * ПРИМЕР:
      * { VOCOID: [{true : 1}, {false: 0}]}
      */
-    public static HashMap<String, HashMap<Object, Integer>> getFeaturesStats(String type) {
+    public static HashMap<String, HashMap<Object, Integer>> getFeaturesStructureDraft(String type) {
         HashMap<String, HashMap<Object, Integer>> mainMap = new HashMap<>();
 
         //TODO: составить все вордлисты, собрать данные по каждому слову и вычислить статы по слову. а потом уже делать этот метод

@@ -4,7 +4,6 @@ package phonosemantics.language;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
-import phonosemantics.App;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
@@ -115,7 +114,7 @@ public class Language {
     // Count all the phonotypes present in a specific language
     public HashMap<String, HashMap<Object, Integer>> calculatePhTypeCoverage() {
         userLogger.info("calculating PhType coverage");
-        HashMap<String, HashMap<Object, Integer>> fullMap = DistinctiveFeatures.getFeaturesStats("all");
+        HashMap<String, HashMap<Object, Integer>> fullMap = DistinctiveFeatures.getFeaturesStructureDraft("all");
 
 
         ArrayList<WordList> allWordlists = WordListService.getAllWordLists();
@@ -130,7 +129,7 @@ public class Language {
                     for (Map.Entry<Object, Integer> phTypeEntity : phTypeHigherLevel.getValue().entrySet()) {
                         // Entity example: {true: 0} or {HIGH_MID: 0}
 
-                        Integer i = word.getWordDistinctiveFeatures().get(phTypeHigherLevel.getKey()).get(phTypeEntity.getKey());
+                        Integer i = word.countWordDistinctiveFeaturesStats().get(phTypeHigherLevel.getKey()).get(phTypeEntity.getKey());
                         //userLogger.info("PH: " + phTypeHigherLevel.getKey() + " --- " + phTypeEntity.getKey() + " " + i);
                         phTypeEntity.setValue(phTypeEntity.getValue() + i);
                     }

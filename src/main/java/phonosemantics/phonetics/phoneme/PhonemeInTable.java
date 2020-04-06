@@ -2,10 +2,6 @@ package phonosemantics.phonetics.phoneme;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import phonosemantics.language.Language;
-import phonosemantics.phonetics.phoneme.distinctiveFeatures.Stricture;
-import phonosemantics.phonetics.phoneme.distinctiveFeatures.consonants.*;
-import phonosemantics.word.wordlist.WordList;
 
 import java.util.HashMap;
 
@@ -18,6 +14,7 @@ public class PhonemeInTable {
     private int column;
     private boolean isRecognized = false;
     private DistinctiveFeatures distinctiveFeatures;
+    // TODO это не должно быть полем! вынести исключительно в метод
     private PhonemeStats phonemeStats;   //optional
 
     public PhonemeInTable(String value, int r, int c) {
@@ -26,8 +23,8 @@ public class PhonemeInTable {
         this.column = c;
     }
 
-    public HashMap<String, HashMap<Object, Integer>> phonemeDistinctiveFeatureStats() {
-        HashMap<String, HashMap<Object, Integer>> distFeatureStats = DistinctiveFeatures.getFeaturesStats("all");
+    public HashMap<String, HashMap<Object, Integer>> countPhonemeDistinctiveFeatureStats() {
+        HashMap<String, HashMap<Object, Integer>> distFeatureStats = DistinctiveFeatures.getFeaturesStructureDraft("all");
         DistinctiveFeatures df = this.distinctiveFeatures;
 
         // TODO это можно как-то автоматизировать через перебор полей класса, но пока нет смысла

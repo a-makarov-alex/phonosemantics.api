@@ -283,8 +283,22 @@ public class PhonemesBank {
         }
     }
 
+
     /**
-     *  ПО СУТИ, ЭТИ ДАННЫЕ - КОНСТАНТА. ДЛЯ ДОБАВЛЕНИЯ ДИНАМИЧЕСКИХ ДАННЫХ ИЗ WORDLIST ЕСТЬ МЕТОД НИЖЕ
+     *   ДИНАМИЧЕСКИЕ ДАННЫЕ (статистика по Wordlist)
+     */
+    public ArrayList<PhonemeInTable> getAllPhonemesList(WordList wl) {
+        ArrayList<PhonemeInTable> phList = this.getAllPhonemesList();
+        for (PhonemeInTable ph : phList) {
+            ph.setPhonemeStats(wl.getPhonemeStats().get(ph.getValue()));
+        }
+        userLogger.info("phonemes list for <<" + wl.getMeaning() + ">> wordlist is composed successfully");
+        return phList;
+    }
+
+
+    /**
+     *  СТАТИЧЕСКИЕ ДАННЫЕ
      *  Condition:  vowel / consonant
      * **/
     public ArrayList<PhonemeInTable> getAllPhonemesList() {
@@ -390,15 +404,6 @@ public class PhonemesBank {
         }
         userLogger.info("extracting is finished successfully");
         return resultList;
-    }
-
-    public ArrayList<PhonemeInTable> getAllPhonemesList(WordList wl) {
-        ArrayList<PhonemeInTable> phList = this.getAllPhonemesList();
-        for (PhonemeInTable ph : phList) {
-            ph.setPhonemeStats(wl.getPhonemeStats().get(ph.getValue()));
-        }
-        userLogger.info("phonemes list for <<" + wl.getMeaning() + ">> wordlist is composed successfully");
-        return phList;
     }
 }
 
