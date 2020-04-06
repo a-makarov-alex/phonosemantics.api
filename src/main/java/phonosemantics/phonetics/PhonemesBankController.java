@@ -36,17 +36,4 @@ public class PhonemesBankController {
         return null;
     }
 
-
-    /**
-     * GETTING PHONEME STATS
-     * **/
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/phonemes/{phoneme}/stats")
-    public PhonemeInTable.PhonemeStats getPhonemeStats(
-            @RequestParam(value = "wordlistMeaning") String wordlistMeaning,
-            @PathVariable(value="phoneme") String phoneme
-    ) {
-        WordList wl = WordListService.getWordlist(wordlistMeaning);
-        return wl.getPhonemeStats().get(phoneme);
-    }
 }

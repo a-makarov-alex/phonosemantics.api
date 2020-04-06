@@ -31,14 +31,6 @@ public class PhonemesController {
     }
 
     @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/wordlists/{meaning}/phonemes")
-    public ArrayList<PhonemeInTable> getPhonemesCoverageForWordlist(@PathVariable(value="meaning") String meaning) {
-        WordList wrdl = WordListService.getWordlist(meaning);
-
-        return PhonemesBank.getInstance().getAllPhonemesList(wrdl);
-    }
-
-    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/phonemes/headers/{distinctiveFeature}")
     public ArrayList<Header> getHeaders(@PathVariable(value="distinctiveFeature") String distinctiveFeature) {
         return HeadersForUI.getHeaders(distinctiveFeature);

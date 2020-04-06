@@ -2,6 +2,8 @@ package phonosemantics.word.wordlist;
 
 import org.springframework.web.bind.annotation.*;
 import phonosemantics.App;
+import phonosemantics.phonetics.PhonemesBank;
+import phonosemantics.phonetics.phoneme.PhonemeInTable;
 
 import java.util.ArrayList;
 
@@ -13,8 +15,8 @@ public class WordListController {
      * **/
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/wordlist")
-    public WordList getWordlistByMeaning(@RequestParam(value = "meaning") String meaning) {
-        return WordListService.getWordlist(meaning);
+    public WordList getWordlistByMeaning(@RequestParam(value = "wordlistMeaning") String wordlistMeaning) {
+        return WordListService.getWordlist(wordlistMeaning);
     }
 
 
@@ -43,6 +45,30 @@ public class WordListController {
         }
 
         return meaningsList;
+    }
+
+    /**
+     * GETTING ALL PHONEMES FOR A CERTAIN WORDLIST
+     * **/
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/wordlists/{wordlistMeaning}/phonemes")
+    public ArrayList<PhonemeInTable> getPhonemesCoverageForWordlist(@PathVariable(value="wordlistMeaning") String wordlistMeaning) {
+        WordList wrdl = WordListService.getWordlist(wordlistMeaning);
+
+        return PhonemesBank.getInstance().getAllPhonemesList(wrdl);
+    }
+
+    /**
+     * GETTING PHONEME STATS FOR A CERTAIN WORDLIST
+     * **/
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/wordlists/{wordlistMeaning}/phonemes/stats")
+    public PhonemeInTable.PhonemeStats getPhonemeStats(
+            @PathVariable(value = "wordlistMeaning") String wordlistMeaning,
+            @RequestParam(value="phoneme") String phoneme
+    ) {
+        WordList wl = WordListService.getWordlist(wordlistMeaning);
+        return wl.getPhonemeStats().get(phoneme);
     }
 }
 
