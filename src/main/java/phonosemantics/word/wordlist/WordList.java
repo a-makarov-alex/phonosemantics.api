@@ -31,8 +31,11 @@ public class WordList {
 
     private String meaning;
     private ArrayList<Word> list;
-    private HashMap<Object, PhTypeStats> phTypeStatsMap = new HashMap<>();
     private HashMap<String, PhonemeInTable.PhonemeStats> phonemeStats;
+    //TODO Deprecated
+    private HashMap<Object, PhTypeStats> phTypeStatsMap = new HashMap<>();
+    private HashMap<String, HashMap<Object, PhonemeInTable.DistFeatureStats>> distFeatureStats = new HashMap<>();
+    private HashMap<String, HashMap<Object, Integer>> numOfWordsWithFeatures;
     private int numOfWords;
     private int numOfPhonemes;
 
@@ -78,19 +81,45 @@ public class WordList {
                     numOfWords));
         }
 
-        //TODO если вписывать авторасчет статов для DistinctiveFeatures, то сюда
+        HashMap<String, HashMap<Object, Integer>> rawStats = this.calculateFeaturesStats("all");
+        for (Map.Entry<String, HashMap<Object, Integer>> highLevelEntry : rawStats.entrySet()) {
+            distFeatureStats.put(highLevelEntry.getKey(), new HashMap<>());
+
+            for (Map.Entry<Object, Integer> lowLevelEntry : highLevelEntry.getValue().entrySet()) {
+                int numOfWordsWithFeature = this.numOfWordsWithFeatures.get(highLevelEntry.getKey()).get(lowLevelEntry.getKey());
+
+                distFeatureStats.get(highLevelEntry.getKey()).put(
+                        lowLevelEntry.getKey(),
+                        new PhonemeInTable.DistFeatureStats(
+                                lowLevelEntry.getValue(),
+                                numOfWordsWithFeature,
+                                numOfPhonemes,
+                                numOfWords
+                        ));
+            }
+        }
     }
 
     public HashMap<String, HashMap<Object, Integer>> calculateFeaturesStats(String type) {
         userLogger.info("starting calculating Wordlist " + this.getMeaning() + "features stats");
         HashMap<String, HashMap<Object, Integer>> resultMap = DistinctiveFeatures.getFeaturesStructureDraft(type);
         HashMap<String, HashMap<Object, Integer>> bufferForWordStats;
+        numOfWordsWithFeatures = DistinctiveFeatures.getFeaturesStructureDraft(type);
+
+        // TODO подумать: можно создать ещё одну вложенную мапу, в которой сохранять количество признаков в КАЖДОМ слове, а не только слов с признаком
+        // TODO более продвинутый вариант - с сохранением структуры, чтобы знать где признак встречается в начале, где следует за другими признаками и т.д.
+        // TODO ещё надо сделать так, чтобы данные каждый раз не пересчитывались впустую заново
 
         for (Word w : this.getList()) {
             bufferForWordStats = w.countWordDistinctiveFeaturesStats(type);
 
             for (Map.Entry<String, HashMap<Object, Integer>> entryHighLevel : bufferForWordStats.entrySet()) {
                 for (Map.Entry<Object, Integer> entryLowLevel : entryHighLevel.getValue().entrySet()) {
+                    // Add 1 to the number of words with Dist Feature if it is found in the Word
+                    if (entryLowLevel.getValue() != 0) {
+                        Integer numOfWordsWithFeature = numOfWordsWithFeatures.get(entryHighLevel.getKey()).get(entryLowLevel.getKey());
+                        numOfWordsWithFeatures.get(entryHighLevel.getKey()).put(entryLowLevel.getKey(), numOfWordsWithFeature + 1);
+                    }
                     // Sum for "current value in the result map + value for current word"
                     Integer i = entryLowLevel.getValue() + resultMap.get(entryHighLevel.getKey()).get(entryLowLevel.getKey());
                     // Put the new sum to result map
@@ -249,6 +278,14 @@ public class WordList {
 
     public HashMap<String, PhonemeInTable.PhonemeStats> getPhonemeStats() {
         return phonemeStats;
+    }
+
+    public HashMap<String, HashMap<Object, PhonemeInTable.DistFeatureStats>> getDistFeatureStats() {
+        return distFeatureStats;
+    }
+
+    public HashMap<String, HashMap<Object, Integer>> getNumOfWordsWithFeatures() {
+        return numOfWordsWithFeatures;
     }
 
     public class PhTypeStats {

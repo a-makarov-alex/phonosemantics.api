@@ -70,7 +70,7 @@ public class PhonemeInTable {
         distFeatureStats.get("backness").put(df.getVowelSpace().getBackness(), 1);
         distFeatureStats.get("roundness").put(df.getVowelSpace().getRoundness(), 1);
 
-        //TODO other fileds
+        //TODO check if there are any other fileds
 
         return distFeatureStats;
     }
@@ -148,6 +148,54 @@ public class PhonemeInTable {
 
         public int getNumW() {
             return numW;
+        }
+
+        public int getNumAllPhonemes() {
+            return numAllPhonemes;
+        }
+
+        public int getNumAllWords() {
+            return numAllWords;
+        }
+    }
+
+    public static class DistFeatureStats {
+        private Double percentOfAllPhonemes;
+        private Double percentOfWordsWithFeature;
+        private Double averageFeatureInstancesPerWord;
+        private int numPhWithFeature;
+        private int numWordsWithFeature;
+        private int numAllPhonemes; //optional. already present in WordList
+        private int numAllWords; //optional. already present in WordList
+
+        public DistFeatureStats(int numFeat, int numW, int numAllPhonemes, int numAllWords) {
+            this.numPhWithFeature = numFeat;
+            this.numWordsWithFeature = numW;
+            this.numAllPhonemes = numAllPhonemes;
+            this.numAllWords = numAllWords;
+            percentOfAllPhonemes = (double)numFeat/(double)numAllPhonemes;
+            percentOfWordsWithFeature = (double)numW/(double)numAllWords;
+            averageFeatureInstancesPerWord = (double) numFeat/(double)numAllWords;
+        }
+
+        public Double getPercentOfAllPhonemes() {
+            return percentOfAllPhonemes;
+        }
+
+        public Double getPercentOfWordsWithFeature() {
+            return percentOfWordsWithFeature;
+        }
+
+        public Double getAverageFeatureInstancesPerWord() {
+            return averageFeatureInstancesPerWord;
+        }
+
+        public int getNumPhWithFeature() {
+            return numPhWithFeature;
+        }
+
+        public int getNumWordsWithFeature() {
+            return numWordsWithFeature;
         }
 
         public int getNumAllPhonemes() {

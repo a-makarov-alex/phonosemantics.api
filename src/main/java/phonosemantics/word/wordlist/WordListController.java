@@ -91,11 +91,24 @@ public class WordListController {
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/wordlists/{wordlistMeaning}/features/stats")
     // type available values: all / general / vowel / consonant
-    public HashMap<String, HashMap<Object, Integer>> getFeaturesStats(
+    public HashMap<String, HashMap<Object, PhonemeInTable.DistFeatureStats>> getFeaturesStats(
             @RequestParam(value="type") String type,
             @PathVariable(value = "wordlistMeaning") String wordlistMeaning) {
         WordList wl = WordListService.getWordlist(wordlistMeaning);
-        return wl.calculateFeaturesStats(type);
+
+        return wl.getDistFeatureStats();
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/wordlists/{wordlistMeaning}/features/wordswith")
+    // type available values: all / general / vowel / consonant
+    public HashMap<String, HashMap<Object, Integer>> getFeaturesWordsWith(
+            @RequestParam(value="type") String type,
+            @PathVariable(value = "wordlistMeaning") String wordlistMeaning) {
+        WordList wl = WordListService.getWordlist(wordlistMeaning);
+
+        return wl.getNumOfWordsWithFeatures();
     }
 }
 

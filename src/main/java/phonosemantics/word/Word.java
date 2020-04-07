@@ -169,20 +169,16 @@ public class Word {
     public HashMap<String, HashMap<Object, Integer>> countWordDistinctiveFeaturesStats(String type) {
         HashMap<String, HashMap<Object, Integer>> distFeaturesMap = DistinctiveFeatures.getFeaturesStructureDraft(type);
 
-        // Делаем рабочую мапу без иерархии
-        // HashMap<String, HashMap<Object, Integer>> ----> HashMap<Object, Integer>
         // TODO рефакторинг. Буфер вроде уже не нужен
         HashMap<Object, Integer> bufferMap = new HashMap<>();
         for (Map.Entry<String, HashMap<Object, Integer>> phTypeHigherLevel : distFeaturesMap.entrySet()) {
             for (Map.Entry<Object, Integer> phTypeEntity : phTypeHigherLevel.getValue().entrySet()) {
                 // Entity example: {true: 0} or {HIGH_MID: 0}
-                //bufferMap.put(phTypeEntity.getKey(), phTypeEntity.getValue());
-
                 // Get certain distinctive feature value from every word's phoneme
                 Integer sumForWord = 0;
+
                 for (String symbol : this.transcription) {
                     PhonemeInTable ph = PhonemesBank.getInstance().find(symbol);
-
                     // add 1 if phoneme has feature, add 0 if not
                     HashMap<String, HashMap<Object, Integer>> stats = ph.countPhonemeDistinctiveFeatureStats();
                     if (stats != null) {
@@ -191,7 +187,6 @@ public class Word {
 
                     }
                 }
-
                 phTypeEntity.setValue(sumForWord);
             }
         }
