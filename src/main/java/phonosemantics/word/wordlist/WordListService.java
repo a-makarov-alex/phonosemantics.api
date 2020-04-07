@@ -138,7 +138,8 @@ public class WordListService {
                 System.out.println();
             }
             inputStream.close();
-            return new WordList(list);
+            WordList wordList = new WordList(list);
+            return wordList;
 
         } catch (IOException e) {
             userLogger.error(e.toString());

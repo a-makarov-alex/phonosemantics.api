@@ -33,6 +33,8 @@ public class WordList {
     private ArrayList<Word> list;
     private HashMap<Object, PhTypeStats> phTypeStatsMap = new HashMap<>();
     private HashMap<String, PhonemeInTable.PhonemeStats> phonemeStats;
+    private int numOfWords;
+    private int numOfPhonemes;
 
     public WordList(ArrayList<Word> list) {
         this.meaning = list.get(0).getMeaning();
@@ -44,6 +46,11 @@ public class WordList {
             }
         }
         this.list = list;
+        this.numOfWords = list.size();
+        this.numOfPhonemes = 0;
+        for (Word w : list) {
+            numOfPhonemes += w.getTranscription().size();
+        }
 
         // Заполняем фонемМапу
         phonemeStats = new HashMap<>();
@@ -51,12 +58,10 @@ public class WordList {
             String currentPh = phoneme.getValue();
             int counterPh = 0;
             int counterW = 0;
-            int numOfAllPhonemes = 0;
-            int numOfAllWords = list.size();
+
             for (Word w : list) {
                 boolean wordIsCounted = false;
                 for (String ph : w.getTranscription()) {
-                    numOfAllPhonemes++;
                     if (ph.equals(currentPh)) {
                         counterPh++;
                         wordIsCounted = true;
@@ -69,9 +74,11 @@ public class WordList {
             phonemeStats.put(phoneme.getValue(), new PhonemeInTable.PhonemeStats(
                     counterPh,
                     counterW,
-                    numOfAllPhonemes,
-                    numOfAllWords));
+                    numOfPhonemes,
+                    numOfWords));
         }
+
+        //TODO если вписывать авторасчет статов для DistinctiveFeatures, то сюда
     }
 
     public HashMap<String, HashMap<Object, Integer>> calculateFeaturesStats(String type) {
@@ -230,6 +237,14 @@ public class WordList {
 
     public HashMap<Object, PhTypeStats> getPhTypeStatsMap() {
         return phTypeStatsMap;
+    }
+
+    public int getNumOfWords() {
+        return numOfWords;
+    }
+
+    public int getNumOfPhonemes() {
+        return numOfPhonemes;
     }
 
     public HashMap<String, PhonemeInTable.PhonemeStats> getPhonemeStats() {

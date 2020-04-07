@@ -6,6 +6,7 @@ import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 @RestController
@@ -63,12 +64,38 @@ public class WordListController {
      * **/
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/wordlists/{wordlistMeaning}/phonemes/stats")
-    public PhonemeInTable.PhonemeStats getPhonemeStats(
+    public PhonemeInTable.PhonemeStats getPhonemeRaw(
             @PathVariable(value = "wordlistMeaning") String wordlistMeaning,
             @RequestParam(value="phoneme") String phoneme
     ) {
         WordList wl = WordListService.getWordlist(wordlistMeaning);
         return wl.getPhonemeStats().get(phoneme);
+    }
+
+    /**
+     * GETTING A RAW FEATURE STATS FOR A CERTAIN WORDLIST
+     * **/
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/wordlists/{wordlistMeaning}/features/raw")
+    // type available values: all / general / vowel / consonant
+    public HashMap<String, HashMap<Object, Integer>> getFeaturesRaw(
+            @RequestParam(value="type") String type,
+            @PathVariable(value = "wordlistMeaning") String wordlistMeaning) {
+        WordList wl = WordListService.getWordlist(wordlistMeaning);
+        return wl.calculateFeaturesStats(type);
+    }
+
+    /**
+     * GETTING FEATURES STATS FOR A CERTAIN WORDLIST
+     * **/
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/wordlists/{wordlistMeaning}/features/stats")
+    // type available values: all / general / vowel / consonant
+    public HashMap<String, HashMap<Object, Integer>> getFeaturesStats(
+            @RequestParam(value="type") String type,
+            @PathVariable(value = "wordlistMeaning") String wordlistMeaning) {
+        WordList wl = WordListService.getWordlist(wordlistMeaning);
+        return wl.calculateFeaturesStats(type);
     }
 }
 

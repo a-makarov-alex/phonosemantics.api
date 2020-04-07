@@ -117,8 +117,8 @@ public class PhonemeInTable {
         private Double averagePhonemesPerWord;
         private int numPh;
         private int numW;
-        private int numAllPhonemes;
-        private int numAllWords;
+        private int numAllPhonemes; //optional. already present in WordList
+        private int numAllWords; //optional. already present in WordList
 
         public PhonemeStats(int numPh, int numW, int numAllPhonemes, int numAllWords) {
             this.numPh = numPh;

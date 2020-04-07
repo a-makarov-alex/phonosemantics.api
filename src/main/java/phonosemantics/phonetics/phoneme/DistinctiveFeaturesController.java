@@ -25,14 +25,4 @@ public class DistinctiveFeaturesController {
     public HashMap<String, HashMap<Object, Integer>> getFeaturesStatsDraft(@PathVariable(value="type") String type) {
         return DistinctiveFeatures.getFeaturesStructureDraft(type);
     }
-
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/features/{type}/stats")
-    // type available values: all / general / vowel / consonant
-    public HashMap<String, HashMap<Object, Integer>> getFeaturesStats(
-            @PathVariable(value="type") String type,
-            @RequestParam(value = "wordlistWeaning") String wordlistWeaning) {
-        WordList wl = WordListService.getWordlist(wordlistWeaning);
-        return wl.calculateFeaturesStats(type);
-    }
 }

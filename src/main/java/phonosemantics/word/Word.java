@@ -164,83 +164,6 @@ public class Word {
 
 
     /**
-     * BUNCH OF METHODS TO COUNT PHONOTYPES
-     **/
-//    public int countPhonotype(Object object) {
-//        Class objClass = object.getClass();
-//
-//        if (objClass.equals(SoundsBank.MannerApproximate.class)) {
-//            return countConsPhonotypeBy(cons -> cons.getMannerApproximate().equals((SoundsBank.MannerApproximate) object));
-//        } else if (objClass.equals(SoundsBank.MannerPricise.class)) {
-//            if (object.equals(LoggerConfig.CONSOLE_SHOW_WORDS_OF_CLASS)) {
-//                System.out.print("Manner Precise :   ");
-//            }
-//            return countConsPhonotypeBy(cons -> cons.getMannerPricise().equals((SoundsBank.MannerPricise) object));
-//        } else if (objClass.equals(SoundsBank.Phonation.class)) {
-//            return countConsPhonotypeBy(cons -> cons.isVoiced().equals((SoundsBank.Phonation) object));
-//        }
-
-        //* ************************** VOWELS **********************************//
-//        else if (objClass.equals(SoundsBank.Height.class)) {
-//            if (object.equals(LoggerConfig.CONSOLE_SHOW_WORDS_OF_CLASS)) {
-//                System.out.print("Height :   ");
-//            }
-//            return countVowPhonotypeBy(vow -> vow.getHeight().equals((SoundsBank.Height) object));
-//        } else if (objClass.equals(SoundsBank.Backness.class)) {
-//            return countVowPhonotypeBy(vow -> vow.getBackness().equals((SoundsBank.Backness) object));
-//        } else if (objClass.equals(SoundsBank.Roundness.class)) {
-//            if (object.equals(LoggerConfig.CONSOLE_SHOW_WORDS_OF_CLASS)) {
-//                System.out.print("Roundness :   ");
-//            }
-//            return countVowPhonotypeBy(vow -> vow.isRoundedness().equals((SoundsBank.Roundness) object));
-//        } else if (objClass.equals(SoundsBank.Nasalization.class)) {
-//            if (object.equals(LoggerConfig.CONSOLE_SHOW_WORDS_OF_CLASS)) {
-//                System.out.print("Nasalization :   ");
-//            }
-//            return countVowPhonotypeBy(vow -> vow.isNasalization().equals((SoundsBank.Nasalization) object));
-//        } else {
-//            return 0;
-//        }
-//    }
-//
-//    /**
-//     * The main methods for counting phonotype instances in the graphicForm
-//     **/
-//    private int countConsPhonotypeBy(Predicate<Consonant> p) {
-//        int count = 0;
-//        for (String symb : this.transcription) {
-//            Phoneme ph = SoundsBank.getInstance().find(symb);
-//            if (ph != null) {
-//                if (ph.getClass().equals(Consonant.class)) {
-//                    Consonant cons = (Consonant) ph;
-//                    if (p.test(cons)) {
-//                        count++;
-//                    }
-//                }
-//            }
-//        }
-//        return count;
-//    }
-//
-//    private int countVowPhonotypeBy(Predicate<Vowel> p) {
-//        int count = 0;
-//        for (String symb : this.transcription) {
-//            Phoneme ph = SoundsBank.getInstance().find(symb);
-//            if (ph != null) {
-//                if (ph.getClass().equals(Vowel.class)) {
-//                    Vowel vow = (Vowel) ph;
-//                    if (p.test(vow)) {
-//                        count++;
-//                    }
-//                }
-//            } else {
-//                //System.out.println(this.getGraphicForm());
-//            }
-//        }
-//        return count;
-//    }
-
-    /**
      * RETURNS SUM OF EVERY DISTINCTIVE FEATURE FOR A CERTAIN WORD
      */
     public HashMap<String, HashMap<Object, Integer>> countWordDistinctiveFeaturesStats(String type) {
@@ -272,10 +195,6 @@ public class Word {
                 phTypeEntity.setValue(sumForWord);
             }
         }
-
-
-
-
         return distFeaturesMap;
     }
 
