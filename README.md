@@ -8,8 +8,11 @@ OR get API json: http://localhost:8083/v2/api-docs
 
 TODO:
 
-1. PhonemesBank ---> getAllPhonemesList комменты удалить
-2. getFeaturesStats создавать вордлисты, считать статы по каждому слову
+1. Округлять проценты до 0.111, т.е. 11,1%
+2. Выяснить куда деваются фонемы: в вордлисте leaf 144 фонемы, из которых рассчитываются 139. Возможно, остальные unrecognized
+
+
+
 3. повторный getLanguage заново пересчитывает calculatePhType
 
 

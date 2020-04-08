@@ -73,20 +73,9 @@ public class WordListController {
     }
 
     /**
-     * GETTING A RAW FEATURE STATS FOR A CERTAIN WORDLIST
-     * **/
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/wordlists/{wordlistMeaning}/features/raw")
-    // type available values: all / general / vowel / consonant
-    public HashMap<String, HashMap<Object, Integer>> getFeaturesRaw(
-            @RequestParam(value="type") String type,
-            @PathVariable(value = "wordlistMeaning") String wordlistMeaning) {
-        WordList wl = WordListService.getWordlist(wordlistMeaning);
-        return wl.calculateFeaturesStats(type);
-    }
-
-    /**
      * GETTING FEATURES STATS FOR A CERTAIN WORDLIST
+     *
+     * how to get raw "number of feature instances" --> wl.calculateFeaturesStats(type)
      * **/
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/wordlists/{wordlistMeaning}/features/stats")
@@ -97,18 +86,6 @@ public class WordListController {
         WordList wl = WordListService.getWordlist(wordlistMeaning);
 
         return wl.getDistFeatureStats();
-    }
-
-
-    @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/wordlists/{wordlistMeaning}/features/wordswith")
-    // type available values: all / general / vowel / consonant
-    public HashMap<String, HashMap<Object, Integer>> getFeaturesWordsWith(
-            @RequestParam(value="type") String type,
-            @PathVariable(value = "wordlistMeaning") String wordlistMeaning) {
-        WordList wl = WordListService.getWordlist(wordlistMeaning);
-
-        return wl.getNumOfWordsWithFeatures();
     }
 }
 
