@@ -90,7 +90,7 @@ public class DistinctiveFeatures {
         this.vowelSpace = new VowelSpace(height, backness, roundness);
     }
 
-    class MajorClass {
+    public class MajorClass {
         // TODO: свойства вычисляются из manner precise
         //private boolean syllabic; can not be done cause depends on context (consonants)
 
@@ -316,7 +316,7 @@ public class DistinctiveFeatures {
         }
     }
 
-    class Place {
+    public class Place {
         private PlaceApproximate placeApproximate;
         private PlacePrecise placePrecise;
 
@@ -358,7 +358,7 @@ public class DistinctiveFeatures {
         }
     }
 
-    class VowelSpace {
+    public class VowelSpace {
         private Height height;
         private Backness backness;
         private Roundness roundness;

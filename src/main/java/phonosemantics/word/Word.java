@@ -23,7 +23,7 @@ public class Word {
     private ArrayList<String> transcription;    //phoneme may be find by PhonemesBank -> find(String phoneme)
     private String meaning;                     // the same. Meaning --> find(String meaning)
     private String language;    // need to find language using Language --> find(String language)
-    private int length = 0;
+    private int length;
     private PartOfSpeech partOfSpeech;  // TODO think about shifting field to meaning
 
     public enum PartOfSpeech {
@@ -158,7 +158,7 @@ public class Word {
 
     // Увеличивает как счетчик длины конкретного слова, так и сумму ВСЕХ фонем в исследовании
     private void incrementLength() {
-        this.length += 1;
+        this.length += 1;   // это можно упростить, просто сделав transcription.size() когда она создана
         Statistics.incrementNumOfAllPhonemes();
     }
 
@@ -191,6 +191,63 @@ public class Word {
             }
         }
         return distFeaturesMap;
+    }
+
+
+    public Object[] getArticulationPattern(String base) {
+        // TODO: тестовый фрагмент
+        String str = "->";
+        for (String s : this.getTranscription()) {
+            str += s;
+        }
+        userLogger.info("transcription " + str);
+        //**********************************************//
+
+        Object[] pattern = new Object[this.transcription.size()];
+
+        for (int i = 0; i < this.transcription.size(); i++) {
+            PhonemeInTable ph = PhonemesBank.getInstance().find(transcription.get(i));
+            if (ph == null) {
+                userLogger.info("Unknown phoneme " + transcription.get(i) + " in transcription for word " + this.getGraphicForm());
+                return null;
+            }
+
+            if (ph.getDistinctiveFeatures() == null) {
+                userLogger.info("Distinctive features are not specified: " + ph.getValue() + " phoneme");
+                pattern[i] = "NO_INFO";
+            } else {
+                switch (base.toLowerCase()) {
+                    // Major Class
+                    case "vocoid" : { pattern[i] = ph.getDistinctiveFeatures().getMajorClass().isVocoid(); break; }
+                    case "approximant" : { pattern[i] = ph.getDistinctiveFeatures().getMajorClass().isApproximant(); break; }
+                    // Manner
+                    case "mannerprecise" : { pattern[i] = ph.getDistinctiveFeatures().getManner().getMannerPrecise(); break; }
+                    case "stricture" : { pattern[i] = ph.getDistinctiveFeatures().getManner().getStricture(); break; }
+                    case "sonorant" : { pattern[i] = ph.getDistinctiveFeatures().getManner().isSonorant(); break; }
+                    case "continuant" : { pattern[i] = ph.getDistinctiveFeatures().getManner().isContinuant(); break; }
+                    case "nasal" : { pattern[i] = ph.getDistinctiveFeatures().getManner().isNasal(); break; }
+                    case "strident" : { pattern[i] = ph.getDistinctiveFeatures().getManner().getStrident(); break; }
+                    case "sibilant" : { pattern[i] = ph.getDistinctiveFeatures().getManner().getSibilant(); break; }
+                    case "semivowel" : { pattern[i] = ph.getDistinctiveFeatures().getManner().getSemivowel(); break; }
+                    case "lateral" : { pattern[i] = ph.getDistinctiveFeatures().getManner().getLateral(); break; }
+                    case "rhotics" : { pattern[i] = ph.getDistinctiveFeatures().getManner().getRhotics(); break; }
+                    case "voiced" : { pattern[i] = ph.getDistinctiveFeatures().getManner().isVoiced(); break; }
+                    // Place
+                    case "placeapproximate" : { pattern[i] = ph.getDistinctiveFeatures().getPlace().getPlaceApproximate(); break; }
+                    case "placeprecise" : { pattern[i] = ph.getDistinctiveFeatures().getPlace().getPlacePrecise(); break; }
+                    // Vowel Space
+                    case "height" : { pattern[i] = ph.getDistinctiveFeatures().getVowelSpace().getHeight(); break; }
+                    case "backness" : { pattern[i] = ph.getDistinctiveFeatures().getVowelSpace().getBackness(); break; }
+                    case "roundness" : { pattern[i] = ph.getDistinctiveFeatures().getVowelSpace().getRoundness(); break; }
+
+                    default : {
+                        userLogger.info("base " + base + " has not proper value for getting articulation pattern");
+                        break;
+                    }
+                }
+            }
+        }
+        return pattern;
     }
 
     /**
