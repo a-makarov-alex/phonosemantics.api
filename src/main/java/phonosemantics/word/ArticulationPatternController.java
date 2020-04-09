@@ -2,8 +2,10 @@ package phonosemantics.word;
 
 import org.springframework.web.bind.annotation.*;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
+import phonosemantics.word.wordlist.WordList;
 import phonosemantics.word.wordlist.WordListService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,17 +23,17 @@ public class ArticulationPatternController {
      * GETTING WORD ARTICULATION PATTERNS (1 WORD, ALL PATTERNS)
      * **/
     @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/words/patterns")
-    public HashMap<String, Object[]> getAllArticulationPatternsForWord(
+    @GetMapping("/patterns/words")
+    public HashMap<String, ArticulationPattern> getAllArticulationPatternsForWord(
             @RequestParam(value = "language") String language,
             @RequestParam(value = "meaning") String meaning
     ) {
         HashMap<String, Object[]> distFeaturesDraft = DistinctiveFeatures.getFeaturesForAPI("all");
-        HashMap<String, Object[]> articulationPatternMap = new HashMap<>();
+        HashMap<String, ArticulationPattern> articulationPatternMap = new HashMap<>();
         Word word = Word.getWord(language, meaning);
 
         for (Map.Entry<String, Object[]> entry : distFeaturesDraft.entrySet()) {
-            Object[] pattern = word.getArticulationPattern(entry.getKey());
+            ArticulationPattern pattern = word.getArticulationPattern(entry.getKey());
             articulationPatternMap.put(entry.getKey(), pattern);
         }
         return articulationPatternMap;
@@ -41,8 +43,8 @@ public class ArticulationPatternController {
      * GETTING WORD ARTICULATION PATTERN (1 WORD, 1 PATTERN)
      * **/
     @CrossOrigin(origins = "http://localhost:8080")
-    @GetMapping("/words/patterns/{patternBase}")
-    public Object[] getOneArticulationPatternForWord(
+    @GetMapping("patterns/{patternBase}/words")
+    public ArticulationPattern getOneArticulationPatternForWord(
             @PathVariable(value= "patternBase") String patternBase,
             @RequestParam(value = "language") String language,
             @RequestParam(value = "meaning") String meaning
@@ -50,4 +52,24 @@ public class ArticulationPatternController {
         Word word = Word.getWord(language, meaning);
         return word.getArticulationPattern(patternBase);
     }
+
+
+    /**
+     * GETTING WORDLIST ARTICULATION PATTERN (1 WORDLIST, 1 PATTERN)
+     * **/
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("patterns/{patternBase}/wordlists")
+    public ArticulationPattern[] getOneArticulationPatternForWordlist(
+            @PathVariable(value= "patternBase") String patternBase,
+            @RequestParam(value = "meaning") String meaning
+    ) {
+        ArrayList<Word> wList = WordListService.getWordlist(meaning).getList();
+        ArticulationPattern[] arrPatterns = new ArticulationPattern[wList.size()];
+
+        for (int i = 0; i < wList.size(); i++) {
+            arrPatterns[i] = wList.get(i).getArticulationPattern(patternBase);
+        }
+        return arrPatterns;
+    }
+
 }

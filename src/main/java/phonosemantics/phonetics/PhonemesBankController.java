@@ -2,10 +2,12 @@ package phonosemantics.phonetics;
 
 import org.springframework.web.bind.annotation.*;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
+import phonosemantics.statistics.Statistics;
 import phonosemantics.word.wordlist.WordList;
 import phonosemantics.word.wordlist.WordListService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api")
@@ -36,4 +38,15 @@ public class PhonemesBankController {
         return null;
     }
 
+
+    /**
+     * GETTING UNKNOWN PHONEMES
+     * ugly path, but phonemes/{phoneme} is already taken
+     * **/
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/phonemes/unknown/all")
+    public HashMap<String, Integer> getUnknownPhonemes() {
+        HashMap<String, Integer> unknownhonemes = Statistics.getUnknownPhonemes();
+        return unknownhonemes;
+    }
 }
