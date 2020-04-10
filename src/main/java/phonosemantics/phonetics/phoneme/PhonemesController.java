@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import phonosemantics.output.header.Header;
 import phonosemantics.output.header.HeadersForUI;
 import phonosemantics.phonetics.PhonemesBank;
-import phonosemantics.word.wordlist.WordList;
-import phonosemantics.word.wordlist.WordListService;
 
 import java.util.ArrayList;
 
@@ -19,7 +17,7 @@ public class PhonemesController {
     // returns only phonemes that are recognized by phonemes bank
     // type available values: all / vowel / consonant
     public ArrayList<PhonemeInTable> getPhonemesCoverage(@PathVariable(value="type") String type){
-        return PhonemesBank.getInstance().getAllPhonemesList(type);
+        return PhonemesBank.getInstance().getPhonemesListForTableUI(type);
     }
 
     @CrossOrigin(origins = "http://localhost:8080")
@@ -27,7 +25,7 @@ public class PhonemesController {
     // returns all phonemes and blank cells that are needed to draw a table on UI
     // type available values: vowel / consonant
     public ArrayList<PhonemeInTable> getPhonemesCoverageForTable(@PathVariable(value="type") String type){
-        return PhonemesBank.getInstance().getPhonemesForTable(type);
+        return PhonemesBank.getInstance().getPhonemesForTableUI(type);
     }
 
     @CrossOrigin(origins = "http://localhost:8080")

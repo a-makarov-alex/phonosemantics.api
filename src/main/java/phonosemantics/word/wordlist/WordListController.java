@@ -1,7 +1,6 @@
 package phonosemantics.word.wordlist;
 
 import org.springframework.web.bind.annotation.*;
-import phonosemantics.App;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 
@@ -55,8 +54,7 @@ public class WordListController {
     @GetMapping("/wordlists/{wordlistMeaning}/phonemes")
     public ArrayList<PhonemeInTable> getPhonemesCoverageForWordlist(@PathVariable(value="wordlistMeaning") String wordlistMeaning) {
         WordList wrdl = WordListService.getWordlist(wordlistMeaning);
-
-        return PhonemesBank.getInstance().getAllPhonemesList(wrdl);
+        return PhonemesBank.getInstance().getPhonemesListForTableUI(wrdl);
     }
 
     /**

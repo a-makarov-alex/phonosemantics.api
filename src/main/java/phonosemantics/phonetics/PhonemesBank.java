@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import org.apache.poi.ss.usermodel.*;
-import org.graalvm.compiler.hotspot.nodes.PluginFactory_JumpToExceptionHandlerNode;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.MannerPrecise;
@@ -19,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class PhonemesBank {
@@ -27,12 +27,15 @@ public class PhonemesBank {
     //путь к шаблону всех согласных фонем
     public static final String INPUT_FILE_PATH = "./src/main/java/phonosemantics/input/PhonemesCoverageExample.xlsx";
 
-    private HashMap<String, DistinctiveFeatures> allPhonemes;
+    private static final CoverageSheet VOWELS_SHEET = new CoverageSheet(createWorkbook(INPUT_FILE_PATH).getSheetAt(0), 2, 8, 1, 6);
+    private static final CoverageSheet CONSONANTS_SHEET = new CoverageSheet(createWorkbook(INPUT_FILE_PATH).getSheetAt(1), 2, 14, 1, 24);
 
-    private ArrayList<PhonemeInTable> allPhonemesNew; // use this field only through getAllPhonemesList() method
-    private ArrayList<PhonemeInTable> getAllPhonemesForTable = new ArrayList<>();
+    private HashMap<String, PhonemeInTable> allPhonemes;
+
+    private ArrayList<PhonemeInTable> allPhonemesForTableUI; // use this field only through getPhonemesListForTableUI() method
     private ArrayList<PhonemeInTable> vowelsForTable;   //вынужденная мера
     private ArrayList<PhonemeInTable> consonantsForTable; //вынужденная мера
+
 
     /***************************  SINGLETON ************************/
     private static PhonemesBank instance;
@@ -47,14 +50,38 @@ public class PhonemesBank {
 
     /*************************** CONSTRUCTOR ************************/
     public PhonemesBank() {
-        this.allPhonemes = new HashMap<>();
-        addConsonants();
-        addVowels();
+        // TODO - заполнить final map
+        // 1. найти фонемы в файле и записать их в ArrayList для UI таблицы (там не подходит HashMap из-за уникальности ключей)
+        // 2. скопировать все реальные фонемы из ArrayList в HashMap<String, PhonemeInTable>
+        // 3. добавить к фонемам в HashMap значения DistFeatures
+        // 4. добавить ендпойнт для проверки, где остались пустые DistFeatures
+
+        allPhonemesForTableUI = createAllPhonemesList();
+        allPhonemes = copyAllPhonemesToHashMap();
+        addDistinctiveFeaturesForAllPhonemes();
+
         // TODO all the affricates
         // TODO all the diacritics
     }
 
-    private void addConsonants() {
+    /**
+     * Получение объекта Workbook по указанному пути расположения файла Excel
+     * **/
+    private static Workbook createWorkbook(String path) {
+        try {
+            InputStream inputStream = new FileInputStream(path);
+            Workbook wb = WorkbookFactory.create(inputStream);
+            inputStream.close();
+            return wb;
+        } catch (IOException e) {
+            userLogger.error("PhonemesCoverageFile can not be opened: " + e.toString());
+            return null;
+        }
+    }
+
+    private HashMap<String, DistinctiveFeatures> getAllConsonantsFeatures() {
+        HashMap<String, DistinctiveFeatures> allPhonemes = new HashMap<>();
+
         // consonants
         // STOPS
         allPhonemes.put("p", new DistinctiveFeatures(MannerPrecise.PLOSIVE, false, PlacePrecise.BILABIAL));
@@ -138,16 +165,18 @@ public class PhonemesBank {
         allPhonemes.put("d̠ʒ", new DistinctiveFeatures(MannerPrecise.AFFRICATE, true, PlacePrecise.POSTALVEOLAR, Sibilant.SIBILANT));
 
         userLogger.info("consonants map is filled up");
+        return allPhonemes;
     }
 
-    private void addVowels() {
+
+    private HashMap<String, DistinctiveFeatures> getAllVowelsFeatures() {
         // HOW TO GET UNICODE IF NEEDED
         /*String e = "ẽ";
         for (int i = 0; i < e.length(); i++) {
             System.out.print( "\\u" + Integer.toHexString(e.charAt(i) | 0x10000).substring(1));
             System.out.print(" ");
         }*/
-
+        HashMap<String, DistinctiveFeatures> allPhonemes = new HashMap<>();
 
         //vowels
         //front
@@ -190,6 +219,7 @@ public class PhonemesBank {
         allPhonemes.put("ɒ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN, Backness.BACK, Roundness.ROUNDED));
 
         userLogger.info("vowels map is filled up");
+        return allPhonemes;
     }
 
     private void addAffricates() {
@@ -204,25 +234,21 @@ public class PhonemesBank {
         userLogger.info("affricates map is filled up");
     }
 
-    /*public DistinctiveFeatures find(String requestedSymbol) {
-        return allPhonemes.get(requestedSymbol);
-    }*/
-
-    public DistinctiveFeatures findInObsoleteMap(String requestedSymbol) {
-        requestedSymbol = requestedSymbol.toLowerCase();
-        return allPhonemes.get(requestedSymbol);
-    }
-
+    /**
+     *  FIND PHONEME IN THE HASHMAP WITH ALL PHONEMES
+     * **/
     public PhonemeInTable find(String requestedSymbol) {
         requestedSymbol = requestedSymbol.toLowerCase();
-        for (PhonemeInTable ph : getAllPhonemesList()) {
-            if (ph.getValue().equals(requestedSymbol.toLowerCase())) {
-                return ph;
-            }
+        PhonemeInTable ph = allPhonemes.get(requestedSymbol);
+        if (ph != null) {
+            return ph;
         }
         return null;
     }
 
+    /**
+     * CHECK IF REQUESTED SYMBOL IS A SPECIAL SYMBOL BUT NOT A PHONEME
+     * **/
     public static boolean isExtraSign(String symbol) {
         String[] symbols = {
                 ".", ",", "-", "=", "˗"
@@ -242,7 +268,7 @@ public class PhonemesBank {
      * ПОЛУЧЕНИЕ СПИСКА ФОНЕМ ДЛЯ ФОРМИРОВАНИЯ ТАБЛИЦЫ НА UI
      * ВКЛЮЧАЕТ В СЕБЯ РАСПОЗНАННЫЕ ФОНЕМЫ, НЕРАСПОЗНАННЫЕ ФОНЕМЫ, КООРДИНАТЫ ПУСТЫХ ЯЧЕЕК
      * **/
-    public ArrayList<PhonemeInTable> getPhonemesForTable(String type) {
+    public ArrayList<PhonemeInTable> getPhonemesForTableUI(String type) {
         if (vowelsForTable != null && type.toLowerCase().equals("vowel")) {
             return vowelsForTable;
         } else {
@@ -250,45 +276,33 @@ public class PhonemesBank {
                 return consonantsForTable;
             }
         }
-
-        Workbook wb = null;
-        try {
-            InputStream inputStream = new FileInputStream(INPUT_FILE_PATH);
-            wb = WorkbookFactory.create(inputStream);
-            inputStream.close();
-
-            CoverageSheet sheet = null;
-
-            switch (type.toLowerCase()) {
-                case "vowel" : {
-                    sheet = new CoverageSheet(wb.getSheetAt(0), 2, 8, 1, 6);
-                    userLogger.info("extracting vowels for table");
-                    break;
-                }
-                case "consonant" : {
-                    sheet = new CoverageSheet(wb.getSheetAt(1), 2, 14, 1, 24);
-                    userLogger.info("extracting consonants for table");
-                    break;
-                }
-                default : {
-                    userLogger.info("request parameter has an invalid value");
-                    return null;
-                }
+        CoverageSheet sheet = null;
+        switch (type.toLowerCase()) {
+            case "vowel" : {
+                sheet = VOWELS_SHEET;
+                userLogger.info("extracting vowels for table");
+                break;
             }
-            return extractAllPhonemesFromFile(sheet);
-
-        } catch (IOException e) {
-            userLogger.error(e.toString());
-            return null;
+            case "consonant" : {
+                sheet = CONSONANTS_SHEET;
+                userLogger.info("extracting consonants for table");
+                break;
+            }
+            default : {
+                userLogger.info("request parameter has an invalid value");
+                return null;
+            }
         }
+        ArrayList<PhonemeInTable> resultList = new ArrayList<>();
+        return extractAllPhonemesFromFile(sheet, resultList);
     }
 
 
     /**
      *   ДИНАМИЧЕСКИЕ ДАННЫЕ (статистика по Wordlist)
      */
-    public ArrayList<PhonemeInTable> getAllPhonemesList(WordList wl) {
-        ArrayList<PhonemeInTable> phList = this.getAllPhonemesList();
+    public ArrayList<PhonemeInTable> getPhonemesListForTableUI(WordList wl) {
+        ArrayList<PhonemeInTable> phList = this.getPhonemesListForTableUI();
         for (PhonemeInTable ph : phList) {
             ph.setPhonemeStats(wl.getPhonemeStats().get(ph.getValue()));
         }
@@ -301,31 +315,20 @@ public class PhonemesBank {
      *  СТАТИЧЕСКИЕ ДАННЫЕ
      *  Condition:  vowel / consonant
      * **/
-    public ArrayList<PhonemeInTable> getAllPhonemesList() {
-        return getAllPhonemesList("all");
+    public ArrayList<PhonemeInTable> getPhonemesListForTableUI() {
+        return getPhonemesListForTableUI("all");
     }
 
-    public ArrayList<PhonemeInTable> getAllPhonemesList(String condition) {
-        if (allPhonemesNew == null) {
-            createAllPhonemesList();
-        }
-
+    public ArrayList<PhonemeInTable> getPhonemesListForTableUI(String condition) {
         if (condition.equals("all")) {
-            return allPhonemesNew;
+            return allPhonemesForTableUI;
         }
 
         ArrayList<PhonemeInTable> list = new ArrayList<>();
 
         switch (condition.toLowerCase()) {
             case "vowel" : {
-                /*for (PhonemeInTable ph : getAllPhonemesList()) {
-                    if (ph.getDistinctiveFeatures() != null) {
-                        if (ph.getDistinctiveFeatures().getManner().getMannerPrecise() == MannerPrecise.VOWEL) {
-                            list.add(ph);
-                        }
-                    }*/
-                // TODO так должно быть проще. проверить
-                for (PhonemeInTable ph : getPhonemesForTable("vowel")) {
+                for (PhonemeInTable ph : getPhonemesForTableUI("vowel")) {
                     if (!ph.getValue().equals("")) {
                         list.add(ph);
                     }
@@ -334,7 +337,7 @@ public class PhonemesBank {
                 return list;
             }
             case "consonant" : {
-                for (PhonemeInTable ph : getPhonemesForTable("consonant")) {
+                for (PhonemeInTable ph : getPhonemesForTableUI("consonant")) {
                     if (!ph.getValue().equals("")) {
                         list.add(ph);
                     }
@@ -349,54 +352,41 @@ public class PhonemesBank {
         }
     }
 
-    private void createAllPhonemesList() {
-        userLogger.info("extracting phonemes list from input file");
-        allPhonemesNew = new ArrayList<>();
-        try {
-            InputStream inputStream = new FileInputStream(INPUT_FILE_PATH);
-            Workbook wb = WorkbookFactory.create(inputStream);
-            inputStream.close();
+    private ArrayList<PhonemeInTable> createAllPhonemesList() {
+        // Check constructor for more info
+        userLogger.info("extracting all phonemes list from input file");
+        ArrayList<PhonemeInTable> resultList = new ArrayList<>();
 
-            userLogger.info("extracting vowels");
-            CoverageSheet vowelSheet = new CoverageSheet(wb.getSheetAt(0), 2, 8, 1, 6);
-            extractAllPhonemesFromFile(vowelSheet);
+        userLogger.info("extracting vowels");
+        extractAllPhonemesFromFile(VOWELS_SHEET, resultList);
 
-            userLogger.info("extracting consonants");
-            CoverageSheet consonantSheet = new CoverageSheet(wb.getSheetAt(1), 2, 14, 1, 24);
-            extractAllPhonemesFromFile(consonantSheet);
-            userLogger.info("cons num: " + allPhonemesNew.size());
-        } catch (IOException e) {
-            userLogger.error(e.toString());
-        }
+        userLogger.info("extracting consonants");
+        extractAllPhonemesFromFile(CONSONANTS_SHEET, resultList);
+        return resultList;
     }
 
-    private ArrayList<PhonemeInTable> extractAllPhonemesFromFile(CoverageSheet sheet) {
-        ArrayList<PhonemeInTable> resultList = new ArrayList<>();
+
+    /**
+     * ДЛЯ ТАБЛИЦЫ НА UI НЕЛЬЗЯ ИСПОЛЬЗОВАТЬ HASHMAP, ТАК КАК ТАМ УНИКАЛЬНЫЕ КЛЮЧИ, А НАМ НУЖНЫ ВСЕ ДАННЫЕ О ПУСТЫХ ЯЧЕЙКАХ
+     * **/
+    private ArrayList<PhonemeInTable> extractAllPhonemesFromFile(CoverageSheet sheet, ArrayList<PhonemeInTable> resultList) {
 
         for (int i = sheet.firstRow; i <= sheet.lastRow; i++) {
             Row r = sheet.sheet.getRow(i);
             for (int j = sheet.firstCol; j <= sheet.lastCol; j++) {
                 Cell c = r.getCell(j);
+
+                /* *********** FOR BLANK CELLS **************/
                 if (c == null) {
-                    // only for empty cells in table
                     resultList.add(new PhonemeInTable("", i, j));
                 }
                 else {
                     if (c.getStringCellValue().equals("")) {
-                        // only for empty cells in table
                         resultList.add(new PhonemeInTable("", i, j));
+
+                        /* ************ FOR REAL PHONEMES *************/
                     } else {
-                        // for real phonemes
                         PhonemeInTable ph = new PhonemeInTable(c.getStringCellValue(), i, j);
-                        DistinctiveFeatures df = this.findInObsoleteMap(c.getStringCellValue());
-                        if (df != null) {
-                            ph.setRecognized(true);
-                            ph.setDistinctiveFeatures(df);
-                        }
-                        // Method is called from different other methods, so there might be duplicates
-                        if (!allPhonemesNew.contains(ph)) {
-                            allPhonemesNew.add(ph);
-                        }
                         resultList.add(ph);
                     }
                 }
@@ -404,6 +394,54 @@ public class PhonemesBank {
         }
         userLogger.info("extracting is finished successfully");
         return resultList;
+    }
+
+
+    private HashMap<String, PhonemeInTable> copyAllPhonemesToHashMap() {
+        // Check constructor for more information
+        HashMap<String, PhonemeInTable> resultMap = new HashMap<>();
+        userLogger.info("copying phonemes to HashMap started");
+
+        for (PhonemeInTable ph : allPhonemesForTableUI) {
+            if (ph.getValue() != "") {
+                resultMap.put(ph.getValue(), ph);
+            }
+        }
+        userLogger.info("copying phonemes to HashMap finished successfully");
+        return resultMap;
+    }
+
+
+    /**
+     * ДОБАВЛЯЕТ ВАЛИДНОЕ ЗНАЧЕНИЕ ПОЛЯ DISTINCTIVE FEATURES КАК ДЛЯ ARRAYLIST, ТАК И ДЛЯ HASHMAP
+     */
+    private void addDistinctiveFeaturesForAllPhonemes() {
+        HashMap<String, DistinctiveFeatures> buffer;
+
+        buffer = getAllConsonantsFeatures();
+        for (Map.Entry<String, DistinctiveFeatures> entry : buffer.entrySet()) {
+            PhonemeInTable ph = allPhonemes.get(entry.getKey());
+            if (ph == null) {
+                userLogger.info("consonant " + entry.getKey() + " is not found in PhonemesCoverageTable");
+
+            } else {
+                ph.setDistinctiveFeatures(entry.getValue());
+                ph.setRecognized(true);
+            }
+        }
+        userLogger.info("Distinctive features added for consonants");
+
+
+        buffer = getAllVowelsFeatures();
+        for (Map.Entry<String, DistinctiveFeatures> entry : buffer.entrySet()) {
+            PhonemeInTable ph = allPhonemes.get(entry.getKey());
+            if (ph == null) {
+                userLogger.info("vowel " + entry.getKey() + " is not found in PhonemesCoverageTable");
+            } else {
+                ph.setDistinctiveFeatures(entry.getValue());
+            }
+        }
+        userLogger.info("Distinctive features added for vowels");
     }
 }
 

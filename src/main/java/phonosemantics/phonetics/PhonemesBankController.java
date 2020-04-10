@@ -3,8 +3,6 @@ package phonosemantics.phonetics;
 import org.springframework.web.bind.annotation.*;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.statistics.Statistics;
-import phonosemantics.word.wordlist.WordList;
-import phonosemantics.word.wordlist.WordListService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +16,7 @@ public class PhonemesBankController {
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/phonemes")
     public ArrayList<PhonemeInTable> getAllPhonemes() {
-        ArrayList<PhonemeInTable> list = PhonemesBank.getInstance().getAllPhonemesList();
+        ArrayList<PhonemeInTable> list = PhonemesBank.getInstance().getPhonemesListForTableUI();
         return list;
     }
 
@@ -29,7 +27,7 @@ public class PhonemesBankController {
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/phonemes/{phoneme}")
     public PhonemeInTable getPhonemeByName(@PathVariable(value="phoneme") String phoneme) {
-        ArrayList<PhonemeInTable> list = PhonemesBank.getInstance().getAllPhonemesList();
+        ArrayList<PhonemeInTable> list = PhonemesBank.getInstance().getPhonemesListForTableUI();
         for (PhonemeInTable ph : list) {
             if (ph.getValue().equals(phoneme.toLowerCase())) {
                 return ph;

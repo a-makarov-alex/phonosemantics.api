@@ -3,7 +3,6 @@ package phonosemantics.language;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
-import phonosemantics.language.Language;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 
@@ -49,7 +48,7 @@ public class LanguageService {
                     }
 
                     Set<PhonemeInTable> languagePhonology = new HashSet<>();
-                    for (PhonemeInTable ph : PhonemesBank.getInstance().getAllPhonemesList()) {
+                    for (PhonemeInTable ph : PhonemesBank.getInstance().getPhonemesListForTableUI()) {
                         if (allPhArr == null) {
                             String allPh = " ";
                             Row r = sheet.getRow(rowNum);
