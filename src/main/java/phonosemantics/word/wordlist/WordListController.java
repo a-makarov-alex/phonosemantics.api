@@ -64,7 +64,7 @@ public class WordListController {
      * **/
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/wordlists/{wordlistMeaning}/phonemes/stats")
-    public PhonemeInTable.PhonemeStats getPhonemeRaw(
+    public PhonemeInTable.PhonemeStats getPhonemeStats(
             @PathVariable(value = "wordlistMeaning") String wordlistMeaning,
             @RequestParam(value="phoneme") String phoneme
     ) {

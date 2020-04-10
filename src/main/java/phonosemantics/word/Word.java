@@ -180,7 +180,7 @@ public class Word {
                 for (String symbol : this.transcription) {
                     PhonemeInTable ph = PhonemesBank.getInstance().find(symbol);
                     // add 1 if phoneme has feature, add 0 if not
-                    HashMap<String, HashMap<Object, Integer>> stats = ph.countPhonemeDistinctiveFeatureStats();
+                    HashMap<String, HashMap<Object, Integer>> stats = ph.countPhonemeDistinctiveFeaturesInstances();
                     if (stats != null) {
                         sumForWord += stats.get(phTypeHigherLevel.getKey()).get(phTypeEntity.getKey());
                     } else {

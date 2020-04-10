@@ -2,6 +2,7 @@ package phonosemantics.phonetics.phoneme;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import phonosemantics.statistics.Math;
 
 import java.util.HashMap;
 
@@ -23,7 +24,7 @@ public class PhonemeInTable {
         this.column = c;
     }
 
-    public HashMap<String, HashMap<Object, Integer>> countPhonemeDistinctiveFeatureStats() {
+    public HashMap<String, HashMap<Object, Integer>> countPhonemeDistinctiveFeaturesInstances() {
         HashMap<String, HashMap<Object, Integer>> distFeatureStats = DistinctiveFeatures.getFeaturesStructureDraft("all");
         DistinctiveFeatures df = this.distinctiveFeatures;
 
@@ -125,9 +126,9 @@ public class PhonemeInTable {
             this.numW = numW;
             this.numAllPhonemes = numAllPhonemes;
             this.numAllWords = numAllWords;
-            percentOfAllPhonemes = (double)numPh/(double)numAllPhonemes;
-            percentOfWordsWithPhoneme = (double)numW/(double)numAllWords;
-            averagePhonemesPerWord = (double) numPh/(double)numAllWords;
+            percentOfAllPhonemes = Math.round((double)numPh/(double)numAllPhonemes, 3);
+            percentOfWordsWithPhoneme = Math.round((double)numW/(double)numAllWords, 3);
+            averagePhonemesPerWord = Math.round((double) numPh/(double)numAllWords, 3);
         }
 
         public Double getPercentOfAllPhonemes() {
@@ -173,9 +174,9 @@ public class PhonemeInTable {
             this.numWordsWithFeature = numW;
             this.numAllPhonemes = numAllPhonemes;
             this.numAllWords = numAllWords;
-            percentOfAllPhonemes = (double)numFeat/(double)numAllPhonemes;
-            percentOfWordsWithFeature = (double)numW/(double)numAllWords;
-            averageFeatureInstancesPerWord = (double) numFeat/(double)numAllWords;
+            percentOfAllPhonemes = Math.round((double)numFeat/(double)numAllPhonemes,3);
+            percentOfWordsWithFeature = Math.round((double)numW/(double)numAllWords, 3);
+            averageFeatureInstancesPerWord = Math.round((double) numFeat/(double)numAllWords, 3);
         }
 
         public Double getPercentOfAllPhonemes() {
