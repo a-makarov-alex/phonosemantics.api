@@ -299,7 +299,7 @@ public class PhonemesBank {
 
 
     /**
-     *   ДИНАМИЧЕСКИЕ ДАННЫЕ (статистика по Wordlist)
+     *   ДОБАВЛЕНЫ ДИНАМИЧЕСКИЕ ДАННЫЕ (статистика по Wordlist)
      */
     public ArrayList<PhonemeInTable> getPhonemesListForTableUI(WordList wl) {
         ArrayList<PhonemeInTable> phList = this.getPhonemesListForTableUI();
@@ -442,6 +442,10 @@ public class PhonemesBank {
             }
         }
         userLogger.info("Distinctive features added for vowels");
+    }
+
+    public HashMap<String, PhonemeInTable> getAllPhonemes() {
+        return allPhonemes;
     }
 }
 
