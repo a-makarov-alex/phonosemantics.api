@@ -1,15 +1,23 @@
 package phonosemantics.word.wordlist;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
+import phonosemantics.meaning.Meaning;
 import phonosemantics.phonetics.PhonemesBank;
+import phonosemantics.phonetics.PhonemesBankController;
+import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
 public class WordListController {
+    private static final Logger userLogger = LogManager.getLogger(WordListController.class);
     /**
      * GETTING WORDLIST BY MEANING
      * **/
@@ -84,6 +92,31 @@ public class WordListController {
         WordList wl = WordListService.getWordlist(wordlistMeaning);
 
         return wl.getDistFeatureStats();
+    }
+
+    /**
+     * GETTING CERTAIN FEATURE STATS FOR ALL WORDLISTS
+     **/
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/wordlists/features/{feature}/stats")
+    // type available values: all / general / vowel / consonant
+    // Meaning: { featureValue, Stats }
+    public HashMap<String, HashMap<Object, PhonemeInTable.DistFeatureStats>> getFeaturesStats(
+            @PathVariable(value = "feature") String feature) {
+
+        ArrayList<WordList> allWordlists = WordListService.getAllWordLists();
+        HashMap<String, HashMap<Object, PhonemeInTable.DistFeatureStats>> resultMap = new HashMap<>();
+        feature = feature.toLowerCase();
+
+        for (WordList wl : allWordlists) {
+            HashMap<Object, PhonemeInTable.DistFeatureStats> statsForOneWordlist = wl.getDistFeatureStats().get(feature);
+            if (statsForOneWordlist != null) {
+                resultMap.put(wl.getMeaning(), statsForOneWordlist);
+            } else {
+                userLogger.info("feature " + feature + " is not a Distinctive Feature");
+            }
+        }
+        return resultMap;
     }
 }
 
