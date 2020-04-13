@@ -8,6 +8,7 @@ OR get API json: http://localhost:8083/v2/api-docs
 
 TODO:
 1. сделать логирование в PhonemesBankController
+1.1 PhonemesBankController почистить от лишнего кода
 2. Выяснить куда деваются фонемы: в вордлисте leaf 144 фонемы, из которых рассчитываются 139. Возможно, остальные unrecognized
 3. Добавить ендпойнты в ArticulationPattern
 4. Протестировать совпадает ли word.length и word.transcription.size();
