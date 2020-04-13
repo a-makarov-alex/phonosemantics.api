@@ -54,7 +54,7 @@ public class WordListController {
     @GetMapping("/wordlists/{wordlistMeaning}/phonemes")
     public ArrayList<PhonemeInTable> getPhonemesCoverageForWordlist(@PathVariable(value="wordlistMeaning") String wordlistMeaning) {
         WordList wrdl = WordListService.getWordlist(wordlistMeaning);
-        return PhonemesBank.getInstance().getPhonemesListForTableUI(wrdl);
+        return PhonemesBank.getInstance().getAllPhonemesList(wrdl);
     }
 
     /**

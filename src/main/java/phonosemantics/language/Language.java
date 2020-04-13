@@ -67,7 +67,7 @@ public class Language {
                     userLogger.debug("PHONOLOGY for LANG " + this.getTitle() + ": ");
 
                     // CREATING A PHONEMES BANK FOR THE LANGUAGE
-                    for (PhonemeInTable ph : PhonemesBank.getInstance().getPhonemesListForTableUI()) {
+                    for (PhonemeInTable ph : PhonemesBank.getInstance().getAllPhonemesList()) {
                         if (allPhArr == null) {
                             String allPh = " ";
                             Row r = sheet.getRow(rowNum);

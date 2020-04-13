@@ -48,7 +48,7 @@ public class LanguageService {
                     }
 
                     Set<PhonemeInTable> languagePhonology = new HashSet<>();
-                    for (PhonemeInTable ph : PhonemesBank.getInstance().getPhonemesListForTableUI()) {
+                    for (PhonemeInTable ph : PhonemesBank.getInstance().getAllPhonemesList()) {
                         if (allPhArr == null) {
                             String allPh = " ";
                             Row r = sheet.getRow(rowNum);

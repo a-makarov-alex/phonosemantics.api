@@ -32,7 +32,7 @@ public class PhonemesBank {
 
     private HashMap<String, PhonemeInTable> allPhonemes;
 
-    private ArrayList<PhonemeInTable> allPhonemesForTableUI; // use this field only through getPhonemesListForTableUI() method
+    private ArrayList<PhonemeInTable> allPhonemesForTableUI; // use this field only through getAllPhonemesList() method
     private ArrayList<PhonemeInTable> vowelsForTable;   //вынужденная мера
     private ArrayList<PhonemeInTable> consonantsForTable; //вынужденная мера
 
@@ -58,7 +58,7 @@ public class PhonemesBank {
 
         allPhonemesForTableUI = createAllPhonemesList();
         allPhonemes = copyAllPhonemesToHashMap();
-        addDistinctiveFeaturesForAllPhonemes();
+        allPhonemes = addDistinctiveFeaturesForAllPhonemes(allPhonemes);
 
         // TODO all the affricates
         // TODO all the diacritics
@@ -267,8 +267,11 @@ public class PhonemesBank {
     /**
      * ПОЛУЧЕНИЕ СПИСКА ФОНЕМ ДЛЯ ФОРМИРОВАНИЯ ТАБЛИЦЫ НА UI
      * ВКЛЮЧАЕТ В СЕБЯ РАСПОЗНАННЫЕ ФОНЕМЫ, НЕРАСПОЗНАННЫЕ ФОНЕМЫ, КООРДИНАТЫ ПУСТЫХ ЯЧЕЕК
+     *
+     * TYPE: vowel, consonant
      * **/
     public ArrayList<PhonemeInTable> getPhonemesForTableUI(String type) {
+
         if (vowelsForTable != null && type.toLowerCase().equals("vowel")) {
             return vowelsForTable;
         } else {
@@ -294,15 +297,18 @@ public class PhonemesBank {
             }
         }
         ArrayList<PhonemeInTable> resultList = new ArrayList<>();
-        return extractAllPhonemesFromFile(sheet, resultList);
+        resultList = extractAllPhonemesFromFile(sheet, resultList);
+        resultList = addDistinctiveFeaturesForPhonemesList(resultList, type);
+
+        return resultList;
     }
 
 
     /**
      *   ДОБАВЛЕНЫ ДИНАМИЧЕСКИЕ ДАННЫЕ (статистика по Wordlist)
      */
-    public ArrayList<PhonemeInTable> getPhonemesListForTableUI(WordList wl) {
-        ArrayList<PhonemeInTable> phList = this.getPhonemesListForTableUI();
+    public ArrayList<PhonemeInTable> getAllPhonemesList(WordList wl) {
+        ArrayList<PhonemeInTable> phList = this.getAllPhonemesList();
         for (PhonemeInTable ph : phList) {
             ph.setPhonemeStats(wl.getPhonemeStats().get(ph.getValue()));
         }
@@ -315,15 +321,15 @@ public class PhonemesBank {
      *  СТАТИЧЕСКИЕ ДАННЫЕ
      *  Condition:  vowel / consonant
      * **/
-    public ArrayList<PhonemeInTable> getPhonemesListForTableUI() {
-        return getPhonemesListForTableUI("all");
+    public ArrayList<PhonemeInTable> getAllPhonemesList() {
+        return getAllPhonemesList("all");
     }
 
-    public ArrayList<PhonemeInTable> getPhonemesListForTableUI(String condition) {
+    public ArrayList<PhonemeInTable> getAllPhonemesList(String condition) {
+        // TODO: ЧЕМ ЭТО ВООБЩЕ ОТЛИЧАЕТСЯ ОТ GETPHONEMES....?????!!!
         if (condition.equals("all")) {
             return allPhonemesForTableUI;
         }
-
         ArrayList<PhonemeInTable> list = new ArrayList<>();
 
         switch (condition.toLowerCase()) {
@@ -415,33 +421,81 @@ public class PhonemesBank {
     /**
      * ДОБАВЛЯЕТ ВАЛИДНОЕ ЗНАЧЕНИЕ ПОЛЯ DISTINCTIVE FEATURES КАК ДЛЯ ARRAYLIST, ТАК И ДЛЯ HASHMAP
      */
-    private void addDistinctiveFeaturesForAllPhonemes() {
-        HashMap<String, DistinctiveFeatures> buffer;
+    private HashMap<String, PhonemeInTable> addDistinctiveFeaturesForAllPhonemes(HashMap<String, PhonemeInTable> phonemesMap) {
+        phonemesMap = addDistinctiveFeaturesForPhonemes(phonemesMap, "vowel");
+        phonemesMap = addDistinctiveFeaturesForPhonemes(phonemesMap, "consonant");
+        return phonemesMap;
+    }
 
-        buffer = getAllConsonantsFeatures();
+    /**
+     * СТРАШНЫЕ КОСТЫЛИ. ТРЕБУЮТСЯ ДО ТЕХ ПОР, ПОКА НА UI ИСПОЛЬЗУЕТСЯ LIST, А НЕ HASHMAP
+     * **/
+    private ArrayList<PhonemeInTable> addDistinctiveFeaturesForPhonemesList(ArrayList<PhonemeInTable> phonemesList, String type) {
+        HashMap<String, DistinctiveFeatures> buffer = new HashMap<>();
+
+        switch (type.toLowerCase()) {
+            case "vowel": {
+                buffer = getAllVowelsFeatures();
+                break;
+            }
+            case "consonant": {
+                buffer = getAllConsonantsFeatures();
+                break;
+            }
+            default: {
+                userLogger.info("Unknown type: " + type);
+                return null;
+            }
+        }
+
+        for (PhonemeInTable ph : phonemesList) {
+            DistinctiveFeatures phDistBuf = buffer.get(ph.getValue());
+            if (phDistBuf == null) {
+                userLogger.info("phoneme " + ph.getValue() + " is not found in PhonemesCoverageTable");
+
+            } else {
+                ph.setDistinctiveFeatures(phDistBuf);
+                ph.setRecognized(true);
+            }
+        }
+        userLogger.info("Distinctive features added for " + type);
+        return phonemesList;
+    }
+
+
+        /**
+         * ADD DISTINCTIVE FEATURES FOR VOWELS / CONSONANTS
+         * **/
+    private HashMap<String, PhonemeInTable> addDistinctiveFeaturesForPhonemes(HashMap<String, PhonemeInTable> phonemesMap, String type) {
+        HashMap<String, DistinctiveFeatures> buffer = null;
+
+        switch (type.toLowerCase()) {
+            case "vowel": {
+                buffer = getAllVowelsFeatures();
+                break;
+            }
+            case "consonant": {
+                buffer = getAllConsonantsFeatures();
+                break;
+            }
+            default: {
+                userLogger.info("Unknown type: " + type);
+                return null;
+            }
+        }
+
         for (Map.Entry<String, DistinctiveFeatures> entry : buffer.entrySet()) {
-            PhonemeInTable ph = allPhonemes.get(entry.getKey());
+            PhonemeInTable ph = phonemesMap.get(entry.getKey());
             if (ph == null) {
-                userLogger.info("consonant " + entry.getKey() + " is not found in PhonemesCoverageTable");
+                userLogger.info("phoneme " + entry.getKey() + " is not found in PhonemesCoverageTable");
 
             } else {
                 ph.setDistinctiveFeatures(entry.getValue());
                 ph.setRecognized(true);
             }
         }
-        userLogger.info("Distinctive features added for consonants");
-
-
-        buffer = getAllVowelsFeatures();
-        for (Map.Entry<String, DistinctiveFeatures> entry : buffer.entrySet()) {
-            PhonemeInTable ph = allPhonemes.get(entry.getKey());
-            if (ph == null) {
-                userLogger.info("vowel " + entry.getKey() + " is not found in PhonemesCoverageTable");
-            } else {
-                ph.setDistinctiveFeatures(entry.getValue());
-            }
-        }
-        userLogger.info("Distinctive features added for vowels");
+        userLogger.info("Distinctive features added for " + type);
+        return phonemesMap;
     }
 
     public HashMap<String, PhonemeInTable> getAllPhonemes() {

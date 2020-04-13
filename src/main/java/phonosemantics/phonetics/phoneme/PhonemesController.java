@@ -17,7 +17,7 @@ public class PhonemesController {
     // returns only phonemes that are recognized by phonemes bank
     // type available values: all / vowel / consonant
     public ArrayList<PhonemeInTable> getPhonemesCoverage(@PathVariable(value="type") String type){
-        return PhonemesBank.getInstance().getPhonemesListForTableUI(type);
+        return PhonemesBank.getInstance().getAllPhonemesList(type); // это не для UI, а вообще
     }
 
     @CrossOrigin(origins = "http://localhost:8080")
