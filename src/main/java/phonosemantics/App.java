@@ -1,17 +1,12 @@
 package phonosemantics;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-import phonosemantics.word.wordlist.WordList;
-import phonosemantics.word.wordlist.WordListService;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.ArrayList;
 import java.util.Collections;
 
 @ComponentScan

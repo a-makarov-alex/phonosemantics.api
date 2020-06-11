@@ -1,6 +1,7 @@
 package phonosemantics.word;
 
 import org.springframework.web.bind.annotation.*;
+import phonosemantics.data.Port;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.word.wordlist.WordList;
 import phonosemantics.word.wordlist.WordListService;
@@ -22,7 +23,7 @@ public class ArticulationPatternController {
     /**
      * GETTING WORD ARTICULATION PATTERNS (1 WORD, ALL PATTERNS)
      * **/
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = Port.FRONTEND_URL)
     @GetMapping("/patterns/words")
     public HashMap<String, ArticulationPattern> getAllArticulationPatternsForWord(
             @RequestParam(value = "language") String language,
@@ -42,7 +43,7 @@ public class ArticulationPatternController {
     /**
      * GETTING WORD ARTICULATION PATTERN (1 WORD, 1 PATTERN)
      * **/
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = Port.FRONTEND_URL)
     @GetMapping("patterns/{patternBase}/words")
     public ArticulationPattern getOneArticulationPatternForWord(
             @PathVariable(value= "patternBase") String patternBase,
@@ -57,7 +58,7 @@ public class ArticulationPatternController {
     /**
      * GETTING WORDLIST ARTICULATION PATTERN (1 WORDLIST, 1 PATTERN)
      * **/
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = Port.FRONTEND_URL)
     @GetMapping("patterns/{patternBase}/wordlists")
     public ArticulationPattern[] getOneArticulationPatternForWordlist(
             @PathVariable(value= "patternBase") String patternBase,
