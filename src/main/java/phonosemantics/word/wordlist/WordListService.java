@@ -22,6 +22,7 @@ public class WordListService {
     // TODO: запихнуть в контекст эти данные, если мы не оставим путь как константу
     // TODO: add some kind of context to project to store data
     private static ArrayList<WordList> allWordLists;
+    // TODO allWordlist можно заполнять в статическом блоке
 
     public static ArrayList<WordList> getAllWordLists() {
         if (allWordLists != null) {

@@ -6,4 +6,5 @@ package phonosemantics.data;
  * **/
 public class Port {
     public static final String FRONTEND_URL = "http://localhost:8081";
+    public static final String BACKEND_PORT = "8083";
 }
