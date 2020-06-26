@@ -6,6 +6,7 @@ phonosemantics v2 functionality in a REST API form
 OR get API json: http://localhost:8083/v2/api-docs
 
 TODO:
+0. сделать тестовый файл и скармливать его через конструктор, вместо зашитого адреса
 1. PhonemesBank устранить путаницу с методами получения списка фонем для таблицы UI
 2. Выяснить куда деваются фонемы: в вордлисте leaf 144 фонемы, из которых рассчитываются 139. Возможно, остальные unrecognized
 3. Добавить ендпойнты в ArticulationPattern

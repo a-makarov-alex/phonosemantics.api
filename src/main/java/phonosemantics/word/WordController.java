@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import phonosemantics.data.Port;
+import phonosemantics.data.PortConfig;
 
 import java.util.HashMap;
 
@@ -13,7 +13,7 @@ public class WordController {
     /**
      * GETTING WORD BY MEANING AND LANGUAGE
      * **/
-    @CrossOrigin(origins = Port.FRONTEND_URL)
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/languages/{language}/meanings/{meaning}")
     public Word getWordByLanguageAndMeaning(
             @RequestParam(value = "language") String language,
@@ -25,7 +25,7 @@ public class WordController {
     /**
      * GETTING WORD's DISTINCTIVE FEATURES
      * **/
-    @CrossOrigin(origins = Port.FRONTEND_URL)
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/languages/{language}/meanings/{meaning}/features")
     public HashMap<String, HashMap<Object, Integer>> getWordDistinctiveFeatures(
             @RequestParam(value = "language") String language,

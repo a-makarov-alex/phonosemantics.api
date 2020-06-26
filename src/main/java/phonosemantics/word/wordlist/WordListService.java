@@ -1,8 +1,8 @@
 package phonosemantics.word.wordlist;
 
 import org.apache.poi.ss.usermodel.*;
-import phonosemantics.App;
 import phonosemantics.LoggerConfig;
+import phonosemantics.data.InputConfig;
 import phonosemantics.word.Word;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,8 +14,6 @@ import java.util.ArrayList;
 
 //TODO: be careful, remove hardcode from this class
 public class WordListService {
-    private static final String FILENAME = "Input.xlsx";
-    private static final String INPUT_DIRECTORY = "./src/main/java/phonosemantics/input/";
     static final Logger userLogger = LogManager.getLogger(WordListService.class);
 
 
@@ -24,22 +22,27 @@ public class WordListService {
     private static ArrayList<WordList> allWordLists;
     // TODO allWordlist можно заполнять в статическом блоке
 
-    public static ArrayList<WordList> getAllWordLists() {
+    public static ArrayList<WordList> getAllWordLists(String path) {
         if (allWordLists != null) {
             userLogger.info("allWordlists is NOT null");
             return allWordLists;
         } else {
             userLogger.info("allWordlists is null");
-            allWordLists = WordListService.readAllWordListsFromInputFile();
+            allWordLists = WordListService.readAllWordListsFromInputFile(path);
             return allWordLists;
         }
+    }
+
+    // For default input file
+    public static ArrayList<WordList> getAllWordLists() {
+        return getAllWordLists(InputConfig.INPUT_DIRECTORY + InputConfig.FILENAME);
     }
 
 
     /**
      * Reads all the words from inputFile and write them to one list of Word entities
      */
-    public static ArrayList<WordList> readAllWordListsFromInputFile() {
+    public static ArrayList<WordList> readAllWordListsFromInputFile(String path) {
 
         userLogger.info("wordlist extracting from file starting...");
 
@@ -48,7 +51,7 @@ public class WordListService {
         ArrayList<WordList> allWordlists = new ArrayList<>();
 
         try {
-            inputStream = new FileInputStream(INPUT_DIRECTORY + FILENAME);
+            inputStream = new FileInputStream(path);
             Workbook wb = WorkbookFactory.create(inputStream);
             Sheet sheet = wb.getSheetAt(0);
 
@@ -60,13 +63,13 @@ public class WordListService {
                 if (LoggerConfig.CONSOLE_SHOW_FOUND_MEANINGS_IN_INPUT_FILE) {
                     userLogger.debug("--- meaning found: " + sheet.getRow(rowNum).getCell(colNum).getStringCellValue());
                 }
-                WordList wl = composeWordList(sheet.getRow(rowNum).getCell(colNum).getStringCellValue());
+                WordList wl = composeWordList(sheet.getRow(rowNum).getCell(colNum).getStringCellValue(), path);
                 allWordlists.add(wl);
 
                 colNum++;
             }
             inputStream.close();
-            userLogger.info(colNum + " wordlists are composed from input file");
+            userLogger.info(colNum - 1 + " wordlists are composed from input file");
             return allWordlists;
 
         } catch (IOException e) {
@@ -78,14 +81,14 @@ public class WordListService {
     /**
      * Reads a list of words from inputFile by meaning
      */
-    public static WordList composeWordList(String meaning) {
+    public static WordList composeWordList(String meaning, String path) {
 
         // open file for reading
         InputStream inputStream = null;
         ArrayList<Word> list = new ArrayList<Word>();
 
         try {
-            inputStream = new FileInputStream(INPUT_DIRECTORY + FILENAME);
+            inputStream = new FileInputStream(path);
             userLogger.info("--- wordlist composing for " + meaning);
             Workbook wb = WorkbookFactory.create(inputStream);
             Sheet sheet;
@@ -149,8 +152,15 @@ public class WordListService {
     }
 
     public static WordList getWordlist(String meaning) {
+        return getWordlist(
+                meaning,
+                InputConfig.INPUT_DIRECTORY + InputConfig.FILENAME
+        );
+    }
+
+    public static WordList getWordlist(String meaning, String filePath) {
         meaning = meaning.toLowerCase();
-        ArrayList<WordList> allWordlists = getAllWordLists();
+        ArrayList<WordList> allWordlists = getAllWordLists(filePath);
         for (WordList wl : allWordlists) {
             if (wl.getMeaning().equals(meaning)) {
                 return wl;

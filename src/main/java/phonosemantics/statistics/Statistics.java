@@ -1,5 +1,6 @@
 package phonosemantics.statistics;
 
+import phonosemantics.data.InputConfig;
 import phonosemantics.word.wordlist.WordListService;
 
 import java.util.*;

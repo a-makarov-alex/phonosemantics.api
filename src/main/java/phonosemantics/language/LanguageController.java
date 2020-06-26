@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import phonosemantics.data.Port;
+import phonosemantics.data.PortConfig;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ public class LanguageController {
     /**
      * GETTING ALL LANGUAGES
      * **/
-    @CrossOrigin(origins = Port.FRONTEND_URL)
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/languages")
     public ArrayList<String> getAllLanguages() {
         return LanguageService.getAllLanguageNames();
@@ -23,7 +23,7 @@ public class LanguageController {
     /**
      * GETTING LANGUAGE BY ITS NAME (TITLE)
      * **/
-    @CrossOrigin(origins = Port.FRONTEND_URL)
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/languages/{language}")
     public Language getLanguageByName(@PathVariable(value="language") String title) {
         return LanguageService.getLanguage(title);

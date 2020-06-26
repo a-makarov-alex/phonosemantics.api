@@ -3,17 +3,13 @@ package phonosemantics.word.wordlist;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
-import phonosemantics.data.Port;
-import phonosemantics.meaning.Meaning;
+import phonosemantics.data.InputConfig;
+import phonosemantics.data.PortConfig;
 import phonosemantics.phonetics.PhonemesBank;
-import phonosemantics.phonetics.PhonemesBankController;
-import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 
 @RestController
@@ -22,7 +18,7 @@ public class WordListController {
     /**
      * GETTING WORDLIST BY MEANING
      * **/
-    @CrossOrigin(origins = Port.FRONTEND_URL)
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/wordlist")
     public WordList getWordlistByMeaning(@RequestParam(value = "wordlistMeaning") String wordlistMeaning) {
         return WordListService.getWordlist(wordlistMeaning);
@@ -32,7 +28,7 @@ public class WordListController {
     /**
      * GETTING ALL WORDLISTS
      * **/
-    @CrossOrigin(origins = Port.FRONTEND_URL)
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/wordlists")
     public ArrayList<WordList> getAllWordlists() {
         ArrayList<WordList> allWordlists = WordListService.getAllWordLists();
@@ -43,7 +39,7 @@ public class WordListController {
     /**
      * GETTING ALL MEANINGS THAT ARE PRESENT IN INPUT FILE ( == IN DATABASE)
      * **/
-    @CrossOrigin(origins = Port.FRONTEND_URL)
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/meanings")
     public ArrayList<String> getAllMeanings() {
 
@@ -59,7 +55,7 @@ public class WordListController {
     /**
      * GETTING ALL PHONEMES FOR A CERTAIN WORDLIST
      * **/
-    @CrossOrigin(origins = Port.FRONTEND_URL)
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/wordlists/{wordlistMeaning}/phonemes")
     public ArrayList<PhonemeInTable> getPhonemesCoverageForWordlist(@PathVariable(value="wordlistMeaning") String wordlistMeaning) {
         WordList wrdl = WordListService.getWordlist(wordlistMeaning);
@@ -69,7 +65,7 @@ public class WordListController {
     /**
      * GETTING PHONEME STATS FOR A CERTAIN WORDLIST
      * **/
-    @CrossOrigin(origins = Port.FRONTEND_URL)
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/wordlists/{wordlistMeaning}/phonemes/stats")
     public PhonemeInTable.PhonemeStats getPhonemeStats(
             @PathVariable(value = "wordlistMeaning") String wordlistMeaning,
@@ -84,7 +80,7 @@ public class WordListController {
      *
      * how to get raw "number of feature instances" --> wl.calculateFeaturesStats(type)
      * **/
-    @CrossOrigin(origins = Port.FRONTEND_URL)
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/wordlists/{wordlistMeaning}/features/stats")
     // type available values: all / general / vowel / consonant
     public HashMap<String, HashMap<Object, PhonemeInTable.DistFeatureStats>> getFeaturesStats(
@@ -98,7 +94,7 @@ public class WordListController {
     /**
      * GETTING CERTAIN FEATURE STATS FOR ALL WORDLISTS
      **/
-    @CrossOrigin(origins = Port.FRONTEND_URL)
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/wordlists/features/{feature}/stats")
     // type available values: all / general / vowel / consonant
     // Meaning: { featureValue, Stats }

@@ -3,7 +3,7 @@ package phonosemantics.phonetics;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
-import phonosemantics.data.Port;
+import phonosemantics.data.PortConfig;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.statistics.Statistics;
@@ -21,7 +21,7 @@ public class PhonemesBankController {
     /**
      * GETTING ALL PHONEMES
      * **/
-    @CrossOrigin(origins = Port.FRONTEND_URL)
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/phonemes")
     public ArrayList<PhonemeInTable> getAllPhonemes() {
         ArrayList<PhonemeInTable> list = PhonemesBank.getInstance().getAllPhonemesList();
@@ -31,7 +31,7 @@ public class PhonemesBankController {
     /**
      * GETTING PHONEME BY ITS TITLE
      * **/
-    @CrossOrigin(origins = Port.FRONTEND_URL)
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/phonemes/{phoneme}")
     public PhonemeInTable getPhonemeByName(@PathVariable(value="phoneme") String phoneme) {
         ArrayList<PhonemeInTable> list = PhonemesBank.getInstance().getAllPhonemesList();
@@ -47,7 +47,7 @@ public class PhonemesBankController {
      * GETTING UNKNOWN PHONEMES
      * ugly path, but phonemes/{phoneme} is already taken
      * **/
-    @CrossOrigin(origins = Port.FRONTEND_URL)
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/phonemes/unknown/all")
     public HashMap<String, Integer> getUnknownPhonemes() {
         return Statistics.getUnknownPhonemes();
@@ -56,7 +56,7 @@ public class PhonemesBankController {
     /**
      * GETTING PHONEMES LIST BY DISTINCTIVE FEATURE
      * **/
-    @CrossOrigin(origins = Port.FRONTEND_URL)
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/phonemes/features/{feature}")
     public ArrayList<String> getPhonemesWithDistFeature(
             @PathVariable(value="feature") String feature,
