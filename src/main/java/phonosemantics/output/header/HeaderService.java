@@ -3,7 +3,7 @@ package phonosemantics.output.header;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HeaderService {
+public final class HeaderService {
 
     public static List<Header> getNormalityHeaders() {
         List<Header> headers = new ArrayList<>();
@@ -48,5 +48,9 @@ public class HeaderService {
         //TODO: добавить остальные заголовки
 
         return headers;
+    }
+
+    // cause it's a utility class
+    private HeaderService() {
     }
 }

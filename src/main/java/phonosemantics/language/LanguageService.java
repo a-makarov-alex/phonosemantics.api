@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
-public class LanguageService {
+public final class LanguageService {
     private static final Logger userLogger = LogManager.getLogger(Language.class);
     public static final String INPUT_LANGUAGES_PATH = "./src/main/java/phonosemantics/input/AllLanguages.xlsx";
 
@@ -171,5 +171,9 @@ public class LanguageService {
             result.add(lang.getKey());
         }
         return result;
+    }
+
+    // cause it's a utility class
+    private LanguageService() {
     }
 }

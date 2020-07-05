@@ -27,6 +27,8 @@ public class PhonemeInTable {
     public Map<String, Map<Object, Integer>> countPhonemeDistinctiveFeaturesInstances() {
         Map<String, Map<Object, Integer>> distFeatureStats = DistinctiveFeatures.getFeaturesStructureDraft("all");
         DistinctiveFeatures df = this.distinctiveFeatures;
+        final String TRUE = "true";
+        final String FALSE = "false";
 
         // TODO это можно как-то автоматизировать через перебор полей класса, но пока нет смысла
         if (df == null) {
@@ -35,23 +37,23 @@ public class PhonemeInTable {
         }
 
         // MAJOR CLASS
-        String key = df.getMajorClass().isVocoid() ? "true" : "false";
+        String key = df.getMajorClass().isVocoid() ? TRUE : FALSE;
         distFeatureStats.get("vocoid").put(key, 1);
 
-        key = df.getMajorClass().isApproximant() ? "true" : "false";
+        key = df.getMajorClass().isApproximant() ? TRUE : FALSE;
         distFeatureStats.get("approximant").put(key, 1);
 
         // MANNER
-        key = df.getManner().isSonorant() ? "true" : "false";
+        key = df.getManner().isSonorant() ? TRUE : FALSE;
         distFeatureStats.get("sonorant").put(key, 1);
 
-        key = df.getManner().isContinuant() ? "true" : "false";
+        key = df.getManner().isContinuant() ? TRUE : FALSE;
         distFeatureStats.get("continuant").put(key, 1);
 
-        key = df.getManner().isNasal() ? "true" : "false";
+        key = df.getManner().isNasal() ? TRUE : FALSE;
         distFeatureStats.get("nasal").put(key, 1);
 
-        key = df.getManner().isVoiced() ? "true" : "false";
+        key = df.getManner().isVoiced() ? TRUE : FALSE;
         distFeatureStats.get("voiced").put(key, 1);
 
         distFeatureStats.get("stricture").put(df.getManner().getStricture(), 1);

@@ -489,13 +489,17 @@ public class PhonemesBank {
         }
 
         for (Map.Entry<String, DistinctiveFeatures> entry : buffer.entrySet()) {
-            PhonemeInTable ph = phonemesMap.get(entry.getKey());
-            if (ph == null) {
-                userLogger.info("phoneme " + entry.getKey() + " is not found in PhonemesCoverageTable");
+            if (phonemesMap != null) {
+                PhonemeInTable ph = phonemesMap.get(entry.getKey());
+                if (ph == null) {
+                    userLogger.info("phoneme " + entry.getKey() + " is not found in PhonemesCoverageTable");
 
+                } else {
+                    ph.setDistinctiveFeatures(entry.getValue());
+                    ph.setRecognized(true);
+                }
             } else {
-                ph.setDistinctiveFeatures(entry.getValue());
-                ph.setRecognized(true);
+                userLogger.info("phonemes map is null");
             }
         }
         userLogger.info("Distinctive features added for " + type);

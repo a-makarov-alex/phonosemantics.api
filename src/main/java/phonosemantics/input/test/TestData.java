@@ -3,7 +3,7 @@ package phonosemantics.input.test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestData {
+public final class TestData {
     public static final String TEST_FILENAME = "InputTest.xlsx";
     public static final String INPUT_TEST_DIRECTORY = "./src/main/java/phonosemantics/input/test/";
     public static final String TEST_FILE_PATH = INPUT_TEST_DIRECTORY + TEST_FILENAME;
@@ -20,5 +20,9 @@ public class TestData {
 
     public static List<String> getTestMeanings() {
         return testMeanings;
+    }
+
+    // cause it's a utility class
+    private TestData() {
     }
 }

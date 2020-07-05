@@ -6,7 +6,13 @@ phonosemantics v2 functionality in a REST API form
 OR get API json: http://localhost:8083/v2/api-docs
 
 Check code coverage via SonarQube (it should be started on 9000 port):
+в файле sonar-project.properties прописан url, так что запустить анализ можно просто:
+mvn sonar:sonar
+
+однако конфигурацию можно задать и черел командную строку:
 mvn sonar:sonar -Dsonar.host.url=http://localhost:9000
+
+больше опиций тут: https://www.devopsschool.com/tutorial/sonarqube/sonarqube-properties.html
 
 TODO:
 0. сделать тестовый файл и скармливать его через конструктор, вместо зашитого адреса

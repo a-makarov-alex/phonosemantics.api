@@ -1,6 +1,6 @@
 package phonosemantics;
 
-public class LoggerConfig {
+public final class LoggerConfig {
     // CONFIG --> should be transformed to logs later
     public static final boolean CONSOLE_SHOW_TRASCRIPTION = false;
     public static final Object CONSOLE_SHOW_WORDS_OF_CLASS = null; //SoundsBank.MannerPricise.STOP;
@@ -13,4 +13,8 @@ public class LoggerConfig {
     public static final boolean CONSOLE_EXTRA_SYMBOLS = false;
 
     public static final boolean DEBUG_STATS = false;
+
+    // cause it's a utility class
+    private LoggerConfig() {
+    }
 }

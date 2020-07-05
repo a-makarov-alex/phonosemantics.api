@@ -13,7 +13,7 @@ import java.util.List;
 import phonosemantics.phonetics.PhonemesBank;
 
 
-public class HeadersForUI {
+public final class HeadersForUI {
     static final Logger userLogger = LogManager.getLogger(HeadersForUI.class);
 
     /**
@@ -98,6 +98,10 @@ public class HeadersForUI {
             userLogger.error(e.toString());
         }
         return headers;
+    }
+
+    // cause it's a utility class
+    private HeadersForUI() {
     }
 }
 
