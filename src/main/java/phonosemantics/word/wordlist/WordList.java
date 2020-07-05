@@ -13,6 +13,7 @@ import phonosemantics.LoggerConfig;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,20 +31,20 @@ public class WordList {
     private static final Logger userLogger = LogManager.getLogger(WordList.class);
 
     private String meaning;
-    private ArrayList<Word> list;
-    private HashMap<String, PhonemeInTable.PhonemeStats> phonemeStats;
+    private List<Word> list;
+    private Map<String, PhonemeInTable.PhonemeStats> phonemeStats;
     //TODO Deprecated
-    private HashMap<Object, PhTypeStats> phTypeStatsMap = new HashMap<>();
-    private HashMap<String, HashMap<Object, PhonemeInTable.DistFeatureStats>> distFeatureStats = new HashMap<>();
-    private HashMap<String, HashMap<Object, Integer>> numOfWordsWithFeatures;
+    private Map<Object, PhTypeStats> phTypeStatsMap = new HashMap<>();
+    private Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> distFeatureStats = new HashMap<>();
+    private Map<String, Map<Object, Integer>> numOfWordsWithFeatures;
     private int numOfWords;
     private int numOfPhonemes;
 
-    public WordList(ArrayList<Word> list) {
+    public WordList(List<Word> list) {
         this.meaning = list.get(0).getMeaning();
         //check that all the words in input list have the same meaning
         for (Word w : list) {
-            if (w.getMeaning() != this.meaning) {
+            if (!w.getMeaning().equals(this.meaning)) {
                 userLogger.error("words in wordlist have different meanings: " + this.meaning + " != " + w.getMeaning());
                 break;
             }
@@ -81,8 +82,8 @@ public class WordList {
                     numOfWords));
         }
 
-        HashMap<String, HashMap<Object, Integer>> rawStats = this.calculateFeaturesStats("all");
-        for (Map.Entry<String, HashMap<Object, Integer>> highLevelEntry : rawStats.entrySet()) {
+        Map<String, Map<Object, Integer>> rawStats = this.calculateFeaturesStats("all");
+        for (Map.Entry<String, Map<Object, Integer>> highLevelEntry : rawStats.entrySet()) {
             distFeatureStats.put(highLevelEntry.getKey(), new HashMap<>());
 
             for (Map.Entry<Object, Integer> lowLevelEntry : highLevelEntry.getValue().entrySet()) {
@@ -100,10 +101,10 @@ public class WordList {
         }
     }
 
-    public HashMap<String, HashMap<Object, Integer>> calculateFeaturesStats(String type) {
+    public Map<String, Map<Object, Integer>> calculateFeaturesStats(String type) {
         userLogger.info("starting calculating Wordlist " + this.getMeaning() + "features stats");
-        HashMap<String, HashMap<Object, Integer>> resultMap = DistinctiveFeatures.getFeaturesStructureDraft(type);
-        HashMap<String, HashMap<Object, Integer>> bufferForWordStats;
+        Map<String, Map<Object, Integer>> resultMap = DistinctiveFeatures.getFeaturesStructureDraft(type);
+        Map<String, Map<Object, Integer>> bufferForWordStats;
         numOfWordsWithFeatures = DistinctiveFeatures.getFeaturesStructureDraft(type);
 
         // TODO подумать: можно создать ещё одну вложенную мапу, в которой сохранять количество признаков в КАЖДОМ слове, а не только слов с признаком
@@ -113,7 +114,7 @@ public class WordList {
         for (Word w : this.getList()) {
             bufferForWordStats = w.countWordDistinctiveFeaturesStats(type);
 
-            for (Map.Entry<String, HashMap<Object, Integer>> entryHighLevel : bufferForWordStats.entrySet()) {
+            for (Map.Entry<String, Map<Object, Integer>> entryHighLevel : bufferForWordStats.entrySet()) {
                 for (Map.Entry<Object, Integer> entryLowLevel : entryHighLevel.getValue().entrySet()) {
                     // Add 1 to the number of words with Dist Feature if it is found in the Word
                     if (entryLowLevel.getValue() != 0) {
@@ -132,19 +133,19 @@ public class WordList {
     }
 
     @Deprecated
-    public HashMap<Object, PhTypeStats> getPhonotypeStats() {
+    public Map<Object, PhTypeStats> getPhonotypeStats() {
         if (this.phTypeStatsMap != null) {
             return this.phTypeStatsMap;
         } else {
+            phTypeStatsMap = new HashMap<>();
             // Заполняем статсМапу парами "фонотип : пустой объект статов"
-            HashMap<String, HashMap<Object, Integer>> allPhTypes = DistinctiveFeatures.getFeaturesStructureDraft("all");
-            for (Map.Entry<String, HashMap<Object, Integer>> outerMap : allPhTypes.entrySet()) {
+            Map<String, Map<Object, Integer>> allPhTypes = DistinctiveFeatures.getFeaturesStructureDraft("all");
+            for (Map.Entry<String, Map<Object, Integer>> outerMap : allPhTypes.entrySet()) {
                 for (Map.Entry<Object, Integer> phT : outerMap.getValue().entrySet()) {
                     PhTypeStats stats = new PhTypeStats(phT.getKey());
                     phTypeStatsMap.put(phT.getKey(), stats);
                 }
             }
-
             // рассчитываем, в скольки языках из представленных присутствует каждый фонотип
             calculatePotentialWordsWithPhType();
 
@@ -153,7 +154,6 @@ public class WordList {
 
             // рассчитываем 3 базовых параметра для оценки результатов
             calculateBasicStats();
-
             return this.phTypeStatsMap;
         }
     }
@@ -188,7 +188,7 @@ public class WordList {
     // TODO метод явно не из этого класса
     @Deprecated
     public void calculateBasicStats() {
-        HashMap<Object, PhTypeStats> inputMap = phTypeStatsMap;
+        Map<Object, PhTypeStats> inputMap = phTypeStatsMap;
 
         for (Map.Entry<Object, PhTypeStats> stats : inputMap.entrySet()) {
             PhTypeStats st = stats.getValue();
@@ -217,15 +217,15 @@ public class WordList {
      * Применить ко всем листам сразу нельзя, т.к. некоторые значения в отдельных языках могут быть не зафиксированы
      */
     public void calculatePotentialWordsWithPhType() {
-        HashMap<String, HashMap<Object, Integer>> fullMap = DistinctiveFeatures.getFeaturesStructureDraft("all");
+        Map<String, Map<Object, Integer>> fullMap = DistinctiveFeatures.getFeaturesStructureDraft("all");
 
-        for (Map.Entry<String, HashMap<Object, Integer>> outerMap : fullMap.entrySet()) {
+        for (Map.Entry<String, Map<Object, Integer>> outerMap : fullMap.entrySet()) {
             for (Map.Entry<Object, Integer> entry : outerMap.getValue().entrySet()) {
                 int count = 0;
 
                 for (Word w : this.getList()) {
                     Language language = LanguageService.getLanguage(w.getLanguage());
-                    HashMap<String, HashMap<Object, Integer>> phTypeCov = language.getPhTypeCoverage();
+                    Map<String, Map<Object, Integer>> phTypeCov = language.getPhTypeCoverage();
 
                     if (phTypeCov.get(outerMap.getKey()).get(entry.getKey()) > 0) {
                         count++;
@@ -244,8 +244,8 @@ public class WordList {
      * @param language
      * @return
      */
-    public ArrayList<Word> getWords(Language language) {
-        ArrayList<Word> list = new ArrayList<>();
+    public List<Word> getWords(Language language) {
+        List<Word> list = new ArrayList<>();
         for (Word word : this.list) {
             if (word.getLanguage().toLowerCase().equals(language.getTitle().toLowerCase())) {
                 list.add(word);
@@ -256,7 +256,7 @@ public class WordList {
 
 
     // GETTERS AND SETTERS
-    public ArrayList<Word> getList() {
+    public List<Word> getList() {
         return list;
     }
 
@@ -264,7 +264,7 @@ public class WordList {
         return meaning;
     }
 
-    public HashMap<Object, PhTypeStats> getPhTypeStatsMap() {
+    public Map<Object, PhTypeStats> getPhTypeStatsMap() {
         return phTypeStatsMap;
     }
 
@@ -276,15 +276,15 @@ public class WordList {
         return numOfPhonemes;
     }
 
-    public HashMap<String, PhonemeInTable.PhonemeStats> getPhonemeStats() {
+    public Map<String, PhonemeInTable.PhonemeStats> getPhonemeStats() {
         return phonemeStats;
     }
 
-    public HashMap<String, HashMap<Object, PhonemeInTable.DistFeatureStats>> getDistFeatureStats() {
+    public Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> getDistFeatureStats() {
         return distFeatureStats;
     }
 
-    public HashMap<String, HashMap<Object, Integer>> getNumOfWordsWithFeatures() {
+    public Map<String, Map<Object, Integer>> getNumOfWordsWithFeatures() {
         return numOfWordsWithFeatures;
     }
 

@@ -1,13 +1,12 @@
 package phonosemantics.output.header;
 
-import phonosemantics.output.header.Header;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class HeaderService {
 
-    public static ArrayList<Header> getNormalityHeaders() {
-        ArrayList<Header> headers = new ArrayList<>();
+    public static List<Header> getNormalityHeaders() {
+        List<Header> headers = new ArrayList<>();
 
         //COMMON HEADERS, ROW 1
         Header h = new Header(0,0, "Semantics");

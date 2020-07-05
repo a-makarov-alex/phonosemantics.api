@@ -5,13 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import phonosemantics.data.PortConfig;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class HeaderController {
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/headers")
-    public ArrayList<Header> getHeaders() {
+    public List<Header> getHeaders() {
         return HeaderService.getNormalityHeaders();
     }
 }

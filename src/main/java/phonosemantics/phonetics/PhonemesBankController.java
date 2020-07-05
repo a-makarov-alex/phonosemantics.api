@@ -11,6 +11,7 @@ import phonosemantics.statistics.Statistics;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,8 +24,8 @@ public class PhonemesBankController {
      * **/
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/phonemes")
-    public ArrayList<PhonemeInTable> getAllPhonemes() {
-        ArrayList<PhonemeInTable> list = PhonemesBank.getInstance().getAllPhonemesList();
+    public List<PhonemeInTable> getAllPhonemes() {
+        List<PhonemeInTable> list = PhonemesBank.getInstance().getAllPhonemesList();
         return list;
     }
 
@@ -34,7 +35,7 @@ public class PhonemesBankController {
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/phonemes/{phoneme}")
     public PhonemeInTable getPhonemeByName(@PathVariable(value="phoneme") String phoneme) {
-        ArrayList<PhonemeInTable> list = PhonemesBank.getInstance().getAllPhonemesList();
+        List<PhonemeInTable> list = PhonemesBank.getInstance().getAllPhonemesList();
         for (PhonemeInTable ph : list) {
             if (ph.getValue().equals(phoneme.toLowerCase())) {
                 return ph;
@@ -49,7 +50,7 @@ public class PhonemesBankController {
      * **/
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/phonemes/unknown/all")
-    public HashMap<String, Integer> getUnknownPhonemes() {
+    public Map<String, Integer> getUnknownPhonemes() {
         return Statistics.getUnknownPhonemes();
     }
 
@@ -58,15 +59,15 @@ public class PhonemesBankController {
      * **/
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/phonemes/features/{feature}")
-    public ArrayList<String> getPhonemesWithDistFeature(
+    public List<String> getPhonemesWithDistFeature(
             @PathVariable(value="feature") String feature,
             @RequestParam(value="featureValue") String featureValue
     ) {
         feature = feature.toLowerCase();
         featureValue = featureValue.toLowerCase();
 
-        HashMap<String, PhonemeInTable> phMap = PhonemesBank.getInstance().getAllPhonemes();
-        ArrayList<String> resultList = new ArrayList<>();
+        Map<String, PhonemeInTable> phMap = PhonemesBank.getInstance().getAllPhonemes();
+        List<String> resultList = new ArrayList<>();
 
         for (Map.Entry<String, PhonemeInTable> entry : phMap.entrySet()) {
             DistinctiveFeatures df = entry.getValue().getDistinctiveFeatures();

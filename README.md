@@ -5,6 +5,9 @@ phonosemantics v2 functionality in a REST API form
 2. See API (UI): http://localhost:8083/swagger-ui.html
 OR get API json: http://localhost:8083/v2/api-docs
 
+Check code coverage via SonarQube (it should be started on 9000 port):
+mvn sonar:sonar -Dsonar.host.url=http://localhost:9000
+
 TODO:
 0. сделать тестовый файл и скармливать его через конструктор, вместо зашитого адреса
 1. PhonemesBank устранить путаницу с методами получения списка фонем для таблицы UI

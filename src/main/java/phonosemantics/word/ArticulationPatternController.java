@@ -7,6 +7,7 @@ import phonosemantics.word.wordlist.WordListService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -24,12 +25,12 @@ public class ArticulationPatternController {
      * **/
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/patterns/words")
-    public HashMap<String, ArticulationPattern> getAllArticulationPatternsForWord(
+    public Map<String, ArticulationPattern> getAllArticulationPatternsForWord(
             @RequestParam(value = "language") String language,
             @RequestParam(value = "meaning") String meaning
     ) {
-        HashMap<String, Object[]> distFeaturesDraft = DistinctiveFeatures.getFeaturesForAPI("all");
-        HashMap<String, ArticulationPattern> articulationPatternMap = new HashMap<>();
+        Map<String, Object[]> distFeaturesDraft = DistinctiveFeatures.getFeaturesForAPI("all");
+        Map<String, ArticulationPattern> articulationPatternMap = new HashMap<>();
         Word word = Word.getWord(language, meaning);
 
         for (Map.Entry<String, Object[]> entry : distFeaturesDraft.entrySet()) {
@@ -63,7 +64,7 @@ public class ArticulationPatternController {
             @PathVariable(value= "patternBase") String patternBase,
             @RequestParam(value = "meaning") String meaning
     ) {
-        ArrayList<Word> wList = WordListService.getWordlist(meaning).getList();
+        List<Word> wList = WordListService.getWordlist(meaning).getList();
         ArticulationPattern[] arrPatterns = new ArticulationPattern[wList.size()];
 
         for (int i = 0; i < wList.size(); i++) {

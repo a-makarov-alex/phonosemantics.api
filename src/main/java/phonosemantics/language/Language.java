@@ -4,7 +4,6 @@ package phonosemantics.language;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
-import phonosemantics.data.InputConfig;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
@@ -28,7 +27,7 @@ public class Language {
 
     // maps save the verdict "if the phoneme/phType were found in the Language words on practice"
     private Set<PhonemeInTable> phCoverage;
-    private HashMap<String, HashMap<Object, Integer>> phTypeCoverage;
+    private Map<String, Map<Object, Integer>> phTypeCoverage;
     private Set<PhonemeInTable> phNotDescribed;
 
     public Language(String title) {
@@ -47,14 +46,12 @@ public class Language {
 
 
     public void readLangPhonologyFromFile() {
-        HashSet<PhonemeInTable> allPhonemes = new HashSet<>();
+        Set<PhonemeInTable> allPhonemes = new HashSet<>();
 
-        try {
-            InputStream inputStream = new FileInputStream(LanguageService.INPUT_LANGUAGES_PATH);
-            Workbook wb = WorkbookFactory.create(inputStream);
-            inputStream.close();
+        try (InputStream inputStream = new FileInputStream(LanguageService.INPUT_LANGUAGES_PATH);
+             Workbook wb = WorkbookFactory.create(inputStream)
+        ){
             Sheet sheet = wb.getSheetAt(0);
-
             int rowNum = 1;
             Row row = sheet.getRow(rowNum);
             Cell cell = row.getCell(0);
@@ -62,9 +59,9 @@ public class Language {
 
             // LOOKING FOR THE LANGUAGE
             while (cell.getCellType() != CellType.BLANK) {
-                String s = cell.getStringCellValue();
+                String cellValue = cell.getStringCellValue();
 
-                if (this.title.toLowerCase().equals(s.toLowerCase())) {
+                if (this.title.equalsIgnoreCase(cellValue)) {
                     userLogger.debug("PHONOLOGY for LANG " + this.getTitle() + ": ");
 
                     // CREATING A PHONEMES BANK FOR THE LANGUAGE
@@ -113,20 +110,20 @@ public class Language {
     }
 
     // Count all the phonotypes present in a specific language
-    public HashMap<String, HashMap<Object, Integer>> calculatePhTypeCoverage() {
+    public Map<String, Map<Object, Integer>> calculatePhTypeCoverage() {
         userLogger.info("calculating PhType coverage");
         String type = "all";
-        HashMap<String, HashMap<Object, Integer>> fullMap = DistinctiveFeatures.getFeaturesStructureDraft(type);
+        Map<String, Map<Object, Integer>> fullMap = DistinctiveFeatures.getFeaturesStructureDraft(type);
 
 
-        ArrayList<WordList> allWordlists = WordListService.getAllWordLists();
+        List<WordList> allWordlists = WordListService.getAllWordLists();
         for (WordList wl : allWordlists) {
             userLogger.info("Calculating coverage for <" + wl.getMeaning() + "> wordlist");
             for (Word word : wl.getWords(this)) {
                 userLogger.info("Word: " + word.getGraphicForm());
 
                 // Put all the distFeatures counters of every word into a full distFeature map
-                for (Map.Entry<String, HashMap<Object, Integer>> phTypeHigherLevel : fullMap.entrySet()) {
+                for (Map.Entry<String, Map<Object, Integer>> phTypeHigherLevel : fullMap.entrySet()) {
 
                     for (Map.Entry<Object, Integer> phTypeEntity : phTypeHigherLevel.getValue().entrySet()) {
                         // Entity example: {true: 0} or {HIGH_MID: 0}
@@ -163,7 +160,7 @@ public class Language {
         return phCoverage;
     }
 
-    public HashMap<String, HashMap<Object, Integer>> getPhTypeCoverage() {
+    public Map<String, Map<Object, Integer>> getPhTypeCoverage() {
         return phTypeCoverage;
     }
 

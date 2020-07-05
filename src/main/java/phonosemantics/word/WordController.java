@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import phonosemantics.data.PortConfig;
 
-import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class WordController {
@@ -27,7 +27,7 @@ public class WordController {
      * **/
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/languages/{language}/meanings/{meaning}/features")
-    public HashMap<String, HashMap<Object, Integer>> getWordDistinctiveFeatures(
+    public Map<String, Map<Object, Integer>> getWordDistinctiveFeatures(
             @RequestParam(value = "language") String language,
             @RequestParam(value = "meaning") String meaning
     ) {

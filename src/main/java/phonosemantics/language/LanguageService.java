@@ -16,8 +16,8 @@ public class LanguageService {
     public static final String INPUT_LANGUAGES_PATH = "./src/main/java/phonosemantics/input/AllLanguages.xlsx";
 
     // количество столбцов с фонемами в файле, описывающем языки
-    public static int NUM_OF_PHONOLOGY_COLUMNS = 7;
-    private static HashMap<String, Language> allLanguages;
+    public static final int NUM_OF_PHONOLOGY_COLUMNS = 7;
+    private static Map<String, Language> allLanguages;
 
 
     /**
@@ -28,12 +28,10 @@ public class LanguageService {
             allLanguages = new HashMap<>();
             userLogger.info("reading languages from file");
 
-            try {
-                InputStream inputStream = new FileInputStream(INPUT_LANGUAGES_PATH);
-                Workbook wb = WorkbookFactory.create(inputStream);
-                inputStream.close();
+            try (InputStream inputStream = new FileInputStream(INPUT_LANGUAGES_PATH);
+                Workbook wb = WorkbookFactory.create(inputStream)
+            ) {
                 Sheet sheet = wb.getSheetAt(0);
-
                 int rowNum = 1;
                 Row row = sheet.getRow(rowNum);
                 Cell cell = row.getCell(0);
@@ -41,7 +39,6 @@ public class LanguageService {
 
                 // LOOKING FOR LANGUAGE
                 while (cell.getCellType() != CellType.BLANK) {
-
                     String languageName = cell.getStringCellValue();
                     if (languageName == null) {
                         break;
@@ -72,11 +69,9 @@ public class LanguageService {
                     Language language = new Language(languageName, languagePhonology);
                     userLogger.info("new language: " + language.getTitle());
                     allLanguages.put(languageName, language);
-
                     rowNum++;
                     cell = sheet.getRow(rowNum).getCell(0);
                 }
-
             } catch (IOException e) {
                 userLogger.error(e.toString());
             }
@@ -89,10 +84,9 @@ public class LanguageService {
             allLanguages = new HashMap<>();
         }
 
-        try {
-            InputStream inputStream = new FileInputStream(INPUT_LANGUAGES_PATH);
-            Workbook wb = WorkbookFactory.create(inputStream);
-            inputStream.close();
+        try (InputStream inputStream = new FileInputStream(INPUT_LANGUAGES_PATH);
+            Workbook wb = WorkbookFactory.create(inputStream)
+        ) {
             Sheet sheet = wb.getSheetAt(0);
 
             int rowNum = 1;
@@ -157,7 +151,7 @@ public class LanguageService {
     /**
      * GET ALL LANGUAGES
      */
-    public static HashMap<String, Language> getAllLanguages() {
+    public static Map<String, Language> getAllLanguages() {
         readAllLanguagesFromFile();
         for (Map.Entry<String, Language> languageEntry : allLanguages.entrySet()) {
             languageEntry.getValue().readLangPhonologyFromFile();
@@ -168,11 +162,11 @@ public class LanguageService {
     /**
      * GET ALL LANGUAGE NAMES
      */
-    public static ArrayList<String> getAllLanguageNames() {
+    public static List<String> getAllLanguageNames() {
         userLogger.info("getting names of all available languages");
         readAllLanguageNamesFromFile();
 
-        ArrayList<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<>();
         for (Map.Entry<String, Language> lang : allLanguages.entrySet()) {
             result.add(lang.getKey());
         }

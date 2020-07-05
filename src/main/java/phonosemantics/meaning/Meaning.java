@@ -1,10 +1,10 @@
 package phonosemantics.meaning;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class Meaning {
     private String definition;
-    private HashMap<SemanticTag, Boolean> tags;
+    private Map<SemanticTag, Boolean> tags;
 
     public Meaning(String definition) {
         this.definition = definition;
@@ -16,7 +16,7 @@ public class Meaning {
         return definition;
     }
 
-    public HashMap<SemanticTag, Boolean> getTags() {
+    public Map<SemanticTag, Boolean> getTags() {
         return tags;
     }
 

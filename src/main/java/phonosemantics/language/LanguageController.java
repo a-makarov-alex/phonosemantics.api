@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import phonosemantics.data.PortConfig;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class LanguageController {
@@ -16,7 +17,7 @@ public class LanguageController {
      * **/
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/languages")
-    public ArrayList<String> getAllLanguages() {
+    public List<String> getAllLanguages() {
         return LanguageService.getAllLanguageNames();
     }
 

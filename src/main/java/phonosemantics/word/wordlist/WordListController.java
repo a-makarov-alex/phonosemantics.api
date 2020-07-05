@@ -3,13 +3,14 @@ package phonosemantics.word.wordlist;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
-import phonosemantics.data.InputConfig;
 import phonosemantics.data.PortConfig;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -30,8 +31,8 @@ public class WordListController {
      * **/
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/wordlists")
-    public ArrayList<WordList> getAllWordlists() {
-        ArrayList<WordList> allWordlists = WordListService.getAllWordLists();
+    public List<WordList> getAllWordlists() {
+        List<WordList> allWordlists = WordListService.getAllWordLists();
         return allWordlists;
     }
 
@@ -41,14 +42,12 @@ public class WordListController {
      * **/
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/meanings")
-    public ArrayList<String> getAllMeanings() {
-
-        ArrayList<String> meaningsList = new ArrayList<>();
+    public List<String> getAllMeanings() {
+        List<String> meaningsList = new ArrayList<>();
 
         for (WordList wl : WordListService.getAllWordLists()) {
             meaningsList.add(wl.getMeaning());
         }
-
         return meaningsList;
     }
 
@@ -57,7 +56,7 @@ public class WordListController {
      * **/
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/wordlists/{wordlistMeaning}/phonemes")
-    public ArrayList<PhonemeInTable> getPhonemesCoverageForWordlist(@PathVariable(value="wordlistMeaning") String wordlistMeaning) {
+    public List<PhonemeInTable> getPhonemesCoverageForWordlist(@PathVariable(value="wordlistMeaning") String wordlistMeaning) {
         WordList wrdl = WordListService.getWordlist(wordlistMeaning);
         return PhonemesBank.getInstance().getAllPhonemesList(wrdl);
     }
@@ -83,11 +82,10 @@ public class WordListController {
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/wordlists/{wordlistMeaning}/features/stats")
     // type available values: all / general / vowel / consonant
-    public HashMap<String, HashMap<Object, PhonemeInTable.DistFeatureStats>> getFeaturesStats(
+    public Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> getFeaturesStats(
             @RequestParam(value="type") String type,
             @PathVariable(value = "wordlistMeaning") String wordlistMeaning) {
         WordList wl = WordListService.getWordlist(wordlistMeaning);
-
         return wl.getDistFeatureStats();
     }
 
@@ -98,15 +96,15 @@ public class WordListController {
     @GetMapping("/wordlists/features/{feature}/stats")
     // type available values: all / general / vowel / consonant
     // Meaning: { featureValue, Stats }
-    public HashMap<String, HashMap<Object, PhonemeInTable.DistFeatureStats>> getFeaturesStats(
+    public Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> getFeaturesStats(
             @PathVariable(value = "feature") String feature) {
 
-        ArrayList<WordList> allWordlists = WordListService.getAllWordLists();
-        HashMap<String, HashMap<Object, PhonemeInTable.DistFeatureStats>> resultMap = new HashMap<>();
+        List<WordList> allWordlists = WordListService.getAllWordLists();
+        Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> resultMap = new HashMap<>();
         feature = feature.toLowerCase();
 
         for (WordList wl : allWordlists) {
-            HashMap<Object, PhonemeInTable.DistFeatureStats> statsForOneWordlist = wl.getDistFeatureStats().get(feature);
+            Map<Object, PhonemeInTable.DistFeatureStats> statsForOneWordlist = wl.getDistFeatureStats().get(feature);
             if (statsForOneWordlist != null) {
                 resultMap.put(wl.getMeaning(), statsForOneWordlist);
             } else {

@@ -14,13 +14,14 @@ import phonosemantics.word.wordlist.WordListService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Word {
     private static final Logger userLogger = LogManager.getLogger(Word.class);
 
     private String graphicForm;
-    private ArrayList<String> transcription;    //phoneme may be find by PhonemesBank -> find(String phoneme)
+    private List<String> transcription;    //phoneme may be find by PhonemesBank -> find(String phoneme)
     private String meaning;                     // the same. Meaning --> find(String meaning)
     private String language;    // need to find language using Language --> find(String language)
     private int length;
@@ -65,7 +66,7 @@ public class Word {
         this.meaning = meaning;
     }
 
-    public ArrayList<String> getTranscription() {
+    public List<String> getTranscription() {
         return transcription;
     }
 
@@ -97,7 +98,7 @@ public class Word {
 
         if (word != null) {
             String[] letters = word.split("");
-            // TODO remove HashMap<String, Phoneme> allPhonemes = SoundsBank.getInstance().getAllPhonemesTable();
+            // TODO remove Map<String, Phoneme> allPhonemes = SoundsBank.getInstance().getAllPhonemesTable();
 //Language language = Language.getLanguage(this.getLanguage());
 
             // Phoneme might be a set of 2 symbols.
@@ -166,12 +167,12 @@ public class Word {
     /**
      * RETURNS SUM OF EVERY DISTINCTIVE FEATURE FOR A CERTAIN WORD
      */
-    public HashMap<String, HashMap<Object, Integer>> countWordDistinctiveFeaturesStats(String type) {
-        HashMap<String, HashMap<Object, Integer>> distFeaturesMap = DistinctiveFeatures.getFeaturesStructureDraft(type);
+    public Map<String, Map<Object, Integer>> countWordDistinctiveFeaturesStats(String type) {
+        Map<String, Map<Object, Integer>> distFeaturesMap = DistinctiveFeatures.getFeaturesStructureDraft(type);
 
         // TODO рефакторинг. Буфер вроде уже не нужен
-        HashMap<Object, Integer> bufferMap = new HashMap<>();
-        for (Map.Entry<String, HashMap<Object, Integer>> phTypeHigherLevel : distFeaturesMap.entrySet()) {
+        Map<Object, Integer> bufferMap = new HashMap<>();
+        for (Map.Entry<String, Map<Object, Integer>> phTypeHigherLevel : distFeaturesMap.entrySet()) {
             for (Map.Entry<Object, Integer> phTypeEntity : phTypeHigherLevel.getValue().entrySet()) {
                 // Entity example: {true: 0} or {HIGH_MID: 0}
                 // Get certain distinctive feature value from every word's phoneme
@@ -180,7 +181,7 @@ public class Word {
                 for (String symbol : this.transcription) {
                     PhonemeInTable ph = PhonemesBank.getInstance().find(symbol);
                     // add 1 if phoneme has feature, add 0 if not
-                    HashMap<String, HashMap<Object, Integer>> stats = ph.countPhonemeDistinctiveFeaturesInstances();
+                    Map<String, Map<Object, Integer>> stats = ph.countPhonemeDistinctiveFeaturesInstances();
                     if (stats != null) {
                         sumForWord += stats.get(phTypeHigherLevel.getKey()).get(phTypeEntity.getKey());
                     } else {
@@ -223,7 +224,7 @@ public class Word {
             return null;
         }
 
-        ArrayList<Word> list = wl.getWords(language);
+        List<Word> list = wl.getWords(language);
         if (list == null) {
             userLogger.debug("no words found for [" + meaning + "] meaning in [" + languageName + "] language");
             return null;
@@ -236,6 +237,5 @@ public class Word {
 
         return list.get(0);
     }
-
 
 }

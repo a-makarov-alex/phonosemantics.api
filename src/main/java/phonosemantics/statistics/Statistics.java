@@ -15,11 +15,11 @@ public class Statistics {
     }
 
 
-    private static HashMap<String, Integer> unknownPhonemes = new HashMap<>();
+    private static Map<String, Integer> unknownPhonemes = new HashMap<>();
 
     private static int numOfAllPhonemes = 0;
 
-    public static HashMap<String, Integer> getUnknownPhonemes() {
+    public static Map<String, Integer> getUnknownPhonemes() {
         WordListService.getAllWordLists(); // in case it is the first request on server and wordlists are not counted yet
         return unknownPhonemes;
     }

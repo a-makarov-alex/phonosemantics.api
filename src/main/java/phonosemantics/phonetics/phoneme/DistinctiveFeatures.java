@@ -7,9 +7,7 @@ import phonosemantics.phonetics.phoneme.distinctiveFeatures.consonants.*;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Backness;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Height;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Roundness;
-import phonosemantics.word.wordlist.WordList;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +18,9 @@ public class DistinctiveFeatures {
     private VowelSpace vowelSpace; //vowels only
     //    private Laryngeal laryngeal;
 
-    private static HashMap<Object, Integer> allFeaturesMap = null;
+    private static Map<Object, Integer> allFeaturesMap = null;
+    private static final String TRUE = "true";
+    private static final String FALSE = "false";
 
 
     /** CONSTRUCTOR FOR CONSONANTS **/
@@ -260,6 +260,9 @@ public class DistinctiveFeatures {
                     nasal = true;
                     break;
                 }
+                default: {
+                    // TODO: add userLogs here
+                }
             }
         }
 
@@ -389,19 +392,19 @@ public class DistinctiveFeatures {
         }
     }
 
-    public static HashMap<String, Object[]> getFeaturesForAPI(String requestedFeatures) {
-        HashMap<String, Object[]> map = new HashMap<>();
+    public static Map<String, Object[]> getFeaturesForAPI(String requestedFeatures) {
+        Map<String, Object[]> map = new HashMap<>();
         requestedFeatures = requestedFeatures.toLowerCase();
 
         /* **********************  GENERAL ***************************/
         if (requestedFeatures.equals("general") || requestedFeatures.equals("all")) {
             map.put("mannerPrecise", MannerPrecise.values());
             map.put("stricture", Stricture.values());
-            map.put("vocoid", new String[] {"true", "false"});
-            map.put("approximant", new String[] {"true", "false"});
-            map.put("sonorant", new String[] {"true", "false"});
-            map.put("continuant", new String[] {"true", "false"});
-            map.put("nasal", new String[] {"true", "false"});
+            map.put("vocoid", new String[] {TRUE, FALSE});
+            map.put("approximant", new String[] {TRUE, FALSE});
+            map.put("sonorant", new String[] {TRUE, FALSE});
+            map.put("continuant", new String[] {TRUE, FALSE});
+            map.put("nasal", new String[] {TRUE, FALSE});
         }
 
         /* **********************  VOWELS ***************************/
@@ -420,7 +423,7 @@ public class DistinctiveFeatures {
             map.put("semivowel", Semivowel.values());
             map.put("lateral", Lateral.values());
             map.put("rhotics", Rhotics.values());
-            map.put("voiced", new String[] {"true", "false"});
+            map.put("voiced", new String[] {TRUE, FALSE});
         }
         return map;
     }
@@ -433,11 +436,11 @@ public class DistinctiveFeatures {
      *     {false: 0}
      *   ]}
      */
-    public static HashMap<String, HashMap<Object, Integer>> getFeaturesStructureDraft(String type) {
-        HashMap<String, HashMap<Object, Integer>> mainMap = new HashMap<>();
+    public static Map<String, Map<Object, Integer>> getFeaturesStructureDraft(String type) {
+        Map<String, Map<Object, Integer>> mainMap = new HashMap<>();
 
         for (Map.Entry<String, Object[]> elem : getFeaturesForAPI(type).entrySet()) {
-            HashMap<Object, Integer> innerMap = new HashMap<>();
+            Map<Object, Integer> innerMap = new HashMap<>();
 
             // Заполняем парами "значение признака : количество экземпляров". [{true : 1}, {false: 0}]
             for (int i=0; i < elem.getValue().length; i++) {

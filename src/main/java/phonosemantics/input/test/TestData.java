@@ -1,6 +1,7 @@
 package phonosemantics.input.test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TestData {
     public static final String TEST_FILENAME = "InputTest.xlsx";
@@ -9,7 +10,7 @@ public class TestData {
 
     public static final int NUM_OF_LANGUAGES = 10;
     public static final int NUM_OF_MEANINGS = 2;
-    private static ArrayList<String> testMeanings;
+    private static List<String> testMeanings;
 
     static {
         testMeanings = new ArrayList<>();
@@ -17,7 +18,7 @@ public class TestData {
         testMeanings.add("leaf");
     }
 
-    public static ArrayList<String> getTestMeanings() {
+    public static List<String> getTestMeanings() {
         return testMeanings;
     }
 }

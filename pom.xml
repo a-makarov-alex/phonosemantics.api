@@ -35,10 +35,13 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+            <!-- spring boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
         </plugins>
     </build>
     <properties>
@@ -97,17 +100,18 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- thymeleaaf -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
         <!-- tomcat-jasper -->
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-jasper</artifactId>
             <version>9.0.29</version>
+        </dependency>
+
+        <!-- sonar-maven-plugin -->
+        <dependency>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.7.0.1746</version>
         </dependency>
 
 

@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import phonosemantics.statistics.Math;
 
-import java.util.HashMap;
+import java.util.Map;
 
 //TODO: можно сделать синглтон и менять PhonemeStats в контроллере
 public class PhonemeInTable {
@@ -24,8 +24,8 @@ public class PhonemeInTable {
         this.column = c;
     }
 
-    public HashMap<String, HashMap<Object, Integer>> countPhonemeDistinctiveFeaturesInstances() {
-        HashMap<String, HashMap<Object, Integer>> distFeatureStats = DistinctiveFeatures.getFeaturesStructureDraft("all");
+    public Map<String, Map<Object, Integer>> countPhonemeDistinctiveFeaturesInstances() {
+        Map<String, Map<Object, Integer>> distFeatureStats = DistinctiveFeatures.getFeaturesStructureDraft("all");
         DistinctiveFeatures df = this.distinctiveFeatures;
 
         // TODO это можно как-то автоматизировать через перебор полей класса, но пока нет смысла

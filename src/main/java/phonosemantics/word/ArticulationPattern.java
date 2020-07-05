@@ -6,12 +6,13 @@ import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ArticulationPattern {
     private static final Logger userLogger = LogManager.getLogger(ArticulationPattern.class);
 
     private String graphicForm;
-    private ArrayList<String> transcription;
+    private List<String> transcription;
     private String base;    //основание для создания паттерна: vocoid/continuant/backness etc
     private String language;
     private Object[] pattern;
@@ -87,7 +88,7 @@ public class ArticulationPattern {
         return language;
     }
 
-    public ArrayList<String> getTranscription() {
+    public List<String> getTranscription() {
         return transcription;
     }
 

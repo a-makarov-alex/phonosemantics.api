@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 //TODO: be careful, remove hardcode from this class
 public class WordListService {
@@ -19,10 +20,10 @@ public class WordListService {
 
     // TODO: запихнуть в контекст эти данные, если мы не оставим путь как константу
     // TODO: add some kind of context to project to store data
-    private static ArrayList<WordList> allWordLists;
+    private static List<WordList> allWordLists;
     // TODO allWordlist можно заполнять в статическом блоке
 
-    public static ArrayList<WordList> getAllWordLists(String path) {
+    public static List<WordList> getAllWordLists(String path) {
         if (allWordLists != null) {
             userLogger.info("allWordlists is NOT null");
             return allWordLists;
@@ -34,7 +35,7 @@ public class WordListService {
     }
 
     // For default input file
-    public static ArrayList<WordList> getAllWordLists() {
+    public static List<WordList> getAllWordLists() {
         return getAllWordLists(InputConfig.INPUT_DIRECTORY + InputConfig.FILENAME);
     }
 
@@ -42,19 +43,15 @@ public class WordListService {
     /**
      * Reads all the words from inputFile and write them to one list of Word entities
      */
-    public static ArrayList<WordList> readAllWordListsFromInputFile(String path) {
-
+    public static List<WordList> readAllWordListsFromInputFile(String path) {
         userLogger.info("wordlist extracting from file starting...");
-
         // open file for reading
-        InputStream inputStream = null;
-        ArrayList<WordList> allWordlists = new ArrayList<>();
+        List<WordList> allWordlists = new ArrayList<>();
 
-        try {
-            inputStream = new FileInputStream(path);
+        try (InputStream inputStream = new FileInputStream(path);
             Workbook wb = WorkbookFactory.create(inputStream);
+        ) {
             Sheet sheet = wb.getSheetAt(0);
-
             int rowNum = 0;
             int colNum = 1;
 
@@ -68,7 +65,6 @@ public class WordListService {
 
                 colNum++;
             }
-            inputStream.close();
             userLogger.info(colNum - 1 + " wordlists are composed from input file");
             return allWordlists;
 
@@ -82,17 +78,15 @@ public class WordListService {
      * Reads a list of words from inputFile by meaning
      */
     public static WordList composeWordList(String meaning, String path) {
-
         // open file for reading
-        InputStream inputStream = null;
-        ArrayList<Word> list = new ArrayList<Word>();
+        List<Word> list = new ArrayList<Word>();
 
-        try {
-            inputStream = new FileInputStream(path);
+        try (InputStream inputStream = new FileInputStream(path);
+             Workbook wb = WorkbookFactory.create(inputStream);
+        ) {
             userLogger.info("--- wordlist composing for " + meaning);
-            Workbook wb = WorkbookFactory.create(inputStream);
-            Sheet sheet;
-            sheet = wb.getSheetAt(0);
+
+            Sheet sheet = wb.getSheetAt(0);
             Row nullRow = sheet.getRow(0);
             Cell cell;
             int count = 0;
@@ -141,7 +135,6 @@ public class WordListService {
             if (LoggerConfig.CONSOLE_SHOW_FOUND_MEANINGS_IN_INPUT_FILE) {
                 System.out.println();
             }
-            inputStream.close();
             WordList wordList = new WordList(list);
             return wordList;
 
@@ -160,7 +153,7 @@ public class WordListService {
 
     public static WordList getWordlist(String meaning, String filePath) {
         meaning = meaning.toLowerCase();
-        ArrayList<WordList> allWordlists = getAllWordLists(filePath);
+        List<WordList> allWordlists = getAllWordLists(filePath);
         for (WordList wl : allWordlists) {
             if (wl.getMeaning().equals(meaning)) {
                 return wl;
@@ -170,10 +163,8 @@ public class WordListService {
     }
 
 //    public void prepareLanguagesMap() {
-//        try {
+//        try(FileInputStream inputStream = new FileInputStream(this.filePath)) {
 //            userLogger.debug(INPUT_DIRECTORY + this.filePath);
-//            FileInputStream inputStream = new FileInputStream(this.filePath);
-//
 //            Workbook wb = WorkbookFactory.create(inputStream);
 //            Sheet sheet = wb.getSheetAt(0);
 //            int rowNum = 1;
@@ -183,7 +174,6 @@ public class WordListService {
 //            while (sheet.getRow(rowNum) != null) {
 //                Language l = new Language(sheet.getRow(rowNum).getCell(0).getStringCellValue());
 //            }
-//            inputStream.close();
 //
 //        } catch (IOException e) {
 //            userLogger.error("file not found by path: " + this.filePath + ". " + e.toString());
