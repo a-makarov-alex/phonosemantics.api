@@ -519,7 +519,7 @@ class CoverageSheet {
     int firstCol;
     int lastCol;
 
-    public CoverageSheet(Sheet sheet, int firstRow, int lastRow, int firstCol, int lastCol) {
+    CoverageSheet(Sheet sheet, int firstRow, int lastRow, int firstCol, int lastCol) {
         this.sheet = sheet;
         this.firstRow = firstRow;
         this.lastRow = lastRow;

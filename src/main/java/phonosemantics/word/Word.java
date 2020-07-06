@@ -92,7 +92,7 @@ public class Word {
         return count;
     }
 
-    public void setTranscriptionFromWord() {
+    private void setTranscriptionFromWord() {
         this.transcription = new ArrayList<>();
         String word = this.getGraphicForm();
 
@@ -170,8 +170,6 @@ public class Word {
     public Map<String, Map<Object, Integer>> countWordDistinctiveFeaturesStats(String type) {
         Map<String, Map<Object, Integer>> distFeaturesMap = DistinctiveFeatures.getFeaturesStructureDraft(type);
 
-        // TODO рефакторинг. Буфер вроде уже не нужен
-        Map<Object, Integer> bufferMap = new HashMap<>();
         for (Map.Entry<String, Map<Object, Integer>> phTypeHigherLevel : distFeaturesMap.entrySet()) {
             for (Map.Entry<Object, Integer> phTypeEntity : phTypeHigherLevel.getValue().entrySet()) {
                 // Entity example: {true: 0} or {HIGH_MID: 0}

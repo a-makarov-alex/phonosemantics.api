@@ -1,6 +1,5 @@
 package phonosemantics.phonetics.phoneme;
 
-import phonosemantics.App;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.MannerPrecise;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.Stricture;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.consonants.*;
@@ -103,11 +102,11 @@ public class DistinctiveFeatures {
         // TODO: выяснить подробности про аппроксиманты
         private boolean approximant = false; //Approximant segments include vowels, glides, and liquids while excluding nasals and obstruents.
 
-        public MajorClass(boolean vocoid) {
+        MajorClass(boolean vocoid) {
             this.vocoid = vocoid;
         }
 
-        public MajorClass(boolean vocoid, boolean approximant) {
+        MajorClass(boolean vocoid, boolean approximant) {
             this.vocoid = vocoid;
             this.approximant = approximant;
         }
@@ -186,7 +185,7 @@ public class DistinctiveFeatures {
         //private boolean delayedRelease = false; // distinguish affricates (+) from stops (-)
 
         /** CONSTRUCTOR FOR VOWELS, PLOSIVES, NASALS, NOT_STRIDENT FRICATIVES & AFFRICATES, TRILLS, TAP-FLAPS**/
-        public Manner(MannerPrecise mannerPrecise, boolean voiced) {
+        Manner(MannerPrecise mannerPrecise, boolean voiced) {
             this.mannerPrecise = mannerPrecise;
             this.voiced = voiced;
             this.countMannerParameters(mannerPrecise);
@@ -201,7 +200,7 @@ public class DistinctiveFeatures {
         }
 
         /** CONSTRUCTOR FOR STRIDENT FRICATIVES & AFFRICATES**/
-        public Manner(MannerPrecise mannerPrecise, boolean voiced, Sibilant sibilant) {
+        Manner(MannerPrecise mannerPrecise, boolean voiced, Sibilant sibilant) {
             this.mannerPrecise = mannerPrecise;
             this.voiced = voiced;
             this.strident = Strident.STRIDENT;
@@ -210,7 +209,7 @@ public class DistinctiveFeatures {
         }
 
         /** CONSTRUCTOR FOR LATERALS AND RHOTICS**/
-        public Manner(MannerPrecise mannerPrecise, boolean voiced, Lateral lateral, Rhotics rhotics) {
+        Manner(MannerPrecise mannerPrecise, boolean voiced, Lateral lateral, Rhotics rhotics) {
             this.mannerPrecise = mannerPrecise;
             this.sonorant = true;
             this.continuant = true;
@@ -221,14 +220,14 @@ public class DistinctiveFeatures {
         }
 
         /** CONSTRUCTOR FOR SEMIVOWELS **/
-        public Manner(MannerPrecise mannerPrecise, Semivowel semivowel) {
+        Manner(MannerPrecise mannerPrecise, Semivowel semivowel) {
             this.mannerPrecise = mannerPrecise;
             this.voiced = true;
             this.semivowel = semivowel;
             this.countMannerParameters(mannerPrecise);
         }
 
-        public void countMannerParameters(MannerPrecise mannerPrecise) {
+        void countMannerParameters(MannerPrecise mannerPrecise) {
             switch(mannerPrecise) {
                 case VOWEL: {
                     sonorant = true;
@@ -323,13 +322,13 @@ public class DistinctiveFeatures {
         private PlaceApproximate placeApproximate;
         private PlacePrecise placePrecise;
 
-        public Place(PlacePrecise placePrecise) {
+        Place(PlacePrecise placePrecise) {
             this.placePrecise = placePrecise;
             this.placeApproximate = placeApproximateFromPrecise(placePrecise);
         }
 
         // Constructor for vowels
-        public Place() {
+        Place() {
             this.placeApproximate = PlaceApproximate.NOT_APPLICABLE;
             this.placePrecise = PlacePrecise.NOT_APPLICABLE;
         }
@@ -366,14 +365,14 @@ public class DistinctiveFeatures {
         private Backness backness;
         private Roundness roundness;
 
-        public VowelSpace(Height height, Backness backness, Roundness roundness) {
+        VowelSpace(Height height, Backness backness, Roundness roundness) {
             this.height = height;
             this.backness = backness;
             this.roundness = roundness;
         }
 
         //constructor for consonants
-        public VowelSpace() {
+        VowelSpace() {
             this.height = Height.NOT_APPLICABLE;
             this.backness = Backness.NOT_APPLICABLE;
             this.roundness = Roundness.NOT_APPLICABLE;
@@ -437,6 +436,7 @@ public class DistinctiveFeatures {
      *   ]}
      */
     public static Map<String, Map<Object, Integer>> getFeaturesStructureDraft(String type) {
+        // TODO: refactoring, create it once and then return from private variable
         Map<String, Map<Object, Integer>> mainMap = new HashMap<>();
 
         for (Map.Entry<String, Object[]> elem : getFeaturesForAPI(type).entrySet()) {
