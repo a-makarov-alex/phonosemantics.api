@@ -1,5 +1,6 @@
 package phonosemantics.phonetics.phoneme;
 
+import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import phonosemantics.statistics.Math;
@@ -7,6 +8,7 @@ import phonosemantics.statistics.Math;
 import java.util.Map;
 
 //TODO: можно сделать синглтон и менять PhonemeStats в контроллере
+@Data
 public class PhonemeInTable {
     private static final Logger userLogger = LogManager.getLogger(PhonemeInTable.class);
 
@@ -78,42 +80,7 @@ public class PhonemeInTable {
         return distFeatureStats;
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    public int getRow() {
-        return row;
-    }
-
-    public int getColumn() {
-        return column;
-    }
-
-    public boolean isRecognized() {
-        return isRecognized;
-    }
-
-    public void setRecognized(boolean recognized) {
-        isRecognized = recognized;
-    }
-
-    public DistinctiveFeatures getDistinctiveFeatures() {
-        return distinctiveFeatures;
-    }
-
-    public void setDistinctiveFeatures(DistinctiveFeatures distinctiveFeatures) {
-        this.distinctiveFeatures = distinctiveFeatures;
-    }
-
-    public PhonemeStats getPhonemeStats() {
-        return phonemeStats;
-    }
-
-    public void setPhonemeStats(PhonemeStats phonemeStats) {
-        this.phonemeStats = phonemeStats;
-    }
-
+    @Data
     public static class PhonemeStats {
         private Double percentOfAllPhonemes;
         private Double percentOfWordsWithPhoneme;
@@ -132,36 +99,9 @@ public class PhonemeInTable {
             percentOfWordsWithPhoneme = Math.round((double)numW/(double)numAllWords, 3);
             averagePhonemesPerWord = Math.round((double) numPh/(double)numAllWords, 3);
         }
-
-        public Double getPercentOfAllPhonemes() {
-            return percentOfAllPhonemes;
-        }
-
-        public Double getPercentOfWordsWithPhoneme() {
-            return percentOfWordsWithPhoneme;
-        }
-
-        public Double getAveragePhonemesPerWord() {
-            return averagePhonemesPerWord;
-        }
-
-        public int getNumPh() {
-            return numPh;
-        }
-
-        public int getNumW() {
-            return numW;
-        }
-
-        public int getNumAllPhonemes() {
-            return numAllPhonemes;
-        }
-
-        public int getNumAllWords() {
-            return numAllWords;
-        }
     }
 
+    @Data
     public static class DistFeatureStats {
         private Double percentOfAllPhonemes;
         private Double percentOfWordsWithFeature;
@@ -179,34 +119,6 @@ public class PhonemeInTable {
             percentOfAllPhonemes = Math.round((double)numFeat/(double)numAllPhonemes,3);
             percentOfWordsWithFeature = Math.round((double)numW/(double)numAllWords, 3);
             averageFeatureInstancesPerWord = Math.round((double) numFeat/(double)numAllWords, 3);
-        }
-
-        public Double getPercentOfAllPhonemes() {
-            return percentOfAllPhonemes;
-        }
-
-        public Double getPercentOfWordsWithFeature() {
-            return percentOfWordsWithFeature;
-        }
-
-        public Double getAverageFeatureInstancesPerWord() {
-            return averageFeatureInstancesPerWord;
-        }
-
-        public int getNumPhWithFeature() {
-            return numPhWithFeature;
-        }
-
-        public int getNumWordsWithFeature() {
-            return numWordsWithFeature;
-        }
-
-        public int getNumAllPhonemes() {
-            return numAllPhonemes;
-        }
-
-        public int getNumAllWords() {
-            return numAllWords;
         }
     }
 }

@@ -1,5 +1,6 @@
 package phonosemantics.word.wordlist;
 
+import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import phonosemantics.language.Language;
@@ -27,6 +28,7 @@ import java.util.Map;
  *          - PHTYPE INSTANCES PER ALL PHTYPES
  *          - AVERAGE PHTYPE INSTANCES NUM PER WORD
  **/
+@Data
 public class WordList {
     private static final Logger userLogger = LogManager.getLogger(WordList.class);
 
@@ -254,40 +256,7 @@ public class WordList {
         return list;
     }
 
-
-    // GETTERS AND SETTERS
-    public List<Word> getList() {
-        return list;
-    }
-
-    public String getMeaning() {
-        return meaning;
-    }
-
-    public Map<Object, PhTypeStats> getPhTypeStatsMap() {
-        return phTypeStatsMap;
-    }
-
-    public int getNumOfWords() {
-        return numOfWords;
-    }
-
-    public int getNumOfPhonemes() {
-        return numOfPhonemes;
-    }
-
-    public Map<String, PhonemeInTable.PhonemeStats> getPhonemeStats() {
-        return phonemeStats;
-    }
-
-    public Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> getDistFeatureStats() {
-        return distFeatureStats;
-    }
-
-    public Map<String, Map<Object, Integer>> getNumOfWordsWithFeatures() {
-        return numOfWordsWithFeatures;
-    }
-
+    @Data
     public class PhTypeStats {
         private Object phType;
 
@@ -308,34 +277,6 @@ public class WordList {
 
         public PhTypeStats(Object phType) {
             this.phType = phType;
-        }
-
-        public Object getPhType() {
-            return phType;
-        }
-
-        public double getPercentOfWordsWithPhType() {
-            return percentOfWordsWithPhType;
-        }
-
-        public double getPercentOfPhonemesWithPhType() {
-            return percentOfPhonemesWithPhType;
-        }
-
-        public double getAveragePhTypePerWord() {
-            return averagePhTypePerWord;
-        }
-
-        public int getPhonemesWithPhTypeCounter() {
-            return phonemesWithPhTypeCounter;
-        }
-
-        public int getWordsWithPhTypeCounter() {
-            return wordsWithPhTypeCounter;
-        }
-
-        public int getPotentialWordsWithPhType() {
-            return potentialWordsWithPhType;
         }
     }
 }

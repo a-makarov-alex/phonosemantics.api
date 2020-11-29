@@ -1,5 +1,6 @@
 package phonosemantics.word;
 
+import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import phonosemantics.LoggerConfig;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Data
 public class Word {
     private static final Logger userLogger = LogManager.getLogger(Word.class);
 
@@ -49,37 +51,6 @@ public class Word {
     public Word(String word) {
         this.graphicForm = word;
         setTranscriptionFromWord(); // length is added here also
-    }
-
-    /**
-     * GETTERS AND SETTERS
-     **/
-    public String getGraphicForm() {
-        return graphicForm;
-    }
-
-    public String getMeaning() {
-        return meaning;
-    }
-
-    public void setMeaning(String meaning) {
-        this.meaning = meaning;
-    }
-
-    public List<String> getTranscription() {
-        return transcription;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public PartOfSpeech getPartOfSpeech() {
-        return partOfSpeech;
     }
 
     public int getNumOfPhonemes(String phoneme) {
@@ -235,5 +206,4 @@ public class Word {
 
         return list.get(0);
     }
-
 }

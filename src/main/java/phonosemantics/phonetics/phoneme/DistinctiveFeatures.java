@@ -1,5 +1,6 @@
 package phonosemantics.phonetics.phoneme;
 
+import lombok.Data;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.MannerPrecise;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.Stricture;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.consonants.*;
@@ -10,6 +11,7 @@ import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Roundness;
 import java.util.HashMap;
 import java.util.Map;
 
+@Data
 public class DistinctiveFeatures {
     private MajorClass majorClass;
     private Manner manner;
@@ -89,6 +91,7 @@ public class DistinctiveFeatures {
         this.vowelSpace = new VowelSpace(height, backness, roundness);
     }
 
+    @Data
     public class MajorClass {
         // TODO: свойства вычисляются из manner precise
         //private boolean syllabic; can not be done cause depends on context (consonants)
@@ -110,14 +113,6 @@ public class DistinctiveFeatures {
             this.vocoid = vocoid;
             this.approximant = approximant;
         }
-
-        public boolean isVocoid() {
-            return vocoid;
-        }
-
-        public boolean isApproximant() {
-            return approximant;
-        }
     }
 
     // TODO: investigate situation with laryngeals
@@ -127,6 +122,7 @@ public class DistinctiveFeatures {
 //        private boolean constrictedGlottis = false;
 //    }
 
+    @Data
     public class Manner {
         private MannerPrecise mannerPrecise;
         // all fields:
@@ -264,60 +260,9 @@ public class DistinctiveFeatures {
                 }
             }
         }
-
-        public void setLateral(Lateral lateral) {
-            this.lateral = lateral;
-        }
-
-        public void setRhotics(Rhotics rhotics) {
-            this.rhotics = rhotics;
-        }
-
-        public boolean isSonorant() {
-            return sonorant;
-        }
-
-        public boolean isContinuant() {
-            return continuant;
-        }
-
-        public Stricture getStricture() {
-            return stricture;
-        }
-
-        public boolean isNasal() {
-            return nasal;
-        }
-
-        public boolean isVoiced() {
-            return voiced;
-        }
-
-        public Strident getStrident() {
-            return strident;
-        }
-
-        public Sibilant getSibilant() {
-            return sibilant;
-        }
-
-        public Lateral getLateral() {
-            return lateral;
-        }
-
-        public Rhotics getRhotics() {
-            return rhotics;
-        }
-
-        public MannerPrecise getMannerPrecise() {
-            return mannerPrecise;
-        }
-
-        public Semivowel getSemivowel() {
-            return semivowel;
-        }
     }
 
+    @Data
     public class Place {
         private PlaceApproximate placeApproximate;
         private PlacePrecise placePrecise;
@@ -331,14 +276,6 @@ public class DistinctiveFeatures {
         Place() {
             this.placeApproximate = PlaceApproximate.NOT_APPLICABLE;
             this.placePrecise = PlacePrecise.NOT_APPLICABLE;
-        }
-
-        public PlaceApproximate getPlaceApproximate() {
-            return placeApproximate;
-        }
-
-        public PlacePrecise getPlacePrecise() {
-            return placePrecise;
         }
 
         /** Needed for constructor**/
@@ -360,6 +297,7 @@ public class DistinctiveFeatures {
         }
     }
 
+    @Data
     public class VowelSpace {
         private Height height;
         private Backness backness;
@@ -376,18 +314,6 @@ public class DistinctiveFeatures {
             this.height = Height.NOT_APPLICABLE;
             this.backness = Backness.NOT_APPLICABLE;
             this.roundness = Roundness.NOT_APPLICABLE;
-        }
-
-        public Height getHeight() {
-            return height;
-        }
-
-        public Backness getBackness() {
-            return backness;
-        }
-
-        public Roundness getRoundness() {
-            return roundness;
         }
     }
 
@@ -451,21 +377,5 @@ public class DistinctiveFeatures {
             mainMap.put(elem.getKey(), innerMap);
         }
         return mainMap;
-    }
-
-    public MajorClass getMajorClass() {
-        return majorClass;
-    }
-
-    public Manner getManner() {
-        return manner;
-    }
-
-    public Place getPlace() {
-        return place;
-    }
-
-    public VowelSpace getVowelSpace() {
-        return vowelSpace;
     }
 }

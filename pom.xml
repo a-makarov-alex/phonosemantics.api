@@ -126,6 +126,14 @@
             <version>3.7.0.1746</version>
         </dependency>
 
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- jacoco-maven-plugin -->
         <!--<dependency>
             <groupId>org.jacoco</groupId>

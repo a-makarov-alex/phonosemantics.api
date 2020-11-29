@@ -1,7 +1,10 @@
 package phonosemantics.meaning;
 
+import lombok.Data;
+
 import java.util.Map;
 
+@Data
 public class Meaning {
     private String definition;
     private Map<SemanticTag, Boolean> tags;
@@ -10,14 +13,6 @@ public class Meaning {
         this.definition = definition;
         // TODO: bank of tags for definitions
         // записывать теги тут, получать список из отдельного метода, где захардкожены эти теги.
-    }
-
-    public String getDefinition() {
-        return definition;
-    }
-
-    public Map<SemanticTag, Boolean> getTags() {
-        return tags;
     }
 
     public boolean checkTag(String tagName) {

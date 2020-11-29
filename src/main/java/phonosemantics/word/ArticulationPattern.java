@@ -1,5 +1,6 @@
 package phonosemantics.word;
 
+import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import phonosemantics.phonetics.PhonemesBank;
@@ -8,6 +9,7 @@ import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class ArticulationPattern {
     private static final Logger userLogger = LogManager.getLogger(ArticulationPattern.class);
 
@@ -73,26 +75,6 @@ public class ArticulationPattern {
                 }
             }
         }
-        return pattern;
-    }
-
-    public String getGraphicForm() {
-        return graphicForm;
-    }
-
-    public String getBase() {
-        return base;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public List<String> getTranscription() {
-        return transcription;
-    }
-
-    public Object[] getPattern() {
         return pattern;
     }
 }

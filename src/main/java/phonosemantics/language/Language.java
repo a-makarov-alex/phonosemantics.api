@@ -1,6 +1,7 @@
 package phonosemantics.language;
 
 
+import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
@@ -17,6 +18,7 @@ import java.io.InputStream;
 import java.util.*;
 
 // TODO: maybe id should be implemented cause 2 languages may have similar name
+@Data
 public class Language {
     private static final Logger userLogger = LogManager.getLogger(Language.class);
 
@@ -24,7 +26,6 @@ public class Language {
     private String family;
     private String group;  // typology etc.
     private Set<PhonemeInTable> phonology;
-
     // maps save the verdict "if the phoneme/phType were found in the Language words on practice"
     private Set<PhonemeInTable> phCoverage;
     private Map<String, Map<Object, Integer>> phTypeCoverage;
@@ -136,35 +137,5 @@ public class Language {
             }
         }
         return fullMap;
-    }
-
-
-    /** GETTERS AND SETTERS **/
-    public String getTitle() {
-        return title;
-    }
-
-    public String getFamily() {
-        return family;
-    }
-
-    public String getGroup() {
-        return group;
-    }
-
-    public Set<PhonemeInTable> getPhonology() {
-        return phonology;
-    }
-
-    public Set<PhonemeInTable> getPhCoverage() {
-        return phCoverage;
-    }
-
-    public Map<String, Map<Object, Integer>> getPhTypeCoverage() {
-        return phTypeCoverage;
-    }
-
-    public Set<PhonemeInTable> getPhNotDescribed() {
-        return phNotDescribed;
     }
 }
