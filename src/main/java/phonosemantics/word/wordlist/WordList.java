@@ -34,7 +34,7 @@ public class WordList {
 
     private String meaning;
     private List<Word> list;
-    private Map<String, PhonemeInTable.PhonemeStats> phonemeStats;
+    private Map<String, PhonemeInTable.PhonemeStats> phonemeStatsMap;
     //TODO Deprecated
     private Map<Object, PhTypeStats> phTypeStatsMap = new HashMap<>();
     private Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> distFeatureStats = new HashMap<>();
@@ -57,9 +57,17 @@ public class WordList {
         for (Word w : list) {
             numOfPhonemes += w.getTranscription().size();
         }
+        // Заполняем статистику по отдельным фонемам
+        this.fillPhonemeStatsMap();
+        // Заполняем данные статистики по фонотипам исходя из сырых данных по фонемам
+        Map<String, Map<Object, Integer>> rawStats = this.calculateFeaturesStats("all");
+        this.fillDistinctiveFeatureStatsMap(rawStats);
 
-        // Заполняем фонемМапу
-        phonemeStats = new HashMap<>();
+    }
+
+    // Заполняем статистику по отдельным фонемам
+    public void fillPhonemeStatsMap() {
+        phonemeStatsMap = new HashMap<>();
         for (PhonemeInTable phoneme : PhonemesBank.getInstance().getAllPhonemesList()) {
             String currentPh = phoneme.getValue();
             int counterPh = 0;
@@ -77,20 +85,23 @@ public class WordList {
                     counterW++;
                 }
             }
-            phonemeStats.put(phoneme.getValue(), new PhonemeInTable.PhonemeStats(
+            // Рассчитываем статистические данные по каждой фонеме и сохраняем
+            phonemeStatsMap.put(phoneme.getValue(), new PhonemeInTable.PhonemeStats(
                     counterPh,
                     counterW,
                     numOfPhonemes,
                     numOfWords));
         }
+    }
 
-        Map<String, Map<Object, Integer>> rawStats = this.calculateFeaturesStats("all");
+    // Заполняем данные статистики по фонотипам исходя из сырых данных по фонемам
+    public void fillDistinctiveFeatureStatsMap(Map<String, Map<Object, Integer>> rawStats) {
         for (Map.Entry<String, Map<Object, Integer>> highLevelEntry : rawStats.entrySet()) {
             distFeatureStats.put(highLevelEntry.getKey(), new HashMap<>());
 
             for (Map.Entry<Object, Integer> lowLevelEntry : highLevelEntry.getValue().entrySet()) {
                 int numOfWordsWithFeature = this.numOfWordsWithFeatures.get(highLevelEntry.getKey()).get(lowLevelEntry.getKey());
-
+                // Рассчитываем статистические данные по каждому фонотипу и сохраняем
                 distFeatureStats.get(highLevelEntry.getKey()).put(
                         lowLevelEntry.getKey(),
                         new PhonemeInTable.DistFeatureStats(

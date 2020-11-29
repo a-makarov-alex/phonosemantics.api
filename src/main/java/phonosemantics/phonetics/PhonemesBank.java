@@ -314,7 +314,7 @@ public class PhonemesBank {
     public List<PhonemeInTable> getAllPhonemesList(WordList wl) {
         List<PhonemeInTable> phList = this.getAllPhonemesList();
         for (PhonemeInTable ph : phList) {
-            ph.setPhonemeStats(wl.getPhonemeStats().get(ph.getValue()));
+            ph.setPhonemeStats(wl.getPhonemeStatsMap().get(ph.getValue()));
         }
         userLogger.info("phonemes list for <<" + wl.getMeaning() + ">> wordlist is composed successfully");
         return phList;

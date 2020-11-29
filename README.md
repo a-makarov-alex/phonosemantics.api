@@ -2,6 +2,7 @@
 phonosemantics v2 functionality in a REST API form
 
 1. Start: mvn clean install, then run generated jar file.
+or skip tests: mvn clean -DskipTests install
 2. See API (UI): http://localhost:8083/swagger-ui.html
 OR get API json: http://localhost:8083/v2/api-docs
 

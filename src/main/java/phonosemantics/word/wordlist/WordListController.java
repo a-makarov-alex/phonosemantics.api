@@ -71,7 +71,7 @@ public class WordListController {
             @RequestParam(value="phoneme") String phoneme
     ) {
         WordList wl = WordListService.getWordlist(wordlistMeaning);
-        return wl.getPhonemeStats().get(phoneme);
+        return wl.getPhonemeStatsMap().get(phoneme);
     }
 
     /**
