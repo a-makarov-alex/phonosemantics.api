@@ -1,8 +1,7 @@
 package phonosemantics.phonetics.phoneme;
 
 import lombok.Data;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import phonosemantics.statistics.Math;
 
 import java.util.Map;
@@ -10,7 +9,7 @@ import java.util.Map;
 //TODO: можно сделать синглтон и менять PhonemeStats в контроллере
 @Data
 public class PhonemeInTable {
-    private static final Logger userLogger = LogManager.getLogger(PhonemeInTable.class);
+    private static final Logger userLogger = Logger.getLogger(PhonemeInTable.class);
 
     private String value;
     private int row;

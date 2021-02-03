@@ -1,7 +1,6 @@
 package phonosemantics.phonetics;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import org.apache.poi.ss.usermodel.*;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
@@ -23,7 +22,7 @@ import java.util.Map;
 
 
 public class PhonemesBank {
-    private static final Logger userLogger = LogManager.getLogger(PhonemesBank.class);
+    private static final Logger userLogger = Logger.getLogger(PhonemesBank.class);
 
     //путь к шаблону всех согласных фонем
     public static final String INPUT_FILE_PATH = "./src/main/java/phonosemantics/input/PhonemesCoverageExample.xlsx";
@@ -246,7 +245,9 @@ public class PhonemesBank {
         if (ph != null) {
             return ph;
         } else {
-            userLogger.info("symbol can not be found: " + requestedSymbol);
+            if (requestedSymbol.length() == 1) {
+                userLogger.info("symbol can not be found: " + requestedSymbol);
+            }
             return null;
         }
     }

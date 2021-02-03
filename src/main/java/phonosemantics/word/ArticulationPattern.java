@@ -1,17 +1,15 @@
 package phonosemantics.word;
 
 import lombok.Data;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
 public class ArticulationPattern {
-    private static final Logger userLogger = LogManager.getLogger(ArticulationPattern.class);
+    private static final Logger userLogger = Logger.getLogger(ArticulationPattern.class);
 
     private String graphicForm;
     private List<String> transcription;

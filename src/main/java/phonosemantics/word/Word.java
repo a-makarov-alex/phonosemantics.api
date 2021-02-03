@@ -1,8 +1,7 @@
 package phonosemantics.word;
 
 import lombok.Data;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import phonosemantics.LoggerConfig;
 import phonosemantics.language.Language;
 import phonosemantics.language.LanguageService;
@@ -14,13 +13,12 @@ import phonosemantics.word.wordlist.WordList;
 import phonosemantics.word.wordlist.WordListService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Data
 public class Word {
-    private static final Logger userLogger = LogManager.getLogger(Word.class);
+    private static final Logger userLogger = Logger.getLogger(Word.class);
 
     private String graphicForm;
     private List<String> transcription;    //phoneme may be find by PhonemesBank -> find(String phoneme)

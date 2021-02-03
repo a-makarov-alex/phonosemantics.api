@@ -1,7 +1,6 @@
 package phonosemantics.phonetics;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 import phonosemantics.data.PortConfig;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
@@ -17,7 +16,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 public class PhonemesBankController {
-    private static final Logger userLogger = LogManager.getLogger(PhonemesBankController.class);
+    private static final Logger userLogger = Logger.getLogger(PhonemesBankController.class);
 
     /**
      * GETTING ALL PHONEMES

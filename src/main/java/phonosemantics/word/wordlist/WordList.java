@@ -1,8 +1,7 @@
 package phonosemantics.word.wordlist;
 
 import lombok.Data;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import phonosemantics.language.Language;
 import phonosemantics.language.LanguageService;
 import phonosemantics.phonetics.PhonemesBank;
@@ -30,7 +29,7 @@ import java.util.Map;
  **/
 @Data
 public class WordList {
-    private static final Logger userLogger = LogManager.getLogger(WordList.class);
+    private static final Logger userLogger = Logger.getLogger(WordList.class);
 
     private String meaning;
     private List<Word> list;

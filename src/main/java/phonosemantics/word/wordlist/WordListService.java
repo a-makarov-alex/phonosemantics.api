@@ -4,8 +4,7 @@ import org.apache.poi.ss.usermodel.*;
 import phonosemantics.LoggerConfig;
 import phonosemantics.data.InputConfig;
 import phonosemantics.word.Word;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,7 +14,7 @@ import java.util.List;
 
 //TODO: be careful, remove hardcode from this class
 public class WordListService {
-    static final Logger userLogger = LogManager.getLogger(WordListService.class);
+    static final Logger userLogger = Logger.getLogger(WordListService.class);
 
 
     // TODO: запихнуть в контекст эти данные, если мы не оставим путь как константу

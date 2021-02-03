@@ -1,7 +1,6 @@
 package phonosemantics.word.wordlist;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 import phonosemantics.data.PortConfig;
 import phonosemantics.phonetics.PhonemesBank;
@@ -15,7 +14,7 @@ import java.util.Map;
 
 @RestController
 public class WordListController {
-    private static final Logger userLogger = LogManager.getLogger(WordListController.class);
+    private static final Logger userLogger = Logger.getLogger(WordListController.class);
     /**
      * GETTING WORDLIST BY MEANING
      * **/

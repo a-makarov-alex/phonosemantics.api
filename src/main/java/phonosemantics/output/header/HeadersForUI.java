@@ -1,7 +1,6 @@
 package phonosemantics.output.header;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
 
 import java.io.FileInputStream;
@@ -14,7 +13,7 @@ import phonosemantics.phonetics.PhonemesBank;
 
 
 public final class HeadersForUI {
-    static final Logger userLogger = LogManager.getLogger(HeadersForUI.class);
+    static final Logger userLogger = Logger.getLogger(HeadersForUI.class);
 
     /**
      * METHOD IS REQUIRED FOR UI

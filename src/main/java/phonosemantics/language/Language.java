@@ -2,8 +2,7 @@ package phonosemantics.language;
 
 
 import lombok.Data;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
@@ -20,7 +19,7 @@ import java.util.*;
 // TODO: maybe id should be implemented cause 2 languages may have similar name
 @Data
 public class Language {
-    private static final Logger userLogger = LogManager.getLogger(Language.class);
+    private static final Logger userLogger = Logger.getLogger(Language.class);
 
     private String title;
     private String family;
