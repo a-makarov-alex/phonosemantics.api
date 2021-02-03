@@ -1,0 +1,260 @@
+2021-02-03 14:52:06 INFO  WordListService:30 - allWordlists is null
+Ð°2021-02-03 14:52:06 INFO  WordListService:46 - wordlist extracting from file starting...
+Ð°2021-02-03 14:52:08 INFO  WordListService:86 - --- wordlist composing for stone
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:368 - extracting all phonemes list from input file
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:371 - extracting vowels
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:406 - extracting is finished successfully
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:374 - extracting consonants
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:406 - extracting is finished successfully
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:414 - copying phonemes to HashMap started
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:421 - copying phonemes to HashMap finished successfully
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:223 - vowels map is filled up
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:496 - phoneme ã is not found in PhonemesCoverageTable
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:496 - phoneme ǝ is not found in PhonemesCoverageTable
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:496 - phoneme ĩ is not found in PhonemesCoverageTable
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:496 - phoneme õ is not found in PhonemesCoverageTable
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:496 - phoneme ĩ is not found in PhonemesCoverageTable
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:496 - phoneme ẽ is not found in PhonemesCoverageTable
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:506 - Distinctive features added for vowel
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:169 - consonants map is filled up
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:496 - phoneme b̪ is not found in PhonemesCoverageTable
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:496 - phoneme tʃ is not found in PhonemesCoverageTable
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:496 - phoneme ng is not found in PhonemesCoverageTable
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:496 - phoneme p̪ is not found in PhonemesCoverageTable
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:496 - phoneme š is not found in PhonemesCoverageTable
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:496 - phoneme ɴ is not found in PhonemesCoverageTable
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:506 - Distinctive features added for consonant
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:249 - symbol can not be found: ʸ
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:249 - symbol can not be found: '
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:249 - symbol can not be found: ʰ
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:249 - symbol can not be found: ž
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:249 - symbol can not be found: ˤ
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:249 - symbol can not be found: ǝ
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:249 - symbol can not be found: ɠ
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:249 - symbol can not be found: ɓ
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:249 - symbol can not be found: ̪
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:249 - symbol can not be found: ʷ
+Ð°2021-02-03 14:52:08 INFO  PhonemesBank:249 - symbol can not be found: š
+Ð°2021-02-03 14:52:08 INFO  WordList:117 - starting calculating Wordlist stonefeatures stats
+Ð°2021-02-03 14:52:08 INFO  WordList:143 - finishing calculating Wordlist stonefeatures stats
+Ð°2021-02-03 14:52:09 INFO  WordListService:86 - --- wordlist composing for leaf
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ʰ
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ʰ
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ʓ
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ʰ
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: č
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ı
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ɓ
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: š
+Ð°2021-02-03 14:52:09 INFO  WordList:117 - starting calculating Wordlist leaffeatures stats
+Ð°2021-02-03 14:52:09 INFO  WordList:143 - finishing calculating Wordlist leaffeatures stats
+Ð°2021-02-03 14:52:09 INFO  WordListService:86 - --- wordlist composing for egg
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ̌
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ʼ
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ß
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ̌
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ˈ
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ɓ
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ƥ
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ̥
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ɓ
+Ð°2021-02-03 14:52:09 INFO  WordList:117 - starting calculating Wordlist eggfeatures stats
+Ð°2021-02-03 14:52:09 INFO  WordList:143 - finishing calculating Wordlist eggfeatures stats
+Ð°2021-02-03 14:52:09 INFO  WordListService:86 - --- wordlist composing for horn
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: '
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ˈ
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ř
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ʰ
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:09 INFO  WordListService:125 - No value for word "horn" of language Are'are (Waiahaa)
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ̪
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ƥ
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ̥
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ǝ
+Ð°2021-02-03 14:52:09 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:09 INFO  WordListService:125 - No value for word "horn" of language Sherbro
+Ð°2021-02-03 14:52:09 INFO  WordList:117 - starting calculating Wordlist hornfeatures stats
+Ð°2021-02-03 14:52:09 INFO  WordList:143 - finishing calculating Wordlist hornfeatures stats
+Ð°2021-02-03 14:52:10 INFO  WordListService:86 - --- wordlist composing for cloud
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: č
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: š
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ˈ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ˈ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʸ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʸ
+Ð°2021-02-03 14:52:10 INFO  WordListService:125 - No value for word "cloud" of language Nivkh
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʓ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ɡ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ɗ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found:  
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ̌
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʰ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ̣
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʰ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ̣
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ɓ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʓ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: š
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  WordList:117 - starting calculating Wordlist cloudfeatures stats
+Ð°2021-02-03 14:52:10 INFO  WordList:143 - finishing calculating Wordlist cloudfeatures stats
+Ð°2021-02-03 14:52:10 INFO  WordListService:86 - --- wordlist composing for root
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ’
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: š
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ˈ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: š
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʸ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʰ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ͡
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ̪
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ̣
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ˈ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ̥
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: č
+Ð°2021-02-03 14:52:10 INFO  WordList:117 - starting calculating Wordlist rootfeatures stats
+Ð°2021-02-03 14:52:10 INFO  WordList:143 - finishing calculating Wordlist rootfeatures stats
+Ð°2021-02-03 14:52:10 INFO  WordListService:86 - --- wordlist composing for rain
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ’
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ˈ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ˈ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʸ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʸ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʓ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʼ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ̪
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ̣
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ǝ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʷ
+Ð°2021-02-03 14:52:10 INFO  WordListService:125 - No value for word "rain" of language Bambara
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ̃
+Ð°2021-02-03 14:52:10 INFO  WordList:117 - starting calculating Wordlist rainfeatures stats
+Ð°2021-02-03 14:52:10 INFO  WordList:143 - finishing calculating Wordlist rainfeatures stats
+Ð°2021-02-03 14:52:10 INFO  WordListService:86 - --- wordlist composing for sand
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ’
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: š
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: č
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ˈ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʸ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ̌
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʄ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʄ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: č
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ̌
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ̌
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ̌
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ̃
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  WordList:117 - starting calculating Wordlist sandfeatures stats
+Ð°2021-02-03 14:52:10 INFO  WordList:143 - finishing calculating Wordlist sandfeatures stats
+Ð°2021-02-03 14:52:10 INFO  WordListService:86 - --- wordlist composing for wind
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ’
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʰ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: š
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ʓ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ɡ
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: š
+Ð°2021-02-03 14:52:10 INFO  PhonemesBank:249 - symbol can not be found: ı
+Ð°2021-02-03 14:52:10 INFO  WordListService:125 - No value for word "wind" of language Degema
+Ð°2021-02-03 14:52:10 INFO  WordList:117 - starting calculating Wordlist windfeatures stats
+Ð°2021-02-03 14:52:11 INFO  WordList:143 - finishing calculating Wordlist windfeatures stats
+Ð°2021-02-03 14:52:11 INFO  WordListService:86 - --- wordlist composing for nose
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ’
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ˈ
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:11 INFO  WordListService:125 - No value for word "nose" of language Malto
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ˤ
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: '
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ̌
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ̪
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ʼ
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: č
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ǝ
+Ð°2021-02-03 14:52:11 INFO  WordListService:125 - No value for word "nose" of language Noon
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ɓ
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found:  
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ß
+Ð°2021-02-03 14:52:11 INFO  WordList:117 - starting calculating Wordlist nosefeatures stats
+Ð°2021-02-03 14:52:11 INFO  WordList:143 - finishing calculating Wordlist nosefeatures stats
+Ð°2021-02-03 14:52:11 INFO  WordListService:86 - --- wordlist composing for heart
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: č
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: '
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: č
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ǝ
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: š
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: š
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: :
+Ð°2021-02-03 14:52:11 INFO  WordListService:125 - No value for word "heart" of language Malto
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ɡ
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ̪
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ɡ
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ı
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ı
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ı
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ʷ
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ß
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ı
+Ð°2021-02-03 14:52:11 INFO  WordList:117 - starting calculating Wordlist heartfeatures stats
+Ð°2021-02-03 14:52:11 INFO  WordList:143 - finishing calculating Wordlist heartfeatures stats
+Ð°2021-02-03 14:52:11 INFO  WordListService:86 - --- wordlist composing for foot
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ˈ
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ʸ
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ʧ
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ː
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ʼ
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ʰ
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ̣
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ̣
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: č
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ǝ
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ß
+Ð°2021-02-03 14:52:11 INFO  PhonemesBank:249 - symbol can not be found: ı
+Ð°2021-02-03 14:52:11 INFO  WordList:117 - starting calculating Wordlist footfeatures stats
+Ð°2021-02-03 14:52:11 INFO  WordList:143 - finishing calculating Wordlist footfeatures stats
+Ð°2021-02-03 14:52:11 INFO  WordListService:67 - 12 wordlists are composed from input file
+Ð°
