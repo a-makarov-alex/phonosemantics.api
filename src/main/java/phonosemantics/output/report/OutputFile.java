@@ -3,9 +3,13 @@ package phonosemantics.output.report;
 import lombok.Data;
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
+import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Backness;
+import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Height;
+import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Roundness;
 import phonosemantics.statistics.Sample;
 import phonosemantics.statistics.Statistics;
 import phonosemantics.word.wordlist.WordList;
@@ -50,6 +54,7 @@ public class OutputFile {
         this.recordsCounter = 0;
         this.filePath = OUTPUT_DIRECTORY + title + ".xlsx";
         this.wb = new XSSFWorkbook();
+        this.filePages = new ArrayList<>();
         this.createOutputFile();
         userLogger.info("output file created");
     }
@@ -86,7 +91,7 @@ public class OutputFile {
             for (OutputFilePage pg : filePages) {
                 GeneralReportHeader.addCommonHeader(pg);
             }
-            GeneralReportHeader.addVowelsHeader(filePages.get(0));
+            //GeneralReportHeader.addVowelsHeader(filePages.get(0));
             //TODO раскомментить
             //GeneralReportHeader.addMannerHeader(sheets.get(1));
             //GeneralReportHeader.addPlaceHeader(sheets.get(2));
@@ -101,9 +106,87 @@ public class OutputFile {
     public void fillWith(List<WordList> wordLists) {
         for (WordList wordList : wordLists) {
             userLogger.info("writing to general file...");
-            writeToGeneralFile(wordList);
+            //TODO было так writeToGeneralFile(wordList);
+            writeToGeneralFileAlternative(wordList);
         }
-        addMeanAndAverage(Statistics.KindOfStats.WORDS_WITH_PHTYPE_PER_LIST);
+        //addMeanAndAverage(Statistics.KindOfStats.WORDS_WITH_PHTYPE_PER_LIST);
+    }
+
+    private void writeToGeneralFileAlternative(WordList wordList) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(this.filePath);
+
+            Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> wlDistFeaturesStats = wordList.getDistFeatureStats();
+            OutputFilePage vowelPage = this.getFilePages().get(0);
+            Sheet sheet = vowelPage.getSheet();
+            Map<Object, GeneralReportHeader> headersMap = vowelPage.getHeaders();
+            int startCol = 3;
+            int incrementCol = 0;
+            int col = startCol + incrementCol;
+            int row = 0;
+
+            userLogger.info("start adding vowel headers");
+            // Проходим по верхнему уровню заголовков
+            for (Map.Entry<String, Map<Object, PhonemeInTable.DistFeatureStats>> highLevelEntry : wlDistFeaturesStats.entrySet()) {
+                String highLevelHeader = highLevelEntry.getKey();
+                headersMap.put(highLevelEntry.getKey(), new GeneralReportHeader(row, col, highLevelHeader));
+                vowelPage.setSheet(createCell(sheet, row, col, highLevelHeader));
+
+                // Проходим по нижнему уровню заголовков
+                for (Map.Entry<Object, PhonemeInTable.DistFeatureStats> lowLevelEntry : highLevelEntry.getValue().entrySet()) {
+                    row++;
+                    String lowLevelHeader = String.valueOf(lowLevelEntry.getKey());
+                    headersMap.put(lowLevelEntry.getKey(), new GeneralReportHeader(row, col, lowLevelHeader));
+                    vowelPage.setSheet(createCell(sheet, row, col, lowLevelHeader));
+
+                    row+=2;
+                    Double cellValue = lowLevelEntry.getValue().getPercentOfWordsWithFeature();
+                    vowelPage.setSheet(createCell(sheet, row, col, cellValue));
+
+                    row++;
+                    cellValue = lowLevelEntry.getValue().getPercentOfAllPhonemes();
+                    vowelPage.setSheet(createCell(sheet, row, col, cellValue));
+
+                    row++;
+                    cellValue = lowLevelEntry.getValue().getAverageFeatureInstancesPerWord();
+                    vowelPage.setSheet(createCell(sheet, row, col, cellValue));
+
+                    //TODO merging cells. Смотри GeneralReportHeader
+                    incrementCol++;
+                    row = 0;
+                    col = startCol + incrementCol;
+                }
+            }
+            wb.write(fileOut);
+            userLogger.info("vowels are written to general file");
+            fileOut.close();
+
+        } catch (IOException e) {
+            userLogger.error("IOException caught: " + e.getStackTrace());
+        }
+        //достать значения
+        //вписать значения
+        //отформатировать значения
+    }
+
+    private Sheet createCell(Sheet sheet, int row, int col, String value) {
+        if (sheet.getRow(row) == null) {
+            sheet.createRow(row);
+        }
+        sheet.getRow(row).createCell(col);
+        sheet.getRow(row).getCell(col).setCellStyle(OutputFile.getHeaderCellStyle());
+        sheet.getRow(row).getCell(col).setCellValue(value);
+        return sheet;
+    }
+
+    private Sheet createCell(Sheet sheet, int row, int col, Double value) {
+        if (sheet.getRow(row) == null) {
+            sheet.createRow(row);
+        }
+        sheet.getRow(row).createCell(col);
+        sheet.getRow(row).getCell(col).setCellStyle(OutputFile.getHeaderCellStyle());
+        sheet.getRow(row).getCell(col).setCellValue(value);
+        return sheet;
     }
 
     private void writeToGeneralFile(WordList wordList) {
@@ -124,7 +207,6 @@ public class OutputFile {
             sh.getRow(3).getCell(1).setCellValue(wordList.getList().size());
 
             Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> wlDistFeatures = wordList.getDistFeatureStats();
-
 
             for (int i = 3; i <= 5; i++) {
                 row = i;
@@ -152,7 +234,7 @@ public class OutputFile {
                 }
 
                 // WRITE ROW BY ROW
-                for (Map.Entry<Object, GeneralReportHeader> entry : GeneralReportHeader.vowSh.entrySet()) {
+                for (Map.Entry<Object, GeneralReportHeader> entry : filePages.get(0).getHeaders().entrySet()) {
                     column = entry.getValue().getColumn();
                     userLogger.info("cell " + row + " " + column);
                     Cell c = sh.getRow(row).createCell(column);

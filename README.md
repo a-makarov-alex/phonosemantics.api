@@ -10,7 +10,7 @@ Check code coverage via SonarQube (it should be started on 9000 port):
 в файле sonar-project.properties прописан url, так что запустить анализ можно просто:
 mvn sonar:sonar
 
-однако конфигурацию можно задать и черел командную строку:
+однако конфигурацию можно задать и через командную строку:
 mvn sonar:sonar -Dsonar.host.url=http://localhost:9000
 
 больше опиций тут: https://www.devopsschool.com/tutorial/sonarqube/sonarqube-properties.html
