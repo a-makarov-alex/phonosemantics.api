@@ -85,6 +85,7 @@ public class GeneralReportHeader {
     /**
      *  Headers for Vowel excel sheet
      *  **/
+    @Deprecated
     public static void addVowelsHeader(OutputFilePage page) {
         Sheet sheet = page.getSheet();
         Map<Object, GeneralReportHeader> headersMap = page.getHeaders();

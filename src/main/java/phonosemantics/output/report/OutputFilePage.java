@@ -11,6 +11,7 @@ public class OutputFilePage {
     private String title;
     private int pageNumber;
     private Sheet sheet;
+    private int lastRowNum;
     private Map<Object, GeneralReportHeader> headers;
 
     public OutputFilePage(String title, int pageNumber, Sheet sheet) {
@@ -18,5 +19,6 @@ public class OutputFilePage {
         this.pageNumber = pageNumber;
         this.sheet = sheet;
         headers = new HashMap<>();
+        lastRowNum = 0;
     }
 }

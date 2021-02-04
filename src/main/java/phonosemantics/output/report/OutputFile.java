@@ -7,9 +7,6 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
-import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Backness;
-import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Height;
-import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Roundness;
 import phonosemantics.statistics.Sample;
 import phonosemantics.statistics.Statistics;
 import phonosemantics.word.wordlist.WordList;
@@ -152,7 +149,11 @@ public class OutputFile {
                     vowelPage.setSheet(createCell(sheet, row, col, cellValue));
 
                     //TODO merging cells. Смотри GeneralReportHeader
+
                     incrementCol++;
+                    if (row > this.filePages.get(0).getLastRowNum()) {
+                        this.filePages.get(0).setLastRowNum(row);
+                    }
                     row = 0;
                     col = startCol + incrementCol;
                 }
@@ -164,9 +165,6 @@ public class OutputFile {
         } catch (IOException e) {
             userLogger.error("IOException caught: " + e.getStackTrace());
         }
-        //достать значения
-        //вписать значения
-        //отформатировать значения
     }
 
     private Sheet createCell(Sheet sheet, int row, int col, String value) {
