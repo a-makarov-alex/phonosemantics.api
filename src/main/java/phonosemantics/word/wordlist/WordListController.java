@@ -80,7 +80,7 @@ public class WordListController {
      * **/
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/wordlists/{wordlistMeaning}/features/stats")
-    // type available values: all / general / vowel / consonant
+    // TODO type available values: all / general / vowel / consonant
     public Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> getFeaturesStats(
             @RequestParam(value="type") String type,
             @PathVariable(value = "wordlistMeaning") String wordlistMeaning) {

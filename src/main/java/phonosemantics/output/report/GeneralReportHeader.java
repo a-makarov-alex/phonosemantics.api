@@ -13,6 +13,7 @@ import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Roundness;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 @Data
 public class GeneralReportHeader {
@@ -26,6 +27,7 @@ public class GeneralReportHeader {
     private static int VOWEL_HEADER_WIDTH;
     private static int CONS_MANNER_HEADER_WIDTH;
 
+    //TODO заменить статические использования и удалить
     public static HashMap<Object, GeneralReportHeader> vowSh = new HashMap<>();
     public static HashMap<Object, GeneralReportHeader>  consMannerSh = new HashMap<>();
     public static HashMap<Object, GeneralReportHeader>  consPlaceSh = new HashMap<>();
@@ -40,7 +42,8 @@ public class GeneralReportHeader {
     /**
      * Header that is common for all General excel sheets
      * **/
-    public static void addCommonHeader(Sheet sheet) {
+    public static void addCommonHeader(OutputFilePage page) {
+        Sheet sheet = page.getSheet();
         // inicialization and style
         for (int i=0; i <= 5; i++ ) {
             sheet.createRow(i);
@@ -49,6 +52,7 @@ public class GeneralReportHeader {
                 sheet.getRow(i).getCell(j).setCellStyle(OutputFile.getHeaderCellStyle());
             }
         }
+        userLogger.info("merging cells in common headers");
 
         // merging cells
         sheet.addMergedRegion(new CellRangeAddress(0,2,0, 0));
@@ -64,11 +68,13 @@ public class GeneralReportHeader {
         list.add(new GeneralReportHeader(4, 2, "% of ph with ph-type"));
         list.add(new GeneralReportHeader(5, 2, "aver ph per word"));
 
+        userLogger.info("adding values for common headers");
         // вписываем значения хедеров
         for (GeneralReportHeader h : list) {
             Cell cell = sheet.getRow(h.row).getCell(h.column);
             cell.setCellValue(h.text);
         }
+        //TODO определить, надо ли сохранять общие хедеры в переменную OutputFilePage
 
         // устанавливаем ширину ячеек
         sheet.setColumnWidth(0, 3700);
@@ -79,47 +85,52 @@ public class GeneralReportHeader {
     /**
      *  Headers for Vowel excel sheet
      *  **/
-    public static void addVowelsHeader(Sheet sheet) {
+    public static void addVowelsHeader(OutputFilePage page) {
+        Sheet sheet = page.getSheet();
+        Map<Object, GeneralReportHeader> headersMap = page.getHeaders();
 
-        vowSh.put(Height.OPEN, new GeneralReportHeader(2, 3, "Open"));
-        vowSh.put(Height.OPEN_MID, new GeneralReportHeader(2, 4, "Op-mid"));
-        vowSh.put(Height.MID, new GeneralReportHeader(2, 5, "Mid"));
-        vowSh.put(Height.CLOSE_MID, new GeneralReportHeader(2, 6, "Cl-mid"));
-        vowSh.put(Height.CLOSE, new GeneralReportHeader(2, 7, "Close"));
+        userLogger.info("start adding vowel headers");
+        headersMap.put(Height.OPEN, new GeneralReportHeader(2, 3, "Open"));
+        headersMap.put(Height.OPEN_MID, new GeneralReportHeader(2, 4, "Op-mid"));
+        headersMap.put(Height.MID, new GeneralReportHeader(2, 5, "Mid"));
+        headersMap.put(Height.CLOSE_MID, new GeneralReportHeader(2, 6, "Cl-mid"));
+        headersMap.put(Height.CLOSE, new GeneralReportHeader(2, 7, "Close"));
 
-        vowSh.put(Backness.FRONT, new GeneralReportHeader(2, 8, "Front"));
-        vowSh.put(Backness.CENTRAL, new GeneralReportHeader(2, 9, "Cent"));
-        vowSh.put(Backness.BACK, new GeneralReportHeader(2, 10, "Back"));
+        headersMap.put(Backness.FRONT, new GeneralReportHeader(2, 8, "Front"));
+        headersMap.put(Backness.CENTRAL, new GeneralReportHeader(2, 9, "Cent"));
+        headersMap.put(Backness.BACK, new GeneralReportHeader(2, 10, "Back"));
 
-        vowSh.put(Roundness.ROUNDED, new GeneralReportHeader(2,11, "Round"));
-        vowSh.put(Roundness.UNROUNDED, new GeneralReportHeader(2,12, "Unround"));
+        headersMap.put(Roundness.ROUNDED, new GeneralReportHeader(2,11, "Round"));
+        headersMap.put(Roundness.UNROUNDED, new GeneralReportHeader(2,12, "Unround"));
 
         //TODO посмотриеть, надо ли развить тему
-        //vowSh.put(Nasalization.NASAL, new Header(2, 13, "Nasal"));
-        //vowSh.put(Nasalization.NON_NASAL, new Header(2, 14, "Non-Nasal"));
+        //headersMap.put(Nasalization.NASAL, new Header(2, 13, "Nasal"));
+        //headersMap.put(Nasalization.NON_NASAL, new Header(2, 14, "Non-Nasal"));
 
         // TODO: избавиться от этого поля
-        VOWEL_HEADER_WIDTH = vowSh.size();
+        VOWEL_HEADER_WIDTH = headersMap.size();
 
+        userLogger.info("inicialization and style vowel headers");
         // inicialization and style
         for (int i=0; i <= 2; i++ ) {
             sheet.getRow(i);
-            for (int j=3; j < 3 + vowSh.size(); j++) {
+            for (int j=3; j < 3 + headersMap.size(); j++) {
                 sheet.getRow(i).createCell(j);
                 sheet.getRow(i).getCell(j).setCellStyle(OutputFile.getHeaderCellStyle());
             }
         }
 
+        userLogger.info("merging cells vowel headers");
         // merging cells
-        int colOpen = vowSh.get(Height.OPEN).column;
-        int colClose = vowSh.get(Height.CLOSE).column;
-        int colFront = vowSh.get(Backness.FRONT).column;
-        int colBack = vowSh.get(Backness.BACK).column;
-        int colRound = vowSh.get(Roundness.ROUNDED).column;
-        int colUnround = vowSh.get(Roundness.UNROUNDED).column;
+        int colOpen = headersMap.get(Height.OPEN).column;
+        int colClose = headersMap.get(Height.CLOSE).column;
+        int colFront = headersMap.get(Backness.FRONT).column;
+        int colBack = headersMap.get(Backness.BACK).column;
+        int colRound = headersMap.get(Roundness.ROUNDED).column;
+        int colUnround = headersMap.get(Roundness.UNROUNDED).column;
         //TODO
-        //int colNasal = vowSh.get(Nasalization.NASAL).column;
-        //int colNonNasal = vowSh.get(Nasalization.NON_NASAL).column;
+        //int colNasal = headersMap.get(Nasalization.NASAL).column;
+        //int colNonNasal = headersMap.get(Nasalization.NON_NASAL).column;
 
         sheet.addMergedRegion(new CellRangeAddress(0,0, colOpen, colUnround));
         //sheet.addMergedRegion(new CellRangeAddress(0,0, colOpen, colNonNasal));
@@ -128,6 +139,7 @@ public class GeneralReportHeader {
         sheet.addMergedRegion(new CellRangeAddress(1,1, colRound, colUnround));
         //sheet.addMergedRegion(new CellRangeAddress(1,1, colNasal, colNonNasal));
 
+        userLogger.info("adding values for vowel headers");
         // вписываем значения хедеров
         sheet.getRow(0).getCell(colOpen).setCellValue("VOWELS");
         sheet.getRow(1).getCell(colOpen).setCellValue("Height");
@@ -135,7 +147,7 @@ public class GeneralReportHeader {
         sheet.getRow(1).getCell(colRound).setCellValue("Roundness");
         //sheet.getRow(1).getCell(colNasal).setCellValue("Nasalization");
 
-        for (GeneralReportHeader h : vowSh.values()) {
+        for (GeneralReportHeader h : headersMap.values()) {
             Cell cell = sheet.getRow(h.row).getCell(h.column);
             cell.setCellValue(h.text);
         }

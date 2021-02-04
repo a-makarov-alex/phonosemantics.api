@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.statistics.Sample;
 import phonosemantics.statistics.Statistics;
 import phonosemantics.word.wordlist.WordList;
@@ -24,20 +25,20 @@ public class OutputFile {
 
     private String title;
     private String filePath;
+    private List<OutputFilePage> filePages;
     private ArrayList<Sheet> sheets;
-    private static final String OUTPUT_DIRECTORY = Paths.get("src", "main", "java", "output").toString();
     private int recordsCounter;
     private Workbook wb;
-    private static CellStyle headerCellStyle;
+    private HashMap<Object, Sample> allSamplesSheet1 = null;
 
+    private static final String OUTPUT_DIRECTORY = Paths.get("src", "main", "java", "phonosemantics", "output").toString();
+    private static CellStyle headerCellStyle;
     public static CellStyle getHeaderCellStyle() {
         return headerCellStyle;
     }
     public static void setHeaderCellStyle(CellStyle headerCellStyle) {
         OutputFile.headerCellStyle = headerCellStyle;
     }
-
-    private HashMap<Object, Sample> allSamplesSheet1 = null;
 
     // TODO to enum
     private static final String SHEET_VOW = "Vowels";
@@ -60,6 +61,7 @@ public class OutputFile {
             // Create an Excel file draft
             sheets = new ArrayList<>();
 
+            userLogger.info("specifying styles for headers");
             // Specify a style for headers
             headerCellStyle = wb.createCellStyle();
             headerCellStyle.setBorderRight(BorderStyle.THIN);
@@ -69,19 +71,25 @@ public class OutputFile {
             headerCellStyle.setAlignment(HorizontalAlignment.CENTER);
             headerCellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
 
-            // Create sheets with headers
-            // sheets
-            sheets.add(wb.createSheet(SHEET_VOW));
-            sheets.add(wb.createSheet(SHEET_CONS_MANNER));
-            sheets.add(wb.createSheet(SHEET_CONS_PLACE));
+            // Creating sheets
+            userLogger.info("creating sheets");
+            OutputFilePage page = new OutputFilePage(SHEET_VOW, 0, wb.createSheet(SHEET_VOW));
+            //TODO добавить хедеры в page
+            filePages.add(page);
+            page = new OutputFilePage(SHEET_CONS_MANNER, 1, wb.createSheet(SHEET_CONS_MANNER));
+            filePages.add(page);
+            page = new OutputFilePage(SHEET_CONS_PLACE, 2, wb.createSheet(SHEET_CONS_PLACE));
+            filePages.add(page);
 
-            //headers
-            for (Sheet sh : sheets) {
-                GeneralReportHeader.addCommonHeader(sh);
+            // Adding headers and saving them in variable
+            userLogger.info("start adding headers");
+            for (OutputFilePage pg : filePages) {
+                GeneralReportHeader.addCommonHeader(pg);
             }
-            GeneralReportHeader.addVowelsHeader(sheets.get(0));
-            GeneralReportHeader.addMannerHeader(sheets.get(1));
-            GeneralReportHeader.addPlaceHeader(sheets.get(2));
+            GeneralReportHeader.addVowelsHeader(filePages.get(0));
+            //TODO раскомментить
+            //GeneralReportHeader.addMannerHeader(sheets.get(1));
+            //GeneralReportHeader.addPlaceHeader(sheets.get(2));
             wb.write(fileOut);
             fileOut.close();
         } catch (IOException e) {
@@ -104,16 +112,19 @@ public class OutputFile {
 
             // percentage or absolute
             CellStyle cellStyle = wb.createCellStyle();
-            HashMap<Object, Double> mapResult = new HashMap<>();
             Sheet sh;
             int row = 0;
             int column = 2;
 
             // WRITE VOWELS
+            userLogger.info("writing vowels to report");
             sh = this.wb.getSheet(SHEET_VOW);
 
             sh.getRow(3).getCell(0).setCellValue(wordList.getMeaning());
             sh.getRow(3).getCell(1).setCellValue(wordList.getList().size());
+
+            Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> wlDistFeatures = wordList.getDistFeatureStats();
+
 
             for (int i = 3; i <= 5; i++) {
                 row = i;
@@ -143,9 +154,9 @@ public class OutputFile {
                 // WRITE ROW BY ROW
                 for (Map.Entry<Object, GeneralReportHeader> entry : GeneralReportHeader.vowSh.entrySet()) {
                     column = entry.getValue().getColumn();
-
+                    userLogger.info("cell " + row + " " + column);
                     Cell c = sh.getRow(row).createCell(column);
-                    c.setCellValue(mapResult.get(entry.getKey()));
+                    //c.setCellValue(mapResult.get(entry.getKey()));
                     c.setCellStyle(createCellStyleWithDataFormat(styleFormat));
                 }
             }

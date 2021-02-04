@@ -4,11 +4,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import phonosemantics.data.PortConfig;
-import phonosemantics.language.LanguageService;
-import phonosemantics.word.wordlist.WordListController;
 import phonosemantics.word.wordlist.WordListService;
-
-import java.util.List;
 
 @RestController
 public class ReportController {
@@ -18,9 +14,9 @@ public class ReportController {
      * Отчет создается в указанной (захардкоженой) директории
      * **/
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
-    @GetMapping("/languages")
+    @GetMapping("/report/general")
     public boolean createGeneralWordlistReport() {
-        OutputFile generalWordlistReport = new OutputFile("General Wordlist Report");
+        OutputFile generalWordlistReport = new OutputFile("GeneralWordlistReport");
         generalWordlistReport.fillWith(WordListService.getAllWordLists());
         return true;
     }
