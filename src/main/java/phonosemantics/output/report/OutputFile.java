@@ -87,10 +87,9 @@ public class OutputFile {
             // Adding headers and saving them in variable
             userLogger.info("start adding headers");
             for (OutputFilePage pg : filePages) {
-                GeneralReportHeader.addCommonHeader(pg);
+                pg.addCommonHeader();
             }
             //GeneralReportHeader.addVowelsHeader(filePages.get(0));
-            //TODO раскомментить
             //GeneralReportHeader.addMannerHeader(sheets.get(1));
             //GeneralReportHeader.addPlaceHeader(sheets.get(2));
             wb.write(fileOut);
@@ -122,6 +121,7 @@ public class OutputFile {
     /**
      * Добавляем заголовки фонетических признаков в отчёт
      */
+    //TODO сюда же можно вынести и Common Headers
     private void writeFeatureHeadersToGeneralFile() {
         try {
             FileOutputStream fileOut = new FileOutputStream(this.filePath);
@@ -142,7 +142,7 @@ public class OutputFile {
             for (Map.Entry<String, Map<Object, PhonemeInTable.DistFeatureStats>> highLevelEntry : wlDistFeaturesStats.entrySet()) {
                 String highLevelHeader = highLevelEntry.getKey();
                 headersMap.put(highLevelHeader, new GeneralReportHeader(row, col, highLevelHeader));
-                vowelPage.setSheet(createCell(sheet, row, col, highLevelHeader));
+                this.createCell(0, row, col, highLevelHeader);
                 int colMergeFrom = col;
 
                 // Проходим по нижнему уровню заголовков
@@ -150,7 +150,7 @@ public class OutputFile {
                     row+=2;
                     String lowLevelHeader = String.valueOf(lowLevelEntry.getKey());
                     headersMap.put(lowLevelHeader, new GeneralReportHeader(row, col, lowLevelHeader));
-                    vowelPage.setSheet(createCell(sheet, row, col, lowLevelHeader));
+                    this.createCell(0, row, col, lowLevelHeader);
 
                     incrementCol++;
                     if (row > vowelPage.getLastRowNum()) {
@@ -181,8 +181,9 @@ public class OutputFile {
 
             Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> wlDistFeaturesStats = wordList.getDistFeatureStats();
             OutputFilePage vowelPage = this.getFilePages().get(0);
-            Sheet sheet = vowelPage.getSheet();
             Map<Object, GeneralReportHeader> headersMap = vowelPage.getHeaders();
+
+            vowelPage.createVerticalHeaders(wordList);
             int startCol = 3;
             int incrementCol = 0;
             int col = startCol + incrementCol;
@@ -218,15 +219,15 @@ public class OutputFile {
                     {
                         row++;
                         Double cellValue = lowLevelEntry.getValue().getPercentOfWordsWithFeature();
-                        vowelPage.setSheet(createCell(sheet, row, col, cellValue));
+                        this.createCell(0, row, col, cellValue, "0.0%");
 
                         row++;
                         cellValue = lowLevelEntry.getValue().getPercentOfAllPhonemes();
-                        vowelPage.setSheet(createCell(sheet, row, col, cellValue));
+                        this.createCell(0, row, col, cellValue, "0.0%");
 
                         row++;
                         cellValue = lowLevelEntry.getValue().getAverageFeatureInstancesPerWord();
-                        vowelPage.setSheet(createCell(sheet, row, col, cellValue));
+                        this.createCell(0, row, col, cellValue, "0.0");
                     }
                     incrementCol++;
                     if (row > vowelPage.getLastRowNum()) {
@@ -236,6 +237,10 @@ public class OutputFile {
                     col = startCol + incrementCol;
                 }
             }
+            // добавляем разделительную строку
+            this.createCell(0, vowelPage.getLastRowNum() + 1, 0, " ");
+            vowelPage.setLastRowNum(vowelPage.getLastRowNum() + 1);
+
             wb.write(fileOut);
             userLogger.info("vowel stats are written to general file");
             fileOut.close();
@@ -245,91 +250,30 @@ public class OutputFile {
         }
     }
 
-    private Sheet createCell(Sheet sheet, int row, int col, String value) {
+    public void createCell(int sheetNum, int row, int col, String value) {
+        Sheet sheet = this.getFilePages().get(sheetNum).getSheet();
         if (sheet.getRow(row) == null) {
             sheet.createRow(row);
         }
         sheet.getRow(row).createCell(col);
         sheet.getRow(row).getCell(col).setCellStyle(OutputFile.getHeaderCellStyle());
         sheet.getRow(row).getCell(col).setCellValue(value);
-        return sheet;
+        this.getFilePages().get(sheetNum).setSheet(sheet);
     }
 
-    private Sheet createCell(Sheet sheet, int row, int col, Double value) {
+    public void createCell(int sheetNum, int row, int col, Double value, String styleFormat) {
+        Sheet sheet = this.getFilePages().get(sheetNum).getSheet();
         if (sheet.getRow(row) == null) {
             sheet.createRow(row);
         }
         sheet.getRow(row).createCell(col);
-        sheet.getRow(row).getCell(col).setCellStyle(OutputFile.getHeaderCellStyle());
+        sheet.getRow(row).getCell(col).setCellStyle(this.createCellStyleWithDataFormat(styleFormat));
         sheet.getRow(row).getCell(col).setCellValue(value);
-        return sheet;
-    }
-
-    private void writeToGeneralFile(WordList wordList) {
-        try {
-            FileOutputStream fileOut = new FileOutputStream(this.filePath);
-
-            // percentage or absolute
-            CellStyle cellStyle = wb.createCellStyle();
-            Sheet sh;
-            int row = 0;
-            int column = 2;
-
-            // WRITE VOWELS
-            userLogger.info("writing vowels to report");
-            sh = this.wb.getSheet(SHEET_VOW);
-
-            sh.getRow(3).getCell(0).setCellValue(wordList.getMeaning());
-            sh.getRow(3).getCell(1).setCellValue(wordList.getList().size());
-
-            Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> wlDistFeatures = wordList.getDistFeatureStats();
-
-            for (int i = 3; i <= 5; i++) {
-                row = i;
-                String styleFormat = "";
-                switch (row) {
-                    // WORDS_WITH_PHTYPE_PER_LIST
-                    case 3 : {
-                        //mapResult = wordList.getStats(Statistics.KindOfStats.WORDS_WITH_PHTYPE_PER_LIST);
-                        styleFormat = "0.0%";
-                        break;
-                    }
-                    // PHTYPES_PER_LIST
-                    case 4 : {
-                        //mapResult = wordList.getStats(Statistics.KindOfStats.PHTYPES_PER_LIST);
-                        styleFormat = "0.0%";
-                        break;
-                    }
-
-                    // PHTYPES_AVERAGE_PER_WORD
-                    case 5 : {
-                        //mapResult = wordList.getStats(Statistics.KindOfStats.PHTYPES_AVERAGE_PER_WORD);
-                        styleFormat = "0.0";
-                        break;
-                    }
-                }
-
-                // WRITE ROW BY ROW
-                for (Map.Entry<Object, GeneralReportHeader> entry : filePages.get(0).getHeaders().entrySet()) {
-                    column = entry.getValue().getColumn();
-                    userLogger.info("cell " + row + " " + column);
-                    Cell c = sh.getRow(row).createCell(column);
-                    //c.setCellValue(mapResult.get(entry.getKey()));
-                    c.setCellStyle(createCellStyleWithDataFormat(styleFormat));
-                }
-            }
-
-            wb.write(fileOut);
-            userLogger.info("vowels are written to general file");
-            fileOut.close();
-
-        } catch (IOException e) {
-            userLogger.error("IOException caught: " + e.getStackTrace());
-        }
+        this.getFilePages().get(sheetNum).setSheet(sheet);
     }
 
     // TODO: удалить в GENERAL файле
-    private CellStyle createCellStyleWithDataFormat(String format) {
+    public CellStyle createCellStyleWithDataFormat(String format) {
         CellStyle cellStyle = wb.createCellStyle();
         cellStyle.setDataFormat(wb.createDataFormat().getFormat(format));
         cellStyle.setAlignment(HorizontalAlignment.LEFT);

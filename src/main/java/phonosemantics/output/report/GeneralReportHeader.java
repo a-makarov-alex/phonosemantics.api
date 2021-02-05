@@ -16,6 +16,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Data
+@Deprecated
+/**
+ * ДАННЫЙ КЛАСС УСТАРЕЛ, СЛЕДУЕТ ИСПОЛЬЗОВАТЬ OutputFile и OutputFilePage
+ */
 public class GeneralReportHeader {
     static final Logger userLogger = Logger.getLogger(GeneralReportHeader.class);
 
@@ -32,54 +36,10 @@ public class GeneralReportHeader {
     public static HashMap<Object, GeneralReportHeader>  consMannerSh = new HashMap<>();
     public static HashMap<Object, GeneralReportHeader>  consPlaceSh = new HashMap<>();
 
-
     public GeneralReportHeader(int row, int column, String text) {
         this.row = row;
         this.column = column;
         this.text = text;
-    }
-
-    /**
-     * Header that is common for all General excel sheets
-     * **/
-    public static void addCommonHeader(OutputFilePage page) {
-        Sheet sheet = page.getSheet();
-        // inicialization and style
-        for (int i=0; i <= 5; i++ ) {
-            sheet.createRow(i);
-            for (int j=0; j <= 2; j++) {
-                sheet.getRow(i).createCell(j);
-                sheet.getRow(i).getCell(j).setCellStyle(OutputFile.getHeaderCellStyle());
-            }
-        }
-        userLogger.info("merging cells in common headers");
-
-        // merging cells
-        sheet.addMergedRegion(new CellRangeAddress(0,2,0, 0));
-        sheet.addMergedRegion(new CellRangeAddress(0,2,1, 1));
-        sheet.addMergedRegion(new CellRangeAddress(0,2,2, 2));
-        sheet.addMergedRegion(new CellRangeAddress(3,5,0, 0));
-        sheet.addMergedRegion(new CellRangeAddress(3,5,1, 1));
-
-        ArrayList<GeneralReportHeader> list = new ArrayList<>();
-        list.add(new GeneralReportHeader(0,0, "Semantics"));
-        list.add(new GeneralReportHeader(0, 1, "Wordlist length"));
-        list.add(new GeneralReportHeader(3, 2, "% of words with ph-type"));
-        list.add(new GeneralReportHeader(4, 2, "% of ph with ph-type"));
-        list.add(new GeneralReportHeader(5, 2, "aver ph per word"));
-
-        userLogger.info("adding values for common headers");
-        // вписываем значения хедеров
-        for (GeneralReportHeader h : list) {
-            Cell cell = sheet.getRow(h.row).getCell(h.column);
-            cell.setCellValue(h.text);
-        }
-        //TODO определить, надо ли сохранять общие хедеры в переменную OutputFilePage
-
-        // устанавливаем ширину ячеек
-        sheet.setColumnWidth(0, 3700);
-        sheet.setColumnWidth(1, 3700);
-        sheet.setColumnWidth(2, 5800);
     }
 
     /**
