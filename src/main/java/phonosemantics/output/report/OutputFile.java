@@ -164,6 +164,7 @@ public class OutputFile {
             wb.write(fileOut);
             userLogger.info("headers are written to general file");
             fileOut.close();
+            vowelPage.setHasHeaders(true);
 
         } catch (IOException e) {
             userLogger.error("IOException caught: " + e.getStackTrace());
@@ -199,11 +200,12 @@ public class OutputFile {
                 for (Map.Entry<Object, PhonemeInTable.DistFeatureStats> lowLevelEntry : highLevelEntry.getValue().entrySet()) {
                     String lowLevelHeader = String.valueOf(lowLevelEntry.getKey());
 
+                    /* для дебага, ещё может пригодиться
                     userLogger.info(highLevelHeader + " " + lowLevelHeader);
                     userLogger.info("has in map high? " + headersMap.get(highLevelHeader));
                     userLogger.info("has in map low? " + headersMap.get(lowLevelHeader));
                     userLogger.info("high col=" + headersMap.get(highLevelHeader).getColumn());
-                    userLogger.info("low col=" + headersMap.get(lowLevelHeader).getColumn());
+                    userLogger.info("low col=" + headersMap.get(lowLevelHeader).getColumn());*/
 
                     // Все значения, кроме true/false/NOT_APPLICABLE уникальны, принадлежат разным Enum
                     // TODO не, ну это дичь, надо переписать!
