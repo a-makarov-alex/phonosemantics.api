@@ -10,6 +10,7 @@ import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.statistics.Sample;
 import phonosemantics.statistics.Statistics;
 import phonosemantics.word.wordlist.WordList;
+import phonosemantics.word.wordlist.WordListService;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -100,7 +101,8 @@ public class OutputFile {
     }
 
     // Writes the worlist parsing and statistics counting result into the output file
-    public void fillWith(List<WordList> wordLists) {
+    public void fillWithAll(List<WordList> wordLists) {
+        writeFeatureHeadersToGeneralFile();
         for (WordList wordList : wordLists) {
             userLogger.info("writing to general file...");
             //TODO было так writeToGeneralFile(wordList);
@@ -109,10 +111,23 @@ public class OutputFile {
         //addMeanAndAverage(Statistics.KindOfStats.WORDS_WITH_PHTYPE_PER_LIST);
     }
 
-    private void writeToGeneralFileAlternative(WordList wordList) {
+    public void fillWith(WordList wordList) {
+        if (!this.getFilePages().get(0).isHasHeaders()) {
+            writeFeatureHeadersToGeneralFile();
+        }
+        userLogger.info("writing wl " + wordList.getMeaning() + " to general file...");
+        writeToGeneralFileAlternative(wordList);
+    }
+
+    /**
+     * Добавляем заголовки фонетических признаков в отчёт
+     */
+    private void writeFeatureHeadersToGeneralFile() {
         try {
             FileOutputStream fileOut = new FileOutputStream(this.filePath);
 
+            // Берем любой вордлист и согласно структуре DistFeature вписываем заголовки
+            WordList wordList = WordListService.getAllWordLists().get(0);
             Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> wlDistFeaturesStats = wordList.getDistFeatureStats();
             OutputFilePage vowelPage = this.getFilePages().get(0);
             Sheet sheet = vowelPage.getSheet();
@@ -126,40 +141,101 @@ public class OutputFile {
             // Проходим по верхнему уровню заголовков
             for (Map.Entry<String, Map<Object, PhonemeInTable.DistFeatureStats>> highLevelEntry : wlDistFeaturesStats.entrySet()) {
                 String highLevelHeader = highLevelEntry.getKey();
-                headersMap.put(highLevelEntry.getKey(), new GeneralReportHeader(row, col, highLevelHeader));
+                headersMap.put(highLevelHeader, new GeneralReportHeader(row, col, highLevelHeader));
                 vowelPage.setSheet(createCell(sheet, row, col, highLevelHeader));
+                int colMergeFrom = col;
 
                 // Проходим по нижнему уровню заголовков
                 for (Map.Entry<Object, PhonemeInTable.DistFeatureStats> lowLevelEntry : highLevelEntry.getValue().entrySet()) {
-                    row++;
+                    row+=2;
                     String lowLevelHeader = String.valueOf(lowLevelEntry.getKey());
-                    headersMap.put(lowLevelEntry.getKey(), new GeneralReportHeader(row, col, lowLevelHeader));
+                    headersMap.put(lowLevelHeader, new GeneralReportHeader(row, col, lowLevelHeader));
                     vowelPage.setSheet(createCell(sheet, row, col, lowLevelHeader));
 
-                    row+=2;
-                    Double cellValue = lowLevelEntry.getValue().getPercentOfWordsWithFeature();
-                    vowelPage.setSheet(createCell(sheet, row, col, cellValue));
-
-                    row++;
-                    cellValue = lowLevelEntry.getValue().getPercentOfAllPhonemes();
-                    vowelPage.setSheet(createCell(sheet, row, col, cellValue));
-
-                    row++;
-                    cellValue = lowLevelEntry.getValue().getAverageFeatureInstancesPerWord();
-                    vowelPage.setSheet(createCell(sheet, row, col, cellValue));
-
-                    //TODO merging cells. Смотри GeneralReportHeader
-
                     incrementCol++;
-                    if (row > this.filePages.get(0).getLastRowNum()) {
-                        this.filePages.get(0).setLastRowNum(row);
+                    if (row > vowelPage.getLastRowNum()) {
+                        vowelPage.setLastRowNum(row);
                     }
                     row = 0;
                     col = startCol + incrementCol;
                 }
+                sheet.addMergedRegion(new CellRangeAddress(0,1, colMergeFrom, col - 1));
             }
             wb.write(fileOut);
-            userLogger.info("vowels are written to general file");
+            userLogger.info("headers are written to general file");
+            fileOut.close();
+
+        } catch (IOException e) {
+            userLogger.error("IOException caught: " + e.getStackTrace());
+        }
+    }
+
+    /**
+     * Вписываем данные для всех фонетических признаков в отчёт
+     * @param wordList
+     */
+    private void writeToGeneralFileAlternative(WordList wordList) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(this.filePath);
+
+            Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> wlDistFeaturesStats = wordList.getDistFeatureStats();
+            OutputFilePage vowelPage = this.getFilePages().get(0);
+            Sheet sheet = vowelPage.getSheet();
+            Map<Object, GeneralReportHeader> headersMap = vowelPage.getHeaders();
+            int startCol = 3;
+            int incrementCol = 0;
+            int col = startCol + incrementCol;
+            int startRow = vowelPage.getLastRowNum();
+            int row = startRow;
+
+            userLogger.info("start adding dist features stats to general report file...");
+            // Проходим по верхнему уровню заголовков
+            for (Map.Entry<String, Map<Object, PhonemeInTable.DistFeatureStats>> highLevelEntry : wlDistFeaturesStats.entrySet()) {
+                String highLevelHeader = highLevelEntry.getKey();
+                int highLevelCol = col;
+
+                // Проходим по нижнему уровню заголовков
+                // Проверяем, что записываем данные в нужный столбик
+                for (Map.Entry<Object, PhonemeInTable.DistFeatureStats> lowLevelEntry : highLevelEntry.getValue().entrySet()) {
+                    String lowLevelHeader = String.valueOf(lowLevelEntry.getKey());
+
+                    userLogger.info(highLevelHeader + " " + lowLevelHeader);
+                    userLogger.info("has in map high? " + headersMap.get(highLevelHeader));
+                    userLogger.info("has in map low? " + headersMap.get(lowLevelHeader));
+                    userLogger.info("high col=" + headersMap.get(highLevelHeader).getColumn());
+                    userLogger.info("low col=" + headersMap.get(lowLevelHeader).getColumn());
+
+                    // Все значения, кроме true/false/NOT_APPLICABLE уникальны, принадлежат разным Enum
+                    // TODO не, ну это дичь, надо переписать!
+                    if (headersMap.get(lowLevelHeader).getColumn() == col ||
+                        (headersMap.get(highLevelHeader).getColumn() == highLevelCol &&
+                            (lowLevelHeader.equals("true") ||
+                             lowLevelHeader.equals("false")) ||
+                             lowLevelHeader.equals("NOT_APPLICABLE") ||
+                             lowLevelHeader.equals("MID")))
+                    {
+                        row++;
+                        Double cellValue = lowLevelEntry.getValue().getPercentOfWordsWithFeature();
+                        vowelPage.setSheet(createCell(sheet, row, col, cellValue));
+
+                        row++;
+                        cellValue = lowLevelEntry.getValue().getPercentOfAllPhonemes();
+                        vowelPage.setSheet(createCell(sheet, row, col, cellValue));
+
+                        row++;
+                        cellValue = lowLevelEntry.getValue().getAverageFeatureInstancesPerWord();
+                        vowelPage.setSheet(createCell(sheet, row, col, cellValue));
+                    }
+                    incrementCol++;
+                    if (row > vowelPage.getLastRowNum()) {
+                        vowelPage.setLastRowNum(row);
+                    }
+                    row = startRow;
+                    col = startCol + incrementCol;
+                }
+            }
+            wb.write(fileOut);
+            userLogger.info("vowel stats are written to general file");
             fileOut.close();
 
         } catch (IOException e) {

@@ -17,7 +17,8 @@ public class ReportController {
     @GetMapping("/report/general")
     public boolean createGeneralWordlistReport() {
         OutputFile generalWordlistReport = new OutputFile("GeneralWordlistReport");
-        generalWordlistReport.fillWith(WordListService.getAllWordLists());
+        //generalWordlistReport.fillWith(WordListService.getAllWordLists());
+        generalWordlistReport.fillWith(WordListService.getWordlist("leaf"));
         return true;
     }
 

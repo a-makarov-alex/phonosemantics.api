@@ -114,7 +114,7 @@ public class WordList {
     }
 
     public Map<String, Map<Object, Integer>> calculateFeaturesStats(String type) {
-        userLogger.info("starting calculating Wordlist " + this.getMeaning() + "features stats");
+        userLogger.info("starting calculating Wordlist " + this.getMeaning() + " features stats");
         Map<String, Map<Object, Integer>> resultMap = DistinctiveFeatures.getFeaturesStructureDraft(type);
         Map<String, Map<Object, Integer>> bufferForWordStats;
         numOfWordsWithFeatures = DistinctiveFeatures.getFeaturesStructureDraft(type);
@@ -140,7 +140,7 @@ public class WordList {
                 }
             }
         }
-        userLogger.info("finishing calculating Wordlist " + this.getMeaning() + "features stats");
+        userLogger.info("finishing calculating Wordlist " + this.getMeaning() + " features stats");
         return resultMap;
     }
 
