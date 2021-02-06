@@ -2,24 +2,26 @@ package phonosemantics.statistics;
 
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 @Data
 public class Sample {
     private static HashMap<Object, Sample> allSamples = new HashMap<>();
 
-    private ArrayList<Double> sample;
+    private List<Double> sample;
     private Object phType;
     private double quartile_25;
     private double mean;
     private double quartile_75;
     private double average;
+    private Statistics.KindOfStats statsType;
 
-    public Sample(ArrayList<Double> sample, Object phType) {
+    public Sample(List<Double> sample, Object phType, Statistics.KindOfStats type) {
         Collections.sort(sample, Collections.reverseOrder());
         this.sample = sample;
+        statsType = type;
         calculateMean();
         calculateAverage();
         defineSampleQuartiles();

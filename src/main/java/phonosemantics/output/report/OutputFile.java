@@ -28,7 +28,6 @@ public class OutputFile {
     private String title;
     private String filePath;
     private List<OutputFilePage> filePages;
-    private ArrayList<Sheet> sheets;
     private int recordsCounter;
     private Workbook wb;
     private HashMap<Object, Sample> allSamplesSheet1 = null;
@@ -60,9 +59,6 @@ public class OutputFile {
     private void createOutputFile() {
         try {
             FileOutputStream fileOut = new FileOutputStream(this.filePath);
-
-            // Create an Excel file draft
-            sheets = new ArrayList<>();
 
             userLogger.info("specifying styles for headers");
             // Specify a style for headers
@@ -104,18 +100,21 @@ public class OutputFile {
         writeFeatureHeadersToGeneralFile();
         for (WordList wordList : wordLists) {
             userLogger.info("writing to general file...");
-            //TODO было так writeToGeneralFile(wordList);
             writeToGeneralFileAlternative(wordList);
         }
         //addMeanAndAverage(Statistics.KindOfStats.WORDS_WITH_PHTYPE_PER_LIST);
     }
 
+    // Заполнение отчёта данными
     public void fillWith(WordList wordList) {
-        if (!this.getFilePages().get(0).isHasHeaders()) {
+        OutputFilePage page = this.getFilePages().get(0);
+        page.getWordlists().add(wordList);
+        if (!page.isHasHeaders()) {
             writeFeatureHeadersToGeneralFile();
         }
-        userLogger.info("writing wl " + wordList.getMeaning() + " to general file...");
+        userLogger.info("writing stats for wl " + wordList.getMeaning() + " to general file...");
         writeToGeneralFileAlternative(wordList);
+        addMeanAndAverage(Statistics.KindOfStats.WORDS_WITH_PHTYPE_PER_LIST);
     }
 
     /**
@@ -190,7 +189,7 @@ public class OutputFile {
             int startRow = vowelPage.getLastRowNum();
             int row = startRow;
 
-            userLogger.info("start adding dist features stats to general report file...");
+            userLogger.info("добавляем статистику DistFeatures в отчёт для вордлиста " + wordList.getMeaning() + "...");
             // Проходим по верхнему уровню заголовков
             for (Map.Entry<String, Map<Object, PhonemeInTable.DistFeatureStats>> highLevelEntry : wlDistFeaturesStats.entrySet()) {
                 String highLevelHeader = highLevelEntry.getKey();
@@ -339,42 +338,80 @@ public class OutputFile {
     private void addMeanAndAverage(Statistics.KindOfStats kindOfStats) {
         try {
             FileOutputStream fileOut = new FileOutputStream(this.filePath);
-            userLogger.info("adding mean and average...");
+            OutputFilePage vowelPage = this.filePages.get(0);
+            Sheet sh = vowelPage.getSheet();
 
-            Sheet sh = sheets.get(0);
+            userLogger.info("подсчёт медианы и среднего арифметического для " + kindOfStats);
+            // для экономии времени при ресчете статистики. DistFeatureName(Key)--List<Double>stats (Value)
+            // структура аналогична wl.getDistFeatureStats()
+            Map<String, Map<Object, List<Double>>> statsListsForDistFeatures = new HashMap<>();
 
-            // HEADERS and row creation
+            userLogger.info("инициализируем структуру для статистики, чтобы поместить туда данные");
+            Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> map = vowelPage.getWordlists().get(0).getDistFeatureStats();
+            for (Map.Entry<String, Map<Object, PhonemeInTable.DistFeatureStats>> highLevelEntry : map.entrySet()) {
+                Map<Object, List<Double>> resultMapLow = new HashMap<>();
+                for (Map.Entry<Object, PhonemeInTable.DistFeatureStats> lowLevelEntry : highLevelEntry.getValue().entrySet()) {
+                    resultMapLow.put(lowLevelEntry.getKey(), new ArrayList<>());
+                }
+                statsListsForDistFeatures.put(highLevelEntry.getKey(), resultMapLow);
+            }
+
+            userLogger.info("заполняем структуру данными статистики для всех вордлистов в отчёте");
+            for (WordList wl : vowelPage.getWordlists()) {
+                for (Map.Entry<String, Map<Object, PhonemeInTable.DistFeatureStats>> highLevelEntry : wl.getDistFeatureStats().entrySet()) {
+                    String highKey = highLevelEntry.getKey();
+                    for (Map.Entry<Object, PhonemeInTable.DistFeatureStats> lowLevelEntry : highLevelEntry.getValue().entrySet()) {
+                        Object lowKey = lowLevelEntry.getKey();
+                        Double lowValue = lowLevelEntry.getValue().getPercentOfWordsWithFeature();
+                        //userLogger.info("adding " + highKey + " " + lowKey + " " + lowValue);
+                        statsListsForDistFeatures.get(highKey).get(lowKey).add(lowValue);
+                    }
+                }
+            }
+
+            // Самплы для ОДНОГО типа статистики
+            userLogger.info("рассчёт сэмплов");
+            Map<String, Map<Object, Sample>> allSamples = new HashMap<>();
+            if (vowelPage.getWordlists().size() >= 4) {
+                for (Map.Entry<String, Map<Object, List<Double>>> highLevelEntry : statsListsForDistFeatures.entrySet()) {
+                    String highKey = highLevelEntry.getKey();
+                    Map<Object, Sample> lowMap = new HashMap<>();
+                    for (Map.Entry<Object, List<Double>> lowLevelEntry : highLevelEntry.getValue().entrySet()) {
+                        Object lowKey = lowLevelEntry.getKey();
+                        lowMap.put(lowKey, new Sample(lowLevelEntry.getValue(), lowKey, Statistics.KindOfStats.WORDS_WITH_PHTYPE_PER_LIST));
+                    }
+                    allSamples.put(highKey, lowMap);
+                }
+            }
+
+            userLogger.info("выводим данные статистики в отчёт");
             int shiftForHeaders = 3;
-            Row rowMean = sh.createRow(shiftForHeaders + recordsCounter + 2);
-            rowMean.createCell(2).setCellValue("MEAN:");
-            Row rowAver = sh.createRow(shiftForHeaders + recordsCounter + 3);
-            rowAver.createCell(2).setCellValue("AVERAGE:");
+            int rowMeanNum = shiftForHeaders + vowelPage.getLastRowNum() + 2;
+            createCell(0, rowMeanNum, 2, "MEAN:");
+            int rowAverNum = rowMeanNum + 1;
+            createCell(0, rowAverNum, 2, "AVERAGE:");
 
-
-            HashMap<Object, Sample> samples = readAllSamples(kindOfStats);
-            HashMap<Object, GeneralReportHeader> headers = GeneralReportHeader.vowSh;
-
+            Map<Object, GeneralReportHeader> headers = vowelPage.getHeaders();
             DecimalFormat df = new DecimalFormat("#.#");
-            // VOWELS MANNER
-            for (Map.Entry<Object, GeneralReportHeader> entry : headers.entrySet()) {
-                Cell cell = rowMean.createCell(entry.getValue().getColumn());
+
+            userLogger.info("RESULT");
+            for (Map.Entry<String, Map<Object, Sample>> highLevelEntry : allSamples.entrySet()) {
+                // берем внешний ключ и ищем его в заголовках
+                for (Map.Entry<Object, Sample> lowLevelEntry : highLevelEntry.getValue().entrySet()) {
+                    userLogger.info(highLevelEntry.getKey() + " " + lowLevelEntry.getKey() + " " + lowLevelEntry.getValue().getMean());
+                }
+            }
+
+
+            /*for (Map.Entry<Object, GeneralReportHeader> entry : headers.entrySet()) {
+                Cell cell = sh.getRow(rowMeanNum).createCell(entry.getValue().getColumn());
                 cell.setCellValue(df.format(samples.get(entry.getKey()).getMean()) + "%");
 
                 cell = rowAver.createCell(entry.getValue().getColumn());
                 cell.setCellValue(df.format(samples.get(entry.getKey()).getAverage()) + "%");
             }
-            userLogger.debug("vowels manner stats added");
+            userLogger.debug("vowels manner stats added");*/
 
-            // CONSONANT MANNER
-            headers = GeneralReportHeader.consMannerSh;
-            for (Map.Entry<Object, GeneralReportHeader> entry : headers.entrySet()) {
-                Cell cell = rowMean.createCell(entry.getValue().getColumn());
-                cell.setCellValue(df.format(samples.get(entry.getKey()).getMean()) + "%");
-
-                cell = rowAver.createCell(entry.getValue().getColumn());
-                cell.setCellValue(df.format(samples.get(entry.getKey()).getAverage()) + "%");
-            }
-            userLogger.debug("consonants manner stats added");
 
             wb.write(fileOut);
             userLogger.info("mean and average are written to file");
@@ -385,8 +422,54 @@ public class OutputFile {
         }
     }
 
+    /*public List<Sample> readAllSamples(Statistics.KindOfStats kindOfStats) {
+        OutputFilePage page = this.getFilePages().get(0);
+        if (page.getStatsColumnsList() != null) {
+            return page.getStatsColumnsList();
+        }
+
+        List<Sample> result = new ArrayList<>();
+        Sheet sh = page.getSheet();;
+        Cell cell;
+
+        ArrayList<Double> dList;
+        //VOWELS
+        for (Map.Entry<Object, GeneralReportHeader> entry : page.getHeaders().entrySet()) {
+            dList = new ArrayList<>();
+
+            for (int i = 3; i < page.getLastRowNum(); i++) {
+                Row r = sh.getRow(i);
+                int col = entry.getValue().getColumn();
+                // Если значение имеется, суммируем
+                if (r.getCell(col) != null) {
+                    dList.add(parseNormalityCell(r.getCell(col)));
+                }
+            }
+
+            Sample sample = new Sample(dList, entry.getKey());
+            result.put(entry.getKey(), sample);
+        }
+
+        // CONSONANTS MANNER
+        for (Map.Entry<Object, GeneralReportHeader> entry : GeneralReportHeader.consMannerSh.entrySet()) {
+            dList = new ArrayList<>();
+
+            for (int i = 3; i < this.recordsCounter + 3; i++) {
+                // TODO: костыли запилены за неимением времени
+                cell = sh.getRow(i).getCell(entry.getValue().getColumn());
+                dList.add(parseNormalityCell(cell));
+            }
+
+            Sample sample = new Sample(dList, entry.getKey());
+            result.put(entry.getKey(), sample);
+        }
+
+        allSamplesSheet1 = result;
+        return result;
+    }*/
+
     // Считывает столбик каждого фонотипа как выборку для расчета статистики
-    public HashMap<Object, Sample> readAllSamples(Statistics.KindOfStats kindOfStats) {
+    /*public HashMap<Object, Sample> readAllSamples(Statistics.KindOfStats kindOfStats) {
         if (allSamplesSheet1 != null) {
             return allSamplesSheet1;
         }
@@ -395,7 +478,7 @@ public class OutputFile {
         Sheet sh = null;
         Cell cell;
         if (kindOfStats == Statistics.KindOfStats.WORDS_WITH_PHTYPE_PER_LIST) {
-            sh = sheets.get(0);
+            sh = this.getFilePages().get(0).getSheet();
         }
 
         ArrayList<Double> dList;
@@ -429,10 +512,10 @@ public class OutputFile {
 
         allSamplesSheet1 = result;
         return result;
-    }
+    }*/
 
     // Считывает столбик каждого фонотипа как выборку для расчета статистики
-    public HashMap<Object, Double[]> readAllSamplesAsArray(Statistics.KindOfStats kindOfStats) {
+    /*public HashMap<Object, Double[]> readAllSamplesAsArray(Statistics.KindOfStats kindOfStats) {
 
         HashMap<Object, Double[]> allSamples = new HashMap<>();
         HashMap<Object, Sample> dLists = readAllSamples(kindOfStats);
@@ -445,7 +528,7 @@ public class OutputFile {
             allSamples.put(entry.getKey(), dArr);
         }
         return allSamples;
-    }
+    }*/
 
     // Возвращает первое число (процент, среднее...) из ячейки файла Normality
     // второе число - это делитель

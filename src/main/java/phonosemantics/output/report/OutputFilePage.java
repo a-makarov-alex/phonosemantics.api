@@ -5,11 +5,12 @@ import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
-import phonosemantics.phonetics.phoneme.PhonemeInTable;
+import phonosemantics.statistics.Sample;
 import phonosemantics.word.wordlist.WordList;
-import phonosemantics.word.wordlist.WordListService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -22,6 +23,8 @@ public class OutputFilePage {
     private int lastRowNum;
     private Map<Object, GeneralReportHeader> headers;
     private boolean hasHeaders; // вписаны ли заголовки в файл или ещё нет
+    private List<WordList> wordlists; // вордлисты, входящие в отчёт
+    private List<Sample> statsSamplesList; // "вертикальный разрез" статистик в отчёте. перечень статс значений для каждого фонотипа
 
     public OutputFilePage(String title, int pageNumber, Sheet sheet) {
         this.title = title;
@@ -30,6 +33,7 @@ public class OutputFilePage {
         headers = new HashMap<>();
         lastRowNum = 0;
         hasHeaders = false;
+        wordlists = new ArrayList<>();
     }
 
     /**
