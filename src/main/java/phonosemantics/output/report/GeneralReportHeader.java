@@ -9,11 +9,9 @@ import phonosemantics.phonetics.phoneme.distinctiveFeatures.MannerPrecise;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.consonants.Lateral;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Backness;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Height;
-import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Roundness;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 @Data
 @Deprecated
@@ -43,84 +41,13 @@ public class GeneralReportHeader {
     }
 
     /**
-     *  Headers for Vowel excel sheet
-     *  **/
-    @Deprecated
-    public static void addVowelsHeader(OutputFilePage page) {
-        Sheet sheet = page.getSheet();
-        Map<Object, GeneralReportHeader> headersMap = page.getHeaders();
-
-        userLogger.info("start adding vowel headers");
-        headersMap.put(Height.OPEN, new GeneralReportHeader(2, 3, "Open"));
-        headersMap.put(Height.OPEN_MID, new GeneralReportHeader(2, 4, "Op-mid"));
-        headersMap.put(Height.MID, new GeneralReportHeader(2, 5, "Mid"));
-        headersMap.put(Height.CLOSE_MID, new GeneralReportHeader(2, 6, "Cl-mid"));
-        headersMap.put(Height.CLOSE, new GeneralReportHeader(2, 7, "Close"));
-
-        headersMap.put(Backness.FRONT, new GeneralReportHeader(2, 8, "Front"));
-        headersMap.put(Backness.CENTRAL, new GeneralReportHeader(2, 9, "Cent"));
-        headersMap.put(Backness.BACK, new GeneralReportHeader(2, 10, "Back"));
-
-        headersMap.put(Roundness.ROUNDED, new GeneralReportHeader(2,11, "Round"));
-        headersMap.put(Roundness.UNROUNDED, new GeneralReportHeader(2,12, "Unround"));
-
-        //TODO посмотриеть, надо ли развить тему
-        //headersMap.put(Nasalization.NASAL, new Header(2, 13, "Nasal"));
-        //headersMap.put(Nasalization.NON_NASAL, new Header(2, 14, "Non-Nasal"));
-
-        // TODO: избавиться от этого поля
-        VOWEL_HEADER_WIDTH = headersMap.size();
-
-        userLogger.info("inicialization and style vowel headers");
-        // inicialization and style
-        for (int i=0; i <= 2; i++ ) {
-            sheet.getRow(i);
-            for (int j=3; j < 3 + headersMap.size(); j++) {
-                sheet.getRow(i).createCell(j);
-                sheet.getRow(i).getCell(j).setCellStyle(OutputFile.getHeaderCellStyle());
-            }
-        }
-
-        userLogger.info("merging cells vowel headers");
-        // merging cells
-        int colOpen = headersMap.get(Height.OPEN).column;
-        int colClose = headersMap.get(Height.CLOSE).column;
-        int colFront = headersMap.get(Backness.FRONT).column;
-        int colBack = headersMap.get(Backness.BACK).column;
-        int colRound = headersMap.get(Roundness.ROUNDED).column;
-        int colUnround = headersMap.get(Roundness.UNROUNDED).column;
-        //TODO
-        //int colNasal = headersMap.get(Nasalization.NASAL).column;
-        //int colNonNasal = headersMap.get(Nasalization.NON_NASAL).column;
-
-        sheet.addMergedRegion(new CellRangeAddress(0,0, colOpen, colUnround));
-        //sheet.addMergedRegion(new CellRangeAddress(0,0, colOpen, colNonNasal));
-        sheet.addMergedRegion(new CellRangeAddress(1,1,colOpen, colClose));
-        sheet.addMergedRegion(new CellRangeAddress(1,1, colFront, colBack));
-        sheet.addMergedRegion(new CellRangeAddress(1,1, colRound, colUnround));
-        //sheet.addMergedRegion(new CellRangeAddress(1,1, colNasal, colNonNasal));
-
-        userLogger.info("adding values for vowel headers");
-        // вписываем значения хедеров
-        sheet.getRow(0).getCell(colOpen).setCellValue("VOWELS");
-        sheet.getRow(1).getCell(colOpen).setCellValue("Height");
-        sheet.getRow(1).getCell(colFront).setCellValue("Backness");
-        sheet.getRow(1).getCell(colRound).setCellValue("Roundness");
-        //sheet.getRow(1).getCell(colNasal).setCellValue("Nasalization");
-
-        for (GeneralReportHeader h : headersMap.values()) {
-            Cell cell = sheet.getRow(h.row).getCell(h.column);
-            cell.setCellValue(h.text);
-        }
-    }
-
-    /**
      *  Headers for Manner excel sheet
      *  **/
     public static void addMannerHeader(Sheet sheet) {
         addMannerHeader(sheet, false);
     }
 
+    @Deprecated
     public static void addMannerHeader(Sheet sheet, boolean shift_required) {
         // default shift is 0
         // true flag means that header is for NORMALITY file, otherwise for GENERAL file
@@ -189,6 +116,7 @@ public class GeneralReportHeader {
     /**
      *  Headers for Place excel sheet
      *  **/
+    @Deprecated
     public static void addPlaceHeader(Sheet sheet) {
         // inicialization and style
         for (int i=0; i <= 2; i++ ) {

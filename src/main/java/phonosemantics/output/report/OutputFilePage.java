@@ -21,16 +21,18 @@ public class OutputFilePage {
     private int pageNumber;
     private Sheet sheet;
     private int lastRowNum;
-    private Map<Object, GeneralReportHeader> headers;
+    // !!итерироваться по ключу через String.valueOf(Object). В будущем стоит поправить.
+    private Map<String, Map<Object, GeneralReportHeader>> headersNew;
     private boolean hasHeaders; // вписаны ли заголовки в файл или ещё нет
     private List<WordList> wordlists; // вордлисты, входящие в отчёт
-    private List<Sample> statsSamplesList; // "вертикальный разрез" статистик в отчёте. перечень статс значений для каждого фонотипа
+    // "вертикальный разрез" статистик в отчёте. перечень статс значений для каждого фонотипа "сквозь" все вордлисты
+    private List<Sample> statsSamplesList;
 
     public OutputFilePage(String title, int pageNumber, Sheet sheet) {
         this.title = title;
         this.pageNumber = pageNumber;
         this.sheet = sheet;
-        headers = new HashMap<>();
+        headersNew = new HashMap<>();
         lastRowNum = 0;
         hasHeaders = false;
         wordlists = new ArrayList<>();
