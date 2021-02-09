@@ -23,6 +23,7 @@ public class ReportController {
         }
         generalWordlistReport.fillWithAll(WordListService.getAllWordLists());
         return true;
+
     }
 
     /**

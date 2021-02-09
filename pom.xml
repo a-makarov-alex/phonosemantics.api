@@ -15,6 +15,13 @@
         <version>2.2.2.RELEASE</version>
     </parent>
 
+    <properties>
+        <maven.compile.source>1.8</maven.compile.source>
+        <maven.compile.target>1.8</maven.compile.target>
+
+        <io-rest-assured.version>4.2.0</io-rest-assured.version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -55,11 +62,6 @@
 
         </plugins>
     </build>
-
-    <properties>
-        <maven.compile.source>1.8</maven.compile.source>
-        <maven.compile.target>1.8</maven.compile.target>
-    </properties>
 
     <dependencies>
         <!-- spring-boot-starter-web -->
@@ -141,7 +143,60 @@
             <version>0.8.5</version>
         </dependency>-->
 
-    </dependencies>
+        <!-- wiremock -->
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>2.19.0</version>
+            <scope>test</scope>
+        </dependency>
 
+        <!-- rest-assured
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>4.3.3</version>
+            <scope>test</scope>
+        </dependency>-->
+
+        <!-- json-path
+        ТРЕБУЕТСЯ ДЛЯ rest-assured ввиду конфликта версий со Spring-boot
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-path</artifactId>
+            <version>4.0.0</version>
+        </dependency>-->
+
+        <!-- xml-path
+        ТРЕБУЕТСЯ ДЛЯ rest-assured ввиду конфликта версий со Spring-boot
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>xml-path</artifactId>
+            <version>4.0.0</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${io-rest-assured.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!--Added required depeendencies due to : https://github.com/rest-assured/rest-assured/issues/1168 -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured-common</artifactId>
+            <version>${io-rest-assured.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${io-rest-assured.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>xml-path</artifactId>
+            <version>${io-rest-assured.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
