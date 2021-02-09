@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
-import phonosemantics.output.report.OutputFile;
 
 import java.util.Map;
 
@@ -35,10 +34,8 @@ public class LanguageTest {
         Response response = RestAssured.given()
                 .when()
                 .get(fullUrl);
-        userLogger.info("RESPONSE CODE " + response.statusCode());
-        userLogger.info("RESPONSE " + response.getBody().asString());
-        Assert.assertTrue(response.statusCode() == 200);
+        //userLogger.info("RESPONSE CODE " + response.statusCode());
+        //userLogger.info("RESPONSE " + response.getBody().asString());
+        Assert.assertEquals(200, response.statusCode());
     }
-
-
 }
