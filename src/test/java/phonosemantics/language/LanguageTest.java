@@ -11,6 +11,9 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockserver.client.MockServerClient;
+import org.mockserver.model.HttpRequest;
+import org.mockserver.model.RequestDefinition;
+import org.mockserver.verify.VerificationTimes;
 import org.testcontainers.containers.MockServerContainer;
 import org.testcontainers.utility.DockerImageName;
 
@@ -49,22 +52,22 @@ public class LanguageTest {
         Assert.assertEquals(200, response.statusCode());
     }
 
-
-
     @Test
     public void testMockserverResponse() throws Exception {
-        new MockServerClient(mockServer.getHost(), mockServer.getServerPort())
-                .when(request()
-                        .withMethod("GET")
-                        .withPath("/person")
-                        .withQueryStringParameter("name", "peter"))
-                .respond(response()
-                        .withBody("Peter the person!"));
+        MockServerClient mockServerClient = new MockServerClient(mockServer.getHost(), mockServer.getServerPort());
+        String path = "/person";
+        mockServerClient.when(request()
+                            .withMethod("GET")
+                            .withPath(path)
+                            .withQueryStringParameter("name", "peter"))
+                        .respond(response()
+                            .withBody("Peter the person!"));
 
-        // Ещё примеры
         /*.withStatusCode(302)
                 .withCookie("sessionId", "2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
                 .withHeader("Location", "https://www.mock-server.com") */
+        // Ещё примеры
+        //https://www.mock-server.com/mock_server/creating_expectations.html
 
         Response response = RestAssured.given()
                 .when()
@@ -72,5 +75,14 @@ public class LanguageTest {
         //userLogger.info("RESPONSE CODE MOCKSERVER: " + response.statusCode());
         //userLogger.info("RESPONSE BODY MOCKSERVER: " + response.getBody().asString());
         Assert.assertEquals(200, response.statusCode());
+
+        mockServerClient.verify(
+                HttpRequest.request().withPath(path),
+                VerificationTimes.once());
+
+        //HttpRequest[] requests = mockServerClient.retrieveRecordedRequests(HttpRequest.request().withPath(path));
+        RequestDefinition[] requests = mockServerClient.retrieveRecordedRequests(HttpRequest.request().withPath(path));
+        userLogger.info("requests num: " + requests.length);
+        userLogger.info("requests: " + requests[0]);
     }
 }
