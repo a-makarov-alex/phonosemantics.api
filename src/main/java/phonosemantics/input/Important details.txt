@@ -1,3 +1,7 @@
+Файл phonemeDistinctiveFeatures.xlsx - это таблица, где согласные разбиты на признаки.
+
+
+
 Out of 706 language inventories surveyed by Ruhlen (1976), labialization occurred most often with velar (42%) and uvular (15%) segments and least often with dental and alveolar segments. With non-dorsal consonants, labialization may include velarization as well. Labialization is not restricted to lip-rounding.
 
 https://en.wikipedia.org/wiki/Labialization
