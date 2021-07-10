@@ -27,7 +27,7 @@ public class WordController {
      * **/
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/languages/{language}/meanings/{meaning}/features")
-    public Map<String, Map<Object, Integer>> getWordDistinctiveFeatures(
+    public Map<String, Map<String, Integer>> getWordDistinctiveFeatures(
             @RequestParam(value = "language") String language,
             @RequestParam(value = "meaning") String meaning
     ) {

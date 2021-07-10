@@ -40,4 +40,15 @@ public class ReportController {
         generalWordlistReport.fillWith(WordListService.getWordlist(meaning));
         return true;
     }
+
+    /**
+     * Отчет создается в указанной (захардкоженой) директории, если ещё не создан
+     * Если отчёт уже существует, данные дописываются. Можно вызывать эндпойнт многократно.
+     * **/
+    @CrossOrigin(origins = PortConfig.FRONTEND_URL)
+    @GetMapping("/report/square/{meaning}")
+    public boolean createPatternSquareReport(@PathVariable(value="meaning") String meaning) {
+        PatternSquareFile patternSquareFile = new PatternSquareFile(WordListService.getWordlist(meaning));
+        return true;
+    }
 }

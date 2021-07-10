@@ -34,7 +34,7 @@ public class LanguageTest {
     public void calculatePhTypeCoverage() {
         String testLangName = "Ket";
         Language language = new Language(testLangName);
-        Map<String, Map<Object, Integer>> phTypeCov = language.calculatePhTypeCoverage();
+        Map<String, Map<String, Integer>> phTypeCov = language.calculatePhTypeCoverage();
         Assert.assertNotNull(phTypeCov);
         Assert.assertTrue(phTypeCov.get("vocoid").get("true") > 0);
     }

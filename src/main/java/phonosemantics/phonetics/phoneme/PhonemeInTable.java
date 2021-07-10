@@ -25,8 +25,9 @@ public class PhonemeInTable {
         this.column = c;
     }
 
-    public Map<String, Map<Object, Integer>> countPhonemeDistinctiveFeaturesInstances() {
-        Map<String, Map<Object, Integer>> distFeatureStats = DistinctiveFeatures.getFeaturesStructureDraft("all");
+    // Метод преобразует для фонемы DistinctiveFeatures в Map<String, Map<String, Integer>> с единицами для найденных признаков
+    public Map<String, Map<String, Integer>> countPhonemeDistinctiveFeaturesInstances() {
+        Map<String, Map<String, Integer>> distFeatureStats = DistinctiveFeatures.getFeaturesStructureDraftStringKeys("all");
         DistinctiveFeatures df = this.distinctiveFeatures;
         final String TRUE = "true";
         final String FALSE = "false";
@@ -57,22 +58,22 @@ public class PhonemeInTable {
         key = df.getManner().isVoiced() ? TRUE : FALSE;
         distFeatureStats.get("voiced").put(key, 1);
 
-        distFeatureStats.get("stricture").put(df.getManner().getStricture(), 1);
-        distFeatureStats.get("rhotics").put(df.getManner().getRhotics(), 1);
-        distFeatureStats.get("lateral").put(df.getManner().getLateral(), 1);
-        distFeatureStats.get("sibilant").put(df.getManner().getSibilant(), 1);
-        distFeatureStats.get("semivowel").put(df.getManner().getSemivowel(), 1);
-        distFeatureStats.get("strident").put(df.getManner().getStrident(), 1);
-        distFeatureStats.get("mannerPrecise").put(df.getManner().getMannerPrecise(), 1);
+        distFeatureStats.get("stricture").put(String.valueOf(df.getManner().getStricture()), 1);
+        distFeatureStats.get("rhotics").put(String.valueOf(df.getManner().getRhotics()), 1);
+        distFeatureStats.get("lateral").put(String.valueOf(df.getManner().getLateral()), 1);
+        distFeatureStats.get("sibilant").put(String.valueOf(df.getManner().getSibilant()), 1);
+        distFeatureStats.get("semivowel").put(String.valueOf(df.getManner().getSemivowel()), 1);
+        distFeatureStats.get("strident").put(String.valueOf(df.getManner().getStrident()), 1);
+        distFeatureStats.get("mannerPrecise").put(String.valueOf(df.getManner().getMannerPrecise()), 1);
 
         // PLACE
-        distFeatureStats.get("placeApproximate").put(df.getPlace().getPlaceApproximate(), 1);
-        distFeatureStats.get("placePrecise").put(df.getPlace().getPlacePrecise(), 1);
+        distFeatureStats.get("placeApproximate").put(String.valueOf(df.getPlace().getPlaceApproximate()), 1);
+        distFeatureStats.get("placePrecise").put(String.valueOf(df.getPlace().getPlacePrecise()), 1);
 
         // VOWEL SPACE
-        distFeatureStats.get("height").put(df.getVowelSpace().getHeight(), 1);
-        distFeatureStats.get("backness").put(df.getVowelSpace().getBackness(), 1);
-        distFeatureStats.get("roundness").put(df.getVowelSpace().getRoundness(), 1);
+        distFeatureStats.get("height").put(String.valueOf(df.getVowelSpace().getHeight()), 1);
+        distFeatureStats.get("backness").put(String.valueOf(df.getVowelSpace().getBackness()), 1);
+        distFeatureStats.get("roundness").put(String.valueOf(df.getVowelSpace().getRoundness()), 1);
 
         //TODO check if there are any other fileds
 

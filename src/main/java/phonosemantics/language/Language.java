@@ -27,7 +27,7 @@ public class Language {
     private Set<PhonemeInTable> phonology;
     // maps save the verdict "if the phoneme/phType were found in the Language words on practice"
     private Set<PhonemeInTable> phCoverage;
-    private Map<String, Map<Object, Integer>> phTypeCoverage;
+    private Map<String, Map<String, Integer>> phTypeCoverage;
     private Set<PhonemeInTable> phNotDescribed;
 
     public Language(String title) {
@@ -110,10 +110,10 @@ public class Language {
     }
 
     // Count all the phonotypes present in a specific language
-    public Map<String, Map<Object, Integer>> calculatePhTypeCoverage() {
+    public Map<String, Map<String, Integer>> calculatePhTypeCoverage() {
         userLogger.info("calculating PhType coverage");
         String type = "all";
-        Map<String, Map<Object, Integer>> fullMap = DistinctiveFeatures.getFeaturesStructureDraft(type);
+        Map<String, Map<String, Integer>> fullMap = DistinctiveFeatures.getFeaturesStructureDraftStringKeys(type);
 
 
         List<WordList> allWordlists = WordListService.getAllWordLists();
@@ -123,9 +123,9 @@ public class Language {
                 userLogger.info("Word: " + word.getGraphicForm());
 
                 // Put all the distFeatures counters of every word into a full distFeature map
-                for (Map.Entry<String, Map<Object, Integer>> phTypeHigherLevel : fullMap.entrySet()) {
+                for (Map.Entry<String, Map<String, Integer>> phTypeHigherLevel : fullMap.entrySet()) {
 
-                    for (Map.Entry<Object, Integer> phTypeEntity : phTypeHigherLevel.getValue().entrySet()) {
+                    for (Map.Entry<String, Integer> phTypeEntity : phTypeHigherLevel.getValue().entrySet()) {
                         // Entity example: {true: 0} or {HIGH_MID: 0}
 
                         Integer i = word.countWordDistinctiveFeaturesStats(type).get(phTypeHigherLevel.getKey()).get(phTypeEntity.getKey());

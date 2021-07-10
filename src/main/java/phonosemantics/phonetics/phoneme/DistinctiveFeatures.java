@@ -1,6 +1,7 @@
 package phonosemantics.phonetics.phoneme;
 
 import lombok.Data;
+import org.apache.log4j.Logger;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.MannerPrecise;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.Stricture;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.consonants.*;
@@ -13,13 +14,15 @@ import java.util.Map;
 
 @Data
 public class DistinctiveFeatures {
+    private static final Logger userLogger = Logger.getLogger(DistinctiveFeatures.class);
+
     private MajorClass majorClass;
     private Manner manner;
     private Place place; //consonants only
     private VowelSpace vowelSpace; //vowels only
     //    private Laryngeal laryngeal;
 
-    private static Map<Object, Integer> allFeaturesMap = null;
+    private static Map<String, Integer> allFeaturesMap = null;
     private static final String TRUE = "true";
     private static final String FALSE = "false";
 
@@ -362,7 +365,6 @@ public class DistinctiveFeatures {
      *   ]}
      */
     public static Map<String, Map<Object, Integer>> getFeaturesStructureDraft(String type) {
-        // TODO: refactoring, create it once and then return from private variable
         Map<String, Map<Object, Integer>> mainMap = new HashMap<>();
 
         for (Map.Entry<String, Object[]> elem : getFeaturesForAPI(type).entrySet()) {
@@ -373,6 +375,24 @@ public class DistinctiveFeatures {
                 innerMap.put(elem.getValue()[i], 0);
             }
 
+            // Добавляем в мапу верхнего уровня: { VOCOID: [{true : 1}, {false: 0}]}
+            mainMap.put(elem.getKey(), innerMap);
+        }
+        return mainMap;
+    }
+
+    public static Map<String, Map<String, Integer>> getFeaturesStructureDraftStringKeys(String type) {
+        Map<String, Map<String, Integer>> mainMap = new HashMap<>();
+
+        for (Map.Entry<String, Object[]> elem : getFeaturesForAPI(type).entrySet()) {
+            Map<String, Integer> innerMap = new HashMap<>();
+
+            // Заполняем парами "значение признака : количество экземпляров". [{true : 1}, {false: 0}]
+            for (int i = 0; i < elem.getValue().length; i++) {
+                innerMap.put(String.valueOf(elem.getValue()[i]), 0);
+                if (String.valueOf(elem.getValue()[i]) == "true") {
+                }
+            }
             // Добавляем в мапу верхнего уровня: { VOCOID: [{true : 1}, {false: 0}]}
             mainMap.put(elem.getKey(), innerMap);
         }

@@ -37,7 +37,7 @@ public class WordList {
     //TODO Deprecated
     private Map<Object, PhTypeStats> phTypeStatsMap = new HashMap<>();
     private Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> distFeatureStats = new HashMap<>();
-    private Map<String, Map<Object, Integer>> numOfWordsWithFeatures;
+    private Map<String, Map<String, Integer>> numOfWordsWithFeatures;
     private int numOfWords;
     private int numOfPhonemes;
 
@@ -59,7 +59,7 @@ public class WordList {
         // Заполняем статистику по отдельным фонемам
         this.fillPhonemeStatsMap();
         // Заполняем данные статистики по фонотипам исходя из сырых данных по фонемам
-        Map<String, Map<Object, Integer>> rawStats = this.calculateFeaturesStats("all");
+        Map<String, Map<String, Integer>> rawStats = this.calculateFeaturesStats("all");
         this.fillDistinctiveFeatureStatsMap(rawStats);
 
     }
@@ -94,11 +94,11 @@ public class WordList {
     }
 
     // Заполняем данные статистики по фонотипам исходя из сырых данных по фонемам
-    public void fillDistinctiveFeatureStatsMap(Map<String, Map<Object, Integer>> rawStats) {
-        for (Map.Entry<String, Map<Object, Integer>> highLevelEntry : rawStats.entrySet()) {
+    public void fillDistinctiveFeatureStatsMap(Map<String, Map<String, Integer>> rawStats) {
+        for (Map.Entry<String, Map<String, Integer>> highLevelEntry : rawStats.entrySet()) {
             distFeatureStats.put(highLevelEntry.getKey(), new HashMap<>());
 
-            for (Map.Entry<Object, Integer> lowLevelEntry : highLevelEntry.getValue().entrySet()) {
+            for (Map.Entry<String, Integer> lowLevelEntry : highLevelEntry.getValue().entrySet()) {
                 int numOfWordsWithFeature = this.numOfWordsWithFeatures.get(highLevelEntry.getKey()).get(lowLevelEntry.getKey());
                 // Рассчитываем статистические данные по каждому фонотипу и сохраняем
                 distFeatureStats.get(highLevelEntry.getKey()).put(
@@ -113,11 +113,11 @@ public class WordList {
         }
     }
 
-    public Map<String, Map<Object, Integer>> calculateFeaturesStats(String type) {
+    public Map<String, Map<String, Integer>> calculateFeaturesStats(String type) {
         userLogger.info("starting calculating Wordlist " + this.getMeaning() + " features stats");
-        Map<String, Map<Object, Integer>> resultMap = DistinctiveFeatures.getFeaturesStructureDraft(type);
-        Map<String, Map<Object, Integer>> bufferForWordStats;
-        numOfWordsWithFeatures = DistinctiveFeatures.getFeaturesStructureDraft(type);
+        Map<String, Map<String, Integer>> resultMap = DistinctiveFeatures.getFeaturesStructureDraftStringKeys(type);
+        Map<String, Map<String, Integer>> bufferForWordStats;
+        numOfWordsWithFeatures = DistinctiveFeatures.getFeaturesStructureDraftStringKeys(type);
 
         // TODO подумать: можно создать ещё одну вложенную мапу, в которой сохранять количество признаков в КАЖДОМ слове, а не только слов с признаком
         // TODO более продвинутый вариант - с сохранением структуры, чтобы знать где признак встречается в начале, где следует за другими признаками и т.д.
@@ -126,8 +126,8 @@ public class WordList {
         for (Word w : this.getList()) {
             bufferForWordStats = w.countWordDistinctiveFeaturesStats(type);
 
-            for (Map.Entry<String, Map<Object, Integer>> entryHighLevel : bufferForWordStats.entrySet()) {
-                for (Map.Entry<Object, Integer> entryLowLevel : entryHighLevel.getValue().entrySet()) {
+            for (Map.Entry<String, Map<String, Integer>> entryHighLevel : bufferForWordStats.entrySet()) {
+                for (Map.Entry<String, Integer> entryLowLevel : entryHighLevel.getValue().entrySet()) {
                     // Add 1 to the number of words with Dist Feature if it is found in the Word
                     if (entryLowLevel.getValue() != 0) {
                         Integer numOfWordsWithFeature = numOfWordsWithFeatures.get(entryHighLevel.getKey()).get(entryLowLevel.getKey());
@@ -151,9 +151,9 @@ public class WordList {
         } else {
             phTypeStatsMap = new HashMap<>();
             // Заполняем статсМапу парами "фонотип : пустой объект статов"
-            Map<String, Map<Object, Integer>> allPhTypes = DistinctiveFeatures.getFeaturesStructureDraft("all");
-            for (Map.Entry<String, Map<Object, Integer>> outerMap : allPhTypes.entrySet()) {
-                for (Map.Entry<Object, Integer> phT : outerMap.getValue().entrySet()) {
+            Map<String, Map<String, Integer>> allPhTypes = DistinctiveFeatures.getFeaturesStructureDraftStringKeys("all");
+            for (Map.Entry<String, Map<String, Integer>> outerMap : allPhTypes.entrySet()) {
+                for (Map.Entry<String, Integer> phT : outerMap.getValue().entrySet()) {
                     PhTypeStats stats = new PhTypeStats(phT.getKey());
                     phTypeStatsMap.put(phT.getKey(), stats);
                 }
@@ -229,15 +229,15 @@ public class WordList {
      * Применить ко всем листам сразу нельзя, т.к. некоторые значения в отдельных языках могут быть не зафиксированы
      */
     public void calculatePotentialWordsWithPhType() {
-        Map<String, Map<Object, Integer>> fullMap = DistinctiveFeatures.getFeaturesStructureDraft("all");
+        Map<String, Map<String, Integer>> fullMap = DistinctiveFeatures.getFeaturesStructureDraftStringKeys("all");
 
-        for (Map.Entry<String, Map<Object, Integer>> outerMap : fullMap.entrySet()) {
-            for (Map.Entry<Object, Integer> entry : outerMap.getValue().entrySet()) {
+        for (Map.Entry<String, Map<String, Integer>> outerMap : fullMap.entrySet()) {
+            for (Map.Entry<String, Integer> entry : outerMap.getValue().entrySet()) {
                 int count = 0;
 
                 for (Word w : this.getList()) {
                     Language language = LanguageService.getLanguage(w.getLanguage());
-                    Map<String, Map<Object, Integer>> phTypeCov = language.getPhTypeCoverage();
+                    Map<String, Map<String, Integer>> phTypeCov = language.getPhTypeCoverage();
 
                     if (phTypeCov.get(outerMap.getKey()).get(entry.getKey()) > 0) {
                         count++;

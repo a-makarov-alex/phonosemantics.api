@@ -136,11 +136,11 @@ public class Word {
     /**
      * RETURNS SUM OF EVERY DISTINCTIVE FEATURE FOR A CERTAIN WORD
      */
-    public Map<String, Map<Object, Integer>> countWordDistinctiveFeaturesStats(String type) {
-        Map<String, Map<Object, Integer>> distFeaturesMap = DistinctiveFeatures.getFeaturesStructureDraft(type);
+    public Map<String, Map<String, Integer>> countWordDistinctiveFeaturesStats(String type) {
+        Map<String, Map<String, Integer>> distFeaturesMap = DistinctiveFeatures.getFeaturesStructureDraftStringKeys(type);
 
-        for (Map.Entry<String, Map<Object, Integer>> phTypeHigherLevel : distFeaturesMap.entrySet()) {
-            for (Map.Entry<Object, Integer> phTypeEntity : phTypeHigherLevel.getValue().entrySet()) {
+        for (Map.Entry<String, Map<String, Integer>> phTypeHigherLevel : distFeaturesMap.entrySet()) {
+            for (Map.Entry<String, Integer> phTypeEntity : phTypeHigherLevel.getValue().entrySet()) {
                 // Entity example: {true: 0} or {HIGH_MID: 0}
                 // Get certain distinctive feature value from every word's phoneme
                 Integer sumForWord = 0;
@@ -148,9 +148,9 @@ public class Word {
                 for (String symbol : this.transcription) {
                     PhonemeInTable ph = PhonemesBank.getInstance().find(symbol);
                     // add 1 if phoneme has feature, add 0 if not
-                    Map<String, Map<Object, Integer>> stats = ph.countPhonemeDistinctiveFeaturesInstances();
+                    Map<String, Map<String, Integer>> stats = ph.countPhonemeDistinctiveFeaturesInstances();
                     if (stats != null) {
-                        sumForWord += stats.get(phTypeHigherLevel.getKey()).get(phTypeEntity.getKey());
+                        sumForWord += stats.get(phTypeHigherLevel.getKey()).get(String.valueOf(phTypeEntity.getKey()));
                     } else {
 
                     }
