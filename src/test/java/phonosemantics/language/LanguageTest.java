@@ -24,10 +24,10 @@ public class LanguageTest {
 
     private static final DockerImageName DEFAULT_IMAGE_NAME = DockerImageName.parse("mockserver/mockserver");
 
-    @Rule
+    //@Rule
     public WireMockRule wireMockRule = new WireMockRule(8089);
 
-    @Rule
+    //@Rule
     public MockServerContainer mockServer = new MockServerContainer(DEFAULT_IMAGE_NAME);
 
     @Test
@@ -39,7 +39,11 @@ public class LanguageTest {
         Assert.assertTrue(phTypeCov.get("vocoid").get("true") > 0);
     }
 
-    @Test
+    /**
+     * Строки ниже не имеют прямого отношения к проекту,
+     * это написано для проверки плагина wiremock.
+     */
+    //@Test
     public void wireMockTest() {
         String testUrl = "/getwiremock";
         String fullUrl = "http://localhost:8089/getwiremock";
@@ -52,7 +56,7 @@ public class LanguageTest {
         Assert.assertEquals(200, response.statusCode());
     }
 
-    @Test
+    //@Test
     public void testMockserverResponse() throws Exception {
         MockServerClient mockServerClient = new MockServerClient(mockServer.getHost(), mockServer.getServerPort());
         String path = "/person";

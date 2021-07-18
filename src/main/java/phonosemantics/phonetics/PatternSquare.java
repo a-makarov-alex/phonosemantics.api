@@ -16,8 +16,6 @@ import java.util.Map;
 @Data
 public class PatternSquare {
     private static final Logger userLogger = Logger.getLogger(PatternSquare.class);
-    //private static final String SUFFIX_2 = "_";
-
     // Один вордлист - один квадрат. Описание см. в корне проекта в README.
 
     // Внешний слой: признаки первого звука в паре
@@ -25,7 +23,7 @@ public class PatternSquare {
     // Внутренний слой: число обнаруженных паттернов
     private Map<String, Map<String, Map<String, Map<String, Integer>>>> patternSquare;
 
-    public PatternSquare(WordList wordlist) {
+    public PatternSquare(List<Word> words) {
         // нужно взять первое поле первой фонемы - и все поля второй фонемы. проставить в таблицу
         // затем второе поле и опять все поля второй фонемы
         // таким образом идем до конца слова
@@ -38,7 +36,6 @@ public class PatternSquare {
         // Уровень (2): ПОДТИП по вертикали
         // Уровень (3): ТИП по горизонтали
         // Уровень (4): ПОДТИП по горизонтали, у которого уже прописываются значения.
-        //int ih = 0;
         for (Map.Entry<String, Map<String, Integer>> outerTypeEntry : outerTypeLayer.entrySet()) {
             String otKey = outerTypeEntry.getKey();
             patternSquare.put(otKey, new HashMap<>());
@@ -52,7 +49,6 @@ public class PatternSquare {
                     patternSquare.get(otKey).get(ostKey).put(itKey, new HashMap<>());
 
                     for (Map.Entry<String, Integer> innerSubtypeEntry : innerTypeEntry.getValue().entrySet()) {
-                        //ih++;
                         String istKey = innerSubtypeEntry.getKey();
                         patternSquare.get(otKey).get(ostKey).get(itKey).put(istKey, 0);
                     }
@@ -62,7 +58,7 @@ public class PatternSquare {
         // На данный момент имеется пустая структура с нулями во всех конечных точках
 
         PhonemesBank phBank = PhonemesBank.getInstance();
-        for (Word w : wordlist.getList()) {
+        for (Word w : words) {
             List<String> tr = w.getTranscription();
             for (int i = 1; i < tr.size(); i++) {
                 PhonemeInTable ph = phBank.find(tr.get(i-1));
