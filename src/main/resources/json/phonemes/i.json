@@ -1,0 +1,35 @@
+{
+  "value": "i",
+  "row": 2,
+  "column": 1,
+  "distinctiveFeatures": {
+    "majorClass": {
+      "vocoid": true,
+      "approximant": true
+    },
+    "manner": {
+      "mannerPrecise": "VOWEL",
+      "sonorant": true,
+      "continuant": true,
+      "stricture": "LOWEST",
+      "nasal": false,
+      "voiced": true,
+      "strident": "NOT_APPLICABLE",
+      "sibilant": "NOT_APPLICABLE",
+      "lateral": "NOT_APPLICABLE",
+      "rhotics": "NOT_APPLICABLE",
+      "semivowel": "NOT_APPLICABLE"
+    },
+    "place": {
+      "placeApproximate": "NOT_APPLICABLE",
+      "placePrecise": "NOT_APPLICABLE"
+    },
+    "vowelSpace": {
+      "height": "CLOSE",
+      "backness": "FRONT",
+      "roundness": "UNROUNDED"
+    }
+  },
+  "phonemeStats": null,
+  "recognized": true
+}

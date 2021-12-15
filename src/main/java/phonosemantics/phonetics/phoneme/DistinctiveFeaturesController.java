@@ -3,7 +3,6 @@ package phonosemantics.phonetics.phoneme;
 import org.springframework.web.bind.annotation.*;
 import phonosemantics.data.PortConfig;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController

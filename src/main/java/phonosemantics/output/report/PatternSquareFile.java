@@ -1,14 +1,19 @@
 package phonosemantics.output.report;
 
+import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import phonosemantics.phonetics.PatternSquare;
+import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
+import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.consonants.Strident;
 import phonosemantics.word.Word;
 import phonosemantics.word.wordlist.WordList;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -41,6 +46,17 @@ public class PatternSquareFile {
             Word word = new Word(w);
             list.add(word);
         }
+        createOutputFile(list);
+    }
+
+    // Для юнит тестов
+    public PatternSquareFile(String word) {
+        this.title = "patternSquare_test";
+        this.filePath = OUTPUT_DIRECTORY + title + ".xlsx";
+        this.wb = new XSSFWorkbook();
+        List<Word> list = new ArrayList<>();
+        Word w = new Word(word);
+        list.add(w);
         createOutputFile(list);
     }
 
@@ -152,5 +168,38 @@ public class PatternSquareFile {
         double value = sheet.getRow(targetRowNum).getCell(targetColNum).getNumericCellValue();
         userLogger.info("RESULT: " + value + " FOR PATTERN " + firstParam + " " + secondParam);
         return value > 0;
+    }
+
+    public boolean assertValidResult(String word) {
+        String pathToJsonDir = "src/main/resources/json/phonemes/";
+        Word w = new Word(word);
+        List<String> tr = w.getTranscription();
+
+        DistinctiveFeatures df1 = null;
+        DistinctiveFeatures df2 = null;
+
+        try {
+            Gson gson = new Gson();
+            // Получаем параметры фонем из json файлов
+            String filePath1 = pathToJsonDir + tr.get(0) + ".json";
+            String filePath2 = pathToJsonDir + tr.get(1) + ".json";
+
+            PhonemeInTable ph1 = gson.fromJson(new FileReader(filePath1), PhonemeInTable.class);
+            PhonemeInTable ph2 = gson.fromJson(new FileReader(filePath2), PhonemeInTable.class);
+
+            df1 = ph1.getDistinctiveFeatures();
+            df2 = ph1.getDistinctiveFeatures();
+
+        } catch (FileNotFoundException e) {
+            userLogger.error("FILE NOT FOUND: " + e.toString());
+        }
+
+
+        // 1. при составлении файла запилить мапу с номерами колонок-столбцов параметров. Стандартный шаблон
+        // 2. закидывать  DF объект в метод и получать в ответ массив из столбцов-колонок
+        // запомнить вертикальные-горизонтальные заголовки как массивы int (номер строки-столца)
+        // найти все пересечения массивов
+        // TODO не забыть про результат
+        return true;
     }
 }
