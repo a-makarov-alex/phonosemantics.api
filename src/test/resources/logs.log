@@ -1,0 +1,29 @@
+2022-04-19 22:53:03 INFO  PhonemesBank:368 - --- Загрузка данных из таблицы всех фонем ---
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:371 - extracting vowels
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:406 - extracting is finished successfully
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:374 - extracting consonants
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:406 - extracting is finished successfully
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:414 - --- Подготовка HashMap для сбора фонемных признаков (из справочника) ---
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:223 - vowels map is filled up
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:495 - --- Не обнаружены данные в справочнике по следующим фонемам: ---
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:496 - --- (ФОНЕМНЫЕ ПРИЗНАКИ ДЛЯ НИХ НЕ БУДУТ ИЗВЛЕЧЕНЫ ИЗ СПРАВОЧНИКА) ---
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:501 - phoneme ã is not found in PhonemesCoverageTable
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:501 - phoneme ǝ is not found in PhonemesCoverageTable
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:501 - phoneme ĩ is not found in PhonemesCoverageTable
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:501 - phoneme õ is not found in PhonemesCoverageTable
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:501 - phoneme ĩ is not found in PhonemesCoverageTable
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:501 - phoneme ẽ is not found in PhonemesCoverageTable
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:511 - Distinctive features added for vowel
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:512 - ---------------
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:169 - consonants map is filled up
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:495 - --- Не обнаружены данные в справочнике по следующим фонемам: ---
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:496 - --- (ФОНЕМНЫЕ ПРИЗНАКИ ДЛЯ НИХ НЕ БУДУТ ИЗВЛЕЧЕНЫ ИЗ СПРАВОЧНИКА) ---
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:501 - phoneme b̪ is not found in PhonemesCoverageTable
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:501 - phoneme p̪ is not found in PhonemesCoverageTable
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:501 - phoneme š is not found in PhonemesCoverageTable
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:501 - phoneme ɴ is not found in PhonemesCoverageTable
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:511 - Distinctive features added for consonant
+Ð°2022-04-19 22:53:03 INFO  PhonemesBank:512 - ---------------
+Ð°2022-04-19 22:53:03 INFO  WordConstructorTest:37 - [ʈ, ø, ɖ, ɛ, c, œ, ɟ, æ, q, ɶ, ɢ, ɨ, ʡ, ʉ, ʔ, ɘ, ʃ, ɵ, ʒ, ə, ʂ, ɜ, ʐ, ɞ, ɕ, ʑ]
+Ð°2022-04-19 22:53:03 INFO  WordConstructorTest:38 - [ʈ, ø, ɖ, ɛ, c, œ, ɟ, æ, q, ɶ, ɢ, ɨ, ʡ, ʉ, ʔ, ɘ, ʃ, ɵ, ʒ, ə, ʂ, ɜ, ʐ, ɞ, ɕ, ʑ]
+Ð°

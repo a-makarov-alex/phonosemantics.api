@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  *  FLOW IS LIKE THAT:
@@ -37,6 +38,7 @@ public class WordList {
     //TODO Deprecated
     private Map<Object, PhTypeStats> phTypeStatsMap = new HashMap<>();
     private Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> distFeatureStats = new HashMap<>();
+    // TODO Эта структура уже включена в distFeatureStats
     private Map<String, Map<String, Integer>> numOfWordsWithFeatures;
     private int numOfWords;
     private int numOfPhonemes;
@@ -288,5 +290,20 @@ public class WordList {
         public PhTypeStats(Object phType) {
             this.phType = phType;
         }
+    }
+
+    @Override
+    public String toString() {
+        List<String> words = list.stream().map(Word::getGraphicForm).collect(Collectors.toList());
+        return "WordList{" +
+                "meaning='" + meaning + '\'' +
+                ", list=" + words +
+                //", phonemeStatsMap=" + phonemeStatsMap +
+                //", phTypeStatsMap=" + phTypeStatsMap +
+                //", distFeatureStats=" + distFeatureStats +
+                ", numOfWordsWithFeatures=" + numOfWordsWithFeatures +
+                ", numOfWords=" + numOfWords +
+                ", numOfPhonemes=" + numOfPhonemes +
+                '}';
     }
 }

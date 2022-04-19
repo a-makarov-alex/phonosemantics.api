@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class TestData {
+    public static final String INPUT_TEST_DIRECTORY_2022 = "./src/test/resources/junit_test_data/";
+
     public static final String TEST_FILENAME = "InputTest.xlsx";
     public static final String INPUT_TEST_DIRECTORY = "./src/main/java/phonosemantics/input/test/";
     public static final String TEST_FILE_PATH = INPUT_TEST_DIRECTORY + TEST_FILENAME;

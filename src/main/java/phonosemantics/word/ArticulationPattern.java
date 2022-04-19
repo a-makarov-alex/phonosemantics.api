@@ -17,9 +17,19 @@ public class ArticulationPattern {
     private String language;
     private Object[] pattern;
 
+    // переход на классы 2022
+    @Deprecated
     public ArticulationPattern(Word word, String base) {
         this.graphicForm = word.getGraphicForm();
         this.transcription = word.getTranscription();
+        this.base = base;
+        this.language = word.getLanguage();
+        this.pattern = calculatePattern();
+    }
+
+    public ArticulationPattern(Word2022 word, String base) {
+        this.graphicForm = word.getGraphicForm();
+        this.transcription = word.getPhonemesPool().getTranscription();
         this.base = base;
         this.language = word.getLanguage();
         this.pattern = calculatePattern();

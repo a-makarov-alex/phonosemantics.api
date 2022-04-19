@@ -136,7 +136,7 @@ public class PhonemesBank {
 //TODO        allPhonemes.put("ħ", new Consonant("ħ", SoundsBank.PlacePrecise.EPIGLOTTAL, SoundsBank.MannerPricise.FRICATIVE));
 //        allPhonemes.put("ʕ", new Consonant("ʕ", SoundsBank.PlacePrecise.EPIGLOTTAL, SoundsBank.MannerPricise.FRICATIVE, true));
 //        allPhonemes.put("h", new Consonant("h", SoundsBank.PlacePrecise.GLOTTAL, SoundsBank.MannerPricise.FRICATIVE));
-//        allPhonemes.put("ɦ", new Consonant("ɦ", SoundsBank.PlacePrecise.GLOTTAL, SoundsBank.MannerPricise.FRICATIVE, true));
+        allPhonemes.put("ɦ", new DistinctiveFeatures(MannerPrecise.FRICATIVE, true, PlacePrecise.GLOTTAL, Sibilant.NOT_SIBILANT));
 
         // SONORANT
         // NASAL
@@ -145,7 +145,7 @@ public class PhonemesBank {
         allPhonemes.put("ɳ", new DistinctiveFeatures(MannerPrecise.NASAL, true, PlacePrecise.RETROFLEX));
         allPhonemes.put("ɲ", new DistinctiveFeatures(MannerPrecise.NASAL, true, PlacePrecise.PALATAL));
         allPhonemes.put("ŋ", new DistinctiveFeatures(MannerPrecise.NASAL, true, PlacePrecise.VELAR));
-        allPhonemes.put("ng", new DistinctiveFeatures(MannerPrecise.NASAL, true, PlacePrecise.VELAR));
+        // allPhonemes.put("ng", new DistinctiveFeatures(MannerPrecise.NASAL, true, PlacePrecise.VELAR)); см. файл с описанием проблем с фонемами (test/resources/junit...)
         allPhonemes.put("ɴ", new DistinctiveFeatures(MannerPrecise.NASAL, true, PlacePrecise.UVULAR));
 
         // TRILL
@@ -164,7 +164,7 @@ public class PhonemesBank {
         // TODO
         allPhonemes.put("ts", new DistinctiveFeatures(MannerPrecise.AFFRICATE, false, PlacePrecise.ALVEOLAR, Sibilant.SIBILANT));
         allPhonemes.put("tʃ", new DistinctiveFeatures(MannerPrecise.AFFRICATE, false, PlacePrecise.POSTALVEOLAR, Sibilant.SIBILANT));
-        allPhonemes.put("d̠ʒ", new DistinctiveFeatures(MannerPrecise.AFFRICATE, true, PlacePrecise.POSTALVEOLAR, Sibilant.SIBILANT));
+        allPhonemes.put("dʒ", new DistinctiveFeatures(MannerPrecise.AFFRICATE, true, PlacePrecise.POSTALVEOLAR, Sibilant.SIBILANT));
 
         userLogger.info("consonants map is filled up");
         return allPhonemes;
@@ -253,7 +253,7 @@ public class PhonemesBank {
     }
 
     /**
-     * CHECK IF REQUESTED SYMBOL IS A SPECIAL SYMBOL BUT NOT A PHONEME
+     * CHECK IF REQUESTED SYMBOL IS A SPECIAL SYMBOL BUT NOT A PHONEME OR DIACRITICS
      * **/
     public static boolean isExtraSign(String symbol) {
         String[] symbols = {
@@ -365,7 +365,7 @@ public class PhonemesBank {
 
     private List<PhonemeInTable> createAllPhonemesList() {
         // Check constructor for more info
-        userLogger.info("extracting all phonemes list from input file");
+        userLogger.info("--- Загрузка данных из таблицы всех фонем ---");
         List<PhonemeInTable> resultList = new ArrayList<>();
 
         userLogger.info("extracting vowels");
@@ -411,14 +411,14 @@ public class PhonemesBank {
     private Map<String, PhonemeInTable> copyAllPhonemesToHashMap() {
         // Check constructor for more information
         Map<String, PhonemeInTable> resultMap = new HashMap<>();
-        userLogger.info("copying phonemes to HashMap started");
+        userLogger.info("--- Подготовка HashMap для сбора фонемных признаков (из справочника) ---");
 
         for (PhonemeInTable ph : allPhonemesForTableUI) {
             if (!ph.getValue().equals("")) {
                 resultMap.put(ph.getValue(), ph);
             }
         }
-        userLogger.info("copying phonemes to HashMap finished successfully");
+        //userLogger.info("copying phonemes to HashMap finished successfully");
         return resultMap;
     }
 
@@ -435,6 +435,7 @@ public class PhonemesBank {
     /**
      * СТРАШНЫЕ КОСТЫЛИ. ТРЕБУЮТСЯ ДО ТЕХ ПОР, ПОКА НА UI ИСПОЛЬЗУЕТСЯ LIST, А НЕ HASHMAP
      * **/
+    @Deprecated
     private List<PhonemeInTable> addDistinctiveFeaturesForPhonemesList(List<PhonemeInTable> phonemesList, String type) {
         Map<String, DistinctiveFeatures> buffer;
 
@@ -453,6 +454,7 @@ public class PhonemesBank {
             }
         }
 
+        userLogger.info("--- Не обнаружены данные в справочнике по следующим фонемам: ---");
         for (PhonemeInTable ph : phonemesList) {
             DistinctiveFeatures phDistBuf = buffer.get(ph.getValue());
             if (phDistBuf == null) {
@@ -464,6 +466,7 @@ public class PhonemesBank {
             }
         }
         userLogger.info("Distinctive features added for " + type);
+        userLogger.info("-------------");
         return phonemesList;
     }
 
@@ -489,6 +492,8 @@ public class PhonemesBank {
             }
         }
 
+        userLogger.info("--- Не обнаружены данные в справочнике по следующим фонемам: ---");
+        userLogger.info("--- (ФОНЕМНЫЕ ПРИЗНАКИ ДЛЯ НИХ НЕ БУДУТ ИЗВЛЕЧЕНЫ ИЗ СПРАВОЧНИКА) ---");
         for (Map.Entry<String, DistinctiveFeatures> entry : buffer.entrySet()) {
             if (phonemesMap != null) {
                 PhonemeInTable ph = phonemesMap.get(entry.getKey());
@@ -504,6 +509,7 @@ public class PhonemesBank {
             }
         }
         userLogger.info("Distinctive features added for " + type);
+        userLogger.info("---------------");
         return phonemesMap;
     }
 

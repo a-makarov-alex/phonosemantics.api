@@ -87,14 +87,10 @@ public class PhonemeInTable {
         private Double averagePhonemesPerWord;
         private int numPh;
         private int numW;
-        private int numAllPhonemes; //optional. already present in WordList
-        private int numAllWords; //optional. already present in WordList
 
         public PhonemeStats(int numPh, int numW, int numAllPhonemes, int numAllWords) {
             this.numPh = numPh;
             this.numW = numW;
-            this.numAllPhonemes = numAllPhonemes;
-            this.numAllWords = numAllWords;
             percentOfAllPhonemes = Math.round((double)numPh/(double)numAllPhonemes, 3);
             percentOfWordsWithPhoneme = Math.round((double)numW/(double)numAllWords, 3);
             averagePhonemesPerWord = Math.round((double) numPh/(double)numAllWords, 3);
@@ -108,14 +104,10 @@ public class PhonemeInTable {
         private Double averageFeatureInstancesPerWord;
         private int numPhWithFeature;
         private int numWordsWithFeature;
-        private int numAllPhonemes; //optional. already present in WordList
-        private int numAllWords; //optional. already present in WordList
 
         public DistFeatureStats(int numFeat, int numW, int numAllPhonemes, int numAllWords) {
             this.numPhWithFeature = numFeat;
             this.numWordsWithFeature = numW;
-            this.numAllPhonemes = numAllPhonemes;
-            this.numAllWords = numAllWords;
             percentOfAllPhonemes = Math.round((double)numFeat/(double)numAllPhonemes,3);
             percentOfWordsWithFeature = Math.round((double)numW/(double)numAllWords, 3);
             averageFeatureInstancesPerWord = Math.round((double) numFeat/(double)numAllWords, 3);
