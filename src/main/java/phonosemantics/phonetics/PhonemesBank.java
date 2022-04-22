@@ -11,6 +11,7 @@ import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Backness;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Height;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Roundness;
 import phonosemantics.word.wordlist.WordList;
+import phonosemantics.word.wordlist.WordList2022;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class PhonemesBank {
     //путь к шаблону всех согласных фонем
     public static final String INPUT_FILE_PATH = "./src/main/java/phonosemantics/input/PhonemesCoverageExample.xlsx";
 
-    private static final CoverageSheet VOWELS_SHEET = new CoverageSheet(createWorkbook(INPUT_FILE_PATH).getSheetAt(0), 2, 8, 1, 6);
+    private static final CoverageSheet VOWELS_SHEET = new CoverageSheet(createWorkbook(INPUT_FILE_PATH).getSheetAt(0), 2, 8, 1, 8);
     private static final CoverageSheet CONSONANTS_SHEET = new CoverageSheet(createWorkbook(INPUT_FILE_PATH).getSheetAt(1), 2, 14, 1, 24);
 
     private Map<String, PhonemeInTable> allPhonemes;
@@ -133,9 +134,9 @@ public class PhonemesBank {
 
         allPhonemes.put("ʁ", new DistinctiveFeatures(MannerPrecise.FRICATIVE, true, PlacePrecise.UVULAR, Lateral.NOT_LATERAL, Rhotics.RHOTICS));
 
-//TODO        allPhonemes.put("ħ", new Consonant("ħ", SoundsBank.PlacePrecise.EPIGLOTTAL, SoundsBank.MannerPricise.FRICATIVE));
-//        allPhonemes.put("ʕ", new Consonant("ʕ", SoundsBank.PlacePrecise.EPIGLOTTAL, SoundsBank.MannerPricise.FRICATIVE, true));
-//        allPhonemes.put("h", new Consonant("h", SoundsBank.PlacePrecise.GLOTTAL, SoundsBank.MannerPricise.FRICATIVE));
+        allPhonemes.put("ħ", new DistinctiveFeatures(MannerPrecise.FRICATIVE, false, PlacePrecise.EPIGLOTTAL, Sibilant.NOT_SIBILANT));
+        allPhonemes.put("ʕ", new DistinctiveFeatures(MannerPrecise.FRICATIVE, true, PlacePrecise.EPIGLOTTAL, Sibilant.NOT_SIBILANT));
+        allPhonemes.put("h", new DistinctiveFeatures(MannerPrecise.FRICATIVE, false, PlacePrecise.GLOTTAL, Sibilant.NOT_SIBILANT));
         allPhonemes.put("ɦ", new DistinctiveFeatures(MannerPrecise.FRICATIVE, true, PlacePrecise.GLOTTAL, Sibilant.NOT_SIBILANT));
 
         // SONORANT
@@ -161,10 +162,15 @@ public class PhonemesBank {
         allPhonemes.put("j", new DistinctiveFeatures(MannerPrecise.APPROXIMANT, PlacePrecise.PALATAL, Semivowel.SEMIVOWEL));
 
         // AFFRICATES
-        // TODO
+        // TODO ещё много аффрикат
         allPhonemes.put("ts", new DistinctiveFeatures(MannerPrecise.AFFRICATE, false, PlacePrecise.ALVEOLAR, Sibilant.SIBILANT));
+        allPhonemes.put("dz", new DistinctiveFeatures(MannerPrecise.AFFRICATE, true, PlacePrecise.ALVEOLAR, Sibilant.SIBILANT));
         allPhonemes.put("tʃ", new DistinctiveFeatures(MannerPrecise.AFFRICATE, false, PlacePrecise.POSTALVEOLAR, Sibilant.SIBILANT));
         allPhonemes.put("dʒ", new DistinctiveFeatures(MannerPrecise.AFFRICATE, true, PlacePrecise.POSTALVEOLAR, Sibilant.SIBILANT));
+        allPhonemes.put("ʈʂ", new DistinctiveFeatures(MannerPrecise.AFFRICATE, false, PlacePrecise.RETROFLEX, Sibilant.SIBILANT));
+        allPhonemes.put("ɖʐ", new DistinctiveFeatures(MannerPrecise.AFFRICATE, true, PlacePrecise.RETROFLEX, Sibilant.SIBILANT));
+        //        allPhonemes.put("tɕ", new Consonant("tɕ", SoundsBank.PlacePrecise.PALATAL, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, false));
+        //        allPhonemes.put("dʑ", new Consonant("dʑ", SoundsBank.PlacePrecise.PALATAL, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, true));
 
         userLogger.info("consonants map is filled up");
         return allPhonemes;
@@ -183,7 +189,7 @@ public class PhonemesBank {
         //vowels
         //front
         allPhonemes.put("i", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE, Backness.FRONT, Roundness.UNROUNDED));
-        allPhonemes.put("ĩ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE, Backness.FRONT, Roundness.UNROUNDED, true)); // \u0129
+        //allPhonemes.put("ĩ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE, Backness.FRONT, Roundness.UNROUNDED, true)); // \u0129
         allPhonemes.put("ĩ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE, Backness.FRONT, Roundness.UNROUNDED, true)); // vow + \u0303
 
         allPhonemes.put("y", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE, Backness.FRONT, Roundness.ROUNDED));
@@ -203,7 +209,7 @@ public class PhonemesBank {
         allPhonemes.put("ɘ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE_MID, Backness.CENTRAL, Roundness.UNROUNDED));
         allPhonemes.put("ɵ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE_MID, Backness.CENTRAL, Roundness.ROUNDED));
         allPhonemes.put("ə", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.MID, Backness.CENTRAL, Roundness.UNROUNDED)); // \u0259
-        allPhonemes.put("ǝ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.MID, Backness.CENTRAL, Roundness.UNROUNDED)); // \u01DD
+        //allPhonemes.put("ǝ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.MID, Backness.CENTRAL, Roundness.UNROUNDED)); // \u01DD
         allPhonemes.put("ɜ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN_MID, Backness.CENTRAL, Roundness.UNROUNDED));
         allPhonemes.put("ɞ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN_MID, Backness.CENTRAL, Roundness.ROUNDED));
         allPhonemes.put("ä", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN, Backness.CENTRAL, Roundness.UNROUNDED));
@@ -224,23 +230,13 @@ public class PhonemesBank {
         return allPhonemes;
     }
 
-    private void addAffricates() {
-
-//        allPhonemes.put("ts", new Consonant("ts", SoundsBank.PlacePrecise.ALVEOLAR, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, false));
-//        allPhonemes.put("dz", new Consonant("dz", SoundsBank.PlacePrecise.ALVEOLAR, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, true));
-//        allPhonemes.put("ʈʂ", new Consonant("ʈʂ", SoundsBank.PlacePrecise.RETROFLEX, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, false));
-//        allPhonemes.put("ɖʐ", new Consonant("ɖʐ", SoundsBank.PlacePrecise.RETROFLEX, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, true));
-//        allPhonemes.put("tɕ", new Consonant("tɕ", SoundsBank.PlacePrecise.PALATAL, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, false));
-//        allPhonemes.put("dʑ", new Consonant("dʑ", SoundsBank.PlacePrecise.PALATAL, SoundsBank.MannerPricise.SIBILANT_AFFRICATE, true));
-
-        userLogger.info("affricates map is filled up");
-    }
 
     /**
      *  FIND PHONEME IN THE HASHMAP WITH ALL PHONEMES
      * **/
     public PhonemeInTable find(String requestedSymbol) {
         requestedSymbol = requestedSymbol.toLowerCase();
+        userLogger.info("searching: " + requestedSymbol);
         PhonemeInTable ph = allPhonemes.get(requestedSymbol);
         if (ph != null) {
             return ph;
@@ -312,10 +308,10 @@ public class PhonemesBank {
     /**
      *   ДОБАВЛЕНЫ ДИНАМИЧЕСКИЕ ДАННЫЕ (статистика по Wordlist)
      */
-    public List<PhonemeInTable> getAllPhonemesList(WordList wl) {
+    public List<PhonemeInTable> getAllPhonemesList(WordList2022 wl) {
         List<PhonemeInTable> phList = this.getAllPhonemesList();
         for (PhonemeInTable ph : phList) {
-            ph.setPhonemeStats(wl.getPhonemeStatsMap().get(ph.getValue()));
+            ph.setPhonemeStats(wl.getStats().getPhonemeStatsMap().get(ph.getValue()));
         }
         userLogger.info("phonemes list for <<" + wl.getMeaning() + ">> wordlist is composed successfully");
         return phList;
@@ -494,6 +490,7 @@ public class PhonemesBank {
 
         userLogger.info("--- Не обнаружены данные в справочнике по следующим фонемам: ---");
         userLogger.info("--- (ФОНЕМНЫЕ ПРИЗНАКИ ДЛЯ НИХ НЕ БУДУТ ИЗВЛЕЧЕНЫ ИЗ СПРАВОЧНИКА) ---");
+        userLogger.info("--- (TODO: сделать отображение в логах, какие фонемы есть в таблице, но их признаки отсутствуют в справочнике) ---");
         for (Map.Entry<String, DistinctiveFeatures> entry : buffer.entrySet()) {
             if (phonemesMap != null) {
                 PhonemeInTable ph = phonemesMap.get(entry.getKey());

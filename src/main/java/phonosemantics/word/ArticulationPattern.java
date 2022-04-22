@@ -31,7 +31,7 @@ public class ArticulationPattern {
         this.graphicForm = word.getGraphicForm();
         this.transcription = word.getPhonemesPool().getTranscription();
         this.base = base;
-        this.language = word.getLanguage();
+        this.language = word.getLanguage().getTitle();
         this.pattern = calculatePattern();
     }
 

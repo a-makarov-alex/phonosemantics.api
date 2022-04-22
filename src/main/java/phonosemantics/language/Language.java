@@ -7,9 +7,10 @@ import org.apache.poi.ss.usermodel.*;
 import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
-import phonosemantics.word.Word;
-import phonosemantics.word.wordlist.WordList;
+import phonosemantics.word.Word2022;
+import phonosemantics.word.wordlist.WordList2022;
 import phonosemantics.word.wordlist.WordListService;
+import static phonosemantics.phonetics.phoneme.DistinctiveFeatures.Type.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -32,20 +33,21 @@ public class Language {
 
     public Language(String title) {
         this.title = title;
-        phCoverage = new HashSet<>();
-        phNotDescribed = new HashSet<>();
+        phonology = readLangPhonologyFromFile();
+        userLogger.info("phonology is set for " + this.getTitle() + " language");
+        //this.phTypeCoverage = calculatePhTypeCoverage(); если раскомментить, зацикливается, т.к. там подтягиваются все вордлисты
+        //phNotDescribed = new HashSet<>();
     }
 
     public Language(String title, Set<PhonemeInTable> phonology) {
         this.title = title;
         this.phonology = phonology;
         this.phTypeCoverage = calculatePhTypeCoverage();
-        phCoverage = new HashSet<>();
         phNotDescribed = new HashSet<>();
     }
 
 
-    public void readLangPhonologyFromFile() {
+    public Set<PhonemeInTable> readLangPhonologyFromFile() {
         Set<PhonemeInTable> allPhonemes = new HashSet<>();
 
         try (InputStream inputStream = new FileInputStream(LanguageService.INPUT_LANGUAGES_PATH);
@@ -90,13 +92,10 @@ public class Language {
                 rowNum++;
                 cell = sheet.getRow(rowNum).getCell(0);
             }
-            this.phonology = allPhonemes;
-            userLogger.info("phonology is set for " + this.getTitle() + " language");
-            this.phTypeCoverage = calculatePhTypeCoverage();
-
         } catch (IOException e) {
             userLogger.error(e.toString());
         }
+        return allPhonemes;
     }
 
     public void categorizePh(PhonemeInTable ph) {
@@ -112,14 +111,13 @@ public class Language {
     // Count all the phonotypes present in a specific language
     public Map<String, Map<String, Integer>> calculatePhTypeCoverage() {
         userLogger.info("calculating PhType coverage");
-        String type = "all";
+        DistinctiveFeatures.Type type = ALL;
         Map<String, Map<String, Integer>> fullMap = DistinctiveFeatures.getFeaturesStructureDraftStringKeys(type);
 
-
-        List<WordList> allWordlists = WordListService.getAllWordLists();
-        for (WordList wl : allWordlists) {
+        List<WordList2022> allWordlists = WordListService.getAllWordLists2022();
+        for (WordList2022 wl : allWordlists) {
             userLogger.info("Calculating coverage for <" + wl.getMeaning() + "> wordlist");
-            for (Word word : wl.getWords(this)) {
+            for (Word2022  word : wl.getWords(this)) {
                 userLogger.info("Word: " + word.getGraphicForm());
 
                 // Put all the distFeatures counters of every word into a full distFeature map

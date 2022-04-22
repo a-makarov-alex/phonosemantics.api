@@ -4,10 +4,13 @@ import lombok.Data;
 import org.apache.log4j.Logger;
 import phonosemantics.LoggerConfig;
 import phonosemantics.phonetics.PhonemesBank;
+import phonosemantics.phonetics.phoneme.distinctiveFeatures.consonants.PlaceApproximate;
+import phonosemantics.phonetics.phoneme.distinctiveFeatures.vowels.Height;
 import phonosemantics.statistics.Statistics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class PhonemesPool {
@@ -26,15 +29,29 @@ public class PhonemesPool {
 
 
     public PhonemesPool(String graphicForm) {
+        this.transcriptionFull = getTranscriptionFromWord(graphicForm);
+        this.transcription = transcriptionFull.stream()
+                .map(PhonemeInTable::getValue)
+                .collect(Collectors.toList());
+        this.initialConsonant = transcriptionFull.stream()
+                .filter(phoneme -> phoneme.getDistinctiveFeatures().getVowelSpace().getHeight().equals(Height.NOT_APPLICABLE))
+                .findFirst().orElse(null);
+        this.initialVowel = transcriptionFull.stream()
+                .filter(phoneme -> phoneme.getDistinctiveFeatures().getPlace().getPlaceApproximate().equals(PlaceApproximate.NOT_APPLICABLE))
+                .findFirst().orElse(null);
+        this.finalConsonant = transcriptionFull.stream()
+                .filter(phoneme -> phoneme.getDistinctiveFeatures().getVowelSpace().getHeight().equals(Height.NOT_APPLICABLE))
+                .reduce(null, (x, y) -> y);
+        this.finalVowel = transcriptionFull.stream()
+                .filter(phoneme -> phoneme.getDistinctiveFeatures().getPlace().getPlaceApproximate().equals(PlaceApproximate.NOT_APPLICABLE))
+                .reduce(null, (x, y) -> y);
 
-        this.transcription = getTranscriptionFromWord(graphicForm);
-        // TODO: здесь доставать из транскрипции фонемы через справочник PhonemesBank (или какой там нужный, проверить)
-        //phoneme may be find by PhonemesBank -> find(String phoneme)
+        // TODO: расчёт reliability !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
 
-    private List<String> getTranscriptionFromWord(String graphicForm) {
-        List<String> result = new ArrayList<>();
+    private List<PhonemeInTable> getTranscriptionFromWord(String graphicForm) {
+        List<PhonemeInTable> result = new ArrayList<>();
 
         if (graphicForm != null) {
             String[] letters = graphicForm.split("");
@@ -50,9 +67,10 @@ public class PhonemesPool {
 
                     // For last symbol
                     if (i == graphicForm.length() - 1) {
+                        //userLogger.info("LAST SYMBOL FOUND: " + letters[i]);
                         PhonemeInTable ph = PhonemesBank.getInstance().find(letters[i]);
                         if (ph != null) {
-                            result.add(ph.getValue());
+                            result.add(ph);
                             //if (language != null) {
 //language.categorizePh(ph);
 //}
@@ -61,23 +79,23 @@ public class PhonemesPool {
                         }
                         Statistics.incrementNumOfAllPhonemes();
                     } else {
-
                         // For 2-graph phoneme
+                        //userLogger.info("REQUEST DIGRAPH: " + letters[i] + letters[i + 1]);
                         PhonemeInTable ph = PhonemesBank.getInstance().find(letters[i] + letters[i + 1]);
                         if (ph != null) {
-                            userLogger.info("DIGRAPH: " + letters[i] + letters[i + 1]);
-                            result.add(ph.getValue());
+                            //userLogger.info("DIGRAPH: " + letters[i] + letters[i + 1]);
+                            result.add(ph);
                             Statistics.incrementNumOfAllPhonemes();
 //if (language != null) {
 //language.categorizePh(ph);
 //}
                             i++;
                         } else {
-
                             // For 1-graph phoneme
+                            //userLogger.info("1-GRAPH: " + letters[i]);
                             ph = PhonemesBank.getInstance().find(letters[i]);
                             if (ph != null) {
-                                result.add(ph.getValue());
+                                result.add(ph);
                                 Statistics.incrementNumOfAllPhonemes();
 //if (language != null) {
 //language.categorizePh(ph);
@@ -91,7 +109,7 @@ public class PhonemesPool {
                     }
                 } else {
                     if (LoggerConfig.CONSOLE_EXTRA_SYMBOLS) {
-                        userLogger.debug("Extra: " + letters[i]);
+                        userLogger.info("Extra: " + letters[i]);
                     }
                 }
             }

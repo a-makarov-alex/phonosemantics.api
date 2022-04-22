@@ -29,9 +29,9 @@ public class ArticulationPatternController {
             @RequestParam(value = "language") String language,
             @RequestParam(value = "meaning") String meaning
     ) {
-        Map<String, Object[]> distFeaturesDraft = DistinctiveFeatures.getFeaturesForAPI("all");
+        Map<String, Object[]> distFeaturesDraft = DistinctiveFeatures.getFeaturesForAPI(DistinctiveFeatures.Type.ALL);
         Map<String, ArticulationPattern> articulationPatternMap = new HashMap<>();
-        Word word = Word.getWord(language, meaning);
+        Word2022 word = Word2022.getWord(language, meaning);
 
         for (Map.Entry<String, Object[]> entry : distFeaturesDraft.entrySet()) {
             ArticulationPattern pattern = word.getArticulationPattern(entry.getKey());
@@ -50,7 +50,7 @@ public class ArticulationPatternController {
             @RequestParam(value = "language") String language,
             @RequestParam(value = "meaning") String meaning
     ) {
-        Word word = Word.getWord(language, meaning);
+        Word2022 word = Word2022.getWord(language, meaning);
         return word.getArticulationPattern(patternBase);
     }
 
@@ -64,7 +64,7 @@ public class ArticulationPatternController {
             @PathVariable(value= "patternBase") String patternBase,
             @RequestParam(value = "meaning") String meaning
     ) {
-        List<Word> wList = WordListService.getWordlist(meaning).getList();
+        List<Word2022> wList = WordListService.getWordlist2022(meaning).getList();
         ArticulationPattern[] arrPatterns = new ArticulationPattern[wList.size()];
 
         for (int i = 0; i < wList.size(); i++) {

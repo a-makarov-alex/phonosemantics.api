@@ -2,12 +2,9 @@ package phonosemantics.phonetics;
 
 import lombok.Data;
 import org.apache.log4j.Logger;
-import phonosemantics.phonetics.PhonemesBank;
 import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
-import phonosemantics.phonetics.phoneme.distinctiveFeatures.Stricture;
-import phonosemantics.word.Word;
-import phonosemantics.word.wordlist.WordList;
+import phonosemantics.word.Word2022;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,14 +20,14 @@ public class PatternSquare {
     // Внутренний слой: число обнаруженных паттернов
     private Map<String, Map<String, Map<String, Map<String, Integer>>>> patternSquare;
 
-    public PatternSquare(List<Word> words) {
+    public PatternSquare(List<Word2022> words) {
         // нужно взять первое поле первой фонемы - и все поля второй фонемы. проставить в таблицу
         // затем второе поле и опять все поля второй фонемы
         // таким образом идем до конца слова
 
         // TODO нарисовать квадрат, чтобы было понятно, зачем 4 вложенных мапы
         patternSquare = new HashMap<>();
-        Map<String, Map<String, Integer>> outerTypeLayer = DistinctiveFeatures.getFeaturesStructureDraftStringKeys("all");
+        Map<String, Map<String, Integer>> outerTypeLayer = DistinctiveFeatures.getFeaturesStructureDraftStringKeys(DistinctiveFeatures.Type.ALL);
 
         // Внешний уровень (1): ТИП по вертикали
         // Уровень (2): ПОДТИП по вертикали
@@ -58,8 +55,8 @@ public class PatternSquare {
         // На данный момент имеется пустая структура с нулями во всех конечных точках
 
         PhonemesBank phBank = PhonemesBank.getInstance();
-        for (Word w : words) {
-            List<String> tr = w.getTranscription();
+        for (Word2022 w : words) {
+            List<String> tr = w.getPhonemesPool().getTranscription();
             for (int i = 1; i < tr.size(); i++) {
                 PhonemeInTable ph = phBank.find(tr.get(i-1));
                 PhonemeInTable nextPh = phBank.find(tr.get(i));

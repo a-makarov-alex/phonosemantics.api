@@ -1,6 +1,5 @@
 package phonosemantics.statistics;
 
-import phonosemantics.data.InputConfig;
 import phonosemantics.word.wordlist.WordListService;
 
 import java.util.*;
@@ -20,7 +19,7 @@ public class Statistics {
     private static int numOfAllPhonemes = 0;
 
     public static Map<String, Integer> getUnknownPhonemes() {
-        WordListService.getAllWordLists(); // in case it is the first request on server and wordlists are not counted yet
+        WordListService.getAllWordLists2022(); // in case it is the first request on server and wordlists are not counted yet
         return unknownPhonemes;
     }
 

@@ -21,17 +21,26 @@ public class FeaturesPool {
     private Map<String, Map<String, Integer>> wordDistinctiveFeaturesStats;
 
     public FeaturesPool(PhonemesPool phonemesPool) {
+        countWordDistinctiveFeaturesStats(
+                DistinctiveFeatures.Type.ALL,
+                phonemesPool.getTranscriptionFull()
+        );
 
+        initialConsonantFeatures = phonemesPool.getInitialConsonant().getDistinctiveFeatures();
+        initialVowelFeatures = phonemesPool.getInitialVowel().getDistinctiveFeatures();
+        //userLogger.info(initialVowelFeatures.toString());
     }
 
 
     /**
      * RETURNS SUM OF EVERY DISTINCTIVE FEATURE FOR A CERTAIN WORD
      */
-    public Map<String, Map<String, Integer>> countWordDistinctiveFeaturesStats(String type, List<PhonemeInTable> transcriptionFull) {
+    public Map<String, Map<String, Integer>> countWordDistinctiveFeaturesStats(DistinctiveFeatures.Type type, List<PhonemeInTable> transcriptionFull) {
+
         if (this.wordDistinctiveFeaturesStats != null) {
             return this.wordDistinctiveFeaturesStats;
         }
+
         Map<String, Map<String, Integer>> distFeaturesMap = DistinctiveFeatures.getFeaturesStructureDraftStringKeys(type);
 
         for (Map.Entry<String, Map<String, Integer>> phTypeHigherLevel : distFeaturesMap.entrySet()) {
@@ -46,7 +55,7 @@ public class FeaturesPool {
                     if (stats != null) {
                         sumForWord += stats.get(phTypeHigherLevel.getKey()).get(String.valueOf(phTypeEntity.getKey()));
                     } else {
-
+                        userLogger.error("--- Фонемные признаки отсутствуют в справочнике для фонемы " + ph.getValue() );
                     }
                 }
                 phTypeEntity.setValue(sumForWord);

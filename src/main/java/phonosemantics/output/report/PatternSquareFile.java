@@ -9,7 +9,9 @@ import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.phonetics.phoneme.distinctiveFeatures.consonants.Strident;
 import phonosemantics.word.Word;
+import phonosemantics.word.Word2022;
 import phonosemantics.word.wordlist.WordList;
+import phonosemantics.word.wordlist.WordList2022;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -29,7 +31,7 @@ public class PatternSquareFile {
 
     private static final String OUTPUT_DIRECTORY = Paths.get("src", "main", "java", "phonosemantics", "output").toString();
 
-    public PatternSquareFile(WordList wl) {
+    public PatternSquareFile(WordList2022 wl) {
         this.title = "patternSquare_" + wl.getMeaning();
         this.filePath = OUTPUT_DIRECTORY + title + ".xlsx";
         this.wb = new XSSFWorkbook();
@@ -41,9 +43,9 @@ public class PatternSquareFile {
         this.title = "patternSquare_test";
         this.filePath = OUTPUT_DIRECTORY + title + ".xlsx";
         this.wb = new XSSFWorkbook();
-        List<Word> list = new ArrayList<>();
+        List<Word2022> list = new ArrayList<>();
         for (String w : words) {
-            Word word = new Word(w);
+            Word2022 word = new Word2022(w);
             list.add(word);
         }
         createOutputFile(list);
@@ -54,13 +56,13 @@ public class PatternSquareFile {
         this.title = "patternSquare_test";
         this.filePath = OUTPUT_DIRECTORY + title + ".xlsx";
         this.wb = new XSSFWorkbook();
-        List<Word> list = new ArrayList<>();
-        Word w = new Word(word);
+        List<Word2022> list = new ArrayList<>();
+        Word2022 w = new Word2022(word);
         list.add(w);
         createOutputFile(list);
     }
 
-    private void createOutputFile(List<Word> words) {
+    private void createOutputFile(List<Word2022> words) {
         try {
             FileOutputStream fileOut = new FileOutputStream(this.filePath);
             Sheet sheet = wb.createSheet();
@@ -170,6 +172,7 @@ public class PatternSquareFile {
         return value > 0;
     }
 
+    // TODO: похоже, что этот метод нужен для обнаружения в слове заданного патерна
     public boolean assertValidResult(String word) {
         String pathToJsonDir = "src/main/resources/json/phonemes/";
         Word w = new Word(word);

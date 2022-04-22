@@ -10,6 +10,7 @@ import phonosemantics.phonetics.phoneme.PhonemeInTable;
 import phonosemantics.statistics.Sample;
 import phonosemantics.statistics.Statistics;
 import phonosemantics.word.wordlist.WordList;
+import phonosemantics.word.wordlist.WordList2022;
 import phonosemantics.word.wordlist.WordListService;
 
 import java.io.FileOutputStream;
@@ -96,9 +97,9 @@ public class OutputFile {
     }
 
     // Writes the worlist parsing and statistics counting result into the output file
-    public void fillWithAll(List<WordList> wordLists) {
+    public void fillWithAll(List<WordList2022> wordLists) {
         writeFeatureHeadersToGeneralFile();
-        for (WordList wordList : wordLists) {
+        for (WordList2022 wordList : wordLists) {
             userLogger.info("writing to general file...");
             writeToGeneralFileAlternative(wordList);
         }
@@ -106,7 +107,7 @@ public class OutputFile {
     }
 
     // Заполнение отчёта данными
-    public void fillWith(WordList wordList) {
+    public void fillWith(WordList2022 wordList) {
         OutputFilePage page = this.getFilePages().get(0);
         page.getWordlists().add(wordList);
         if (!page.isHasHeaders()) {
@@ -126,8 +127,8 @@ public class OutputFile {
             FileOutputStream fileOut = new FileOutputStream(this.filePath);
 
             // Берем любой вордлист и согласно структуре DistFeature вписываем заголовки
-            WordList wordList = WordListService.getAllWordLists().get(0);
-            Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> wlDistFeaturesStats = wordList.getDistFeatureStats();
+            WordList2022 wordList = WordListService.getAllWordLists2022().get(0);
+            Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> wlDistFeaturesStats = wordList.getStats().getDistFeatureStats();
             OutputFilePage vowelPage = this.getFilePages().get(0);
             Sheet sheet = vowelPage.getSheet();
             int startCol = 3;
@@ -175,11 +176,11 @@ public class OutputFile {
      * Вписываем данные для всех фонетических признаков в отчёт
      * @param wordList
      */
-    private void writeToGeneralFileAlternative(WordList wordList) {
+    private void writeToGeneralFileAlternative(WordList2022 wordList) {
         try {
             FileOutputStream fileOut = new FileOutputStream(this.filePath);
 
-            Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> wlDistFeaturesStats = wordList.getDistFeatureStats();
+            Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> wlDistFeaturesStats = wordList.getStats().getDistFeatureStats();
             OutputFilePage vowelPage = this.getFilePages().get(0);
             Map<String, Map<Object, GeneralReportHeader>> headersMap = vowelPage.getHeadersNew();
 
@@ -341,7 +342,7 @@ public class OutputFile {
             Map<String, Map<Object, List<Double>>> statsListsForDistFeatures = new HashMap<>();
 
             userLogger.info("инициализируем структуру для статистики, чтобы поместить туда данные");
-            Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> map = vowelPage.getWordlists().get(0).getDistFeatureStats();
+            Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> map = vowelPage.getWordlists().get(0).getStats().getDistFeatureStats();
             for (Map.Entry<String, Map<Object, PhonemeInTable.DistFeatureStats>> highLevelEntry : map.entrySet()) {
                 Map<Object, List<Double>> resultMapLow = new HashMap<>();
                 for (Map.Entry<Object, PhonemeInTable.DistFeatureStats> lowLevelEntry : highLevelEntry.getValue().entrySet()) {
@@ -351,8 +352,8 @@ public class OutputFile {
             }
 
             userLogger.info("заполняем структуру данными статистики для всех вордлистов в отчёте");
-            for (WordList wl : vowelPage.getWordlists()) {
-                for (Map.Entry<String, Map<Object, PhonemeInTable.DistFeatureStats>> highLevelEntry : wl.getDistFeatureStats().entrySet()) {
+            for (WordList2022 wl : vowelPage.getWordlists()) {
+                for (Map.Entry<String, Map<Object, PhonemeInTable.DistFeatureStats>> highLevelEntry : wl.getStats().getDistFeatureStats().entrySet()) {
                     String highKey = highLevelEntry.getKey();
                     for (Map.Entry<Object, PhonemeInTable.DistFeatureStats> lowLevelEntry : highLevelEntry.getValue().entrySet()) {
                         Object lowKey = lowLevelEntry.getKey();

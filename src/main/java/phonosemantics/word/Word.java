@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Data
+@Deprecated
 public class Word {
     private static final Logger userLogger = Logger.getLogger(Word.class);
 
@@ -136,7 +137,7 @@ public class Word {
     /**
      * RETURNS SUM OF EVERY DISTINCTIVE FEATURE FOR A CERTAIN WORD
      */
-    public Map<String, Map<String, Integer>> countWordDistinctiveFeaturesStats(String type) {
+    public Map<String, Map<String, Integer>> countWordDistinctiveFeaturesStats(DistinctiveFeatures.Type type) {
         Map<String, Map<String, Integer>> distFeaturesMap = DistinctiveFeatures.getFeaturesStructureDraftStringKeys(type);
 
         for (Map.Entry<String, Map<String, Integer>> phTypeHigherLevel : distFeaturesMap.entrySet()) {
@@ -178,7 +179,7 @@ public class Word {
     /**
      * RETURNS WORD BY LANGUAGE AND MEANING
      */
-    public static Word getWord(String languageName, String meaning) {
+    /*public static Word getWord(String languageName, String meaning) {
         WordList wl = WordListService.getWordlist(meaning);
         if (wl == null) {
             userLogger.debug("requested wordlist for [" + meaning + "] meaning does not exist");
@@ -203,5 +204,5 @@ public class Word {
         }
 
         return list.get(0);
-    }
+    }*/
 }

@@ -1,92 +1,61 @@
 package phonosemantics.language;
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static org.mockserver.model.HttpResponse.response;
-import static org.mockserver.model.HttpRequest.request;
 
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.mockserver.client.MockServerClient;
-import org.mockserver.model.HttpRequest;
-import org.mockserver.model.RequestDefinition;
-import org.mockserver.verify.VerificationTimes;
-import org.testcontainers.containers.MockServerContainer;
-import org.testcontainers.utility.DockerImageName;
+import phonosemantics.input.test.TestData;
+import phonosemantics.phonetics.phoneme.PhonemeInTable;
 
-import java.util.Map;
+import java.io.FileReader;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Properties;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LanguageTest {
     private static final Logger userLogger = Logger.getLogger(LanguageTest.class);
 
-    private static final DockerImageName DEFAULT_IMAGE_NAME = DockerImageName.parse("mockserver/mockserver");
-
-    //@Rule
-    public WireMockRule wireMockRule = new WireMockRule(8089);
-
-    //@Rule
-    public MockServerContainer mockServer = new MockServerContainer(DEFAULT_IMAGE_NAME);
-
     @Test
-    public void calculatePhTypeCoverage() {
-        String testLangName = "Ket";
-        Language language = new Language(testLangName);
-        Map<String, Map<String, Integer>> phTypeCov = language.calculatePhTypeCoverage();
-        Assert.assertNotNull(phTypeCov);
-        Assert.assertTrue(phTypeCov.get("vocoid").get("true") > 0);
+    public void languageConstructor_1arg_phonologySimpleTest() throws Exception {
+        FileReader reader = new FileReader(TestData.INPUT_TEST_DIRECTORY_2022 + "language/language_1arg_phonologySimple.properties");
+        Properties p = new Properties();
+        p.load(reader);
+        String langName = p.getProperty("language");
+
+        Language lang = new Language(langName);
+        Set<String> expectedSet = new HashSet<>(Arrays.asList(p.getProperty("expected.phonology").split(" ")));
+        Set<String> actualSet = lang.getPhonology().stream()
+                .map(PhonemeInTable::getValue)
+                .collect(Collectors.toSet());
+
+        Assert.assertTrue(actualSet.containsAll(expectedSet));
+        Assert.assertEquals(p.getProperty("expected.number.phonemes"), String.valueOf(actualSet.size() - 1)); // дополнительный элемент - пустой символ ""
     }
 
-    /**
-     * Строки ниже не имеют прямого отношения к проекту,
-     * это написано для проверки плагина wiremock.
-     */
-    //@Test
-    public void wireMockTest() {
-        String testUrl = "/getwiremock";
-        String fullUrl = "http://localhost:8089/getwiremock";
-        stubFor(get(testUrl).willReturn(okJson("success")));
-        Response response = RestAssured.given()
-                .when()
-                .get(fullUrl);
-        //userLogger.info("RESPONSE CODE " + response.statusCode());
-        //userLogger.info("RESPONSE " + response.getBody().asString());
-        Assert.assertEquals(200, response.statusCode());
+
+    // TODO: либо вычищать вручную диакритику и сохранять исходник отдельно,
+    //  либо выпиливать диакритику динамически и указывать в логах какие фонемы каким образом изменены (читай: считаны с корректировками под ближайшие похожие)
+    @Test
+    public void languageConstructor_1arg_phonologyRarePhonemesTest() throws Exception {
+        FileReader reader = new FileReader(TestData.INPUT_TEST_DIRECTORY_2022 + "language/language_1arg_phonologyRarePhonemes.properties");
+        Properties p = new Properties();
+        p.load(reader);
+        String langName = p.getProperty("language");
+
+        Language lang = new Language(langName);
+        Set<String> expectedSet = new HashSet<>(Arrays.asList(p.getProperty("expected.phonology").split(" ")));
+        Set<String> actualSet = lang.getPhonology().stream()
+                .map(PhonemeInTable::getValue)
+                .collect(Collectors.toSet());
+        userLogger.info(lang.getTitle());
+        userLogger.info(actualSet);
+        userLogger.info(expectedSet);
+
+        Assert.assertTrue(actualSet.containsAll(expectedSet));
+        Assert.assertEquals(p.getProperty("expected.number.phonemes"), String.valueOf(actualSet.size() - 1)); // дополнительный элемент - пустой символ ""
     }
 
-    //@Test
-    public void testMockserverResponse() throws Exception {
-        MockServerClient mockServerClient = new MockServerClient(mockServer.getHost(), mockServer.getServerPort());
-        String path = "/person";
-        mockServerClient.when(request()
-                            .withMethod("GET")
-                            .withPath(path)
-                            .withQueryStringParameter("name", "peter"))
-                        .respond(response()
-                            .withBody("Peter the person!"));
 
-        /*.withStatusCode(302)
-                .withCookie("sessionId", "2By8LOhBmaW5nZXJwcmludCIlMDAzMW")
-                .withHeader("Location", "https://www.mock-server.com") */
-        // Ещё примеры
-        //https://www.mock-server.com/mock_server/creating_expectations.html
-
-        Response response = RestAssured.given()
-                .when()
-                .get(mockServer.getEndpoint() + "/person?name=peter");
-        //userLogger.info("RESPONSE CODE MOCKSERVER: " + response.statusCode());
-        //userLogger.info("RESPONSE BODY MOCKSERVER: " + response.getBody().asString());
-        Assert.assertEquals(200, response.statusCode());
-
-        mockServerClient.verify(
-                HttpRequest.request().withPath(path),
-                VerificationTimes.once());
-
-        //HttpRequest[] requests = mockServerClient.retrieveRecordedRequests(HttpRequest.request().withPath(path));
-        RequestDefinition[] requests = mockServerClient.retrieveRecordedRequests(HttpRequest.request().withPath(path));
-        userLogger.info("requests num: " + requests.length);
-        userLogger.info("requests: " + requests[0]);
-    }
+    // TODO в конструкторе Language(1 arg) закомментированы строки с coverage, надо придумать откуда их запускать
 }

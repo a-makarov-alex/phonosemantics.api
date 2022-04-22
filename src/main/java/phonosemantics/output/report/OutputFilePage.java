@@ -6,7 +6,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import phonosemantics.statistics.Sample;
-import phonosemantics.word.wordlist.WordList;
+import phonosemantics.word.wordlist.WordList2022;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +24,7 @@ public class OutputFilePage {
     // !!итерироваться по ключу через String.valueOf(Object). В будущем стоит поправить.
     private Map<String, Map<Object, GeneralReportHeader>> headersNew;
     private boolean hasHeaders; // вписаны ли заголовки в файл или ещё нет
-    private List<WordList> wordlists; // вордлисты, входящие в отчёт
+    private List<WordList2022> wordlists; // вордлисты, входящие в отчёт
     // "вертикальный разрез" статистик в отчёте. перечень статс значений для каждого фонотипа "сквозь" все вордлисты
     private List<Sample> statsSamplesList;
 
@@ -74,7 +74,7 @@ public class OutputFilePage {
         sheet.setColumnWidth(2, 5800);
     }
 
-    public void createVerticalHeaders(WordList wl) {
+    public void createVerticalHeaders(WordList2022 wl) {
         userLogger.info("инициализация ячеек вертикальных заголовков");
         int startRow = getLastRowNum() + 1;
         int finishRow = startRow + 2;

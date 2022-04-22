@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import phonosemantics.data.PortConfig;
+import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 
 import java.util.Map;
 
@@ -15,11 +16,11 @@ public class WordController {
      * **/
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/languages/{language}/meanings/{meaning}")
-    public Word getWordByLanguageAndMeaning(
+    public Word2022 getWordByLanguageAndMeaning(
             @RequestParam(value = "language") String language,
             @RequestParam(value = "meaning") String meaning
     ) {
-        return Word.getWord(language, meaning);
+        return Word2022.getWord(language, meaning);
     }
 
     /**
@@ -31,8 +32,8 @@ public class WordController {
             @RequestParam(value = "language") String language,
             @RequestParam(value = "meaning") String meaning
     ) {
-        Word w = Word.getWord(language, meaning);
-        return w.countWordDistinctiveFeaturesStats("all");
+        Word2022 w = Word2022.getWord(language, meaning);
+        return w.countWordDistinctiveFeaturesStats(DistinctiveFeatures.Type.ALL);
     }
 
 }

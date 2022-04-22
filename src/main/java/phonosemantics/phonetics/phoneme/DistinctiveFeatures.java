@@ -320,12 +320,11 @@ public class DistinctiveFeatures {
         }
     }
 
-    public static Map<String, Object[]> getFeaturesForAPI(String requestedFeatures) {
-        Map<String, Object[]> map = new HashMap<>();
-        requestedFeatures = requestedFeatures.toLowerCase();
+    public static Map<String, Object[]> getFeaturesForAPI(Type requestedFeatures) {
 
+    Map<String, Object[]> map = new HashMap<>();
         /* **********************  GENERAL ***************************/
-        if (requestedFeatures.equals("general") || requestedFeatures.equals("all")) {
+        if (requestedFeatures.equals(Type.GENERAL) || requestedFeatures.equals(Type.ALL)) {
             map.put("mannerPrecise", MannerPrecise.values());
             map.put("stricture", Stricture.values());
             map.put("vocoid", new String[] {TRUE, FALSE});
@@ -336,14 +335,14 @@ public class DistinctiveFeatures {
         }
 
         /* **********************  VOWELS ***************************/
-        if (requestedFeatures.equals("vowel") || requestedFeatures.equals("all")) {
+        if (requestedFeatures.equals(Type.VOWEL) || requestedFeatures.equals(Type.ALL)) {
             map.put("height", Height.values());
             map.put("backness", Backness.values());
             map.put("roundness", Roundness.values());
         }
 
         /* **********************  CONSONANTS ***************************/
-        if (requestedFeatures.equals("consonant") || requestedFeatures.equals("all")) {
+        if (requestedFeatures.equals(Type.CONSONANT) || requestedFeatures.equals(Type.ALL)) {
             map.put("placeApproximate", PlaceApproximate.values());
             map.put("placePrecise", PlacePrecise.values());
             map.put("strident", Strident.values());
@@ -364,7 +363,7 @@ public class DistinctiveFeatures {
      *     {false: 0}
      *   ]}
      */
-    public static Map<String, Map<Object, Integer>> getFeaturesStructureDraft(String type) {
+    public static Map<String, Map<Object, Integer>> getFeaturesStructureDraft(Type type) {
         Map<String, Map<Object, Integer>> mainMap = new HashMap<>();
 
         for (Map.Entry<String, Object[]> elem : getFeaturesForAPI(type).entrySet()) {
@@ -381,7 +380,7 @@ public class DistinctiveFeatures {
         return mainMap;
     }
 
-    public static Map<String, Map<String, Integer>> getFeaturesStructureDraftStringKeys(String type) {
+    public static Map<String, Map<String, Integer>> getFeaturesStructureDraftStringKeys(Type type) {
         Map<String, Map<String, Integer>> mainMap = new HashMap<>();
 
         for (Map.Entry<String, Object[]> elem : getFeaturesForAPI(type).entrySet()) {
@@ -397,5 +396,22 @@ public class DistinctiveFeatures {
             mainMap.put(elem.getKey(), innerMap);
         }
         return mainMap;
+    }
+
+    public enum Type {
+        GENERAL,
+        VOWEL,
+        CONSONANT,
+        ALL
+    }
+
+    @Override
+    public String toString() {
+        return "DistinctiveFeatures{\n" +
+                " majorClass=" + majorClass +
+                ",\n manner=" + manner +
+                ",\n place=" + place +
+                ",\n vowelSpace=" + vowelSpace +
+                "\n}";
     }
 }

@@ -27,7 +27,7 @@ public class PhonemeInTable {
 
     // Метод преобразует для фонемы DistinctiveFeatures в Map<String, Map<String, Integer>> с единицами для найденных признаков
     public Map<String, Map<String, Integer>> countPhonemeDistinctiveFeaturesInstances() {
-        Map<String, Map<String, Integer>> distFeatureStats = DistinctiveFeatures.getFeaturesStructureDraftStringKeys("all");
+        Map<String, Map<String, Integer>> distFeatureStats = DistinctiveFeatures.getFeaturesStructureDraftStringKeys(DistinctiveFeatures.Type.ALL);
         DistinctiveFeatures df = this.distinctiveFeatures;
         final String TRUE = "true";
         final String FALSE = "false";

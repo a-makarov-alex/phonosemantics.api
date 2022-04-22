@@ -4,9 +4,10 @@ import lombok.Data;
 import org.apache.log4j.Logger;
 import phonosemantics.language.Language;
 import phonosemantics.language.LanguageService;
+import phonosemantics.phonetics.phoneme.DistinctiveFeatures;
 import phonosemantics.phonetics.phoneme.FeaturesPool;
 import phonosemantics.phonetics.phoneme.PhonemesPool;
-import phonosemantics.word.wordlist.WordList;
+import phonosemantics.word.wordlist.WordList2022;
 import phonosemantics.word.wordlist.WordListService;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class Word2022 {
     private PhonemesPool phonemesPool;
     private FeaturesPool featuresPool;
     private String meaning;                     // Meaning --> find(String meaning)
-    private String language;    // need to find language using Language --> find(String language)
+    private Language language;    // need to find language using Language --> find(String language)
     private int length;     // рассчитываемое значение. Берется в PhonemesPool -> getTranscription().length()
     private PartOfSpeech partOfSpeech;  // TODO think about shifting field to meaning
 
@@ -33,15 +34,17 @@ public class Word2022 {
         this.meaning = meaning;
         phonemesPool = new PhonemesPool(graphicForm);
         this.length = phonemesPool.getTranscription().size();
-        this.language = language;
+        this.language = new Language(language);
         this.partOfSpeech = partOfSpeech;
+        featuresPool = new FeaturesPool(phonemesPool);
     }
 
     public Word2022(String word, String language) {
         this.graphicForm = word;
-        this.language = language;
+        this.language = new Language(language);
         phonemesPool = new PhonemesPool(graphicForm);
         this.length = phonemesPool.getTranscription().size();
+        featuresPool = new FeaturesPool(phonemesPool);
     }
 
     // for jUnit tests
@@ -49,6 +52,7 @@ public class Word2022 {
         this.graphicForm = word;
         phonemesPool = new PhonemesPool(graphicForm);
         this.length = phonemesPool.getTranscription().size();
+        featuresPool = new FeaturesPool(phonemesPool);
     }
 
     public int getNumOfCertainPhoneme(String phoneme) {
@@ -65,7 +69,7 @@ public class Word2022 {
     /**
      * RETURNS SUM OF EVERY DISTINCTIVE FEATURE FOR A CERTAIN WORD
      */
-    public Map<String, Map<String, Integer>> countWordDistinctiveFeaturesStats(String type) {
+    public Map<String, Map<String, Integer>> countWordDistinctiveFeaturesStats(DistinctiveFeatures.Type type) {
         return this.featuresPool.countWordDistinctiveFeaturesStats(type, this.phonemesPool.getTranscriptionFull());
     }
 
@@ -88,8 +92,8 @@ public class Word2022 {
     /**
      * RETURNS WORD BY LANGUAGE AND MEANING
      */
-    public static Word getWord(String languageName, String meaning) {
-        WordList wl = WordListService.getWordlist(meaning);
+    public static Word2022 getWord(String languageName, String meaning) {
+        WordList2022 wl = WordListService.getWordlist2022(meaning);
         if (wl == null) {
             userLogger.debug("requested wordlist for [" + meaning + "] meaning does not exist");
             return null;
@@ -101,7 +105,7 @@ public class Word2022 {
             return null;
         }
 
-        List<Word> list = wl.getWords(language);
+        List<Word2022> list = wl.getWords(language);
         if (list == null) {
             userLogger.debug("no words found for [" + meaning + "] meaning in [" + languageName + "] language");
             return null;

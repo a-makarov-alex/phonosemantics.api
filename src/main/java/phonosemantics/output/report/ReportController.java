@@ -21,7 +21,7 @@ public class ReportController {
         if (generalWordlistReport == null) {
             generalWordlistReport = new OutputFile("GeneralWordlistReport");
         }
-        generalWordlistReport.fillWithAll(WordListService.getAllWordLists());
+        generalWordlistReport.fillWithAll(WordListService.getAllWordLists2022());
         return true;
 
     }
@@ -37,7 +37,7 @@ public class ReportController {
         if (generalWordlistReport == null) {
             generalWordlistReport = new OutputFile("GeneralWordlistReport");
         }
-        generalWordlistReport.fillWith(WordListService.getWordlist(meaning));
+        generalWordlistReport.fillWith(WordListService.getWordlist2022(meaning));
         return true;
     }
 
@@ -48,7 +48,7 @@ public class ReportController {
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/report/square/{meaning}")
     public boolean createPatternSquareReport(@PathVariable(value="meaning") String meaning) {
-        PatternSquareFile patternSquareFile = new PatternSquareFile(WordListService.getWordlist(meaning));
+        PatternSquareFile patternSquareFile = new PatternSquareFile(WordListService.getWordlist2022(meaning));
         return true;
     }
 }

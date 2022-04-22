@@ -3,8 +3,10 @@ package phonosemantics.word.wordlist;
 import org.apache.poi.ss.usermodel.*;
 import phonosemantics.LoggerConfig;
 import phonosemantics.data.InputConfig;
+import phonosemantics.language.Language;
 import phonosemantics.word.Word;
 import org.apache.log4j.Logger;
+import phonosemantics.word.Word2022;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,33 +21,34 @@ public class WordListService {
 
     // TODO: запихнуть в контекст эти данные, если мы не оставим путь как константу
     // TODO: add some kind of context to project to store data
-    private static List<WordList> allWordLists;
+    private static List<WordList2022> allWordLists2022;
     // TODO allWordlist можно заполнять в статическом блоке
 
-    public static List<WordList> getAllWordLists(String path) {
-        if (allWordLists != null) {
-            userLogger.info("allWordlists is NOT null");
-            return allWordLists;
+
+    public static List<WordList2022> getAllWordLists2022(String path) {
+        if (allWordLists2022 != null) {
+            userLogger.info("--- Список вордлистов уже собран ранее ---");
+            return allWordLists2022;
         } else {
-            userLogger.info("allWordlists is null");
-            allWordLists = WordListService.readAllWordListsFromInputFile(path);
-            return allWordLists;
+            userLogger.info("--- Формирование списка вордлистов из файла " + path + "---");
+            allWordLists2022 = WordListService.readAllWordListsFromInputFile(path);
+            return allWordLists2022;
         }
     }
 
     // For default input file
-    public static List<WordList> getAllWordLists() {
-        return getAllWordLists(InputConfig.INPUT_DIRECTORY + InputConfig.FILENAME);
+    public static List<WordList2022> getAllWordLists2022() {
+        return getAllWordLists2022(InputConfig.INPUT_DIRECTORY + InputConfig.FILENAME);
     }
 
 
     /**
      * Reads all the words from inputFile and write them to one list of Word entities
      */
-    public static List<WordList> readAllWordListsFromInputFile(String path) {
+    public static List<WordList2022> readAllWordListsFromInputFile(String path) {
         userLogger.info("wordlist extracting from file starting...");
         // open file for reading
-        List<WordList> allWordlists = new ArrayList<>();
+        List<WordList2022> allWordlists = new ArrayList<>();
 
         try (InputStream inputStream = new FileInputStream(path);
             Workbook wb = WorkbookFactory.create(inputStream);
@@ -59,7 +62,7 @@ public class WordListService {
                 if (LoggerConfig.CONSOLE_SHOW_FOUND_MEANINGS_IN_INPUT_FILE) {
                     userLogger.debug("--- meaning found: " + sheet.getRow(rowNum).getCell(colNum).getStringCellValue());
                 }
-                WordList wl = composeWordList(sheet.getRow(rowNum).getCell(colNum).getStringCellValue(), path);
+                WordList2022 wl = composeWordList(sheet.getRow(rowNum).getCell(colNum).getStringCellValue(), path);
                 allWordlists.add(wl);
 
                 colNum++;
@@ -76,14 +79,14 @@ public class WordListService {
     /**
      * Reads a list of words from inputFile by meaning
      */
-    public static WordList composeWordList(String meaning, String path) {
+    public static WordList2022 composeWordList(String meaning, String path) {
         // open file for reading
-        List<Word> list = new ArrayList<Word>();
+        List<Word2022> list = new ArrayList<>();
 
         try (InputStream inputStream = new FileInputStream(path);
              Workbook wb = WorkbookFactory.create(inputStream);
         ) {
-            userLogger.info("--- wordlist composing for " + meaning);
+            userLogger.info("--- составление вордлиста для значения: " + meaning + " с учетом языков-источников");
 
             Sheet sheet = wb.getSheetAt(0);
             Row nullRow = sheet.getRow(0);
@@ -114,13 +117,18 @@ public class WordListService {
                                 break;
                             }
                             cell = sheet.getRow(i).getCell(col);
+
                             if (cell != null && cell.getCellType() != CellType.BLANK) {
-                                Word word = new Word(
-                                        cell.getStringCellValue(),
-                                        sheet.getRow(i).getCell(0).getStringCellValue());
+                                String graphicForm = cell.getStringCellValue();
+                                String language = sheet.getRow(i).getCell(0).getStringCellValue();
+
+                                Word2022 word = new Word2022(
+                                        graphicForm,
+                                        language);
                                 word.setMeaning(nullRow.getCell(col).getStringCellValue());
                                 list.add(word);
                                 count++;
+
                             } else {
                                 userLogger.info("No value for word \"" + nullRow.getCell(col).getStringCellValue() +
                                         "\" of language " + sheet.getRow(i).getCell(0).getStringCellValue());
@@ -134,7 +142,7 @@ public class WordListService {
             if (LoggerConfig.CONSOLE_SHOW_FOUND_MEANINGS_IN_INPUT_FILE) {
                 System.out.println();
             }
-            WordList wordList = new WordList(list);
+            WordList2022 wordList = new WordList2022(list);
             return wordList;
 
         } catch (IOException e) {
@@ -143,17 +151,19 @@ public class WordListService {
         }
     }
 
-    public static WordList getWordlist(String meaning) {
-        return getWordlist(
+
+    public static WordList2022 getWordlist2022(String meaning) {
+        return getWordlist2022(
                 meaning,
                 InputConfig.INPUT_DIRECTORY + InputConfig.FILENAME
         );
     }
 
-    public static WordList getWordlist(String meaning, String filePath) {
+
+    public static WordList2022 getWordlist2022(String meaning, String filePath) {
         meaning = meaning.toLowerCase();
-        List<WordList> allWordlists = getAllWordLists(filePath);
-        for (WordList wl : allWordlists) {
+        List<WordList2022> allWordlists = getAllWordLists2022(filePath);
+        for (WordList2022 wl : allWordlists) {
             if (wl.getMeaning().equals(meaning)) {
                 return wl;
             }

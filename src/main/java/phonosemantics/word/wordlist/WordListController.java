@@ -20,8 +20,8 @@ public class WordListController {
      * **/
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/wordlist")
-    public WordList getWordlistByMeaning(@RequestParam(value = "wordlistMeaning") String wordlistMeaning) {
-        return WordListService.getWordlist(wordlistMeaning);
+    public WordList2022 getWordlistByMeaning(@RequestParam(value = "wordlistMeaning") String wordlistMeaning) {
+        return WordListService.getWordlist2022(wordlistMeaning);
     }
 
 
@@ -30,8 +30,8 @@ public class WordListController {
      * **/
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/wordlists")
-    public List<WordList> getAllWordlists() {
-        List<WordList> allWordlists = WordListService.getAllWordLists();
+    public List<WordList2022> getAllWordlists() {
+        List<WordList2022> allWordlists = WordListService.getAllWordLists2022();
         return allWordlists;
     }
 
@@ -44,7 +44,7 @@ public class WordListController {
     public List<String> getAllMeanings() {
         List<String> meaningsList = new ArrayList<>();
 
-        for (WordList wl : WordListService.getAllWordLists()) {
+        for (WordList2022 wl : WordListService.getAllWordLists2022()) {
             meaningsList.add(wl.getMeaning());
         }
         return meaningsList;
@@ -56,7 +56,7 @@ public class WordListController {
     @CrossOrigin(origins = PortConfig.FRONTEND_URL)
     @GetMapping("/wordlists/{wordlistMeaning}/phonemes")
     public List<PhonemeInTable> getPhonemesCoverageForWordlist(@PathVariable(value="wordlistMeaning") String wordlistMeaning) {
-        WordList wrdl = WordListService.getWordlist(wordlistMeaning);
+        WordList2022 wrdl = WordListService.getWordlist2022(wordlistMeaning);
         return PhonemesBank.getInstance().getAllPhonemesList(wrdl);
     }
 
@@ -69,8 +69,8 @@ public class WordListController {
             @PathVariable(value = "wordlistMeaning") String wordlistMeaning,
             @RequestParam(value="phoneme") String phoneme
     ) {
-        WordList wl = WordListService.getWordlist(wordlistMeaning);
-        return wl.getPhonemeStatsMap().get(phoneme);
+        WordList2022 wl = WordListService.getWordlist2022(wordlistMeaning);
+        return wl.getStats().getPhonemeStatsMap().get(phoneme);
     }
 
     /**
@@ -84,8 +84,8 @@ public class WordListController {
     public Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> getFeaturesStats(
             @RequestParam(value="type") String type,
             @PathVariable(value = "wordlistMeaning") String wordlistMeaning) {
-        WordList wl = WordListService.getWordlist(wordlistMeaning);
-        return wl.getDistFeatureStats();
+        WordList2022 wl = WordListService.getWordlist2022(wordlistMeaning);
+        return wl.getStats().getDistFeatureStats();
     }
 
     /**
@@ -98,12 +98,12 @@ public class WordListController {
     public Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> getFeaturesStats(
             @PathVariable(value = "feature") String feature) {
 
-        List<WordList> allWordlists = WordListService.getAllWordLists();
+        List<WordList2022> allWordlists = WordListService.getAllWordLists2022();
         Map<String, Map<Object, PhonemeInTable.DistFeatureStats>> resultMap = new HashMap<>();
         feature = feature.toLowerCase();
 
-        for (WordList wl : allWordlists) {
-            Map<Object, PhonemeInTable.DistFeatureStats> statsForOneWordlist = wl.getDistFeatureStats().get(feature);
+        for (WordList2022 wl : allWordlists) {
+            Map<Object, PhonemeInTable.DistFeatureStats> statsForOneWordlist = wl.getStats().getDistFeatureStats().get(feature);
             if (statsForOneWordlist != null) {
                 resultMap.put(wl.getMeaning(), statsForOneWordlist);
             } else {

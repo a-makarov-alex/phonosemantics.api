@@ -10,7 +10,7 @@ public class WordListServiceTest {
 
     @Test
     public void getAllWordlistsSimpleTest() {
-        List<WordList> allWls = WordListService.getAllWordLists(TestData.TEST_FILE_PATH);
+        List<WordList2022> allWls = WordListService.getAllWordLists2022(TestData.TEST_FILE_PATH);
         Assert.assertNotNull(allWls);
         Assert.assertEquals(allWls.size(), TestData.NUM_OF_MEANINGS);
         // TODO: check if the num of WLs equals the num of meanings in the input file
@@ -19,7 +19,7 @@ public class WordListServiceTest {
     @Test
     public void getWordlistSimpleTest() {
         String meaning = "stone";
-        WordList wl = WordListService.getWordlist(meaning, TestData.TEST_FILE_PATH);
+        WordList2022 wl = WordListService.getWordlist2022(meaning, TestData.TEST_FILE_PATH);
         Assert.assertNotNull(wl);
         Assert.assertEquals(wl.getList().size(), TestData.NUM_OF_LANGUAGES);
     }
@@ -27,7 +27,7 @@ public class WordListServiceTest {
     @Test
     public void getWordlistWithEmptyRowTest() {
         String meaning = "leaf";
-        WordList wl = WordListService.getWordlist(meaning, TestData.TEST_FILE_PATH);
+        WordList2022 wl = WordListService.getWordlist2022(meaning, TestData.TEST_FILE_PATH);
         Assert.assertNotNull(wl);
         Assert.assertEquals(wl.getList().size(), TestData.NUM_OF_LANGUAGES - 1);
     }
