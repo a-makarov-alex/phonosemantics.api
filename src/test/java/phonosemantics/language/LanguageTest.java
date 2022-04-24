@@ -30,7 +30,7 @@ public class LanguageTest {
                 .collect(Collectors.toSet());
 
         Assert.assertTrue(actualSet.containsAll(expectedSet));
-        Assert.assertEquals(p.getProperty("expected.number.phonemes"), String.valueOf(actualSet.size() - 1)); // дополнительный элемент - пустой символ ""
+        Assert.assertEquals(p.getProperty("expected.number.phonemes"), String.valueOf(actualSet.size())); // дополнительный элемент - пустой символ ""
     }
 
 
@@ -53,9 +53,59 @@ public class LanguageTest {
         userLogger.info(expectedSet);
 
         Assert.assertTrue(actualSet.containsAll(expectedSet));
-        Assert.assertEquals(p.getProperty("expected.number.phonemes"), String.valueOf(actualSet.size() - 1)); // дополнительный элемент - пустой символ ""
+        Assert.assertEquals(p.getProperty("expected.number.phonemes"), String.valueOf(actualSet.size())); // дополнительный элемент - пустой символ ""
     }
 
+
+    @Test
+    public void languageConstructor_1arg_phonologyNasalVowelsTest() throws Exception {
+        FileReader reader = new FileReader(TestData.INPUT_TEST_DIRECTORY_2022 + "language/language_1arg_phonologyNasalVowels.properties");
+        Properties p = new Properties();
+        p.load(reader);
+        String langName = p.getProperty("language");
+
+        Language lang = new Language(langName);
+        Set<String> expectedSet = new HashSet<>(Arrays.asList(p.getProperty("expected.phonology").split(" ")));
+        Set<String> actualSet = lang.getPhonology().stream()
+                .map(PhonemeInTable::getValue)
+                .collect(Collectors.toSet());
+        userLogger.info(lang.getTitle());
+        userLogger.info(actualSet);
+        userLogger.info(expectedSet);
+
+        Assert.assertTrue(actualSet.containsAll(expectedSet));
+        Assert.assertEquals(p.getProperty("expected.number.phonemes"), String.valueOf(actualSet.size())); // дополнительный элемент - пустой символ ""
+    }
+
+
+    @Test
+    public void languageConstructor_1arg_phonologyEmptyCellsTest() throws Exception {
+        FileReader reader = new FileReader(TestData.INPUT_TEST_DIRECTORY_2022 + "language/language_1arg_phonologyEmptyCells.properties");
+        Properties p = new Properties();
+        p.load(reader);
+        String langName = p.getProperty("language");
+
+        Language lang = new Language(langName);
+        Set<String> expectedSet = new HashSet<>(Arrays.asList(p.getProperty("expected.phonology").split(" ")));
+        Set<String> actualSet = lang.getPhonology().stream()
+                .map(PhonemeInTable::getValue)
+                .collect(Collectors.toSet());
+        userLogger.info(lang.getTitle());
+        userLogger.info(actualSet);
+        userLogger.info(expectedSet);
+
+        Assert.assertTrue(actualSet.containsAll(expectedSet));
+        Assert.assertEquals(p.getProperty("expected.number.phonemes"), String.valueOf(actualSet.size())); // дополнительный элемент - пустой символ ""
+    }
+
+
+    @Test
+    public void languageConstructor_1arg_phonologyLanguageAbsentInCatalogTest() throws Exception {
+        String langName = "blablabla";
+        Language lang = new Language(langName);
+        Assert.assertNull(lang.getPhonology());
+        // Плюс должна быть запись в логах
+    }
 
     // TODO в конструкторе Language(1 arg) закомментированы строки с coverage, надо придумать откуда их запускать
 }

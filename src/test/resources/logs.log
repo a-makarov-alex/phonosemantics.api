@@ -1,27 +1,2 @@
-2022-04-23 00:05:18 INFO  PhonemesBank:364 - --- Загрузка данных из таблицы всех фонем ---
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:367 - extracting vowels
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:402 - extracting is finished successfully
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:370 - extracting consonants
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:402 - extracting is finished successfully
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:410 - --- Подготовка HashMap для сбора фонемных признаков (из справочника) ---
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:229 - vowels map is filled up
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:491 - --- Не обнаружены данные в справочнике по следующим фонемам: ---
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:492 - --- (ФОНЕМНЫЕ ПРИЗНАКИ ДЛЯ НИХ НЕ БУДУТ ИЗВЛЕЧЕНЫ ИЗ СПРАВОЧНИКА) ---
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:493 - --- (TODO: сделать отображение в логах, какие фонемы есть в таблице, но их признаки отсутствуют в справочнике) ---
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:508 - Distinctive features added for vowel
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:509 - ---------------
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:175 - consonants map is filled up
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:491 - --- Не обнаружены данные в справочнике по следующим фонемам: ---
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:492 - --- (ФОНЕМНЫЕ ПРИЗНАКИ ДЛЯ НИХ НЕ БУДУТ ИЗВЛЕЧЕНЫ ИЗ СПРАВОЧНИКА) ---
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:493 - --- (TODO: сделать отображение в логах, какие фонемы есть в таблице, но их признаки отсутствуют в справочнике) ---
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:498 - phoneme b̪ is not found in PhonemesCoverageTable
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:498 - phoneme p̪ is not found in PhonemesCoverageTable
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:498 - phoneme š is not found in PhonemesCoverageTable
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:498 - phoneme ɴ is not found in PhonemesCoverageTable
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:508 - Distinctive features added for consonant
-Ð°2022-04-23 00:05:18 INFO  PhonemesBank:509 - ---------------
-Ð°2022-04-23 00:05:18 INFO  Language:37 - phonology is set for Nidzh Udi language
-Ð°2022-04-23 00:05:18 INFO  LanguageTest:49 - Nidzh Udi
-Ð°2022-04-23 00:05:18 INFO  LanguageTest:50 - [, ʁ, ʃ, χ, tʃ, ɑ, ʒ, œ, ɔ, ə, ɛ, b, d, æ, f, g, h, i, j, k, l, m, n, p, q, r, s, t, u, v, y, z, ts]
-Ð°2022-04-23 00:05:18 INFO  LanguageTest:51 - [ʁ, ʃ, χ, tʃ, ɑ, ʒ, œ, ɔ, ə, ɛ, d͡z, b, d, æ, f, g, h, i, j, k, l, m, n, p, q, r, s, t, d͡ʒ, u, v, y, z, ts]
+2022-04-25 00:12:51 ERROR Language:97 - язык blablabla не обнаружен в справочнике
 Ð°

@@ -27,14 +27,19 @@ public class Language {
     private String group;  // typology etc.
     private Set<PhonemeInTable> phonology;
     // maps save the verdict "if the phoneme/phType were found in the Language words on practice"
+    // следующие две коллекции хранят информацию об обнаруженных фонемах и фонемных признаках
     private Set<PhonemeInTable> phCoverage;
     private Map<String, Map<String, Integer>> phTypeCoverage;
+    // фонемы, обнаруженные в словах, но не описанные в языке
+    // TODO фича - показывать в логах ближайшие похожие из имеющихся в фонологии языка
     private Set<PhonemeInTable> phNotDescribed;
 
     public Language(String title) {
         this.title = title;
         phonology = readLangPhonologyFromFile();
-        userLogger.info("phonology is set for " + this.getTitle() + " language");
+        if (phonology != null) {
+            userLogger.info("phonology is set for " + this.getTitle() + " language");
+        }
         //this.phTypeCoverage = calculatePhTypeCoverage(); если раскомментить, зацикливается, т.к. там подтягиваются все вордлисты
         //phNotDescribed = new HashSet<>();
     }
@@ -54,48 +59,83 @@ public class Language {
              Workbook wb = WorkbookFactory.create(inputStream)
         ){
             Sheet sheet = wb.getSheetAt(0);
+            String[] allPhArr = null;
+
+            int targetRow = this.getRowNumForLanguageInLanguagePhonologyFile();
+
+            if (targetRow != 0) {
+                userLogger.info("--- Фонемный состав языка " + this.getTitle() + ": ---");
+
+                // Получение графической формы фонем из файла с фонологичей языка
+                StringBuilder strb = new StringBuilder(" ");
+                Row r = sheet.getRow(targetRow);
+
+                for (int i = 1; i <= LanguageService.NUM_OF_PHONOLOGY_COLUMNS; i++) {
+                    if (r.getCell(i) != null) {
+                        strb.append(r.getCell(i).getStringCellValue());
+                        strb.append(" ");
+                    } else {
+                        userLogger.info("Отсутствуют фонемы раздела " + sheet.getRow(0).getCell(i).getStringCellValue() + " для языка " + this.getTitle());
+                    }
+                }
+                allPhArr = strb.toString().split(" ");
+
+                // Поиск фонем в справочнике и их сохранение в виде объектов Phoneme в списке фонем языка
+                for (String symbol: allPhArr) {
+                    PhonemeInTable phoneme = PhonemesBank.getInstance().find(symbol);
+                    if (phoneme != null) {
+                        //userLogger.info(phoneme.getValue() + " ");
+                        allPhonemes.add(phoneme);
+                    } else {
+                        // костыль
+                        if (symbol.length() > 0) {
+                            userLogger.error("Неизвестная фонема: " + symbol + " в составе языка " + this.getTitle());
+                        }
+                    }
+                }
+            } else {
+                userLogger.error("язык " + this.getTitle() + " не обнаружен в справочнике");
+                return null;
+            }
+        } catch (IOException e) {
+            userLogger.error(e.toString());
+        }
+        return allPhonemes;
+    }
+
+    // Поиск строки с названием заданного языка
+    private int getRowNumForLanguageInLanguagePhonologyFile() {
+        try (InputStream inputStream = new FileInputStream(LanguageService.INPUT_LANGUAGES_PATH);
+             Workbook wb = WorkbookFactory.create(inputStream)
+        ){
+            Sheet sheet = wb.getSheetAt(0);
             int rowNum = 1;
             Row row = sheet.getRow(rowNum);
             Cell cell = row.getCell(0);
-            String[] allPhArr = null;
 
             // LOOKING FOR THE LANGUAGE
             while (cell.getCellType() != CellType.BLANK) {
                 String cellValue = cell.getStringCellValue();
 
                 if (this.title.equalsIgnoreCase(cellValue)) {
-                    userLogger.debug("PHONOLOGY for LANG " + this.getTitle() + ": ");
-
-                    // CREATING A PHONEMES BANK FOR THE LANGUAGE
-                    for (PhonemeInTable ph : PhonemesBank.getInstance().getAllPhonemesList()) {
-                        if (allPhArr == null) {
-                            String allPh = " ";
-                            Row r = sheet.getRow(rowNum);
-
-                            for (int i = 1; i <= LanguageService.NUM_OF_PHONOLOGY_COLUMNS; i++) {
-                                if (r.getCell(i) != null) {
-                                    allPh += r.getCell(i).getStringCellValue() + " ";
-                                }
-                            }
-                            allPhArr = allPh.split(" ");
-                        }
-
-                        for (String symbol: allPhArr) {
-                            if (symbol.equals(ph.getValue())) {
-                                userLogger.debug(ph.getValue() + " "); //check all phonemes in console
-                                allPhonemes.add(ph);
-                            }
-                        }
-                    }
-                    break;
+                    return rowNum;
                 }
                 rowNum++;
-                cell = sheet.getRow(rowNum).getCell(0);
+                Row r = sheet.getRow(rowNum);
+                if (r == null) {
+                    break;
+                }
+                cell = r.getCell(0);
+                if (cell == null) {
+                    break;
+                }
+
             }
         } catch (IOException e) {
             userLogger.error(e.toString());
+            return 0;
         }
-        return allPhonemes;
+        return 0;
     }
 
     public void categorizePh(PhonemeInTable ph) {

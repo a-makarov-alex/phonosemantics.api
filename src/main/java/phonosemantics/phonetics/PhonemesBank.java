@@ -146,7 +146,6 @@ public class PhonemesBank {
         allPhonemes.put("ɳ", new DistinctiveFeatures(MannerPrecise.NASAL, true, PlacePrecise.RETROFLEX));
         allPhonemes.put("ɲ", new DistinctiveFeatures(MannerPrecise.NASAL, true, PlacePrecise.PALATAL));
         allPhonemes.put("ŋ", new DistinctiveFeatures(MannerPrecise.NASAL, true, PlacePrecise.VELAR));
-        // allPhonemes.put("ng", new DistinctiveFeatures(MannerPrecise.NASAL, true, PlacePrecise.VELAR)); см. файл с описанием проблем с фонемами (test/resources/junit...)
         allPhonemes.put("ɴ", new DistinctiveFeatures(MannerPrecise.NASAL, true, PlacePrecise.UVULAR));
 
         // TRILL
@@ -189,7 +188,6 @@ public class PhonemesBank {
         //vowels
         //front
         allPhonemes.put("i", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE, Backness.FRONT, Roundness.UNROUNDED));
-        //allPhonemes.put("ĩ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE, Backness.FRONT, Roundness.UNROUNDED, true)); // \u0129
         allPhonemes.put("ĩ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE, Backness.FRONT, Roundness.UNROUNDED, true)); // vow + \u0303
 
         allPhonemes.put("y", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE, Backness.FRONT, Roundness.ROUNDED));
@@ -208,8 +206,7 @@ public class PhonemesBank {
         allPhonemes.put("ʉ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE, Backness.CENTRAL, Roundness.ROUNDED));
         allPhonemes.put("ɘ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE_MID, Backness.CENTRAL, Roundness.UNROUNDED));
         allPhonemes.put("ɵ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.CLOSE_MID, Backness.CENTRAL, Roundness.ROUNDED));
-        allPhonemes.put("ə", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.MID, Backness.CENTRAL, Roundness.UNROUNDED)); // \u0259
-        //allPhonemes.put("ǝ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.MID, Backness.CENTRAL, Roundness.UNROUNDED)); // \u01DD
+        allPhonemes.put("ə", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.MID, Backness.CENTRAL, Roundness.UNROUNDED));
         allPhonemes.put("ɜ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN_MID, Backness.CENTRAL, Roundness.UNROUNDED));
         allPhonemes.put("ɞ", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN_MID, Backness.CENTRAL, Roundness.ROUNDED));
         allPhonemes.put("ä", new DistinctiveFeatures(MannerPrecise.VOWEL, Height.OPEN, Backness.CENTRAL, Roundness.UNROUNDED));
@@ -236,15 +233,28 @@ public class PhonemesBank {
      * **/
     public PhonemeInTable find(String requestedSymbol) {
         requestedSymbol = requestedSymbol.toLowerCase();
-        userLogger.info("searching: " + requestedSymbol);
+        //userLogger.info("searching: " + requestedSymbol);
         PhonemeInTable ph = allPhonemes.get(requestedSymbol);
         if (ph != null) {
             return ph;
         } else {
-            if (requestedSymbol.length() == 1) {
-                userLogger.info("symbol can not be found: " + requestedSymbol);
+            // Для фонем с альтернативным написанием
+            String altForm = PhonemesBank.getAlternativeGraphicForm(requestedSymbol);
+            if (altForm != null) {
+                return allPhonemes.get(altForm);
+            } else {
+                if (requestedSymbol.length() == 1) {
+                    userLogger.error("Неизвестная фонема: " + requestedSymbol);
+                    userLogger.error("\\u" + Integer.toHexString(requestedSymbol.charAt(0) | 0x10000).substring(1));
+                } /*else {
+                    userLogger.error("Неизвестная фонема: " + requestedSymbol + " длины " + requestedSymbol.length());
+                    for (int i=0; i < requestedSymbol.length(); i++) {
+                        userLogger.error("\\u" + Integer.toHexString(requestedSymbol.charAt(i) | 0x10000).substring(1));
+                        System.out.print(" ");
+                    }
+                }*/
+                return null;
             }
-            return null;
         }
     }
 
@@ -265,6 +275,30 @@ public class PhonemesBank {
         }
         return result;
     }
+
+
+    /**
+     * ЗАМЕНА ФОНЕМ С АЛЬТЕРНАТИВНЫМ НАПИСАНИЕМ НА ИХ ВАРИАНТ, ИМЕЮЩИЙСЯ В БАНКЕ ФОНЕМ
+     */
+    public static String getAlternativeGraphicForm(String symbol) {
+        if (symbol == null || symbol.length() == 0) {
+            return null;
+        }
+
+        switch (symbol) {
+            case "ng" : return "ŋ";
+            case "ĩ" : return "ĩ";
+            case "õ" : return "õ";
+            case "ã" : return "ã";
+            case "ũ" : return "ũ";
+            case "ǝ" : return "ə";
+            default: {
+                userLogger.info("Альтернативного написания не обнаружено для фонемы " + symbol);
+                return null;
+            }
+        }
+    }
+
 
     /**
      * ПОЛУЧЕНИЕ СПИСКА ФОНЕМ ДЛЯ ФОРМИРОВАНИЯ ТАБЛИЦЫ НА UI
